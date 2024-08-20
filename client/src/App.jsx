@@ -15,7 +15,7 @@ import AuthChecker from "./components/AuthChecker";
 import PasswordResetRequest from "./pages/Auth/ForgotPassword/PasswordResetRequest";
 import SentSuccess from "./pages/SentSuccess";
 import Home from"./pages/Home"; //public
-import FindJobs from"./pages/FindJobs";//public
+import FindJobs from"./pages/Job/FindJobs/FindJobs";//public
 import ErrorPage from"./pages/ErrorPage";
 import AboutJob from "./pages/Aboutjob/AboutJob";//public
 import BrowseCompanies from "./pages/Organization/BrowseCompnies/BrowseCompnies";

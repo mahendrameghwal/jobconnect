@@ -1,13 +1,13 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { useSearchJobsQuery } from "../../app/api/JobApi";
-import FindJobCard from "../components/FindJob.card";
-import jobtypes from "../data/Jobtypes";
-import { useCallback, useEffect, useState } from "react";
-import jobCategories from "../data/JobCategory";
-import { loadCountries } from '../../app/slices/AddressSlice';
+import { useSearchJobsQuery } from "../../../../app/api/JobApi";
+import FindJobCard from "../../../components/FIndJob.card";
+import jobtypes from "../../../data/Jobtypes";
+import { useEffect, useState } from "react";
+import jobCategories from "../../../data/JobCategory";
+import { loadCountries } from '../../../../app/slices/AddressSlice';
 import { useDispatch, useSelector } from "react-redux";
-import sort from "../data/Sort";
-import Salarydata from "../data/Salarydata";
+import sort from "../../../data/Sort";
+import Salarydata from "../../../data/Salarydata";
 import { debounce } from "lodash";
 
 
