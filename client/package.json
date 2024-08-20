@@ -37,6 +37,7 @@
     "react-apexcharts": "^1.4.1",
     "react-cookie": "^7.1.0",
     "react-dom": "^18.2.0",
+    "react-error-boundary": "^4.0.13",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
     "react-loader-spinner": "^5.4.5",
