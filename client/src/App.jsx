@@ -22,7 +22,6 @@ import BrowseCompanies from "./pages/Organization/BrowseCompnies/BrowseCompnies"
 import Suggestion from "./pages/Suggestion";
 import ExcludeFooter from "./utils/ExcludeFooter";
 import ExcludeNavbar from "./utils/ExcludeNavbar";
-
 import ResumeTemplateSelector from "./pages/Templates/Selector/ResumeTemplateSelector";
 import ResumeBuilder from "./pages/Templates/Builder/ResumeBuilder";
 
@@ -31,10 +30,6 @@ const PrivateRouteForAllUser = lazy(() => import("./routes/PrivateRouteForAllUse
 const OnlyAdminRoute = lazy(() => import("./routes/OnlyAdminRoute"));
 const PrivateCandidateRoute = lazy(() => import("./routes/PrivateCandidateRoute"));
 const PrivateOrgRoute = lazy(() => import("./routes/PrivateOrgRoute"));
-
-
-
-
 const CompanyProfile = lazy(() => import("./pages/Organization/CompanyProfile/CompanyProfile"));
 const ViewApplication = lazy(() => import("./pages/Organization/ViewApplication/ViewApplication"));
 const Login = lazy(() => import("./pages/Auth/Login/Login"));
