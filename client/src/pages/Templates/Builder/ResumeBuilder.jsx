@@ -1,0 +1,414 @@
+import React, {useState,useCallback, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
+import ResumeEditor from '../Editor/ResumeEditor';
+import ResumePreview from '../Preview/ResumePreview';
+import { useMeQuery } from '../../../../app/api/authApi';
+// import { jsPDF } from 'jspdf';
+import { PDFDocument } from 'pdf-lib';
+import html2canvas from 'html2canvas';
+import PDFbutton from './generatePDF';
+import toast from 'react-hot-toast';
+import debounce from 'lodash.debounce';
+
+
+const ResumeBuilder = () => {
+  const [activeSection, setActiveSection] = useState('personal');
+  const { isError, data: resumeData, error, isLoading } = useMeQuery();
+  const { templateId } = useParams();
+  const [PersonalInfo, setPersonalInfo] = useState({
+    fullname: '',
+    email: '',
+    phone: '',
+    country: '',
+    state: '',
+    city: '',
+    summary: ''
+  });
+  const [Skillinfo,setSkillinfo] = useState(resumeData?.skills || []);
+  const [employmentInfo,setemploymentInfo] = useState(resumeData?.employment || []);
+  const [EduInfo,setEduInfo] = useState(resumeData?.education || []);
+  const [ProjectInfo,setProjectInfo] = useState(resumeData?.project || []);
+  const [LangInfo,setLangInfo] = useState(resumeData?.language || []);
+
+
+
+
+
+  // intial set input for personal information
+  useEffect(() => {
+    if (resumeData) {
+      setPersonalInfo({
+        fullname: resumeData.fullname || '',
+        email: resumeData.email || '',
+        phone: resumeData.phone || '',
+        country: resumeData.country || '',
+        state: resumeData.state || '',
+        city: resumeData.city || '',
+        summary: resumeData.summary || ''
+      });
+      setSkillinfo(resumeData?.skills);
+      setemploymentInfo(resumeData?.employment);
+      setEduInfo(resumeData?.education)
+      setProjectInfo(resumeData?.project)
+      setLangInfo(resumeData?.language)
+    }
+  }, [resumeData]);
+
+
+
+
+  // change personal information
+    const handlePersonalInfochange = (e) => {
+     
+      const { name, value } = e.target;
+      setPersonalInfo(prevData => ({
+        ...prevData,
+        [name]: value
+      }));
+    };
+   
+
+
+  // for skill 
+  const HandleDeleteSkill = useCallback((index) => {
+    if (Skillinfo.length === 1) {
+      toast.error('At least one skill is required');
+      return;
+    }
+    const updatedSkills = Skillinfo.filter((_, i) => i !== index);
+    setSkillinfo(updatedSkills);
+  },[Skillinfo])
+
+
+
+  const handleSkillInputChange = useCallback(
+    (index, e) => {
+      const { name, value } = e.target;
+      setSkillinfo(prevSkills => {
+        const updatedSkills = [...prevSkills];
+        updatedSkills[index] = { ...updatedSkills[index], [name]: value };
+        return updatedSkills;
+      });
+    },[Skillinfo]);
+
+  const handleAddSkill = useCallback(() => {
+    setSkillinfo([...Skillinfo, {name: '' }]);
+  },[Skillinfo])
+
+
+
+//  for employment 
+ const HandleDeleteEmployment = useCallback((index) => {
+  if (employmentInfo.length === 1) {
+    toast.error('At least one employment required');
+    return;
+  }
+  const updatedemployment= employmentInfo.filter((_, i) => i !== index);
+  setemploymentInfo(updatedemployment);
+},[employmentInfo]);
+
+
+
+const handleEmploymentInputChange = useCallback((index, e) => {
+    const { name, value } = e.target;
+    setemploymentInfo(prevEmp => {
+      const updatedemployment = [...prevEmp];
+      updatedemployment[index] = { ...updatedemployment[index], [name]: value };
+      return updatedemployment;
+    });
+  },[employmentInfo])
+
+
+const handleAddEmployment = useCallback(() => {
+  setemploymentInfo([...employmentInfo, { 
+    position: '', 
+    orgname: '', 
+    emptype:'',
+    startdate:"",
+    enddate:""
+  }]);
+},[employmentInfo])
+
+
+
+
+// for education 
+const HandleDeleteEdu = useCallback((index) => {
+  if (EduInfo.length === 1) {
+    toast.error('At least one education is required');
+    return;
+  }
+  const updatedEduInfo= EduInfo.filter((_, i) => i !== index);
+  setEduInfo(updatedEduInfo);
+},[EduInfo]);
+
+
+
+const handleEduInputChange = useCallback((index, e) => {
+    const { name, value } = e.target;
+    setEduInfo(prevEdu => {
+      const updatedEdu = [...prevEdu];
+      updatedEdu[index] = { ...updatedEdu[index], [name]: value };
+      return updatedEdu;
+    });
+  },[EduInfo])
+
+
+const handleAddEdu = useCallback(() => {
+  setEduInfo([...EduInfo, { 
+    degree: "",
+enddate: "",
+fieldofstudy: "",
+institute: "",
+percentage:"",
+qualification: "",
+startdate:""
+
+
+  }]);
+},[EduInfo])
+
+
+
+//for project
+const HandleDeleteProject = useCallback((index) => {
+  if (ProjectInfo.length === 1) {
+    toast.error('At least one project is required');
+    return;
+  }
+  const updatedProjectInfo= ProjectInfo.filter((_, i) => i !== index);
+  setProjectInfo(updatedProjectInfo);
+},[ProjectInfo]);
+
+
+
+const handleProjectChange = useCallback((index, e) => {
+    const { name, value } = e.target;
+    setProjectInfo(prevProj => {
+      const updatedProj= [...prevProj];
+      updatedProj[index] = { ...updatedProj[index], [name]: value };
+      return updatedProj;
+    });
+  },[ProjectInfo])
+
+// onchange project skill
+  const handleProjectSkill = useCallback((projIndex, skillIndex, e) => {
+    const { value } = e.target;
+    setProjectInfo(prevProj => {
+      const updatedProj = [...prevProj];
+      const updatedSkills = [...updatedProj[projIndex].projectskill];
+      updatedSkills[skillIndex] = {
+        ...updatedSkills[skillIndex],
+        name: value
+      };
+      updatedProj[projIndex] = {
+        ...updatedProj[projIndex],
+        projectskill: updatedSkills
+      };
+      return updatedProj;
+    });
+  }, [setProjectInfo]);
+
+
+  const ProjectaddSkill = useCallback((projIndex) => {
+    setProjectInfo(prevProj => {
+      const updatedProj = prevProj.map((project, index) => {
+        if (index === projIndex) {
+          return {
+            ...project,
+            projectskill: [...project.projectskill, { name: '' }]
+          };
+        }
+        return project;
+      });
+      return updatedProj;
+    });
+  }, [setProjectInfo]);
+
+
+
+const handleAddProject = useCallback(() => {
+  setProjectInfo([...ProjectInfo, { 
+      title: '',
+      status: '',
+      description: '',
+      startdate:'',
+      enddate: '',
+      sourcelink: '',
+      livelink: '',
+      projectskill: [{name:""}]
+  }]);
+},[ProjectInfo])
+
+
+
+const HandleLangDelete = useCallback((index) => {
+  if (LangInfo.length === 1) {
+    toast.error('At least one language is required');
+    return;
+  }
+  const updatedLangInfo= LangInfo.filter((_, i) => i !== index);
+  setLangInfo(updatedLangInfo);
+},[LangInfo]);
+
+
+//for language
+const handleLangInputChange = useCallback((index, e) => {
+    const { name, value } = e.target;
+    setLangInfo(prevLang => {
+      const updatedLang = [...prevLang];
+      updatedLang[index] = { ...updatedLang[index], [name]: value };
+      return updatedLang;
+    });
+  },[LangInfo])
+
+
+
+
+
+
+
+
+
+
+
+  const handleAddLang = useCallback(() => {
+    setLangInfo([...LangInfo, { lan: '', proficiency: ''}]);
+  },[LangInfo])
+
+
+  
+
+  const handleInputChange = (e, section, index = null) => {
+    const { name, value } = e.target;
+  
+    if (index !== null) {
+      let updatedData = { ...resumeData };
+
+      updatedData[section][index] = { ...updatedData[section][index], [name]: value };
+    } else if (section === 'personal') {
+      
+      resumeData[name] = value;
+    } else {
+      let updatedData = { ...resumeData };
+
+      updatedData[section] = { ...updatedData[section], [name]: value };
+    }
+  };
+
+  const generatePDF = async () => {
+    if(!resumeData){
+      return;
+    }
+    const input = document.getElementById('resume-preview');
+    const canvas = await html2canvas(input, { scale: 2 }); 
+    const imgData = canvas.toDataURL('image/png');
+  
+    const pdfDoc = await PDFDocument.create();
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+  
+    // Set the desired padding
+    const padding = 40; 
+  
+    // Create a page with padding
+    const page = pdfDoc.addPage([imgWidth + padding, imgHeight + padding]);
+  
+    // Embed the image
+    const pngImage = await pdfDoc.embedPng(imgData);
+    const pngDims = pngImage.scale(1); // Scale to original size
+  
+    // Draw the image with padding
+    page.drawImage(pngImage, {
+      x: padding / 2, // Left padding
+      y: padding / 2, // Top padding
+      width: pngDims.width,
+      height: pngDims.height,
+    });
+  
+    // Save the PDF
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+  
+    // Create a link to download the PDF
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `${resumeData?.fullname}.pdf`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  
+  
+
+
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  return (
+    <div className=" min-h-screen max-h-full  bg-gray-100">
+      <div className="flex max-md:flex-col flex-grow mt-2">
+        <div className="w-full md:w-1/2  bg-white rounded-lg shadow-md">
+          <ResumeEditor 
+          resumeData={resumeData}
+          PersonalInfo={PersonalInfo}
+          handlePersonalInfochange={handlePersonalInfochange}
+          handleInputChange={handleInputChange}
+          setPersonalInfo={setPersonalInfo}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          handleAddSkill={handleAddSkill}
+          HandleDeleteSkill={HandleDeleteSkill}
+          handleSkillInputChange={handleSkillInputChange}
+          Skillinfo={Skillinfo}
+          handleEmploymentInputChange={handleEmploymentInputChange}
+          handleAddEmployment={handleAddEmployment}
+          HandleDeleteEmployment={HandleDeleteEmployment}
+          employmentInfo={employmentInfo}
+          HandleDeleteEdu={HandleDeleteEdu}
+          handleEduInputChange={handleEduInputChange}
+          handleAddEdu={handleAddEdu}
+          EduInfo={EduInfo}
+          HandleDeleteProject={HandleDeleteProject}
+          handleProjectChange={handleProjectChange}
+          handleAddProject={handleAddProject}
+          ProjectInfo={ProjectInfo}
+          handleProjectSkill={handleProjectSkill}
+          ProjectaddSkill={ProjectaddSkill}
+          LangInfo={LangInfo}
+          handleLangInputChange={handleLangInputChange} 
+          HandleLangDelete={HandleLangDelete}
+          handleAddLang={handleAddLang}
+          />
+        </div>
+        <div className=" w-full md:w-1/2 md:block p-2 bg-white rounded-lg  max-md:m-1 ">
+        
+            <div className='flex justify-between'>
+            <h2 className="text-2xl font-bold ">Resume Preview</h2>
+            <PDFbutton generatePDF={generatePDF} />
+            </div>
+        
+          <ResumePreview
+          PersonalInfo={PersonalInfo}
+          Skillinfo={Skillinfo}
+          employmentInfo={employmentInfo}
+          templateId={templateId} 
+          EduInfo={EduInfo}
+          ProjectInfo={ProjectInfo}
+         LangInfo={LangInfo}
+           />
+        </div>
+      </div>
+     
+    </div>
+  );
+};
+
+export default ResumeBuilder;
