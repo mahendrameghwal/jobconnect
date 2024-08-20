@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 
 const DeleteAcountSendEmail = async (email, resetToken) => {
-    const resetURL = `http://localhost:5173/delete-acount/${resetToken}`;
+    const resetURL = `${process.env.FRONTEND_APP_URL}/delete-acount/${resetToken}`;
   
     try {
       const mailOptions = {
@@ -116,7 +116,7 @@ const DeleteAcountSendEmail = async (email, resetToken) => {
 
 
 const sendResetPasswordEmail = async (email, resetToken) => {
-  const resetURL = `http://localhost:5173/resetnewpassword/${resetToken}`;
+  const resetURL = `${process.env.FRONTEND_APP_URL}/resetnewpassword/${resetToken}`;
 
   try {
     const mailOptions = {

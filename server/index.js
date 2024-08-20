@@ -14,7 +14,7 @@ const ChatSocket = require('./utils/Chatsocket');
 
 const io = require('socket.io')(server, {
  cors: {
-    origin: 'http://localhost:5173',
+    origin: process.env.FRONTEND_APP_URL,
   },
 });
 module.exports.io = io;
@@ -28,14 +28,14 @@ app.use(cookieParser());
 
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin:  process.env.FRONTEND_APP_URL,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
 };
 app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Origin',  process.env.FRONTEND_APP_URL);
   res.header('Access-Control-Allow-Credentials', 'true');
   next();
 });
