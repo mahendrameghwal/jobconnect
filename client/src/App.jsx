@@ -8,7 +8,7 @@ import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
 import { DiGithubBadge } from "react-icons/di";
 // import LoginPopup from "./components/Loginpopup";
-import Errorboundrypage from "./pages/error/ErrorboundryPage";
+// import Errorboundrypage from "./pages/error/ErrorboundryPage";
 import Welcome from "../src/pages/Welcome/Welcome";
 
 import AuthChecker from "./components/AuthChecker";
@@ -78,7 +78,7 @@ function App() {
   
   // const isauth = useAuth()
   return (
-  <ErrorBoundary FallbackComponent={Errorboundrypage}>
+  // <ErrorBoundary FallbackComponent={Errorboundrypage}>
   <Fragment>
   <AuthChecker/>
   <Suspense fallback={<Loader/>}>
@@ -197,7 +197,7 @@ function App() {
           </main>
           </Suspense>
           </Fragment>
-          </ErrorBoundary>
+          // </ErrorBoundary>
   );
 }
 
