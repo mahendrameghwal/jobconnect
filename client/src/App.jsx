@@ -78,7 +78,7 @@ function App() {
   
   // const isauth = useAuth()
   return (
-  // <ErrorBoundary FallbackComponent={Errorboundrypage}>
+ 
   <Fragment>
   <AuthChecker/>
   <Suspense fallback={<Loader/>}>
@@ -197,7 +197,7 @@ function App() {
           </main>
           </Suspense>
           </Fragment>
-          // </ErrorBoundary>
+      
   );
 }
 
