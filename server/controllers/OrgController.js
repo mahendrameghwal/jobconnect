@@ -80,12 +80,7 @@ const CreateOrg = async (req, res, next) => {
         
         res.cookie('accesstoken', token, {
           httpOnly: true,
-          secure: true, 
-          expires: expirationDate,
-          sameSite: 'strict',
-          domain: 'https://jobconnect1.onrender.com',
-          path: '/',
-     
+          expires: expirationDate
         });
 
 

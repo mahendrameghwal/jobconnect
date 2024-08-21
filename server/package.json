@@ -20,7 +20,6 @@
     "express": "^4.18.3",
     "express-async-handler": "^1.2.0",
     "express-fileupload": "^1.4.3",
-    "http-proxy-middleware": "^3.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.10",
     "morgan": "^1.10.0",
@@ -31,6 +30,6 @@
     "terminal-kit": "^3.0.1",
     "validator": "^13.11.0"
   },
-  "proxy": "https://jobconnect1.onrender.com",
+  "proxy": "http://localhost:5173",
   "description": ""
 }

@@ -11,7 +11,7 @@ const errorHandler = require('./handler/errorhandler');
 const fileUpload = require('express-fileupload');
 const ConnectDB = require('./config/DbConfig');
 const ChatSocket = require('./utils/Chatsocket');
-const { createProxyMiddleware } = require('http-proxy-middleware');
+
 
 const io = require('socket.io')(server, {
  cors: {
@@ -40,12 +40,6 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
   next();
 });
-
-app.use('/', createProxyMiddleware({
-  target:  process.env.FRONTEND_APP_URL,
-  changeOrigin: true,
-}));
-
 
 
 app.use(morgan('dev'));
