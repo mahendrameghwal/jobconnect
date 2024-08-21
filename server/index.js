@@ -27,7 +27,7 @@ ConnectDB();
 app.use(cookieParser(process?.env?.JWT_SECRET, {
   httpOnly: true,
   secure: true,
-  sameSite: 'strict',
+  sameSite: 'none',
 }));
 
 

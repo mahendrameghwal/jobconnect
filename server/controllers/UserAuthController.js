@@ -64,7 +64,7 @@ const register = asyncHandler(async (req, res, next) => {
         httpOnly: true,
         expires: expirationDate,
         secure: true,
-        sameSite: 'strict',
+        sameSite: 'none',
       });
 
 
@@ -145,7 +145,7 @@ const login = async (req, res, next) => {
                 httpOnly: true,
                 expires: expirationDate,
                 secure: true,
-                sameSite: 'strict',
+                sameSite: 'none',
               })
               .status(200)
               .json({ message: 'login success', token:decodedToken }); 
@@ -180,7 +180,7 @@ const login = async (req, res, next) => {
               httpOnly: true,
               expires: expirationDate,
               secure: true,
-              sameSite: 'strict',
+              sameSite: 'none',
               })
               .status(200)
               .json({ message: 'login success', token: decodedToken }); // Include decodedToken in the response
