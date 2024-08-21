@@ -111,7 +111,7 @@ function App() {
       <Toaster
         position="top-center"
         toastOptions={{
-          className: "text-white tracking-wider bg-black  font-normal text-base rounded-lg text-sm px-2 py-0 text-center mr-2 mt-10",
+          className: "text-white tracking-wider bg-black font-normal text-base rounded-lg text-sm px-2 py-0 text-center mr-2 mt-10",
         }}
       />
       {

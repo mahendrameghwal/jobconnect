@@ -22,9 +22,13 @@ module.exports.io = io;
 ChatSocket(io);
 ConnectDB();
 
-
+// process?.env?.JWT_SECRET
 //middlewares
-app.use(cookieParser());
+app.use(cookieParser(process?.env?.JWT_SECRET, {
+  httpOnly: true,
+  secure: true,
+  sameSite: 'strict',
+}));
 
 
 

@@ -63,8 +63,12 @@ const register = asyncHandler(async (req, res, next) => {
       res.cookie('accesstoken', token, {
         httpOnly: true,
         expires: expirationDate,
-       
+        secure: true,
+        sameSite: 'strict',
       });
+
+
+      
 
       return res
         .status(201)
@@ -140,6 +144,8 @@ const login = async (req, res, next) => {
               .cookie('accesstoken', token, {
                 httpOnly: true,
                 expires: expirationDate,
+                secure: true,
+                sameSite: 'strict',
               })
               .status(200)
               .json({ message: 'login success', token:decodedToken }); 
@@ -170,9 +176,11 @@ const login = async (req, res, next) => {
           if (err) {
             return res.status(403).json({ message: 'Invalid or expired token' });
           } else {
-            return res.cookie('accesstoken', token, {
-                httpOnly: true,
-                expires: expirationDate,
+             res.cookie('accesstoken', token, {
+              httpOnly: true,
+              expires: expirationDate,
+              secure: true,
+              sameSite: 'strict',
               })
               .status(200)
               .json({ message: 'login success', token: decodedToken }); // Include decodedToken in the response

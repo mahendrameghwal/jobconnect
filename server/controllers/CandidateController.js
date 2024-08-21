@@ -73,12 +73,9 @@ const CreateCandidate = asyncHandler(async (req, res, next) => {
        
           res.cookie('accesstoken', token, {
             httpOnly: true,
-
             expires: expirationDate,
-    
-          
-          
-          
+            secure: true,
+            sameSite: 'strict',
           });
           return res.status(201).json(CandidateData);
         } else {
