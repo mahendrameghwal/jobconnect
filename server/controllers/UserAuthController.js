@@ -25,13 +25,13 @@ const register = asyncHandler(async (req, res, next) => {
       !req.body.password == '' &&
         res
           .status(401)
-          .send({
+          .json({
             message: 'password must be conatain between 5 to 16 chacater',
           });
     }
     if (req.body.email) {
       if (!validator.isEmail(req.body.email)) {
-        return res.status(400).send({ message: 'Email must be a valid email' });
+        return res.status(400).json({ message: 'Email must be a valid email' });
       }
     }
     const ExistUser = await User.findOne({ email: req.body.email });
@@ -39,7 +39,7 @@ const register = asyncHandler(async (req, res, next) => {
     if (ExistUser) {
       return res
         .status(403)
-        .send({ message: 'user already exist with this email' });
+        .json({ message: 'user already exist with this email' });
     } else {
       const NewUser = new User({ ...req.body, password: Hashpassword });
 
@@ -68,7 +68,7 @@ const register = asyncHandler(async (req, res, next) => {
 
       return res
         .status(201)
-        .send({ message: 'user created successfully', data: NewUser });
+        .json({ message: 'user created successfully', data: NewUser });
     }
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -78,7 +78,7 @@ const register = asyncHandler(async (req, res, next) => {
       }
       return res
         .status(400)
-        .send({
+        .json({
           error: 'Please check input and try again',
           details: validationErrors,
         });
@@ -96,13 +96,13 @@ const login = async (req, res, next) => {
     if (!email || !password) {
       return res
         .status(400)
-        .send({ message: ' Please fill in all required fields' });
+        .json({ message: ' Please fill in all required fields' });
     }
 
     const ExistUser = await User.findOne({ email });
 
     if (!ExistUser) {
-      return res.status(400).send({ message: 'user not found' });
+      return res.status(400).json({ message: 'user not found' });
     } else {
       const Iscorrect = bcrypt.compareSync(
         req.body.password,
@@ -110,7 +110,7 @@ const login = async (req, res, next) => {
       );
 
       if (!Iscorrect) {
-        return res.status(400).send({ message: 'check password or username' });
+        return res.status(400).json({ message: 'check password or username' });
       }
       if (ExistUser.Isorg) {
         
@@ -134,7 +134,7 @@ const login = async (req, res, next) => {
 
         jwt.verify(token, SECERET_KEY, (err, decodedToken) => {
           if (err) {
-            return res.status(403).send({ message: 'Invalid or expired token' });
+            return res.status(403).json({ message: 'Invalid or expired token' });
           } else {
             return res
               .cookie('accesstoken', token, {
@@ -142,7 +142,7 @@ const login = async (req, res, next) => {
                 expires: expirationDate,
               })
               .status(200)
-              .send({ message: 'login success', token:decodedToken }); 
+              .json({ message: 'login success', token:decodedToken }); 
           }
         });
       } else {
@@ -168,14 +168,14 @@ const login = async (req, res, next) => {
 
         jwt.verify(token, SECERET_KEY, (err, decodedToken) => {
           if (err) {
-            return res.status(403).send({ message: 'Invalid or expired token' });
+            return res.status(403).json({ message: 'Invalid or expired token' });
           } else {
             return res.cookie('accesstoken', token, {
                 httpOnly: true,
                 expires: expirationDate,
               })
               .status(200)
-              .send({ message: 'login success', token: decodedToken }); // Include decodedToken in the response
+              .json({ message: 'login success', token: decodedToken }); // Include decodedToken in the response
           }
         });
 
@@ -191,7 +191,7 @@ const login = async (req, res, next) => {
       }
       return res
         .status(400)
-        .send({
+        .json({
           error: 'Please check input and try again',
           details: validationErrors,
         });
@@ -205,10 +205,10 @@ const ResetRequest = asyncHandler(async (req, res, next) => {
   const { email } = req.body;
 
   if (email === '') {
-    return res.status(404).send({ message: 'Please Provide  email address' });
+    return res.status(404).json({ message: 'Please Provide  email address' });
   }
   if (!validator.isEmail(email)) {
-    return res.status(400).send({ message: 'Email must be a valid email.' });
+    return res.status(400).json({ message: 'Email must be a valid email.' });
   }
   try {
     const user = await User.findOne({ email });
@@ -216,7 +216,7 @@ const ResetRequest = asyncHandler(async (req, res, next) => {
     if (!user) {
       return res
         .status(404)
-        .send({ message: 'User does not exist for this email.' });
+        .json({ message: 'User does not exist for this email.' });
     }
     
     const resetToken = crypto.randomBytes(20).toString('hex');
@@ -227,7 +227,7 @@ const ResetRequest = asyncHandler(async (req, res, next) => {
 
     return res
       .status(200)
-      .send({ message: 'Password reset email sent successfully.' });
+      .json({ message: 'Password reset email sent successfully.' });
   } catch (error) {
     next(error);
   }
@@ -240,17 +240,17 @@ const AcountDeleteRequest = asyncHandler(async (req, res, next) => {
   const {email}= req.user;
 
   if (email === '') {
-    return res.status(404).send({ message:'Please Provide email address' });
+    return res.status(404).json({ message:'Please Provide email address' });
   }
   if (!validator.isEmail(email)) {
-    return res.status(400).send({ message: 'Email must be a valid email.' });
+    return res.status(400).json({ message: 'Email must be a valid email.' });
   }
   try {
     const user = await User.findOne({ email });  
     if (!user) {
       return res
         .status(404)
-        .send({ message: 'User does not exist for this email.' });
+        .json({ message: 'User does not exist for this email.' });
     }
 
     const resetToken = crypto.randomBytes(20).toString('hex');
@@ -261,7 +261,7 @@ const AcountDeleteRequest = asyncHandler(async (req, res, next) => {
 
     return res
       .status(200)
-      .send({ message: 'Acount delete request email sent successfully.' });
+      .json({ message: 'Acount delete request email sent successfully.' });
   } catch (error) {
     next(error);
   }
@@ -282,7 +282,7 @@ const Me = asyncHandler(async (req, res, next) => {
       );
       
       if (!Existcandidate) {
-        return res.status(404).send({ message: 'Candidate not found' });
+        return res.status(404).json({ message: 'Candidate not found' });
       }
       
       const candidateObject = Existcandidate.toObject();
@@ -290,13 +290,13 @@ const Me = asyncHandler(async (req, res, next) => {
       candidateObject.PermissonForUpdate = PermissonForUpdate;
       candidateObject.Isorg = false; // Adding Isorg field for candidate
 
-      return res.status(200).send(candidateObject);
+      return res.status(200).json(candidateObject);
     } else {
       let PermissonForUpdate = false;  
       const org = await Org.findById(user?.Org).populate('jobs');
       
       if (!org) {
-        return res.status(404).send({ message: 'Organization not found' });
+        return res.status(404).json({ message: 'Organization not found' });
       }
   
       if (req.user && req.user.Org && req.user.Org.toString() === org._id.toString()) {
@@ -328,7 +328,7 @@ const resetPassword = asyncHandler(async (req, res, next) => {
       Hashpassword = await bcrypt.hash(password, 10);
     } else {
       !password == '' &&
-        res.status(401).send({
+        res.status(401).json({
           message: 'password must be conatain between 5 to 16 chacater',
         });
     }
@@ -338,7 +338,7 @@ const resetPassword = asyncHandler(async (req, res, next) => {
     });
 
     if (!user) {
-      return res.status(400).send({
+      return res.status(400).json({
         message: 'Please request a new  reset link',
       });
     }
@@ -347,12 +347,12 @@ const resetPassword = asyncHandler(async (req, res, next) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
     await user.save();
-    return res.status(200).send({ message: 'Password reset successfully.' });
+    return res.status(200).json({ message: 'Password reset successfully.' });
   } catch (error) {
     if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
       return res
         .status(500)
-        .send({ message: 'Network error occurred. Please try again later.' });
+        .json({ message: 'Network error occurred. Please try again later.' });
     }
     next(error);
   }
@@ -366,7 +366,7 @@ const logout = asyncHandler(async (req, res, next) => {
         expires: new Date(0),
       })
       .status(200)
-      .send({ message: 'user has logged out succesfully' });
+      .json({ message: 'user has logged out succesfully' });
   } catch (error) {
     next(error);
   }
@@ -377,17 +377,17 @@ const GetCurrentUserInfo = asyncHandler(async (req, res, next) => {
     const userid = req.user?._id;
     const user = await User.findById(userid);
     if (!user) {
-      return res.status(400).send({ message: 'User not found' });
+      return res.status(400).json({ message: 'User not found' });
     }
     if (!user.Isorg) {
       const populatedUser = await user.populate('candidate');
       const { Org, password, jobs, ...Candidatedetail } =
         populatedUser.toObject();
-      return res.status(200).send(Candidatedetail);
+      return res.status(200).json(Candidatedetail);
     } else {
       const populatedUser = await user.populate('Org');
       const { password, candidate, ...Orgdetails } = populatedUser.toObject();
-      return res.status(200).send(Orgdetails);
+      return res.status(200).json(Orgdetails);
     }
   } catch (error) {
     next(error);
@@ -401,11 +401,11 @@ const UserinfoById = asyncHandler(async (req, res, next) => {
     if (!mongoose.Types.ObjectId.isValid(userid)) {
       return res
         .status(404)
-        .send({ message: 'user information is not current' });
+        .json({ message: 'user information is not current' });
     }
 
     if (!userid) {
-      return res.status(400).send({ message: 'user not found' });
+      return res.status(400).json({ message: 'user not found' });
     }
 
     let details = await Org.findById(userid).select(
@@ -419,9 +419,9 @@ const UserinfoById = asyncHandler(async (req, res, next) => {
     }
 
     if (!details) {
-      return res.status(404).send({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     } else {
-      return res.status(200).send(details);
+      return res.status(200).json(details);
     }
   } catch (error) {
     next(error);
@@ -454,7 +454,7 @@ const MultipleUserinfo = asyncHandler(async (req, res, next) => {
         continue;
       }
     }
-    return res.send(Person);
+    return res.json(Person);
   } catch (error) {
     next(error);
   }
@@ -466,20 +466,20 @@ const DeleteAcountPerManently = asyncHandler(async (req, res, next) => {
     if (!accessToken) {
       return res
         .status(401)
-        .send({ message: 'Login first before deleting the account' });
+        .json({ message: 'Login first before deleting the account' });
     }
     const decodedToken = jwt.decode(accessToken);
 
     if (!decodedToken || !decodedToken._id) {
       return res
         .status(401)
-        .send({ message: ' missing user ID in the access token' });
+        .json({ message: ' missing user ID in the access token' });
     }
     const userId = decodedToken._id;
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).send({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
 
     if (user.Isorg) {
@@ -487,7 +487,7 @@ const DeleteAcountPerManently = asyncHandler(async (req, res, next) => {
       await Job.deleteMany({ author: user?._id });
       await User.findByIdAndDelete(user?._id);
       res.clearCookie('accesstoken', { httpOnly: true,  });
-      return res.status(200).send({ message: 'Successfully deleted account' });
+      return res.status(200).json({ message: 'Successfully deleted account' });
     } else {
       await Job.updateMany(
         { applicants: { $elemMatch: { $eq: mongoose.Types.ObjectId(user?._id) } } },
@@ -498,7 +498,7 @@ const DeleteAcountPerManently = asyncHandler(async (req, res, next) => {
       res.clearCookie('accesstoken', { httpOnly: true });
       return res
         .status(200)
-        .send({ message: 'Successfully deleted account' });
+        .json({ message: 'Successfully deleted account' });
     }
   } catch (error) {
     next(error);

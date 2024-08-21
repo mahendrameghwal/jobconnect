@@ -17,7 +17,7 @@ const Createjob = async (req, res, next) => {
     if (!IsAvailableOrg) {
       return res
         .status(400)
-        .send({ message: 'Please Create an first Organization ' });
+        .json({ message: 'Please Create an first Organization ' });
     } else {
       const newJobData = {
         ...req.body,
@@ -53,7 +53,7 @@ const Createjob = async (req, res, next) => {
       for (const field in err.errors) {
         validationErrors[field] = err.errors[field].message;
       }
-      return res.status(400).send({
+      return res.status(400).json({
         error: 'please Fill required fields',
         details: validationErrors,
       });
@@ -70,9 +70,9 @@ const getAllJobs = asyncHandler(async (req, res, next) => {
 
     const jobs = await Job.find().sort({ updatedAt: sortDirection }).limit(LimitofJob).populate('orgname')
     if (!jobs || jobs.length === 0) {
-      return res.status(404).send({ message: 'no jobs found' });
+      return res.status(404).json({ message: 'no jobs found' });
     } else {
-      return res.status(200).send(jobs);
+      return res.status(200).json(jobs);
     }
   } catch (err) {
 
@@ -83,7 +83,7 @@ const getAllJobs = asyncHandler(async (req, res, next) => {
 const DeleteAlljob = asyncHandler(async (req, res, next) => {
   try {
     const jobs = await Job.deleteMany();
-    return res.status(200).send({ message: 'successfully deleted' });
+    return res.status(200).json({ message: 'successfully deleted' });
   } catch (err) {
     
     next(err);
@@ -97,12 +97,12 @@ const GetJobById = asyncHandler(async (req, res, next) => {
     const job = await Job.findById(id).populate('orgname');
   
     if (!job) {
-      return res.status(404).send({ message: 'Job not found' });
+      return res.status(404).json({ message: 'Job not found' });
     }
-    return res.status(200).send({ job });
+    return res.status(200).json({ job });
   } catch (err) {
     if (err instanceof CastError) {
-      return res.status(400).send({ message: 'we could not find any Job 🧐' });
+      return res.status(400).json({ message: 'we could not find any Job 🧐' });
     }
     next(err);
   }
@@ -120,22 +120,22 @@ const AppliedCandidate = asyncHandler(async (req, res, next) => {
     const Permission= job.orgname?.toString()===Org?.toString();
 
    if(job.orgname?.toString()!==Org?.toString()){
-    return res.status(404).send({ message: "You don't have permission to perform this action" });
+    return res.status(404).json({ message: "You don't have permission to perform this action" });
    }
     if (!job) {
-      return res.status(404).send({ message: 'Job not found.' });
+      return res.status(404).json({ message: 'Job not found.' });
     }    
     else {
       //  const FilteredJob = job.applicants.map(applicant => applicant.appliedJobs.find(job => job.jobId.toString() === id))
      //  const filteredApplicants = job.applicants.map(applicant => applicant.appliedJobs.find(job => job.jobId.toString() === id))
 
-      return res.status(200).send({job,Permission});
+      return res.status(200).json({job,Permission});
     }
   } catch (err) {
     if (err instanceof CastError) {
       return res
         .status(404)
-        .send({ message: 'Please verify the ID and try again.' });
+        .json({ message: 'Please verify the ID and try again.' });
     }
     next(err);
   }
@@ -204,10 +204,10 @@ const SearchJobPost = asyncHandler(async (req, res, next) => {
     if (!jobPosts || jobPosts.length === 0) {
       return res
         .status(404)
-        .send({ message: 'No job posts found with the given criteria' });
+        .json({ message: 'No job posts found with the given criteria' });
     }
 
-    return res.status(200).send(jobPosts);
+    return res.status(200).json(jobPosts);
   } catch (err) {
    
     next(err);
@@ -220,14 +220,14 @@ const getPernoalizePost = asyncHandler(async (req, res, next) => {
 
     const isValidAuthorId = mongoose.Types.ObjectId.isValid(authorid);
     if (!isValidAuthorId) {
-      return res.status(400).send({ message: 'Invalid author ID' });
+      return res.status(400).json({ message: 'Invalid author ID' });
     }
     if (authorid) {
       const JobPosts = await Job.find({ author: authorid });
       if (!JobPosts || JobPosts.length === 0) {
-        return res.status(404).send({ message: 'no Job Found' });
+        return res.status(404).json({ message: 'no Job Found' });
       } else {
-        return res.status(200).send(JobPosts);
+        return res.status(200).json(JobPosts);
       }
     }
   } catch (err) {
@@ -248,9 +248,9 @@ const GenrateCategory = asyncHandler(async (req, res) => {
     ]);
     const uniqueCategories = categories.map((categoryObj) => categoryObj._id);
 
-    return res.status(200).send(uniqueCategories);
+    return res.status(200).json(uniqueCategories);
   } catch (err) {
-    return res.status(400).send({ message: 'no category found' });
+    return res.status(400).json({ message: 'no category found' });
   }
 });
 
@@ -267,29 +267,29 @@ const ShortListSingleCandidate = asyncHandler(async (req, res, next) => {
     if (!isValidIds[0]) {
       return res
         .status(400)
-        .send({ message: 'Please check the provided data and try again ' });
+        .json({ message: 'Please check the provided data and try again ' });
       }
 
     if (!isValidIds[1]) {
-      return res.status(400).send({ message: 'Please check the provided data and try again.' });
+      return res.status(400).json({ message: 'Please check the provided data and try again.' });
     }
     const Availablejob = await Job.findById(applicationId);
     if (!Availablejob) {
-      return res.status(400).send({ message: 'Job not found' });
+      return res.status(400).json({ message: 'Job not found' });
     }
 
     if (Availablejob.orgname.toString() !== req.user.Org.toString()) {
-      return res.status(403) .send({ message: "No permission for this action"});
+      return res.status(403) .json({ message: "No permission for this action"});
     }
     const AvailableCandidate = await Candidate.findById(candidateId);
     if (!AvailableCandidate) {
-      return res.status(403).send({ message: 'Candidate not found' });
+      return res.status(403).json({ message: 'Candidate not found' });
     } else {
       const jobApplication = AvailableCandidate.appliedJobs.find(job => job.jobId.toString() === Availablejob._id.toString());
 
       // Check if the candidate is already shortlisted
       if (jobApplication.status.toLowerCase() === 'shortlisted') {
-        return res.status(400).send({ message: 'Candidate is already Shortlisted' });
+        return res.status(400).json({ message: 'Candidate is already Shortlisted' });
       }
     
 
@@ -305,9 +305,9 @@ const ShortListSingleCandidate = asyncHandler(async (req, res, next) => {
       if (updatedCandidate) {
         return res
           .status(200)
-          .send({ message: 'candidate has been successfully rejected ' });
+          .json({ message: 'candidate has been successfully rejected ' });
       } else {
-        return res.status(200).send({ message: ' Oops! Something went wrong' });
+        return res.status(200).json({ message: ' Oops! Something went wrong' });
       }
     }
   } catch (err) {
@@ -330,29 +330,29 @@ const RejectedSingleCandidate = asyncHandler(async (req, res, next) => {
     if (!isValidIds[0]) {
       return res
         .status(400)
-        .send({ message: 'Please check the provided data and try again ' });
+        .json({ message: 'Please check the provided data and try again ' });
       }
 
     if (!isValidIds[1]) {
-      return res.status(400).send({ message: 'Please check the provided data and try again.' });
+      return res.status(400).json({ message: 'Please check the provided data and try again.' });
     }
     const Availablejob = await Job.findById(applicationId);
     if (!Availablejob) {
-      return res.status(400).send({ message: 'Job not found' });
+      return res.status(400).json({ message: 'Job not found' });
     }
 
     if (Availablejob.orgname.toString() !== req.user.Org.toString()) {
-      return res.status(403) .send({ message: "No permission for this action"});
+      return res.status(403) .json({ message: "No permission for this action"});
     }
     const AvailableCandidate = await Candidate.findById(candidateId);
     if (!AvailableCandidate) {
-      return res.status(403).send({ message: 'Candidate not found' });
+      return res.status(403).json({ message: 'Candidate not found' });
     } else {
       const jobApplication = AvailableCandidate.appliedJobs.find(job => job.jobId.toString() === Availablejob._id.toString());
 
       // Check if the candidate is already rejected
       if (jobApplication.status.toLowerCase() === 'rejected') {
-        return res.status(400).send({ message: 'Candidate is already rejected' });
+        return res.status(400).json({ message: 'Candidate is already rejected' });
       }
     
 
@@ -366,9 +366,9 @@ const RejectedSingleCandidate = asyncHandler(async (req, res, next) => {
       if (updatedCandidate) {
         return res
           .status(200)
-          .send({ message: 'candidate has been successfully rejected ' });
+          .json({ message: 'candidate has been successfully rejected ' });
       } else {
-        return res.status(200).send({ message: ' Oops! Something went wrong' });
+        return res.status(200).json({ message: ' Oops! Something went wrong' });
       }
     }
   } catch (err) {
@@ -384,11 +384,11 @@ const UpdateJobInformation = asyncHandler(async (req, res, next) => {
     const { jobId, jobData } = req.body;
     const existingJob = await Job.findById(jobId);
     if (!existingJob) {
-      return res.status(404).send({ message: 'Job not found' });
+      return res.status(404).json({ message: 'Job not found' });
     }
     // Check if the user is authorized to edit this job
     if (existingJob?.orgname.toString() !== userId.toString()) {
-      return res.status(403).send({ message: 'Unauthorized to edit this job' });
+      return res.status(403).json({ message: 'Unauthorized to edit this job' });
     }
 
     // Update the job fields
@@ -407,7 +407,7 @@ const UpdateJobInformation = asyncHandler(async (req, res, next) => {
     // Save the updated job
     await existingJob.save({validateModifiedOnly:true});
 
-    res.status(200).send({ message: 'Job updated successfully', job: existingJob });
+    res.status(200).json({ message: 'Job updated successfully', job: existingJob });
 
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -415,7 +415,7 @@ const UpdateJobInformation = asyncHandler(async (req, res, next) => {
       for (const field in err.errors) {
         validationErrors[field] = err.errors[field].message;
       }
-      return res.status(400).send({ message: 'Please check input and try again', details: validationErrors });
+      return res.status(400).json({ message: 'Please check input and try again', details: validationErrors });
     }
 
     next(err);

@@ -80,17 +80,17 @@ const CreateCandidate = asyncHandler(async (req, res, next) => {
           
           
           });
-          return res.status(201).send(CandidateData);
+          return res.status(201).json(CandidateData);
         } else {
-          return res.status(400).send({ message: 'Unable to create Profile' });
+          return res.status(400).json({ message: 'Unable to create Profile' });
         }
       } else {
-        return res.status(422).send({ message: 'Invalid owner ID' });
+        return res.status(422).json({ message: 'Invalid owner ID' });
       }
     } else {
       return res
         .status(400)
-        .send({ message: 'You cannot create multiple profile' });
+        .json({ message: 'You cannot create multiple profile' });
     }
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -100,12 +100,12 @@ const CreateCandidate = asyncHandler(async (req, res, next) => {
       }
       return res
         .status(400)
-        .send({ error: 'Please check input and try again', details: validationErrors });
+        .json({ error: 'Please check input and try again', details: validationErrors });
     } else if (err.code === 11000) {
       const duplicateKey = Object.keys(err.keyValue)[0];
       return res
         .status(400)
-        .send({ message: ` Please use a different ${duplicateKey}` });
+        .json({ message: ` Please use a different ${duplicateKey}` });
     } else {
       next(err);
     }
@@ -117,9 +117,9 @@ const getAllCandidate = asyncHandler(async (req, res, next) => {
     const SelectedFields = 'name email avtar _id gender resume fullname  '
     const AllCandidate = await Candidate.find().select(SelectedFields).limit(0);
     if (!AllCandidate || AllCandidate.length === 0) {
-      return res.status(404).send({ message: 'no candidate found' });
+      return res.status(404).json({ message: 'no candidate found' });
     }
-    return res.status(200).send(AllCandidate);
+    return res.status(200).json(AllCandidate);
   } catch (err) {
     
     next(err);
@@ -135,11 +135,11 @@ const EditCandidateInformation = asyncHandler(async (req, res, next) => {
     const CandidateId = existCandidate?._id.toString();
   
     if (!existCandidate) {
-      return res.status(404).send({ message: 'Candidate not found' });
+      return res.status(404).json({ message: 'Candidate not found' });
     }
 
     if (userId !== CandidateId) {
-      return res.status(403).send({ message: 'Unauthorized to edit Information ' });
+      return res.status(403).json({ message: 'Unauthorized to edit Information ' });
     }
 
     const updateData = EditBody;
@@ -165,7 +165,7 @@ const EditCandidateInformation = asyncHandler(async (req, res, next) => {
 
    if (UpdatedCandidate){
 
-     return res.status(200).send({ message: 'Your Profile successfully updated', UpdatedCandidate });
+     return res.status(200).json({ message: 'Your Profile successfully updated', UpdatedCandidate });
    }
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -175,12 +175,12 @@ const EditCandidateInformation = asyncHandler(async (req, res, next) => {
       }
       return res
         .status(400)
-        .send({ message: 'Please check input and try again', details: validationErrors });
+        .json({ message: 'Please check input and try again', details: validationErrors });
     } else if (err.code === 11000) {
       const duplicateKey = Object.keys(err.keyValue)[0];
       return res
         .status(400)
-        .send({ message: ` Please use a different ${duplicateKey}` });
+        .json({ message: ` Please use a different ${duplicateKey}` });
     } else {
       next(err);
     }
@@ -198,11 +198,11 @@ const UpdateCandidateProfile = asyncHandler(async (req, res, next) => {
     const { section, action, itemData, itemId } = req.body;
 
     if (!existCandidate) {
-      return res.status(404).send({ message: 'Candidate not found' });
+      return res.status(404).json({ message: 'Candidate not found' });
     }
 
     if (userId.toString() !== candidateId.toString()) {
-      return res.status(403).send({ message: 'Unauthorized to edit information' });
+      return res.status(403).json({ message: 'Unauthorized to edit information' });
     }
 
 
@@ -228,7 +228,7 @@ const UpdateCandidateProfile = asyncHandler(async (req, res, next) => {
         message = 'Social link';
         break;
       default:
-        return res.status(400).send({ message: 'something went wrong...' });
+        return res.status(400).json({ message: 'something went wrong...' });
     }
    
     switch (action) {
@@ -241,18 +241,18 @@ const UpdateCandidateProfile = asyncHandler(async (req, res, next) => {
         if (itemIndex !== -1) {
           existCandidate[section][itemIndex] = { ...existCandidate[section][itemIndex], ...itemData };
         } else {
-          return res.status(404).send({ message: `${message} record not found` });
+          return res.status(404).json({ message: `${message} record not found` });
         }
         break;
       case 'remove':
         existCandidate[section] = existCandidate[section].filter(item => item._id.toString() !== itemId);
         break;
       default:
-        return res.status(400).send({ message: 'Invalid action' });
+        return res.status(400).json({ message: 'Invalid action' });
     }
 
      await existCandidate.save();
-    res.status(200).send({ message: `${message} updated successfully` });
+    res.status(200).json({ message: `${message} updated successfully` });
 
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -260,7 +260,7 @@ const UpdateCandidateProfile = asyncHandler(async (req, res, next) => {
       for (const field in err.errors) {
         validationErrors[field] = err.errors[field].message;
       }
-      return res.status(400).send({ message: 'Please check input and try again', details: validationErrors });
+      return res.status(400).json({ message: 'Please check input and try again', details: validationErrors });
     }
 
     next(err);
@@ -332,18 +332,18 @@ const ApplyToJob = asyncHandler(async (req, res, next) => {
     const IsCandidateAvailable =
       !CandidateId || CandidateId === undefined || CandidateId === '';
     if (IsCandidateAvailable) {
-      return res.status(400).send({ message: 'Please Create Profile First' });
+      return res.status(400).json({ message: 'Please Create Profile First' });
     } else {
       const IsValidCandidateId = mongoose.Types.ObjectId.isValid(CandidateId);
       if (!IsValidCandidateId) {
         return res
           .status(400)
-          .send({ message: 'Invalid candidate ID provided' });
+          .json({ message: 'Invalid candidate ID provided' });
       } else {
         if (CandidateId) {
           const availablecandidate = await Candidate.findById(CandidateId);
           if (!availablecandidate) {
-            return res.status(400).send({ message: 'candidate not available' });
+            return res.status(400).json({ message: 'candidate not available' });
           } else {
             const IsAlreadyAppliedJobs = availablecandidate.appliedJobs.some(
               (job) => job.jobId.toString() == jobid.toString(),
@@ -352,7 +352,7 @@ const ApplyToJob = asyncHandler(async (req, res, next) => {
             if (IsAlreadyAppliedJobs) {
               return res
                 .status(400)
-                .send({ message: 'You have already applied for this job' });
+                .json({ message: 'You have already applied for this job' });
             } else {
               const SuccessCandidateUpdate = await Candidate.findByIdAndUpdate(
                 availablecandidate._id,
@@ -376,16 +376,16 @@ const ApplyToJob = asyncHandler(async (req, res, next) => {
                 if (SuccessJobUpdate) {
                   return res
                     .status(200)
-                    .send({ message: 'Applied Successfully' });
+                    .json({ message: 'Applied Successfully' });
                 } else {
                   return res
                     .status(400)
-                    .send({ message: 'something wrong to Apply Job.' });
+                    .json({ message: 'something wrong to Apply Job.' });
                 }
               } else {
                 return res
                   .status(400)
-                  .send({ message: ' failed to apply Please try again later' });
+                  .json({ message: ' failed to apply Please try again later' });
               }
             }
           }
@@ -394,7 +394,7 @@ const ApplyToJob = asyncHandler(async (req, res, next) => {
     }
   } catch (err) {
     if (err instanceof CastError) {
-      return res.status(400).send({ message: 'Invalid ID format' });
+      return res.status(400).json({ message: 'Invalid ID format' });
     } else {
       next(err);
     }
@@ -418,7 +418,7 @@ const GetCandidateById = asyncHandler(async (req, res, next) => {
     );
     
     if (!Existcandidate) {
-      return res.status(404).send({ message: 'Candidate not found' });
+      return res.status(404).json({ message: 'Candidate not found' });
     }
     
     const candidateObject = Existcandidate.toObject();
@@ -427,10 +427,10 @@ const GetCandidateById = asyncHandler(async (req, res, next) => {
       candidateObject.Permisson = PermissonForUpdate;
     }
     
-    return res.status(200).send(candidateObject);
+    return res.status(200).json(candidateObject);
   } catch (err) {
     if (err instanceof CastError) {
-      return res.status(404).send({ message: 'Please verify the ID and try again.' });
+      return res.status(404).json({ message: 'Please verify the ID and try again.' });
     }
     next(err);
   }

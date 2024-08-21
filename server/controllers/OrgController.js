@@ -91,7 +91,7 @@ const CreateOrg = async (req, res, next) => {
     } else {
       return res
         .status(400)
-        .send({ message: 'You cannot create multiple profile' });
+        .json({ message: 'You cannot create multiple profile' });
     }
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -101,12 +101,12 @@ const CreateOrg = async (req, res, next) => {
       }
       return res
         .status(400)
-        .send({ error: 'Please check input and try again', details: validationErrors });
+        .json({ error: 'Please check input and try again', details: validationErrors });
     } else if (err.code === 11000) {
       const duplicateKey = Object.keys(err.keyValue)[0];
       return res
         .status(400)
-        .send({ message: ` Please use a different ${duplicateKey}` });
+        .json({ message: ` Please use a different ${duplicateKey}` });
     } else {
       return next(err);
     }
@@ -124,11 +124,11 @@ const UpdateOrgInformation = expressAsyncHandler(async (req, res, next) => {
     const OrgId = existOrg?._id.toString();
   
     if (!existOrg) {
-      return res.status(404).send({ message: 'Candidate not found' });
+      return res.status(404).json({ message: 'Candidate not found' });
     }
 
     if (userId !== OrgId) {
-      return res.status(403).send({ message: 'Unauthorized to edit Information ' });
+      return res.status(403).json({ message: 'Unauthorized to edit Information ' });
     }
 
     const updateData = EditBody;
@@ -154,7 +154,7 @@ const UpdateOrgInformation = expressAsyncHandler(async (req, res, next) => {
 
    if (UpdatedOrg){
 
-     return res.status(200).send({ message: 'Your Profile successfully updated', UpdatedOrg });
+     return res.status(200).json({ message: 'Your Profile successfully updated', UpdatedOrg });
    }
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -164,12 +164,12 @@ const UpdateOrgInformation = expressAsyncHandler(async (req, res, next) => {
       }
       return res
         .status(400)
-        .send({ message: 'Please check input and try again', details: validationErrors });
+        .json({ message: 'Please check input and try again', details: validationErrors });
     } else if (err.code === 11000) {
       const duplicateKey = Object.keys(err.keyValue)[0];
       return res
         .status(400)
-        .send({ message: ` Please use a different ${duplicateKey}` });
+        .json({ message: ` Please use a different ${duplicateKey}` });
     } else {
       next(err);
     }
@@ -188,7 +188,7 @@ const GetOrgById = expressAsyncHandler(async (req, res, next) => {
     const org = await Org.findById(id).populate('jobs');
     
     if (!org) {
-      return res.status(404).send({ message: 'Organization not found' });
+      return res.status(404).json({ message: 'Organization not found' });
     }
 
 
@@ -205,7 +205,7 @@ const GetOrgById = expressAsyncHandler(async (req, res, next) => {
   } catch (err) {
     // Handle specific errors
     if (err instanceof CastError) {
-      return res.status(400).send({ message: 'Invalid organization ID. Please check and try again' });
+      return res.status(400).json({ message: 'Invalid organization ID. Please check and try again' });
     }
     // Handle other potential errors
     next(err); // Pass error to the Express error handler
@@ -222,11 +222,11 @@ const DeleteJob = expressAsyncHandler(async (req, res, next) => {
     const job = await Job.findById(id);
 
     if (!job) {
-      return res.status(404).send({ message: 'Job not found' });
+      return res.status(404).json({ message: 'Job not found' });
     }
 
     if (job.orgname.toString() !== orgId.toString()) {
-      return res.status(403).send({ message: 'You do not have permission to delete this job' });
+      return res.status(403).json({ message: 'You do not have permission to delete this job' });
     }
 
     // Delete job from Job collection
@@ -261,11 +261,11 @@ const DeleteJob = expressAsyncHandler(async (req, res, next) => {
       }
     );
 
-    return res.status(200).send({ message: 'Job deleted successfully' });
+    return res.status(200).json({ message: 'Job deleted successfully' });
 
   } catch (err) {
     if (err.name === 'CastError') {
-      return res.status(400).send({ message: 'Invalid job ID or ID format' });
+      return res.status(400).json({ message: 'Invalid job ID or ID format' });
     }
     next(err);
   }
@@ -292,10 +292,10 @@ const SearchOrg = expressAsyncHandler(async (req, res, next) => {
     const Orgs = await Org.find(query);
 
     if (!Orgs || Orgs.length === 0) {
-      return res.status(404).send({ message: 'No Companies found with the given criteria' });
+      return res.status(404).json({ message: 'No Companies found with the given criteria' });
     }
 
-   return res.status(200).send(Orgs);
+   return res.status(200).json(Orgs);
   } catch (err) {
     next(err);
   }
@@ -351,7 +351,7 @@ const searchCandidates = async (req, res, next) => {
 
 
       if (!candidates || candidates.length < 1) {
-        return res.status(404).send({ message: "Candidates not found." });
+        return res.status(404).json({ message: "Candidates not found." });
     }
 
      res.status(200).json(candidates);

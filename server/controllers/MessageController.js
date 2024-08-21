@@ -14,7 +14,7 @@ const getMessages = async (req, res, next) => {
       .sort({ createdAt: 1 })
       .select('sender receiver message onModel createdAt ');
 
-    return res.status(200).send(messages);
+    return res.status(200).json(messages);
   } catch (err) {
     next(err);
   }
