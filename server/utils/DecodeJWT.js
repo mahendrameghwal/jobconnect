@@ -11,7 +11,10 @@ const DecodeJWT = (res)=>{
           return res
             .cookie('accesstoken', token, {
               httpOnly: true,
+              secure: true, 
               expires: expirationDate,
+        
+              
             })
             .status(200)
             .send({ message: 'login success', token:decodedToken }); 

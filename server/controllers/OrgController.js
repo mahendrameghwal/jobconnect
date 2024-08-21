@@ -80,7 +80,9 @@ const CreateOrg = async (req, res, next) => {
         
         res.cookie('accesstoken', token, {
           httpOnly: true,
+          secure: true, 
           expires: expirationDate,
+     
         });
 
 

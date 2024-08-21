@@ -62,6 +62,7 @@ const register = asyncHandler(async (req, res, next) => {
 
       res.cookie('accesstoken', token, {
         httpOnly: true,
+        secure: true, 
         expires: expirationDate,
       });
 
@@ -138,7 +139,10 @@ const login = async (req, res, next) => {
             return res
               .cookie('accesstoken', token, {
                 httpOnly: true,
+                secure: true, 
                 expires: expirationDate,
+               
+      
               })
               .status(200)
               .send({ message: 'login success', token:decodedToken }); 
@@ -171,7 +175,9 @@ const login = async (req, res, next) => {
           } else {
             return res.cookie('accesstoken', token, {
                 httpOnly: true,
+                secure: true, 
                 expires: expirationDate,
+          
               })
               .status(200)
               .send({ message: 'login success', token: decodedToken }); // Include decodedToken in the response
@@ -362,6 +368,7 @@ const logout = asyncHandler(async (req, res, next) => {
     res
       .cookie('accesstoken', '', {
         httpOnly: true,
+        
         expires: new Date(0),
       })
       .status(200)
@@ -485,7 +492,7 @@ const DeleteAcountPerManently = asyncHandler(async (req, res, next) => {
       await Org.findOneAndDelete({ owner: user?._id });
       await Job.deleteMany({ author: user?._id });
       await User.findByIdAndDelete(user?._id);
-      res.clearCookie('accesstoken', { httpOnly: true });
+      res.clearCookie('accesstoken', { httpOnly: true, secure: true,  });
       return res.status(200).send({ message: 'Successfully deleted account' });
     } else {
       await Job.updateMany(
