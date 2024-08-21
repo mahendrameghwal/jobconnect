@@ -75,6 +75,10 @@ const CreateCandidate = asyncHandler(async (req, res, next) => {
             httpOnly: true,
             secure: true, 
             expires: expirationDate,
+            sameSite: 'strict',
+            domain: 'https://jobconnect1.onrender.com',
+            path: '/',
+          
           
           
           });

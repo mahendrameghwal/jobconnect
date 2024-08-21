@@ -13,7 +13,9 @@ const DecodeJWT = (res)=>{
               httpOnly: true,
               secure: true, 
               expires: expirationDate,
-        
+              sameSite: 'strict',
+              domain: 'https://jobconnect1.onrender.com',
+              path: '/',
               
             })
             .status(200)

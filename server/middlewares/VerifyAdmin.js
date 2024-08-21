@@ -7,7 +7,7 @@ const Verifyorg = async (req, res, next) => {
     const {accesstoken} = req?.cookies;
   
     if (!accesstoken) {
-      return res.status(401).send({ message: 'Unauthorized user access org' });
+      return res.status(401).send({ message: 'Unauthorized user access ' });
     }
     jwt.verify(accesstoken, SECERET_KEY, (err, decodedToken) => {
       if (err) {

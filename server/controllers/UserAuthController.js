@@ -64,6 +64,9 @@ const register = asyncHandler(async (req, res, next) => {
         httpOnly: true,
         secure: true, 
         expires: expirationDate,
+        sameSite: 'strict',
+        domain: 'https://jobconnect1.onrender.com',
+        path: '/',
       });
 
       return res
@@ -141,7 +144,9 @@ const login = async (req, res, next) => {
                 httpOnly: true,
                 secure: true, 
                 expires: expirationDate,
-               
+                sameSite: 'strict',
+                domain: 'https://jobconnect1.onrender.com',
+                path: '/',
       
               })
               .status(200)
@@ -177,7 +182,9 @@ const login = async (req, res, next) => {
                 httpOnly: true,
                 secure: true, 
                 expires: expirationDate,
-          
+                sameSite: 'strict',
+                domain: 'https://jobconnect1.onrender.com',
+                path: '/',
               })
               .status(200)
               .send({ message: 'login success', token: decodedToken }); // Include decodedToken in the response
