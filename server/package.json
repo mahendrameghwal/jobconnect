@@ -30,6 +30,6 @@
     "terminal-kit": "^3.0.1",
     "validator": "^13.11.0"
   },
-  "proxy": "http://localhost:5173",
+  "proxy": "https://jobconnect1.onrender.com",
   "description": ""
 }

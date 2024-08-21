@@ -64,5 +64,5 @@
     "vite": "^4.4.5",
     "vite-plugin-rewrite-all": "^1.0.2"
   },
-  "proxy": "http://localhost:8800"
+  "proxy": "https://jobconnect-9r0d.onrender.com"
 }
