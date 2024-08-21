@@ -30,6 +30,6 @@
     "terminal-kit": "^3.0.1",
     "validator": "^13.11.0"
   },
-  "proxy": "https://jobconnect1.onrender.com",
+  "proxy": "https://jobconnect1.netlify.app",
   "description": ""
 }
