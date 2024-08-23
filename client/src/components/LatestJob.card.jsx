@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsBuilding } from 'react-icons/bs';
+import { MdOutlineAlternateEmail } from "react-icons/md";
 
 const JobList = ({ jobs }) => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const JobList = ({ jobs }) => {
       {jobs.map(({ title, joblevel, country, city, orgname, _id, jobtype }) => (
         <div
           key={_id}
-          className="grid grid-rows-[auto_1fr_auto] dark:bg-[#0b0c0e] striped-border bg-gray-50 border rounded-sm shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden h-full"
+          className="grid grid-rows-[auto_1fr_auto] dark:bg-gray-900/30 striped-border bg-gray-50 border rounded-sm shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden h-full"
         >
           <div className="px-4 py-2 ">
             <div className='flex justify-between items-center mb-3'>

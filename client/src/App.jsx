@@ -64,7 +64,6 @@ const Pricing = lazy(() => import("./pages/pricing/Pricing"));
 
 
 
-
 function App() {
   const location =useLocation()
  
@@ -79,7 +78,7 @@ function App() {
   // const isauth = useAuth()
   return (
  
-  <Fragment>
+  <main className='dark:bg-gray-800'>
   <AuthChecker/>
   <Suspense fallback={<Loader/>}>
   
@@ -196,7 +195,7 @@ function App() {
       
           </main>
           </Suspense>
-          </Fragment>
+          </main>
       
   );
 }

@@ -13,13 +13,14 @@ const DashboardSkillChart = ({ jobs }) => {
     const skillCounts = {};
     jobs?.forEach(job => {
       job?.skills?.forEach(skill => {
-        skillCounts[skill] = (skillCounts[skill] || 0) + 1;
+        const normalizedSkill = skill.toLowerCase(); // Normalize to lowercase
+        skillCounts[normalizedSkill] = (skillCounts[normalizedSkill] || 0) + 1;
       });
     });
     return Object.entries(skillCounts)
       .map(([skill, count]) => ({ skill, count }))
       .sort((a, b) => b.count - a.count)
-      .slice(0, 10); 
+      .slice(0, 10);
   }, [jobs]);
 
   // Create a map of skills to colors
@@ -31,12 +32,13 @@ const DashboardSkillChart = ({ jobs }) => {
     return colorMap;
   }, [skillsData]);
 
+  // Convert skill names in chart options to lowercase for color matching
   const chartOptions = {
     chart: {
       type: 'pie',
     },
     labels: skillsData.map(item => item.skill),
-    background: skillsData.map(item => skillColors[item.skill]),
+    colors: skillsData.map(item => skillColors[item.skill]), // Use 'colors' instead of 'background'
     legend: {
       position: 'bottom',
       fontSize: '14px',
@@ -61,14 +63,12 @@ const DashboardSkillChart = ({ jobs }) => {
         formatter: (value) => `${value} job${value !== 1 ? 's' : ''}`
       }
     },
-   
   };
 
   const series = skillsData.map(item => item.count);
 
   return (
-    <div className=' w-45  max-md:w-full shadow-sm rounded-sm border-gray-200  p-1 border border-stroke bg-white'>
-
+    <div className='w-45 max-md:w-full shadow-sm rounded-sm border-gray-200 p-1 border border-stroke bg-white'>
       <ReactApexChart
         options={chartOptions}
         series={series}

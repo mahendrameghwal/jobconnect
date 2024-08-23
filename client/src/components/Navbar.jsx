@@ -3,7 +3,6 @@ import logo from "../assets/logo.svg"
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 // import useStickyHeader from '../../hooks/Usesticky';
 import DarkLightmode from './theme/DarkLightmode';
-
 import useAuth from "../../hooks/useAuth";
 import { useSignOutMutation } from '../../app/api/authApi';
 import { logout } from '../../app/slices/Authslice';
@@ -41,7 +40,7 @@ function Navbar() {
  return (
     <Fragment>
     {/*navbar */}
-   <nav className=  {"z-40  bg-slate-200/90 backdrop-blur-md sticky top-0  shadow-md flex  items-center  py-0.5 justify-between px-2 flex-wrap max-md:p-1"}>
+   <nav className=  {"z-40 dark:bg-gray-900/80 bg-slate-200/90 backdrop-blur-md sticky top-0  shadow-md flex  items-center  py-0.5 justify-between px-2 flex-wrap max-md:p-1"}>
    
     {/*logo */}
  
@@ -53,14 +52,14 @@ function Navbar() {
          className="flex items-center px-3 py-2 rounded text-black-500 hover:text-black-400"
        >
          <svg
-           className={`fill-current   h-5 w-6 ${isOpen ? "hidden" : "block"}`}
+           className={`fill-current  dark:text-white  h-5 w-6 ${isOpen ? "hidden" : "block"}`}
            viewBox="0 0 20 20"
            xmlns="http://www.w3.org/2000/svg"
          >
            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
          </svg>
          <svg
-           className={`fill-current h-5 w-6  ${isOpen ? "block" : "hidden"}`}
+           className={`fill-current dark:text-white h-5 w-6  ${isOpen ? "block" : "hidden"}`}
            viewBox="0 0 20 20"
            xmlns="http://www.w3.org/2000/svg"
          >
@@ -75,7 +74,7 @@ function Navbar() {
      <NavLink
        to="/post/search"
        className={({ isActive }) =>
-         `text-base mr-3 block mt-4 lg:inline-block lg:mt-0 ${isActive ? "text-blue-500 font-semibold" : "text-gray-600 font-semibold"} transition-colors duration-300`
+         `text-base mr-3 block mt-4 lg:inline-block lg:mt-0 ${isActive ? "text-blue-500 font-semibold" : "text-gray-600 dark:text-gray-300 font-semibold"} transition-colors duration-300`
        }
      >
        Find Jobs
@@ -84,7 +83,7 @@ function Navbar() {
      <NavLink
        to="/browsecompanies"
        className={({ isActive }) =>
-         `text-base mr-3 block mt-4 lg:inline-block lg:mt-0 ${isActive ? "text-blue-500 font-semibold" : "text-gray-600 font-semibold"} transition-colors duration-300`
+         `text-base mr-3 block mt-4 lg:inline-block lg:mt-0 ${isActive ? "text-blue-500 font-semibold" : "text-gray-600 dark:text-gray-300 font-semibold"} transition-colors duration-300`
        }
      >
        Browse Companies
@@ -94,7 +93,7 @@ function Navbar() {
        <NavLink
          to="/findtalent"
          className={({ isActive }) =>
-           `text-base mr-3 block mt-4 lg:inline-block lg:mt-0 ${isActive ? "text-blue-500 font-semibold" : "text-gray-600 font-semibold"} transition-colors duration-300`
+           `text-base mr-3 block mt-4 lg:inline-block lg:mt-0 ${isActive ? "text-blue-500 font-semibold" : "text-gray-600 dark:text-gray-300 font-semibold"} transition-colors duration-300`
          }
        >
          Search Talent
@@ -108,13 +107,13 @@ function Navbar() {
         isauth ?
         <button disabled={isLoading || isError}
      onClick={HandleLogout}
-       className="inline-flex  rounded-md border hover:border-blue-500   tracking-wider items-center hover:text-gray-700 hover:bg-slate-300 transition-colors bg-blue-500  py-1 px-4 text-white">
+       className="inline-flex dark:border-none  rounded-md border hover:border-blue-500   tracking-wider items-center hover:text-gray-700 hover:bg-slate-300 transition-colors bg-blue-500  py-1 px-4 text-white">
        Log out
        </button>
        :
        <Link
        to={'/login'}
-       className="inline-flex  rounded-md border hover:border-blue-500   tracking-wider items-center hover:text-gray-700 hover:bg-slate-300 transition-colors bg-blue-500  py-1 px-4 text-white">
+       className="inline-flex  rounded-md border dark:border-none hover:border-blue-500   tracking-wider items-center hover:text-gray-700 hover:bg-slate-300 transition-colors bg-blue-500  py-1 px-4 text-white">
        Log in
        </Link>
        }
@@ -124,8 +123,8 @@ function Navbar() {
         <Link to={'/profile'}>
        <button  className="inline-flex  items-center px-4 text-black">
        <div className='flex flex-col'>
-       <RxAvatar className=' w-8 rounded-full' alt="" />
-       <span className='text-xs'>profile</span>
+       <RxAvatar className=' w-8 dark:text-white rounded-full' alt="" />
+       <span className='text-xs dark:text-white'>profile</span>
        </div>
        </button>
          </Link>
@@ -138,7 +137,7 @@ function Navbar() {
       !isauth && (
         <Link
         to={'/register'}
-        className="inline-flex border hover:border-blue-500  rounded-md tracking-wider items-center hover:text-gray-700 hover:bg-slate-300 transition-colors bg-blue-500  py-1 px-4 text-white">
+        className="inline-flex border dark:border-none hover:border-blue-500  rounded-md tracking-wider items-center hover:text-gray-700 hover:bg-slate-300 transition-colors bg-blue-500  py-1 px-4 text-white">
         Register
         </Link>
       )

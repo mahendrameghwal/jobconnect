@@ -208,10 +208,10 @@ if(isError){
 }
   <div className="w-3/4 max-md:w-full mx-auto mt-6  max-md:mt-2   p-2  ">
 {
-  Permisson &&   <div className="flex justify-end items-center gap-x-3 bg-gray-100 p-4">
+  Permisson &&   <div className="flex justify-end items-center gap-x-3  p-4">
   <EditMode isChecked={isEditMode} onToggle={handleToggle} />
-  <p className="ml-4 text-sm font-semibold">{isEditMode ? 'Edit Mode On' : 'Edit Mode Off'}</p>
-  <Link to='/template' type="button" class="py-1 px-5 me-2 text-base font-normal text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 ">Build Your CV</Link>
+  <p className="ml-4 max-md:text-white text-sm font-semibold">{isEditMode ? 'Edit Mode On' : 'Edit Mode Off'}</p>
+  <Link to='/template' type="button" class="py-1 px-5 max-md:py-0.5 max-md:px-2 me-2 text-base font-normal text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 ">Build Your CV</Link>
 </div>
 }
     {/* basic information */}

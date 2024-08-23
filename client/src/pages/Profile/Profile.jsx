@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 
 const Profile = () => {
+  
 const navigate = useNavigate()
   const appliedJobsRef = useRef(null);
   const topCompaniesRef = useRef(null);
@@ -41,11 +42,10 @@ const navigate = useNavigate()
   if(isDeleteError){
   toast.error(deleteError?.data?.message)
   }
-  
-  
+
   const {isError,data,error,isLoading}= useMeQuery()
   const {avtar,fullname,orgname, jobs, PermissonForUpdate,Isorg, city,appliedJobs, _id}= data || {}; 
-  
+
   
  if (isLoading) {
    return  <div className="spinner min-h-screen absolute top-1/2 left-1/2  transform -translate-x-1/2 "></div>
@@ -77,13 +77,14 @@ const navigate = useNavigate()
    <main className=" bg-gray-400 bg-opacity-10 pt-8 ">
    <section role="main" className="w-full max-h-full min-h-screen">
    <div className="flex justify-evenly max-md:flex-col  px-2">
-   <section className="max-h-screen  bg-white w-1/4 max-md:w-full rounded-md shadow-md">
+   <section className="max-h-screen  
+dark:bg-gray-900/30 dark:shadow-gray-800/30  bg-white w-1/4 max-md:w-full rounded-md shadow-md">
 <div className="w-90  max-md:my-2 my-5 mx-auto ">
 
 <div className="flex  flex-col justify-center">
 {
 
-      <div className="flex justify-center">
+      <div className="flex  justify-center">
 <img className="  h-28 max-md:h-24 max-md:drop-shadow-md drop-shadow-lg rounded-full" src={
   avtar ? avtar : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
 } alt="user" />
@@ -95,7 +96,7 @@ const navigate = useNavigate()
 {
 
     <div className="flex mt-2 max-md:mt-1 justify-center">
-      <span className="text-xl max-md:text-lg font-sans text-gray-800 font-medium ">
+      <span className="text-xl max-md:text-lg font-sans dark:text-gray-200 text-gray-800 font-medium ">
         {Isorg ? orgname : fullname}
       </span>
      </div>
@@ -103,13 +104,13 @@ const navigate = useNavigate()
 
 {
   city && <div className="flex mt-2 max-md:mt-1 justify-center">
-      <span className="text-xl max-md:text-lg font-normal text-gray-800 ">
+      <span className="text-xl max-md:text-lg font-normal dark:text-gray-200 text-gray-800 ">
         {Isorg ? city : city}
       </span>
      </div>
 }
 {
-  PermissonForUpdate && <div className="flex justify-center my-2">
+  PermissonForUpdate && <div className="flex dark:text-gray-200 justify-center my-2">
   <Link to={Isorg?`/browsecompanies/profile/${_id}`:`/user/candidate/${_id}`}
     className="cursor-pointer text-center pt-1 w-40 h-8 bg-blue-600 text-white rounded-lg hover:bg-blue-700 hover:shadow-lg transition-all group active:w-11 active:h-11 active:rounded-full active:duration-300 ease-in-out">
     <span className="group-active:hidden">View & Update</span>
@@ -117,11 +118,11 @@ const navigate = useNavigate()
   </div>
 }
 
-<div className="flex my-5  max-md:my-3  bg-blue-50 drop-shadow-md rounded-md p-2 ">
+<div className="flex my-5  max-md:my-3 dark:bg-gray-900/95 bg-blue-50 drop-shadow-md rounded-md p-2 ">
 
 <section className="w-full  border-opacity-40">
-<p className=" text-base text-center">{Isorg ? 'posted Jobs':"Applied Jobs"}</p>
-<span className="text-xl max-md:text-lg flex justify-center text-center mt-3 items-center cursor-pointer text-blue-600">{Isorg ? Array.isArray(jobs) && jobs.length : Array.isArray(appliedJobs ) && appliedJobs.length } <HiOutlineChevronRight /></span>
+<p className=" text-base dark:text-gray-100 text-center">{Isorg ? 'posted Jobs':"Applied Jobs"}</p>
+<span className="text-xl max-md:text-lg flex justify-center text-center mt-3 items-center cursor-pointer text-blue-600">{Isorg ? Array.isArray(jobs) && jobs.length : Array.isArray(appliedJobs ) && appliedJobs.length }</span>
 
 
 </section>
@@ -138,12 +139,12 @@ to={
 
 }
 
- className="hover:bg-blue-50 max-md:my-0.5  flex flex-row items-center justify-center gap-x-2 border py-2 my-1 rounded-md">
+ className="dark:border-none hover:bg-blue-50 max-md:my-0.5 dark:bg-gray-900/95  flex flex-row items-center justify-center gap-x-2 border py-2 my-1 rounded-md">
  {
   Isorg ? (
-    <span className="flex items-center gap-x-2">Create job <IoCreateOutline size={16} /></span>
+    <span className="flex items-center gap-x-2 dark:text-gray-100">Create job <IoCreateOutline size={16} /></span>
   ) : (
-    <span className="flex items-center gap-x-2">Home <BiHome size={16} /></span>
+    <span className="flex items-center gap-x-2 dark:text-gray-100">Home <BiHome size={16} /></span>
   )
 }
 </Link>
@@ -162,12 +163,12 @@ to={
 
 }
 
- className="hover:bg-blue-50 max-md:my-0.5  flex flex-row items-center justify-center gap-x-2 border py-2 my-1 rounded-md">
+ className="dark:border-none hover:bg-blue-50 dark:text-gray-100 dark:bg-gray-900/95 max-md:my-0.5  flex flex-row items-center justify-center gap-x-2 border py-2 my-1 rounded-md">
  {
   Isorg ? (
-    <span className="flex items-center gap-x-2">Find Talent<CiSearch  size={16} /></span>
+    <span className="flex dark:text-gray-100 items-center gap-x-2">Find Talent<CiSearch  size={16} /></span>
   ) : (
-    <span className="flex items-center gap-x-2">Find Job<CiSearch  size={16} /></span>
+    <span className="flex dark:text-gray-100 items-center gap-x-2">Find Job<CiSearch  size={16} /></span>
   )
 }
 </Link>
@@ -177,8 +178,8 @@ to={
 {
   userInfo?.isAdmin && (
     <Link  to='/dashboard'
- className="hover:bg-blue-50 max-md:my-0.5  flex flex-row items-center justify-center gap-x-2 border py-2 my-1 rounded-md">
- <span className="flex items-center gap-x-2">DashBoard<FaChartPie  size={16} /></span>
+ className="dark:border-none dark:text-gray-100 dark:bg-gray-900/95 hover:bg-blue-50 max-md:my-0.5  flex flex-row items-center justify-center gap-x-2 border py-2 my-1 rounded-md">
+ <span className="flex dark:text-gray-100 items-center gap-x-2">DashBoard<FaChartPie  size={16} /></span>
 </Link>
   )
 }
@@ -188,10 +189,10 @@ to={
 
 
 
-<button onClick={()=>navigate(`/resetrequest`)} className="hover:bg-blue-50 max-md:my-0.5  flex items-center justify-center gap-x-2 border py-2 my-1 rounded-md">Forget password <MdOutlineRememberMe size={20} /></button>
-<button onClick={()=>navigate(`/chat/${_id}`)} className="hover:bg-blue-50 max-md:my-0.5  flex items-center justify-center gap-x-2 border py-2 my-1 rounded-md">Chat <CiChat1 size={20} /></button>
+<button onClick={()=>navigate(`/resetrequest`)} className="dark:border-none dark:text-gray-100 dark:bg-gray-900/95 hover:bg-blue-50 max-md:my-0.5  flex items-center justify-center gap-x-2 border py-2 my-1 rounded-md">Forget password <MdOutlineRememberMe size={20} /></button>
+<button onClick={()=>navigate(`/chat/${_id}`)} className="dark:border-none dark:text-gray-100 dark:bg-gray-900/95 hover:bg-blue-50 max-md:my-0.5  flex items-center justify-center gap-x-2 border py-2 my-1 rounded-md">Chat <CiChat1 size={20} /></button>
 {
-  PermissonForUpdate && <button disabled={isDeleteLoading} onClick={()=>{delAccountRequest()}} className={`${isDeleteLoading?`bg-red-400`:`bg-red-500 `} hover:bg-red-600 transition duration-300 ease-in-out max-md:my-0.5 text-white flex items-center justify-center gap-x-2 border py-2 my-1 rounded-md`}>
+  PermissonForUpdate && <button disabled={isDeleteLoading} onClick={()=>{delAccountRequest()}} className={`${isDeleteLoading?`bg-red-400`:`bg-red-500 `} hover:bg-red-600 dark:border-none transition duration-300 ease-in-out max-md:my-0.5 text-white flex items-center justify-center gap-x-2 border py-2 my-1 rounded-md`}>
   {isDeleteLoading ?"wait Please...":'Delete Account'}
   <MdFolderDelete size={20} />
 </button>
@@ -206,20 +207,20 @@ to={
       initial={{ opacity: 0, scale: 1 }}
    animate={{ opacity: 1, scale: 1 }}
    transition={{ duration: 0.6 }}
-      ref={appliedJobsRef} className="rounded-lg shadow-sm p-2 mb-5 bg-white ">
+      ref={appliedJobsRef} className="dark:bg-gray-900/30 dark:shadow-gray-950 rounded-lg  shadow-sm p-2 mb-5 bg-white ">
       <AppliedJobs currentuserid={_id} Isorg={Isorg} isLoading={isLoading} applicationdata={Isorg ? jobs :appliedJobs}/>
      </motion.div>
     }
    <motion.div  initial={{ opacity: 0, scale: 1 }}
    animate={{ opacity: 1, scale: 1 }}
-   transition={{ duration: 0.6 }} ref={topCompaniesRef} className="rounded-lg shadow-sm p-2 mb-5 bg-white ">
+   transition={{ duration: 0.6 }} ref={topCompaniesRef} className="dark:bg-gray-900/30 dark:shadow-gray-800/30 rounded-lg shadow-sm p-2 mb-5 bg-white ">
    <TopCompnies/>
     </motion.div>
     <motion.div 
     initial={{ opacity: 0, scale: 1 }}
    animate={{ opacity: 1, scale: 1 }}
    transition={{ duration: 0.6 }}
-    ref={recommendedJobsRef} className="rounded-lg shadow-sm p-2 mb-5 bg-white ">
+    ref={recommendedJobsRef} className="dark:bg-gray-900/30 dark:shadow-gray-800/30 rounded-lg shadow-sm p-2 mb-5 bg-white ">
     <RecommendedJobs/>
    </motion.div>
       {/*<div className="rounded-lg w-full shadow-sm p-2 mb-5 bg-white "><img src={Banner} alt="" /></div>*/}

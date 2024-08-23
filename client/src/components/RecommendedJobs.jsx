@@ -1,25 +1,4 @@
-// const RecommendedJobs = () => {
-    
-//  return (
-    // <div className=" m-2 hover:shadow-xl p-2 rounded-xl transition-shadow duration-150 shadow-sm cursor-pointer border border-gray-200  bg-blue-50 ">
-    // <div>
-    // <div className="flex px-1 items-center justify-between">
-    // <img className="h-10 rounded-md " src="https://img.naukimg.com/logo_images/groups/v1/4628151.gif" alt="" />
-    // <span className="text-gray-500">2 days ago</span>
-    // </div>
-    // <div className="flex-col px-1 mt-4 items-center justify-between">
-    // <span className="text-gray-800 capitalize  font-semibold ">senior Software Engineer</span> <br />
-    // <span className="text-gray-700 capitalize  text-base font-medium ">Company-name</span><br />
-    // <span className="text-gray-500 capitalize text-sm  flex items-center gap-x-1"><CiLocationOn size={20}/> Jaipur (Rajasthan)</span>
-    
-    // </div>
-    // </div>
-    
-    // </div>
-//  )
-// }
 
-// export default RecommendedJobs
 
 
 import Carousel from 'react-multi-carousel';
@@ -35,7 +14,7 @@ const RecommendedJobs = () => {
     <Fragment>
     <div >
 <div className="flex   my-4  justify-between">
-<p className="text-lg tracking-wide font-semibold capitalize "><span className="text-blue-500 font-semibold text-xl">Recommended</span> jobs</p>
+<p className="text-lg tracking-wide font-semibold capitalize "><span className="text-blue-500 font-semibold text-xl">Recommended</span> <span className='dark:text-white'>jobs</span></p>
 <p className="text-blue-500 font-medium underline cursor-pointer">View all </p>
 </div>
 
@@ -81,16 +60,16 @@ const RecommendedJobs = () => {
 {
     first && 
     first.map((x,i)=>(
-        <div key={i} onClick={()=>{navigate(`post/search/job-description/${x}`)}} className=" m-2 hover:shadow-xl p-2 rounded-xl transition-shadow duration-150 shadow-sm cursor-pointer border border-gray-200  bg-blue-50 ">
+        <div key={i} onClick={()=>{navigate(`post/search/job-description/${x}`)}} className=" dark:bg-gray-900/95 dark:border-none  m-2 hover:shadow-xl p-2 rounded-xl transition-shadow duration-150 shadow-sm cursor-pointer border border-gray-200  bg-blue-50 ">
 <div>
 <div className="flex px-1 items-center justify-between">
 <img className="h-10 rounded-md " src="https://img.naukimg.com/logo_images/groups/v1/4628151.gif" alt="" />
-<span className="text-gray-500">2 days ago</span>
+<span className="text-gray-500 dark:text-gray-400">2 days ago</span>
 </div>
 <div className="flex-col px-1 mt-4 items-center justify-between">
-<span className="text-gray-800 capitalize  font-semibold ">senior Software Engineer</span> <br />
-<span className="text-gray-700 capitalize  text-base font-medium ">Company-name</span><br />
-<span className="text-gray-500 capitalize text-sm  flex items-center gap-x-1"><CiLocationOn size={20}/> Jaipur (Rajasthan)</span>
+<span className="text-gray-800 capitalize  font-semibold  dark:text-white  ">senior Software Engineer</span> <br />
+<span className="text-gray-700  dark:text-gray-100  capitalize  text-base font-medium ">Company-name</span><br />
+<span className="text-gray-500  dark:text-gray-100  capitalize text-sm  flex items-center gap-x-1"><CiLocationOn size={20}/> Jaipur (Rajasthan)</span>
 
 </div>
 </div>

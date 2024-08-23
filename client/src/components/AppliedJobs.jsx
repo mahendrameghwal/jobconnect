@@ -47,11 +47,11 @@ const AppliedJobs = ({isLoading,currentuserid, Isorg ,applicationdata}) => {
      
       <p className="text-lg tracking-wide font-semibold capitalize flex-wrap flex gap-x-2">
   {Isorg ? (
-    <span className="text-blue-500 font-semibold text-xl">Posted Jobs</span>
+    <span className="text-blue-500 font-semibold text-xl ">Posted Jobs</span>
   ) : (
-    <span className="text-blue-500 font-semibold text-xl">Applied Jobs</span>
+    <span className="text-blue-500 font-semibold text-xl ">Applied Jobs</span>
   )}
-  <span className="text-sm">({`${applicationdata.length}`})</span>
+  <span className="text-sm dark:text-white">({`${applicationdata.length}`})</span>
 </p>
       </div>
     
@@ -98,22 +98,22 @@ const AppliedJobs = ({isLoading,currentuserid, Isorg ,applicationdata}) => {
     const {jobId: { _id, title, shortdesc, city, state ,createdAt},status, dateApplied, } = job;
     
     return (
-      <div key={i} className="m-2 relative hover:shadow-xl p-1 rounded-xl transition-shadow duration-150 shadow-sm cursor-pointer border border-gray-200 bg-opacity-60 bg-blue-100">
+      <div key={i} className=" dark:bg-gray-900/95 dark:border-none m-2 relative hover:shadow-xl p-1 rounded-xl transition-shadow duration-150 shadow-sm cursor-pointer border border-gray-200 bg-opacity-60 bg-blue-100">
         <div className="flex-col  px-1 py-2 mt-1 items-center">
-          <span className="text-gray-800 capitalize flex-wrap flex justify-start font-medium">{ !Isorg ?title:job?.title}</span>
-          <span className="text-gray-500 text-xs">
+          <span className="text-gray-800 capitalize flex-wrap flex justify-start font-medium dark:text-white">{ !Isorg ?title:job?.title}</span>
+          <span className="text-gray-500 text-xs dark:text-gray-300">
             {
               !Isorg  ?formatDistanceToNow(new Date(dateApplied), { addSuffix: true }):formatDistanceToNow(new Date(job?.createdAt), { addSuffix: true })
             }
           </span>
           <span
-            className="text-gray-800 mt-1 capitalize flex flex-wrap break-normal justify-start text-sm items-center"
+            className="text-gray-800 dark:text-gray-200 mt-1 capitalize flex flex-wrap break-normal justify-start text-sm items-center"
             style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
           >
             {shortdesc && shortdesc.length > 80 ? (
               <div className='flex-col'>
                 <span>{shortdesc.slice(0, 60)}</span>
-                <Link to={`/post/search/about/${_id}`} className="text-gray-200 px-2 cursor-pointer hover:underline">
+                <Link to={`/post/search/about/${_id}`} className="dark:text-gray-400  px-2 cursor-pointer underline">
                   See more
                 </Link>
               </div>
@@ -124,7 +124,7 @@ const AppliedJobs = ({isLoading,currentuserid, Isorg ,applicationdata}) => {
             {job.shortdesc && job.shortdesc.length > 80 ? (
               <div className='flex-col'>
                 <span>{job.shortdesc.slice(0, 60)}</span>
-                <Link to={`/post/search/about/${_id}`} className="text-gray-200 px-2 cursor-pointer hover:underline">
+                <Link to={`/post/search/about/${_id}`} className="dark:text-gray-400  px-2 cursor-pointer hover:underline">
                   See more
                 </Link>
               </div>
@@ -138,9 +138,9 @@ const AppliedJobs = ({isLoading,currentuserid, Isorg ,applicationdata}) => {
             status && (
               <span 
                 className={`absolute px-2 tracking-wide rounded-r-md text-sm top-0 right-0 ${
-                  status === 'pending' ? 'bg-amber-300/55 text-amber-900' :
-                  status === 'rejected' ? 'bg-red-300/55 text-red-900' :
-                  status === 'shortlisted' ? 'bg-green-300/55 text-green-900 m' :
+                  status === 'pending' ? 'dark:bg-amber-300 bg-amber-300/55 text-amber-900' :
+                  status === 'rejected' ? 'dark:bg-red-300 bg-red-300/55 text-red-900' :
+                  status === 'shortlisted' ? 'dark:bg-green-300 bg-green-300/55 text-green-900 m' :
                   ''
                 }`}
               >
@@ -149,8 +149,8 @@ const AppliedJobs = ({isLoading,currentuserid, Isorg ,applicationdata}) => {
             )
           }
           
-          <span className="text-gray-800 mt-1 capitalize flex justify-start text-sm items-center">
-            <CiLocationOn className='max-md:h-4' size={20}/>
+          <span className="text-gray-800 mt-1 dark:text-gray-100 capitalize flex justify-start text-sm items-center">
+            <CiLocationOn className='max-md:h-4 ' size={20}/>
             { !Isorg ?city:job?.city} &nbsp;
             { !Isorg ?state:job?.state}
           </span>

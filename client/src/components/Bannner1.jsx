@@ -36,7 +36,7 @@ const Banner1 = () => {
         </div>
       </section>
 
-      <section className="bg-gray-100 dark:bg-gray-800 py-6 max-md:py-4">
+    <section className=" py-6 max-md:py-4">
         <div className="container mx-auto px-4">
           <h2 className="text-xl md:text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-3">
             Trusted by Industry Leaders

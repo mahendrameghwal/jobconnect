@@ -95,7 +95,7 @@ Total applicants : {applicants.length}
   <div className="flex flex-row justify-between">
 {
   title && (
-    <h1 className="text-2xl uppercase max-md:text-xl font-semibold text-blue-500">
+    <h1 className="text-2xl uppercase max-md:text-xl font-semibold dark:text-blue-400 text-blue-500">
   {title}
   </h1>
   )
@@ -108,28 +108,28 @@ Total applicants : {applicants.length}
 
   <div className="flex gap-5 items-center flex-row max-md:flex-col max-md:items-start max-md:gap-2">
    {
-    orgname && orgname.orgname &&  <span className="flex items-center gap-x-1 text-[#070F2B] text-base max-md:text-base">
-    <BsBuilding className="" color="#616466" /> {orgname.orgname}
+    orgname && orgname.orgname &&  <span className="flex items-center gap-x-1 text-[#070F2B] dark:text-gray-50 text-base max-md:text-base">
+    <BsBuilding className="text-[#616466] dark:text-gray-300"  /> {orgname.orgname}
   </span>
    }
     {
       city && (
         <span className="flex items-center text-[#070F2B] gap-x-1 capitalize text-base max-md:text-base">
-      <MdOutlineLocationOn color="#616466" /> <span  >{city},</span>{state && <span className="px-0.5">({state})</span>}
-      {country && <span className="px-0.5">{country}</span>}
+      <MdOutlineLocationOn className="text-[#616466] dark:text-gray-300" /> <span className="dark:text-gray-50" >{city},</span>{state && <span className="dark:text-gray-50">({state})</span>}
+      {country && <span className="dark:text-gray-50">{country}</span>}
     </span>
       )
     }
    {
     PostTime && (
-      <span className="flex items-center gap-x-1 text-[#070F2B] text-base max-md:text-base">
-      <BsCalendar2Date className="" color="#616466" /> Posted : {PostTime}</span>
+      <span className="flex items-center gap-x-1 text-[#070F2B] text-base dark:text-gray-50 max-md:text-base">
+      <BsCalendar2Date  className="text-[#616466] dark:text-gray-300" /> Posted : {PostTime}</span>
     )
    }
    {
     salary && (
-      <span className="flex items-center gap-x-1 text-[#070F2B] text-base max-md:text-base">
-      <PiMoneyThin className="" color="#616466" />
+      <span className="flex dark:text-gray-50 items-center gap-x-1 text-[#070F2B] text-base max-md:text-base">
+      <PiMoneyThin  className="text-[#616466] dark:text-gray-300" />
       {salary}
     </span>
     )
@@ -139,16 +139,16 @@ Total applicants : {applicants.length}
 </div>
 {
   jobtype && 
-  (<span className="flex gap-x-1 max-md:text-base text-lg"> <span className="capitalize font-semibold">Job Type</span> : <span className="capitalize">{jobtype}</span></span>)
+  (<span className="flex gap-x-1 max-md:text-base text-lg"> <span className="capitalize dark:text-white font-semibold">Job Type :</span>  <span className="capitalize dark:text-gray-50">{jobtype}</span></span>)
 }
 {
   joblevel && (
-    <span className="flex gap-x-1 max-md:text-base text-lg">  <span className="capitalize font-semibold">Exprience Level</span> :<span className="capitalize">{joblevel}</span></span>
+    <span className="flex gap-x-1 max-md:text-base text-lg">  <span className="capitalize dark:text-white font-semibold">Exprience Level :</span> <span className="capitalize dark:text-gray-50">{joblevel}</span></span>
   )
 }
 {
   category && (
-    <span className="flex gap-x-1 max-md:text-base text-lg">  <span className="capitalize font-semibold">Category</span> : <span className="capitalize">{category}</span></span>
+    <span className="flex gap-x-1 max-md:text-base text-lg">  <span className="capitalize dark:text-white font-semibold">Category :</span>  <span className="capitalize dark:text-gray-50">{category}</span></span>
   )
 }
 
@@ -156,7 +156,7 @@ Total applicants : {applicants.length}
 {
   skills && skills.length > 0 &&
  <Fragment>
- <span className=" text-xl font-bold">Skills :</span>
+ <span className=" text-xl font-bold dark:text-white">Skills :</span>
  <div className="my-4  flex flex-wrap gap-4">
   {
     skills.map((skill,i)=>{
@@ -164,7 +164,7 @@ Total applicants : {applicants.length}
       // Get the random class 
       const randomClass = RandomColor[randomIndex];
    return   <div  key={i}>
-        <strong className={`mb-2 px-3 py-1 max-md:text-sm uppercase shadow-md border border-gray-200 font-medium text-base rounded-sm cursor-pointer ${randomClass}`}>
+        <strong className={`mb-2 px-3 py-1 max-md:text-sm uppercase shadow-sm  font-normal text-sm rounded-sm cursor-pointer ${randomClass}`}>
         {skill}
       </strong>
     
@@ -180,11 +180,11 @@ Total applicants : {applicants.length}
 {/* About job */}
 
 <div className=" my-8">
-  <span className=" text-xl max-md:text-base font-bold">About this Job Role</span>
+  <span className=" text-xl max-md:text-base font-bold dark:text-white">About this Job Role</span>
  {
   shortdesc && (
     <div className="my-4 break-all">
-    <span className="text-lg max-md:text-base">{shortdesc}</span>
+    <span className="text-lg max-md:text-base dark:text-gray-50">{shortdesc}</span>
     
   </div>
   )
@@ -194,9 +194,9 @@ Total applicants : {applicants.length}
 {
   responsibilities && responsibilities.length>0 && (
     <div className=" my-8">
-<span className=" text-xl max-md:text-base font-bold">Responsibilities</span>
+<span className=" text-xl max-md:text-base font-bold dark:text-white">Responsibilities</span>
 <div className="my-4">
-  <ul className=" mx-6">
+  <ul className=" mx-6 dark:text-gray-50">
    {
     responsibilities.map(responsibility=> <li key={uuidv4()} className="list-disc break-all leading-loose text-lg max-md:text-base">{responsibility}</li>)
    }

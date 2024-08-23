@@ -9,7 +9,7 @@ const FeaturedJobsCard = () => {
         {arr.map((item, i) => (
           <div
             key={i}
-            className="w-1/5 p-5 hover:shadow-md border striped-border bg-gray-50 rounded max-sm:w-full max-lg:w-2/5 max-md:p-3"
+            className="w-1/5 p-5 hover:shadow-md border striped-border dark:bg-gray-900/30 bg-gray-50 rounded max-sm:w-full max-lg:w-2/5 max-md:p-3"
           >
             <div className="flex justify-between items-center">
               <img
@@ -19,14 +19,14 @@ const FeaturedJobsCard = () => {
                 height="32"
                 loading="lazy"
               />
-              <span className="border px-2 py-1 rounded-md text-blue-600 border-blue-600">
+              <span className="border px-2 py-0.5 rounded-md text-blue-600 dark:text border-blue-600">
                 Full Time
               </span>
             </div>
             <section className="flex flex-col">
-              <p className="font-semibold my-3 tracking-wider">Email Marketing</p>
-              <p className="text-gray-500 my-1">Location: Jaipur</p>
-              <p className="text-sm text-gray-400 my-1">
+              <p className="font-semibold my-3 dark:text-white tracking-wider">Email Marketing</p>
+              <p className="text-gray-500 my-1 dark:text-gray-50">Location: Jaipur</p>
+              <p className="text-sm text-gray-400 my-1 dark:text-gray-100">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, officia.
               </p>
             </section>
@@ -35,7 +35,7 @@ const FeaturedJobsCard = () => {
       </div>
       <a
         href="#"
-        className="flex items-center gap-x-3 text-gray-500 hover:underline cursor-pointer mt-6"
+        className="flex items-center gap-x-3 text-gray-500 dark:text-gray-100 hover:underline cursor-pointer mt-6"
       >
         Show more jobs <HiOutlineArrowNarrowRight />
       </a>

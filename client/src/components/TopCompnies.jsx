@@ -13,13 +13,13 @@ const {data, isLoading}= useGetOrgQuery()
 if(isLoading){
   return (
      <Fragment>
-     <div className='flex py-10 justify-center'>  <pre>loading・・・</pre></div></Fragment>)
+     <div className='flex py-10 justify-center dark:text-white'>  <pre>loading・・・</pre></div></Fragment>)
 }
 
 if(!data){
   return (
      <Fragment>
-     <div className='flex py-10 justify-center'> 
+     <div className='flex py-10 justify-center dark:text-white'> 
        <pre className='text-red-500'>Unable to load Jobs Please try again later ⚠️</pre>
      </div>
  </Fragment>
@@ -30,7 +30,7 @@ if(!data){
   return (
     <Fragment>
     <div className="flex px-2  my-4 justify-between">
-    <p className="text-lg tracking-wide font-semibold capitalize "><span className="text-blue-500 font-semibold text-xl">Top </span>companies</p>
+    <p className="text-lg tracking-wide font-semibold capitalize "><span className="text-blue-500 font-semibold text-xl">Top </span><span  className='dark:text-white'>Compnies</span></p>
     <p className="text-blue-500 font-medium underline cursor-pointer">View all </p>
     </div>
   
@@ -74,21 +74,21 @@ if(!data){
 {
     data && data.length >0 &&
     data.map(({avtar,orgname,city,state,country,_id},i)=>(
-        <div key={i} className=" m-2  transform hover:-translate-y-1 transition-all hover:shadow-xl p-2 rounded-xl duration-200 shadow-sm  border border-gray-200  bg-blue-50 ">
+        <div key={i} className=" dark:bg-gray-900/95 dark:border-none m-2  transform hover:-translate-y-1 transition-all hover:shadow-xl p-2 rounded-xl duration-200 shadow-sm  border border-gray-200  bg-blue-50 ">
 <div>
 <div className="flex px-1 items-center justify-start">
 {
   avtar && <img className="h-8 max-md:h-12 rounded-md " src={avtar} alt="" />
 }
 {
-  !avtar && <GoOrganization className="h-8 max-md:h-12 rounded-md "  size={20}/>
+  !avtar && <GoOrganization className="h-8 dark:text-white max-md:h-12 rounded-md "  size={20}/>
 }
 
 </div>
 <div className="flex-col px-1 mt-1 items-center ">
-<span className="text-gray-800 capitalize flex justify-start  max-md:font-medium font-semibold ">{orgname}</span> 
-<span className="text-gray-800 mt-1 capitalize flex-wrap flex justify-start text-sm  items-center ">{city} ({state})</span>
-<span className="text-gray-800 mt-1 capitalize flex-wrap flex justify-start text-sm  items-center ">{country}</span>
+<span className="text-gray-800 dark:text-white capitalize flex justify-start  max-md:font-medium font-semibold ">{orgname}</span> 
+<span className="text-gray-800 dark:text-gray-100   mt-1 capitalize flex-wrap flex justify-start text-sm  items-center ">{city} ({state})</span>
+<span className="text-gray-800 dark:text-gray-100   mt-1 capitalize flex-wrap flex justify-start text-sm  items-center ">{country}</span>
 <Link to={`/browsecompanies/profile/${_id}`} className="text-blue-700  underline mt-3 capitalize tracking-wider flex justify-start text-sm  items-center ">View profile</Link>
 
 

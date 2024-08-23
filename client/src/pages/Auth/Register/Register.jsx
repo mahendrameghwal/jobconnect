@@ -10,6 +10,9 @@ import { toast } from "react-hot-toast"
 import {BiShow, BiHide} from "react-icons/bi"
 import { useRegisterMutation } from "../../../../app/api/authApi"
 import { FcGoogle } from "react-icons/fc";
+import { FaRegUser , FaFingerprint } from "react-icons/fa"
+import { MdOutlineAlternateEmail , MdOutlineLock} from "react-icons/md"
+
 
 const Register = () =>{
     const navigate =useNavigate()
@@ -61,7 +64,7 @@ const Register = () =>{
       
       <div
      
-          className="-z-10 relative overflow-hidden md:flex w-1/2 bg-gradient-to-r from-gray-900 to-blue-700  justify-around items-center hidden">
+          className=" relative overflow-hidden md:flex w-1/2  dark:from-gray-900/30  dark:to-gray-900/30  bg-gradient-to-r from-gray-900  to-blue-700  justify-around items-center hidden">
           <div>
               <h1 className="text-white font-bold text-4xl font-sans">JobConnect</h1>
               <p className="text-white mt-1">Create Your Acount </p>
@@ -72,51 +75,51 @@ const Register = () =>{
           <div className="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
           <div className="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
       </div>
-      <form className="flex  md:w-1/2 justify-center py-5 items-center bg-white" onSubmit={HandleRegister}>
+      <form className="flex dark:bg-gray-900/30   md:w-1/2 justify-center py-5 items-center bg-white" onSubmit={HandleRegister}>
       
-          <div className="bg-white -mt-11 max-md:mt-0 max-md:w-90 ">
+          <div className="mt-11 max-md:mt-0 max-md:w-90 ">
           <span
           className="inline-flex items-center justify-center rounded-md bg-green-100 px-1  text-green-700">
-           <p className="whitespace-nowrap text-xs dark:bg-green-400">default role will candidate</p>
+           <p className="whitespace-nowrap text-xs ">default role will candidate</p>
         </span>
-              <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello Dear!</h1>
-              <p className="text-sm font-normal text-gray-600 mb-3">Welcome here</p>
+              <h1 className="text-gray-800 dark:text-white font-bold text-2xl mb-1">Hello Dear!</h1>
+              <p className="text-sm font-normal dark:text-gray-50 text-gray-600 mb-3">Welcome here</p>
              
-              <div className={`flex items-center border-2 py-2 px-3 rounded-md mb-3`}>
-              <img className="h-5" src={User} alt="user" />
-                  <input value={fullname} onChange={HandleUser} className="pl-2 w-full outline-none border-none" type="text" name="fullname"  placeholder="Full name" />
+              <div className={`flex items-center dark:border border-2 py-2 px-3 rounded-md mb-3`}>
+              <FaRegUser className="h-6 dark:text-white"  alt="fullname" />
+                  <input value={fullname} onChange={HandleUser} className="pl-2 w-full dark:text-gray-50 dark:bg-gray-800  outline-none border-none" type="text" name="fullname"  placeholder="Full name" />
         </div>
       
         {
           error && error.data && error.data.details && error.data.details?.fullname && ( <div className="flex justify-start my-1"><span className="text-xs text-red-600">{error.data.details?.fullname}</span></div>)
          }
-                  <div className={`flex items-center border-2 py-2 px-3 rounded-md mb-3 `}>
-                  <img className="h-5" src={Usernameicon} alt="username" />
-                      <input onChange={HandleUser}  value={username} className="pl-2  w-full outline-none border-none" type="text" name="username"  placeholder="Username" />
+                  <div className={`flex items-center dark:border border-2 py-2 px-3 rounded-md mb-3 `}>
+                  <FaFingerprint className="h-6  dark:text-white"  alt="username" />
+                      <input onChange={HandleUser}  value={username} className="pl-2  dark:text-gray-50 dark:bg-gray-800  w-full outline-none border-none" type="text" name="username"  placeholder="Username" />
                       </div>
                     {
           error && error.data && error.data.details && error.data.details?.username && ( <div className="flex justify-start my-1"><span className="text-xs text-red-600">{error.data.details?.username}</span></div>)
          }
              
-                      <div className={`flex items-center  border-2 py-2 px-3 rounded-md mb-3 `}>
-                  <img className="h-5" src={emailicon} alt="username" />
+                      <div className={`flex items-center  dark:border border-2 py-2 px-3 rounded-md mb-3 `}>
+                  <MdOutlineAlternateEmail className="h-6  dark:text-white" alt="email" />
                      
-                          <input  onChange={HandleUser}  value={email} className="pl-2  w-full outline-none border-none" type="email" name="email"  placeholder="Email Address" />
+                          <input  onChange={HandleUser}  value={email} className="pl-2 dark:text-gray-50 dark:bg-gray-800  w-full outline-none border-none" type="email" name="email"  placeholder="Email Address" />
         </div>
       {
           error && error.data && error.data.details && error.data.details?.email && ( <div className="flex justify-start my-1"><span className="text-xs text-red-600">{error.data.details?.email}</span></div>)
          }
     
              
-                          <div className={`flex items-center relative border-2 py-2 px-3 rounded-md mb-3 `}>
-                         <img className="h-5" src={lock} alt="password" />
+                          <div className={`flex items-center relative dark:border border-2 py-2 px-3 rounded-md mb-3 `}>
+                         <MdOutlineLock className="h-6  dark:text-white"  alt="password" />
                         {
                           Showpassword ?
-                          <BiHide onClick={()=>{setShowpassword(!Showpassword)}}  size={20} className=" right-3 absolute cursor-pointer" />
+                          <BiHide onClick={()=>{setShowpassword(!Showpassword)}}  size={20} className="dark:text-white right-3 absolute cursor-pointer" />
                           :
-                          <BiShow onClick={()=>{setShowpassword(!Showpassword)}}  size={20} className=" right-3 absolute cursor-pointer" />
+                          <BiShow onClick={()=>{setShowpassword(!Showpassword)}}  size={20} className="dark:text-white right-3 absolute cursor-pointer" />
                         }
-                               <input  onChange={HandleUser}  value={password} className="pl-2  w-full outline-none border-none" type={Showpassword ?"text":"password"} name="password"  placeholder="Password" />
+                               <input  onChange={HandleUser}  value={password} className="pl-2 dark:text-gray-50 dark:bg-gray-800  w-full outline-none border-none" type={Showpassword ?"text":"password"} name="password"  placeholder="Password" />
                           
                                </div>
                                {
@@ -125,16 +128,16 @@ const Register = () =>{
      
         
         <div className=" gap-y-3 max-md:gap-y-1 flex max-sm:!w-full flex-wrap gap-x-1 items-center mt-3 justify-between">
-        <label className="text-[#592ec2]" htmlFor="Isorg ">Register acount for: </label>
-        <select  name="Isorg" onChange={HandleUser} className="max-sm:!w-full  border border-gray-400 rounded-md text-gray-600 h-10 px-3   focus:outline-none ">
-          <option className=" text-sm rounded-md" value="">Select role</option>
-          <option  className=" text-sm rounded-md" value='candidate'>candidate</option>
-          <option  className=" text-sm rounded-md" value='organization'>organization</option>
+        <label className="text-custom-blue dark:text-gray-100" htmlFor="Isorg ">Register acount for: </label>
+        <select  name="Isorg" onChange={HandleUser} className="max-sm:!w-full  dark:text-gray-50  border-2 dark:bg-gray-800 border-gray-400 rounded-md text-gray-600 h-10 px-3   focus:outline-none ">
+          <option  className=" dark:text-gray-50 text-sm rounded-md" value="">Select role</option>
+          <option  className=" dark:text-gray-50 text-sm rounded-md" value='candidate'>candidate</option>
+          <option  className=" dark:text-gray-50 text-sm rounded-md" value='organization'>organization</option>
         </select>
       </div>         
        <button onClick={HandleRegister} type="submit" disabled={isLoading} className="block w-full bg-gradient-to-r from-gray-900 to-blue-700  mt-1 py-2 rounded-md text-white font-medium mb-1">{isLoading ?'creating acount..':'Register'}</button>
       
-       <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-gray-500 bg-gray py-1.5 my-1 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+       <button className="flex w-full items-center dark:text-gray-50 justify-center gap-3.5 rounded-lg border border-gray-500 bg-gray py-1.5 my-1  dark:hover:bg-opacity-50">
                   <span>
                <FcGoogle/>
                   </span>
@@ -143,8 +146,8 @@ const Register = () =>{
 
                       
       <div className="flex justify-between mt-2">
-                            <span onClick={()=>{navigate('/forgetpassowrd')}} className="text-sm underline  text-blue-600 cursor-pointer">have an acount  ?</span>
-                            <span onClick={()=>{navigate('/login')}} className="text-sm  underline  text-blue-600 cursor-pointer">login here</span>
+                            <span onClick={()=>{navigate('/forgetpassowrd')}} className="text-sm underline dark:text-blue-300 text-blue-600 cursor-pointer">have an acount  ?</span>
+                            <span onClick={()=>{navigate('/login')}} className="text-sm underline dark:text-blue-300 text-blue-600 cursor-pointer">login here</span>
                             </div>
 
                            

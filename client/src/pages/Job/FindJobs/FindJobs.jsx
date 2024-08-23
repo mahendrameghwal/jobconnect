@@ -133,7 +133,7 @@ const FindJobs = () => {
       {isSuccess && <FindJobCard data={data} error={error} isError={isError} isSuccess={isSuccess} />}
 
       <section className="flex justify-center my-2">
-        <button className="rounded-md inline-flex items-center justify-center py-1 transition-colors tracking-wider px-7 text-center font-normal text-blue-800 border border-blue-500 bg-transparent hover:bg-blue-500 hover:text-white disabled:bg-gray-500/80 disabled:border-gray-500/80 disabled:text-black/50">
+        <button className="rounded-md dark:border-gray-100 dark:text-gray-100 inline-flex items-center justify-center py-1 transition-colors tracking-wider px-7 text-center font-normal text-blue-800 border border-blue-500 bg-transparent hover:bg-blue-500 hover:text-white disabled:bg-gray-500/80 disabled:border-gray-500/80 disabled:text-black/50">
           View more
         </button>
       </section>

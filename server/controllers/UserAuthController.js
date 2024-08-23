@@ -502,7 +502,7 @@ const DeleteAcountPerManently = asyncHandler(async (req, res, next) => {
         { $pull: { applicants: { _id: mongoose.Types.ObjectId(user?._id) } } }
       )
       await Candidate.findOneAndDelete({ owner:user?._id});
-    await User.findByIdAndDelete(user?._id);
+      await User.findByIdAndDelete(user?._id);
       res.clearCookie('accesstoken', { httpOnly: true });
       return res
         .status(200)

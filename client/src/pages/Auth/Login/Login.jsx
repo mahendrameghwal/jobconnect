@@ -8,6 +8,8 @@ import { BiShow, BiHide } from "react-icons/bi";
 import {toast} from "react-hot-toast";
 import { useLoginMutation } from "../../../../app/api/authApi";
 import {logout,setCredentials} from "../../../../app/slices/Authslice"
+import { MdOutlineAlternateEmail ,MdOutlineLock } from "react-icons/md";
+
 
 const Login = () => {
   const [login, { isLoading, error }] = useLoginMutation();
@@ -55,7 +57,7 @@ const HandleUser = e => {
     <div className="min-h-screen max-h-full">
 
       <div className="h-screen md:flex">
-        <div className="relative -z-10 overflow-hidden md:flex w-1/2 bg-gradient-to-r from-gray-900 to-blue-700  justify-around items-center hidden">
+        <div className="relative  overflow-hidden md:flex w-1/2   dark:from-gray-900/30  dark:to-gray-900/30  bg-gradient-to-r from-gray-900 to-blue-700  justify-around items-center hidden">
           <div>
             <h1 className="text-white font-bold text-4xl font-sans">JobConnect</h1>
             <p className="text-white mt-1">Looking for a New Job?</p>
@@ -70,22 +72,22 @@ const HandleUser = e => {
         </div>
         <form
           onSubmit={handleLogin}
-          className="flex  max-md:flex max-md:items-center max-md:h-screen md:w-1/2 justify-center py-10 items-center bg-white"
+          className="flex dark:bg-gray-900/30  max-md:flex max-md:items-center max-md:h-screen md:w-1/2 justify-center py-10 items-center bg-white"
         >
           <div className=" max-md:w-2/3 w-1/2">
-            <h1 className="text-gray-800 font-bold text-2xl mb-1">
+            <h1 className="text-gray-800 dark:text-white font-bold text-2xl mb-1">
               Hello Again!
             </h1>
-            <p className="text-sm font-normal text-gray-600 mb-7">
+            <p className="text-sm font-normal dark:text-gray-50 text-gray-600 mb-7">
               Welcome Back
             </p>
-            <div className={`flex items-center border-2 py-2 px-3  rounded-md mb-4`}>
-              <img className="h-5" src={emailicon} alt="email" />
+            <div className={`flex items-center dark:border border-2 py-2 px-3  rounded-md mb-4`}>
+              <MdOutlineAlternateEmail className="h-6 dark:text-white" alt="email" />
 
               <input
                 value={email}
                 onChange={HandleUser}
-                className="pl-2 outline-none border-none w-full"
+                className="pl-2 dark:text-gray-50 dark:bg-gray-800  outline-none border-none w-full"
                 type="text"
                 name="email"
                 placeholder="Email Address"
@@ -95,15 +97,15 @@ const HandleUser = e => {
               
               </div>
           
-            <div className={`flex relative items-center border-2 py-2 px-3 rounded-md mb-4`}>
-              <img className="h-5" src={lock} alt="" />
+            <div className={`flex relative dark:border  items-center border-2 py-2 px-3 rounded-md mb-4`}>
+              <MdOutlineLock className="h-6 dark:text-white"  alt="password" />
               {Showpassword ? (
                 <BiHide
                   onClick={() => {
                     setShowpassword(!Showpassword);
                   }}
                   size={20}
-                  className=" right-3 absolute cursor-pointer"
+                  className=" right-3 dark:text-white absolute cursor-pointer"
                 />
               ) : (
                 <BiShow
@@ -111,13 +113,13 @@ const HandleUser = e => {
                     setShowpassword(!Showpassword);
                   }}
                   size={20}
-                  className=" right-3 absolute cursor-pointer"
+                  className=" right-3 dark:text-white absolute cursor-pointer"
                 />
               )}
               <input
                 value={password}
                 onChange={HandleUser}
-                className="pl-2 outline-none border-none w-full"
+                className="pl-2 dark:text-gray-50 outline-none dark:bg-gray-800 border-none w-full"
                 type={Showpassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"

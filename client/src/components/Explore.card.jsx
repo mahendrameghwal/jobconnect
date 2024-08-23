@@ -41,7 +41,7 @@ const ExploreCard = () => {
             <div
               onClick={() => SelectandNavigatePageChange(item)}
               key={i}
-              className="hover:cursor-pointer hover:shadow-md border striped-border dark:bg-[#0b0c0e]  bg-gray-50 p-5"
+              className="hover:cursor-pointer hover:shadow-md border striped-border dark:bg-gray-900/30  bg-gray-50 p-5"
             >
               <Icon size={25} className="text-blue-500" />
               <section className="flex flex-col">

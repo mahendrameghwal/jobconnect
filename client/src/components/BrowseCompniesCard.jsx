@@ -60,7 +60,7 @@ if(isLoading){
                 navigate(`/browsecompanies/profile/${_id}`);
               }}
               key={_id}
-              className="  cursor-pointer  p-5 hover:shadow-md border striped-border bg-gray-50 rounded"
+              className=" dark:bg-gray-900/30 cursor-pointer  p-5 hover:shadow-md border striped-border bg-gray-50 rounded"
             >
               <div className="flex justify-between items-center">
                {
@@ -70,11 +70,11 @@ if(isLoading){
                   src={avtar}
                   alt={orgname}
                 />
-                ): <FaRegBuilding className="h-8 rounded-full" />
+                ): <FaRegBuilding className="h-8 dark:text-gray-50 rounded-full" />
                }
               {
                 jobs && Array.isArray(jobs) && (
-                  <span className="border  px-2 py-0.5    rounded-md bg-blue-400/20 text-blue-700   ">
+                  <span className="border dark:border-none  px-2 py-0.5    rounded-md dark:bg-blue-300/20 dark:text-blue-300  bg-blue-400/20 text-blue-700   ">
                 <span className="px-1">{jobs?.length}</span>Jobs
                 </span>
                 )
@@ -83,19 +83,19 @@ if(isLoading){
               <section className="flex flex-col">
                {
                 orgname && (
-                  <p className="font-semibold my-3  tracking-wider">{orgname}</p>
+                  <p className="font-semibold my-3 dark:text-white tracking-wider">{orgname}</p>
                 )
                }
                 {
                   city && (
-                    <p className=" text-gray-500 my-1 ">{city} ({state})</p>
+                    <p className=" dark:text-gray-200 text-gray-500 my-1 ">{city} ({state})</p>
                   )
                 }
-                <p className="text-sm text-gray-400 my-1">
+                <p className="text-sm text-gray-400 dark:text-gray-300 my-1">
                 {about.length > 60 ? (
                   <Fragment>
                     {`${about.slice(0, 60)} `}
-                    <span className='px-2 underline text-gray-500 hover:text-gray-600'>see more</span>
+                    <span className='px-2 underline dark:text-gray-200 text-gray-500 hover:text-gray-600'>see more</span>
                   </Fragment>
                 ) : (
                   about
