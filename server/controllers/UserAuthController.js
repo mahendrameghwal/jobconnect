@@ -369,12 +369,14 @@ const resetPassword = asyncHandler(async (req, res, next) => {
 const logout = asyncHandler(async (req, res, next) => {
   try {
     res
-      .cookie('accesstoken', '', {
-        httpOnly: true,
-        expires: new Date(0),
-      })
-      .status(200)
-      .json({ message: 'user has logged out succesfully' });
+    .cookie('accesstoken', '', {
+      httpOnly: true,
+      expires: new Date(0),
+      secure: true, 
+      sameSite: 'none' 
+    })
+    .status(200)
+    .json({ message: 'User has logged out successfully' });
   } catch (error) {
     next(error);
   }
