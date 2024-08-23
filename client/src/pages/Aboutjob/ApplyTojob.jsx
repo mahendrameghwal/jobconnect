@@ -11,6 +11,8 @@ const ApplyToJob = ({ applyid, applicants }) => {
 
   const checkIfAlreadyApplied = useCallback(() => {
     if (CurrentUser && CurrentUser.candidate?._id) {
+      console.log( CurrentUser.candidate._id);
+      console.log(applicants);
       const isAlreadyAppliedJob = applicants.some(applicant => applicant === CurrentUser.candidate._id);
       setIsAlreadyApplied(isAlreadyAppliedJob);
     }

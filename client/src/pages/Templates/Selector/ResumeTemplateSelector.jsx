@@ -25,7 +25,8 @@ const ResumeTemplateSelector = () => {
 
   return (
     <motion.div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Choose Your Resume Template</h1>
+    <h1 className="text-3xl max-md:text-2xl mb-2 font-semibold bg-gradient-to-t text-center text-transparent dark:text-blue-500   from-green-700 via-blue-700 to-purple-700 bg-clip-text">Choose Your resume Template</h1>
+
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {templates.map((template) => (
           <div

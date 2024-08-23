@@ -112,7 +112,7 @@ dark:bg-gray-900/30 dark:shadow-gray-800/30  bg-white w-1/4 max-md:w-full rounde
 {
   PermissonForUpdate && <div className="flex dark:text-gray-200 justify-center my-2">
   <Link to={Isorg?`/browsecompanies/profile/${_id}`:`/user/candidate/${_id}`}
-    className="cursor-pointer text-center pt-1 w-40 h-8 bg-blue-600 text-white rounded-lg hover:bg-blue-700 hover:shadow-lg transition-all group active:w-11 active:h-11 active:rounded-full active:duration-300 ease-in-out">
+    className="cursor-pointer text-center pt-1 w-40 h-8 bg-blue-600 text-white rounded-lg hover:bg-blue-700 hover:shadow-lg transition-colors ease-in-out">
     <span className="group-active:hidden">View & Update</span>
   </Link>
   </div>

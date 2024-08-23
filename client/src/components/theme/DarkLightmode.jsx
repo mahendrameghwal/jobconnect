@@ -36,7 +36,13 @@ const DarkLightMode = () => {
             setIsOpen(!isOpen);
           }}
         >
-          {colorMode === 'system' ? <FaDesktop /> : colorMode === 'dark' ? <FaMoon /> : <FaSun />}
+        {colorMode === 'system' ? (
+          <FaDesktop className="text-gray-500 hover:text-gray-700 transition-colors duration-300" />
+        ) : colorMode === 'dark' ? (
+          <FaMoon className="text-blue-500 hover:text-blue-700 transition-colors duration-300" />
+        ) : (
+          <FaSun className="text-yellow-500 hover:text-yellow-700 transition-colors duration-300" />
+        )}
           <span className="ml-2">{colorMode.charAt(0).toUpperCase() + colorMode.slice(1)}</span>
         </button>
       </div>

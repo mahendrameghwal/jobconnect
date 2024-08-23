@@ -86,7 +86,7 @@ const copyToClipboard = (id) => {
 }
 {
   applicants && (
-    <span className="flex absolute text-[#0C356A] top-1 right-2 max-md:text-sm max-sm:text-xs z-10 items-center gap-x-1 tracking-wider text-base font-normal">
+    <span className="flex absolute text-[#0C356A] dark:text-blue-200 top-1 right-2 max-md:text-sm max-sm:text-xs z-10 items-center gap-x-1 tracking-wider text-base font-normal">
 Total applicants : {applicants.length}
 </span>
   )
@@ -101,7 +101,7 @@ Total applicants : {applicants.length}
   )
 }
 {
-  orgname && (<button onClick={()=>{navigate(`/browsecompanies/profile/${orgname._id}`)}} className="official">Our Official page</button>)
+  orgname && (<button onClick={()=>{navigate(`/browsecompanies/profile/${orgname._id}`)}} className="official ">Our Official page</button>)
 }
 
   </div>

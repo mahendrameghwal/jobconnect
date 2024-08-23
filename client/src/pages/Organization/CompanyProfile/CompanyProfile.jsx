@@ -134,7 +134,7 @@ const CompanyProfile = memo(() => {
 
 
     return (
-      <div className="bg-gray-50">
+      <div >
       {
         activePopup === 'updateOrg' && (
           <UpdateOrg
@@ -165,9 +165,9 @@ const CompanyProfile = memo(() => {
               transition={{ duration: 0.6 }}
               className="col-span-4 sm:col-span-3"
             >
-              <div className="bg-white  relative shadow rounded-sm p-2">
+              <div className="bg-white dark:bg-gray-900/95  relative shadow rounded-sm p-2">
       {
-        permission && <FiEdit    onClick={() => togglePopup('updateOrg')} className="h-4 absolute right-3 top-2 cursor-pointer max-lg:my-0 my-2"  />   
+        permission && <FiEdit    onClick={() => togglePopup('updateOrg')} className="h-4 dark:text-gray-100 absolute right-3 top-2 cursor-pointer max-lg:my-0 my-2"  />   
       } 
 
 
@@ -175,7 +175,7 @@ const CompanyProfile = memo(() => {
                   <div className="flex flex-col items-center">
                     <img
                       src={avtar}
-                      className="w-32 h-32 p-2 border rounded-full mb-4 shrink-0"
+                      className="w-32 h-32 p-2 border dark:border-gray-600 rounded-full mb-4 shrink-0"
                     ></img>
                     {orgname && (
                       <h1 className="text-xl max-md:text-base text-blue-600 font-bold">
@@ -183,7 +183,7 @@ const CompanyProfile = memo(() => {
                       </h1>
                     )}
                     {category && (
-                      <p className="text-gray-900 max-md:text-sm">{category}</p>
+                      <p className="text-gray-900 max-md:text-sm dark:text-white">{category}</p>
                     )}
                   </div>
                 )}
@@ -192,9 +192,9 @@ const CompanyProfile = memo(() => {
                   <h2 className="text-blue-600 capitalize font-bold max-md:font-medium tracking-wider mb-2">
                     Location
                   </h2>
-                  <ul className="flex gap-x-1 flex-wrap">
+                  <ul className="flex gap-x-1 dark:text-white flex-wrap">
                     {city && <li className="max-md:text-sm mb-1">{city}</li>}
-                    {city && <li className="max-md:text-sm mb-1">({state})</li>}
+                    {state && <li className="max-md:text-sm mb-1">({state})</li>}
                     {country && (
                       <li className="max-md:text-sm mb-1">{country}</li>
                     )}
@@ -206,7 +206,7 @@ const CompanyProfile = memo(() => {
                     <h2 className="text-blue-600 capitalize font-bold max-md:font-medium tracking-wider mb-2">
                       About Me
                     </h2>
-                    <p className="text-gray-700 max-md:text-sm">{about}</p>
+                    <p className="text-gray-700 dark:text-gray-200 max-md:text-sm">{about}</p>
                   </div>
                 )}
                 {mobile && (
@@ -214,7 +214,7 @@ const CompanyProfile = memo(() => {
                     <h2 className="text-blue-600 capitalize font-bold max-md:font-medium tracking-wider mb-2">
                       Phone no.
                     </h2>
-                    <p className="text-gray-700 max-md:text-sm">{mobile}</p>
+                    <p className="text-gray-700 dark:text-gray-200 max-md:text-sm">{mobile}</p>
                   </div>
                 )}
               </div>
@@ -225,24 +225,24 @@ const CompanyProfile = memo(() => {
               transition={{ duration: 0.6 }}
               className="col-span-4 sm:col-span-9 "
             >
-              <div className=" bg-white  relative shadow rounded-sm p-3 company-job-div">
+              <div className=" bg-white dark:bg-gray-900/95  relative shadow rounded-sm p-3 company-job-div">
                 <div className="flex gap-x-5 absolute bottom-1 right-1 mt-3">
                 
                 </div>
                 {createdAt && (
-                  <span className="select-none text-green-500 border-2 rounded-md border-green-300 px-2 py-0.5 text-sm font-sans font-medium">
-                    The account was created{' '}
+                  <span className="select-none text-green-500  rounded-md  py-0.5 text-sm font-sans font-medium">
+                    account  created{' '}
                     {formatDistanceToNow(new Date(createdAt))} ago
                   </span>
                 )}
 
-                <h3 className="font-semibold text-left mt-3 -mb-2">
+                <h3 className="font-semibold dark:text-white text-left mt-3 -mb-2">
                   Follow us on :
                 </h3>
                 <div className="flex flex-wrap gap-x-5">
                   {linkedin && (
                     <Link to={linkedin}>
-                      <div className="flex cursor-pointer justify-start items-center gap-6 my-6">
+                      <div className="flex cursor-pointer dark:text-gray-200 justify-start items-center gap-6 my-6">
                         <FaLinkedinIn
                           className="hover:text-blue-600"
                           size={25}
@@ -252,7 +252,7 @@ const CompanyProfile = memo(() => {
                   )}
                   {website && (
                     <Link to={website.trim()}>
-                      <div className="flex cursor-pointer justify-start items-center gap-6 my-6">
+                      <div className="flex cursor-pointer dark:text-gray-200 justify-start items-center gap-6 my-6">
                         <FaLink className="hover:text-blue-600" size={25} />
                       </div>
                     </Link>
@@ -260,11 +260,11 @@ const CompanyProfile = memo(() => {
                 </div>
 
                 <div className="flex flex-wrap items-center my-2 justify-between">
-                  <h2 className="text-xl font-bold ">Latest Jobs</h2>
+                  <h2 className="text-xl font-bold dark:text-white ">Posted Jobs</h2>
                   {permission && (
                     <Link
                       to="/createjob"
-                      className="bg-blue-600 flex items-center text-sm hover:bg-blue-700 duration-300 transition-shadow shadow-md hover:shadow-lg hover:shadow-blue-200 text-gray-100 px-4 py-1.5 gap-1 rounded-md tracking-wider capitalize"
+                      className="bg-blue-600 dark:shadow-none flex items-center text-sm hover:bg-blue-700 duration-300 transition-shadow shadow-md hover:shadow-lg hover:shadow-blue-200 text-gray-100 px-4 py-1.5 gap-1 rounded-md tracking-wider capitalize"
                     >
                       create a Job
                       <LuPenSquare size={12} />
@@ -278,22 +278,22 @@ const CompanyProfile = memo(() => {
                     initial={{ opacity: 0, scale: 1 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1 }}
-                    className="my-5 px-2 border relative shadow-md shadow-gray-50 flex flex-row max-md:flex-col max-md:items-start justify-between"
+                    className="my-5 px-2 border relative shadow-md shadow-gray-50 dark:shadow-none dark:border-gray-600 flex flex-row max-md:flex-col max-md:items-start justify-between"
                   >
                     <div className="max-md:px-0 mt-3 w-8/12 max-md:w-full max-md:mx-0">
-                      {title && <p className="font-bold max-md:font-medium">{title}</p>}
+                      {title && <p className="font-bold max-md:font-medium dark:text-white">{title}</p>}
                       {createdAt && (
                         <span className="text-gray-400 text-sm absolute top-3 right-2">
                           {formatDistanceToNow(parseISO(createdAt), { addSuffix: true })}
                         </span>
                       )}
-                      <span className="font-medium max-md:font-normal max-md:text-sm text-gray-500">
+                      <span className="font-medium max-md:font-normal max-md:text-sm text-gray-500 dark:text-gray-400">
                         {city}, {country}
                       </span>
                       {skills && skills.length > 0 && (
                         <div className="flex flex-wrap items-center justify-start gap-x-3 mt-1">
                           {skills.map((skill, i) => (
-                            <span key={i} className="mb-0.5 border text-sm font-normal px-2 rounded-md">
+                            <span key={i} className="mb-0.5 dark:border-gray-500 dark:text-gray-300 border text-sm font-normal px-2 rounded-md">
                               {skill}
                             </span>
                           ))}
@@ -332,9 +332,9 @@ const CompanyProfile = memo(() => {
                                 onClick={()=>ChangeExistJob(index)}
                                 type="button"
                                 disabled={isLoading}
-                                className="inline-flex items-center px-7 py-2 bg-blue-900/60 hover:bg-blue-900/70 text-slate-100 text-sm font-medium rounded-sm"
+                                className="inline-flex items-center px-7 py-2 bg-blue-900/60 hover:bg-blue-800 text-slate-100 text-sm font-medium rounded-sm"
                               >
-                                <FiEdit />
+                                <FiEdit className='dark:text-gray-100' />
                               </button>
                               </>
                             )}

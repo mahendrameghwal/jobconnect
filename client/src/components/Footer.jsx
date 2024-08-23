@@ -15,43 +15,33 @@ const Footer = () => {
         <div className="md:flex md:justify-between">
           <div className=" md:mb-2 py-2">
             <div className="flex items-center ">
-              <img src={logo} className="mr-4 h-10" alt="Logo"/>
+              <img src={logo} className="mr-4 max-md:h-5 h-7" alt="Logo"/>
               <span className="self-center text-xl font-semibold whitespace-nowrap text-white">JobConnect</span>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
-              <h3 className="mb-6 text-sm font-semibold uppercase text-white">Resources</h3>
+              <h3 className="mb-2 text-sm font-semibold uppercase text-white">Follow us</h3>
               <ul>
-               
+                <li className="mb-4">
+                  <div
+                    className=" hover:underline dark:text-gray-200 text-gray-400">Github</div>
+                </li>
                 <li>
-                  <div 
-                    className=" hover:underline text-gray-400">Tailwind CSS</div>
+                  <div
+                    className=" hover:underline dark:text-gray-200 text-gray-400">Discord</div>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="mb-6 text-sm font-semibold uppercase text-white">Follow us</h3>
+              <h3 className="mb-2 text-sm font-semibold  uppercase text-white">Legal</h3>
               <ul>
                 <li className="mb-4">
-                  <div
-                    className=" hover:underline text-gray-400">Github</div>
-                </li>
-                <li>
-                  <div
-                    className=" hover:underline text-gray-400">Discord</div>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-6 text-sm font-semibold  uppercase text-white">Legal</h3>
-              <ul>
-                <li className="mb-4">
-                  <div className=" hover:underline text-gray-400">Privacy
+                  <div className=" hover:underline dark:text-gray-200 text-gray-400">Privacy
                     Policy</div>
                 </li>
                 <li>
-                  <div className=" hover:underline text-gray-400">Terms
+                  <div className=" hover:underline dark:text-gray-200 text-gray-400">Terms
                     &amp; Conditions</div>
                 </li>
               </ul>
