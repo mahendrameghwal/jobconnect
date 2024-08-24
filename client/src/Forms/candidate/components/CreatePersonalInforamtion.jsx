@@ -50,7 +50,7 @@ const CreatePersonalInforamtion = ({
    </label>
    
    <input onChange={handleFileInputChange} value={fileInputState}
-     className=" block w-full max-md:placeholder:text-sm   bg-gray-100 text-gray-700 border border-gray-200 rounded py-2.5 px-4  leading-tight focus:outline-none focus:bg-white"
+     className=" block w-full max-md:placeholder:text-sm   bg-gray-100 text-gray-700 border border-gray-200 rounded py-2.5 px-4  leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
      type="file" accept="image/png,.jpg,.jpeg,.png image/jpeg" name='avtar' />
  
  </div>
@@ -61,7 +61,7 @@ const CreatePersonalInforamtion = ({
          full Name
        </label>
        <input name='fullname' value={Candidate.fullname} onChange={Handlecandidate}
-         className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white"
+         className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
          type="text"
          placeholder="Fullname"
        />
@@ -74,7 +74,7 @@ const CreatePersonalInforamtion = ({
     Gender
    </label>
    <select name="gender"  onChange={Handlecandidate} value={Candidate.gender}
-   className="  max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+   className="  max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800">
    <option  className='!text-sm' value="">choose Gender</option>
  {
    Gender.map((gender,i)=>(
@@ -93,7 +93,7 @@ const CreatePersonalInforamtion = ({
   Available to Join
  </label>
    <select name="noticeperiod" id="" onChange={Handlecandidate} value={Candidate.noticeperiod}
-   className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+   className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
    
    >
    <option  className='!text-sm' value="">choose Notice period</option>
@@ -115,7 +115,7 @@ const CreatePersonalInforamtion = ({
 employment status
 </label>
  <select name="empstatus" value={Candidate.empstatus} onChange={(e)=>{dispatch(CandidateStatus(e.target.value))}}
- className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+ className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
  
  >
  <option  className='!text-sm'  value=''>choose Employment status</option>
@@ -142,7 +142,7 @@ employment status
 current  status
 </label>
 <select name="currentempstatus" value={Candidate.currentempstatus} onChange={(e)=>dispatch(CurrentCandidateStatus(e.target.value))}
-className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
 
 >
 <option className='!text-sm' value=''>--Choose Employment status--</option>
@@ -168,7 +168,7 @@ CurrentEmploymentStatus.map((employment)=>(
 Country
 </label>
 <select name='country' value={Candidate.country} onChange={(e) => handleCountry(e.target.value)}
-className="max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+className="max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
 disabled={countryLoading}
 >
 <option className='!text-sm' value=''>
@@ -196,7 +196,7 @@ disabled={countryLoading}
 State
 </label>
 <select name="state" id="" value={Candidate.state}  onChange={(e) =>dispatch(setState(e.target.value))}
-className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
 
 >
 <option className='!text-sm' value=''>Select a state</option>
@@ -219,7 +219,7 @@ className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 b
 City
 </label>
  <select name="city" value={Candidate.city} onChange={(e) => dispatch(setCity(e.target.value))}
- className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+ className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
  disabled={cityLoading}
  >
  <option  className='!text-sm'  value="">Select a city</option>
@@ -252,7 +252,7 @@ City
  email
 </label>
 <input name='email' value={Candidate.email} onChange={Handlecandidate}
- className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+ className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
  type="email"
  placeholder="example@gmail.com"
 />
@@ -267,7 +267,7 @@ City
 Mobile No.
 </label>
 <input name='phone' value={Candidate.phone} onChange={Handlecandidate}
-className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
 type="number"
 placeholder="+91 1234567890"
 />
@@ -283,7 +283,7 @@ placeholder="+91 1234567890"
 Quick summary
 </label>
 <textarea name='summary' value={Candidate.summary} onChange={Handlecandidate}
- className="resize-none max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+ className="resize-none max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
  id="grid-password"
  type="password"
  placeholder="A quick intro for yourself"
@@ -301,11 +301,11 @@ social
 
  <input type='text' placeholder='custom social' 
 
-className="mb-1 max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1.5 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={(e)=>setSelectedSocial(e.target.value)} value={selectedSocial}/> 
+className="mb-1 max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1.5 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800" onChange={(e)=>setSelectedSocial(e.target.value)} value={selectedSocial}/> 
 <span>or</span>
 
 <select name="name"   onChange={(e)=>setSelectedSocial(e.target.value)} value={selectedSocial}
-className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
 
 >
 <option className='!text-sm' value=''>--select a social network--</option>
@@ -330,7 +330,7 @@ Add Link here
 name="link"
 value={link}
 onChange={(e) => setLink(e.target.value)}
-className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"/>
 
 
 </div>
@@ -381,7 +381,7 @@ Candidate.social[0].name!==''&& Candidate.social[0].link!=='' &&  Candidate.soci
 Skill
 </label>
 <select name="skilltype"   onChange={(e)=>setseletctedSkillType(e.target.value)} value={seletctedSkillType}
-className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
 
 >
 <option className='!text-sm' value=''>--select a category--</option>
@@ -406,7 +406,7 @@ Add Skills
 name="Skillname"
 value={Skillname}
 onChange={(e) => setSkillname(e.target.value)}
-className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"/>
 
 
 </div>

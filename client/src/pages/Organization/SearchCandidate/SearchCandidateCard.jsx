@@ -20,7 +20,7 @@ const navigate = useNavigate()
               navigate(`/user/candidate/${_id}`);
             }}
             key={_id}
-            className="cursor-pointer p-5 hover:shadow-md border striped-border bg-gray-50 rounded"
+            className="cursor-pointer p-5 hover:shadow-md border striped-border bg-gray-50 dark:bg-gray-900/30 rounded"
           >
             <div className="flex justify-between items-center">
               {avtar ? (
@@ -30,28 +30,28 @@ const navigate = useNavigate()
                   alt={fullname}
                 />
               ) : (
-                <FaUser className="h-8 w-8 text-gray-400" />
+                <FaUser className="h-8 w-8 dark:text-gray-200 text-gray-400" />
               )}
               {skills && Array.isArray(skills) && (
-                <span className="border px-2 py-0.5 rounded-md bg-green-400/20 text-green-700">
+                <span className="border px-2  rounded-md bg-green-400/20 dark:bg-green-200/90 dark:border-gray-600 text-green-700">
                   <span className="px-1">{skills.length}</span>Skills
                 </span>
               )}
             </div>
             <section className="flex flex-col">
               {fullname && (
-                <p className="font-semibold my-3 tracking-wider">{fullname}</p>
+                <p className="font-semibold my-3 dark:text-gray-50 tracking-wider">{fullname}</p>
               )}
               {city && (
-                <p className="text-gray-500 my-1">
+                <p className="text-gray-500 dark:text-gray-300 my-1">
                   {city} ({state})
                 </p>
               )}
-              <p className="text-sm text-gray-400 my-1">
+              <p className="text-sm text-gray-400/50 my-1">
                 {summary && summary.length > 60 ? (
                   <Fragment>
                     {`${summary.slice(0, 60)} `}
-                    <span className='px-2 underline text-gray-500 hover:text-gray-600'>see more</span>
+                    <span className='px-2 underline dark:text-gray-300 dark:hover:text-gray-400 text-gray-500 hover:text-gray-600'>see more</span>
                   </Fragment>
                 ) : (
                   summary

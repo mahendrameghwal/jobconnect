@@ -14,7 +14,7 @@ const Navigate = useNavigate()
 
   return (
  
-    <div  className={`bg-white chat-scrollbar border overflow-y-auto h-screen w-1/3 max-md:w-full transition duration-500 ease-in-out transform  `}>
+    <div  className={`bg-white dark:bg-gray-900/30 dark:border-gray-600 chat-scrollbar border overflow-y-auto h-screen w-1/3 max-md:w-full transition duration-500 ease-in-out transform  `}>
  {/*
 //     <span className='font-medium flex  justify-start px-4 text-custom-blue'>active user</span>
 //         <div className=" px-2  overflow-x-auto flex flex-row "
@@ -39,7 +39,7 @@ const Navigate = useNavigate()
 
      {
      Array.isArray(AllchattingUserInformation) && AllchattingUserInformation.map(({avtar,name,id})=>(
-        <div key={id} onClick={()=> Navigate(`/chat/${id}`)} className={`${recipient==id && 'bg-gray-200'} relative hover:bg-[#b9d1e954]/20 border border-gray-200  bg-gray-100/40 cursor-pointer  px-2  border-collapse  flex items-center`}>
+        <div key={id} onClick={()=> Navigate(`/chat/${id}`)} className={`${recipient==id && 'bg-blue-300/40 '} dark:border-gray-600 relative hover:bg-[#b9d1e954]/20 border border-gray-200   cursor-pointer  px-2  border-collapse  flex items-center`}>
         
         <div className="absolute top-0.5 right-0.5">
           <div className="bg-gray-300 px-2 max-md:hidden  text-gray-600 border border-gray-400 rounded-sm text-xs flex items-center">
@@ -53,11 +53,11 @@ const Navigate = useNavigate()
         </div>
         {
           avtar ?  <img src={`${avtar}`} className="w-10 h-20 max-md:w-8 max-md:h-12 object-contain  rounded-full mr-4" />:
-          <FaUserCircle className="w-10 h-20 max-md:w-8 max-md:h-12 rounded-full mr-4" />
+          <FaUserCircle className="w-10 h-20 max-md:w-8 max-md:h-12 dark:text-gray-200 rounded-full mr-4" />
 
         }
         <div className="flex-1">
-          <h2 className="text-sm font-normal">{name}</h2>
+          <h2 className="text-sm dark:text-gray-300 font-normal">{name}</h2>
         </div>
       </div>
       ))

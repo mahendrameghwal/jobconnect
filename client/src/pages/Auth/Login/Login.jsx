@@ -74,14 +74,14 @@ const HandleUser = e => {
           onSubmit={handleLogin}
           className="flex dark:bg-gray-900/30  max-md:flex max-md:items-center max-md:h-screen md:w-1/2 justify-center py-10 items-center bg-white"
         >
-          <div className=" max-md:w-2/3 w-1/2">
+          <div className=" max-md:w-4/5 w-1/2">
             <h1 className="text-gray-800 dark:text-white font-bold text-2xl mb-1">
               Hello Again!
             </h1>
             <p className="text-sm font-normal dark:text-gray-50 text-gray-600 mb-7">
               Welcome Back
             </p>
-            <div className={`flex items-center dark:border border-2 py-2 px-3  rounded-md mb-4`}>
+            <div className={`flex items-center dark:border-gray-600 border-2 py-2 px-3  rounded-md mb-4`}>
               <MdOutlineAlternateEmail className="h-6 dark:text-white" alt="email" />
 
               <input
@@ -97,7 +97,7 @@ const HandleUser = e => {
               
               </div>
           
-            <div className={`flex relative dark:border  items-center border-2 py-2 px-3 rounded-md mb-4`}>
+            <div className={`flex relative dark:border-gray-600  items-center border-2 py-2 px-3 rounded-md mb-4`}>
               <MdOutlineLock className="h-6 dark:text-white"  alt="password" />
               {Showpassword ? (
                 <BiHide

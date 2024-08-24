@@ -1,5 +1,5 @@
 function ExcludeNavbar(pathname) {
-    const excludedPaths = ['/dashboard','/sendsuccess'];
+    const excludedPaths = ['/dashboard','/sendsuccess','/resetrequest'];
     return !excludedPaths.some(path => pathname.includes(path));
   }
 

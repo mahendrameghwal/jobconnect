@@ -27,13 +27,15 @@ const ResumeTemplateSelector = () => {
     <motion.div className="container mx-auto px-4 py-8">
     <h1 className="text-3xl max-md:text-2xl mb-2 font-semibold bg-gradient-to-t text-center text-transparent dark:text-blue-500   from-green-700 via-blue-700 to-purple-700 bg-clip-text">Choose Your resume Template</h1>
 
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-md:gap-3">
         {templates.map((template) => (
           <div
             key={template.id}
             className={`bg-white rounded-sm shadow-md border overflow-hidden cursor-pointer ${
-              selectedTemplate === template.id ? 'ring-1 ring-blue-400' : ''
+              selectedTemplate === template.id ? 'ring-2 ring-[#1E90FF]' : ''
             }`}
+            
+            
             onClick={() => setSelectedTemplate(template.id)}
           >
             <img src={template.image} alt={template.name} className="w-full object-contain" />
@@ -46,7 +48,7 @@ const ResumeTemplateSelector = () => {
       {selectedTemplate && (
         <motion.div className="mt-8 text-center">
           <button
-            className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors"
+            className="bg-blue-500 text-white px-6 py-2 max-md:py-1 rounded-md hover:bg-blue-600 transition-colors"
             onClick={handleCreateResume} // Attach handler to button click
           >
             Create Resume

@@ -353,9 +353,9 @@ const handleLangInputChange = useCallback((index, e) => {
   }
 
   return (
-    <div className=" min-h-screen max-h-full  bg-gray-100">
-      <div className="flex max-md:flex-col flex-grow mt-2">
-        <div className="w-full md:w-1/2  bg-white rounded-lg shadow-md">
+    <div className=" min-h-screen max-h-full  dark:bg-black  bg-gray-100 ">
+      <div className="flex max-md:flex-col  flex-grow mt-2">
+        <div className="w-full md:w-1/2 rounded-lg shadow-md">
           <ResumeEditor 
           resumeData={resumeData}
           PersonalInfo={PersonalInfo}
@@ -388,10 +388,10 @@ const handleLangInputChange = useCallback((index, e) => {
           handleAddLang={handleAddLang}
           />
         </div>
-        <div className=" w-full md:w-1/2 md:block p-2 bg-white rounded-lg  max-md:m-1 ">
+        <div className=" w-full md:w-1/2 md:block p-2 bg-white dark:bg-gray-900/30 rounded-lg  max-md:m-1 ">
         
             <div className='flex justify-between'>
-            <h2 className="text-2xl font-bold ">Resume Preview</h2>
+            <h2 className="text-2xl font-bold dark:text-white ">Resume Preview</h2>
             <PDFbutton generatePDF={generatePDF} />
             </div>
         

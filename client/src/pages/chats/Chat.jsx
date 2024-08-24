@@ -120,7 +120,7 @@ const Chat = () => {
   );
 
   return (
-    <section className="flex flex-row ">
+    <section className="flex flex-row  ">
       {isChecked ?(
         <Allchats
           recipient={recipient}

@@ -64,14 +64,14 @@ export default function BasicTable({applicants}) {
   };
  
   const columns = [
-  /*
+  
       {
         header: 'ID',
         accessorKey: '_id',
         size: 80, 
         enableColumnFilter:true
       },
-    */ 
+    
     {
       enableColumnFilter:true,
       header: 'Status',
@@ -171,33 +171,41 @@ export default function BasicTable({applicants}) {
               <button  onClick={() => handleApplicationClick(CandidateId)} className='flex cursor-pointer justify-center transform'>
               <TbGridDots color='#026edb' size={25} /></button>
 
-                  {openAction===CandidateId && (
-                       <div className="  w-full mx-1  max-md:left-30% right-5    bg-white rounded divide-y divide-gray-100 shadow-md ">
-                         <span className="flex flex-col   overflow-hidden rounded-md border bg-white shadow-sm">
-                           <Link  role='button'
-                             to={`/user/candidate/${CandidateId}`}
-                             className="px-1 flex items-center gap-x-1 justify-center py-1.5 text-sm font-medium hover:bg-slate-200 text-amber-700  capitalize  focus:relative"
-                           >
-                             view  <IoEyeOutline size={21} />
-                           </Link>
-                           <button   role='button'  onClick={() => ShortlistCandidate(CandidateId)} className="px-1 flex  items-center gap-x-1 justify-center py-1.5 text-sm font-medium hover:bg-slate-200  text-green-700  capitalize  focus:relative">
-                             Hire Candidate <LuFlagTriangleRight size={21} />
-                           </button>
-                           <button role='button'
-                             onClick={() => RejectCandidate(CandidateId)}
-                             className="px-1 flex items-center gap-x-1 justify-center py-1.5 text-sm font-medium hover:bg-slate-200 text-red-700  capitalize  focus:relative"
-                           >
-                             reject Candidate <RxCross2  size={21} />
-                           </button>
-                           <Link role='button'
-                            to={`/chat/${CandidateId}`}
-                             className="px-1 flex items-center gap-x-1 justify-center py-1.5 text-sm font-medium bg-slate-100 hover:bg-slate-300 text-gray-500 capitalize  focus:relative"
-                           >
-                             message user <MdOutlineMessage  size={21} className='text-custom-blue'  />
-                           </Link>
-                         </span>
-                       </div>
-                     )}
+              {openAction === CandidateId && (
+                <div className="w-full mx-1 max-md:left-30% right-5 rounded divide-y divide-gray-100 shadow-md dark:divide-gray-700 dark:bg-gray-900 dark:shadow-lg">
+                  <span className="flex flex-col overflow-hidden rounded-md border bg-white shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:shadow-md">
+                    <Link
+                      role="button"
+                      to={`/user/candidate/${CandidateId}`}
+                      className="px-1 flex items-center gap-x-1 justify-center py-1.5 text-sm max-md:text-xs font-medium text-amber-700 capitalize hover:bg-slate-200 dark:text-amber-300 dark:hover:bg-gray-600 focus:relative"
+                    >
+                      View <IoEyeOutline className="w-4 h-4" />
+                    </Link>
+                    <button
+                      role="button"
+                      onClick={() => ShortlistCandidate(CandidateId)}
+                      className="px-1 flex items-center gap-x-1 justify-center py-1.5 text-sm max-md:text-xs font-medium text-green-700 capitalize hover:bg-slate-200 dark:text-green-300 dark:hover:bg-gray-600 focus:relative"
+                    >
+                      Hire Candidate <LuFlagTriangleRight className="w-4 h-4" />
+                    </button>
+                    <button
+                      role="button"
+                      onClick={() => RejectCandidate(CandidateId)}
+                      className="px-1 flex items-center gap-x-1 justify-center py-1.5 text-sm max-md:text-xs font-medium text-red-700 capitalize hover:bg-slate-200 dark:text-red-300 dark:hover:bg-gray-600 focus:relative"
+                    >
+                      Reject Candidate <RxCross2 className="w-4 h-4" />
+                    </button>
+                    <Link
+                      role="button"
+                      to={`/chat/${CandidateId}`}
+                      className="px-1 flex items-center gap-x-1 justify-center py-1.5 text-sm font-medium bg-slate-100 text-gray-500 capitalize hover:bg-slate-300 dark:bg-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 focus:relative"
+                    >
+                      Message User <MdOutlineMessage className="w-4 h-4 text-custom-blue" />
+                    </Link>
+                  </span>
+                </div>
+              )}
+              
                      </div>
            
               );
@@ -250,21 +258,21 @@ export default function BasicTable({applicants}) {
       onChange={handleInputChange}
          name='globalsearch'
         type="search"
-        className="peer  p-1 w-full border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
+        className="peer  p-1 w-full border-none dark:text-gray-100  bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
         placeholder="Search all columns"
       />
 
-      <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-800 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+      <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2  dark:bg-[#202938] dark:text-white bg-white p-0.5 text-xs text-gray-800 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
       Search all columns
       </span>
     </label>
   </section>
-      <table role='table' border={1} className=" border-collapse w-full text-sm text-left text-gray-500">
-        <thead className="text-xs uppercase rounded-md bg-custom-blue  py-2">
+      <table role='table' border={1} className=" border-collapse  w-full text-sm text-left text-gray-500">
+        <thead className="text-xs uppercase rounded-md bg-custom-blue dark:bg-gray-900/30  py-2">
           {table.getHeaderGroups().map(headerGroup => (
             <tr className="px-1 py-3" key={headerGroup.id}>
               {headerGroup.headers.map(header => (
-                <th className='py-2 px-2 border text-white border-white'
+                <th className='py-2 px-2 border dark:border-gray-600 text-white border-white'
                   key={header.id}
                  
                 >
@@ -291,11 +299,11 @@ export default function BasicTable({applicants}) {
           ))}
         </thead>
 
-        <tbody className='border border-slate-400 '>
+        <tbody className='border dark:bg-gray-900/30 border-slate-400 '>
           {table.getRowModel().rows.map(row => (
             <tr  key={row.id}>
               {row.getVisibleCells().map(cell => (
-                <td  className=' pl-2 py-1 border border-slate-400' key={cell.id}>
+                <td  className=' pl-2 py-1 border dark:border-gray-600 dark:text-gray-200 border-slate-400' key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

@@ -135,7 +135,7 @@ const showLoadMore = remainingCities > 0;
                onChange={handleFileInputChange}
                     value={fileInputState}
                     accept=".jpg,.jpeg,.png, image/jpeg ,image/png"
-                    className="appearance-none cursor-pointer block w-full max-md:placeholder:text-sm   bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white"/>
+                    className="appearance-none cursor-pointer block w-full max-md:placeholder:text-sm   bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"/>
                   
     
       
@@ -146,7 +146,7 @@ const showLoadMore = remainingCities > 0;
               Name <span className=" text-red-500  text-sm italic ">*</span>
             </label>
             <input name="orgname"  onChange={handleChange} value={Org.orgname}
-              className="appearance-none  max-md:placeholder:text-sm  block w-full  bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none  max-md:placeholder:text-sm  block w-full  bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
               type="text"
               placeholder="Company name"
             />
@@ -164,7 +164,7 @@ const showLoadMore = remainingCities > 0;
             <label htmlFor="category" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Category <span className=" text-red-500  text-sm italic ">*</span>
             </label>
-            <select required    onChange={handleChange} value={Org.category }      className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2  px-4 py-3 w-full" name="category" id="">
+            <select required    onChange={handleChange} value={Org.category }      className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2  px-4 py-3 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800" name="category" id="">
             <option value='' disabled>Select a Category</option>
             {OrgCategories.map((types) => (
               <option key={types.id} value={types.name}>
@@ -186,8 +186,8 @@ const showLoadMore = remainingCities > 0;
             Linkdin
           </label>
           <input name="linkedin" onChange={handleChange} value={Org.linkedin}
-            className="appearance-none max-md:placeholder:text-sm  block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-city"
+            className="appearance-none max-md:placeholder:text-sm  block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
+          
             type="text"
             placeholder="https://www.linkedin.com/in/company-name/"
           />
@@ -201,8 +201,7 @@ const showLoadMore = remainingCities > 0;
           website
         </label>
         <input name="website" onChange={handleChange} value={Org.website}
-          className="appearance-none max-md:placeholder:text-sm  block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          id="grid-city"
+          className="appearance-none max-md:placeholder:text-sm  block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           type="text"
           placeholder="https://www.your-site-name.com/"
         />
@@ -215,7 +214,7 @@ const showLoadMore = remainingCities > 0;
   Mobile no. <span className=" text-red-500  text-sm italic ">*</span>
   </label>
   <input name="mobile" onChange={handleChange} value={Org.mobile}
-    className="appearance-none max-md:placeholder:text-sm  block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+    className="appearance-none max-md:placeholder:text-sm  block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
   
     type="tel"
     placeholder="+91 1234567890"
@@ -239,7 +238,7 @@ const showLoadMore = remainingCities > 0;
   name='country'
   value={Org.country}
   onChange={(e) => HandleCountry(e.target.value)}
-  className="max-md:placeholder:text-sm block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+  className="max-md:placeholder:text-sm block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
   disabled={countryloading}
 >
   <option className='!text-sm' value=''>
@@ -260,7 +259,7 @@ const showLoadMore = remainingCities > 0;
 state
 </label>
   <select name='state'  value={Org.state} onChange={(e) =>dispatch(setState(e.target.value))}
-  className="max-md:placeholder:text-sm  block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+  className="max-md:placeholder:text-sm  block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
    disabled={stateloading}
   >
   <option  className='!text-sm' value=''>Select a State</option>
@@ -285,7 +284,7 @@ state
     name="city"
     value={Org.city}
     onChange={(e) => dispatch(setCity(e.target.value))}
-    className=" max-md:placeholder:text-sm block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+    className=" max-md:placeholder:text-sm block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     disabled={cityloading}
   >
     <option className='!text-sm' value="">
@@ -318,7 +317,7 @@ state
               About Company <span className=" text-red-500  text-sm italic ">*</span>
             </label>
             <textarea rows={6} name="about" onChange={handleChange} value={Org.about}
-              className="resize-none max-md:placeholder:text-sm appearance-none block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="resize-none max-md:placeholder:text-sm appearance-none block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
               id="grid-password"
               placeholder="Intro about Your organization"
             />

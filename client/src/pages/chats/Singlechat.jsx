@@ -18,14 +18,14 @@ const SingleChat = ({
 
 
   return (
-    <section className="flex snap-none relative flex-col items-center justify-end w-full min-h-screen  text-gray-800">
+    <section className="flex snap-none relative flex-col items-center justify-end w-full min-h-screen   text-gray-800">
    {
     !userInfo && <span className='absolute top-1/2 text-gray-400 -translate-x-1/2 left-1/2 '>No user Found</span>
    }
 
      {
       userInfo && (
-        <div className=" w-full   bg-gray-100 cursor-pointer  p-2 shadow-md  border-gray-200 border flex items-center">
+        <div className=" w-full  dark:bg-gray-900/30 dark:border-gray-600 bg-gray-100 cursor-pointer  p-2 shadow-md  border-gray-200 border flex items-center">
         {
             <div className="relative border border-slate-500/50 p-2 rounded-full">
             {userInfo?.avtar ? (
@@ -34,7 +34,7 @@ const SingleChat = ({
                 className="w-8  h-8 max-md:w-6 max-md:h-6"
               />
             ) : (
-              <FaRegUser className="w-8  h-8 max-md:w-6 max-md:h-6  " />
+              <FaRegUser className="w-8 dark:text-gray-200  h-8 max-md:w-6 max-md:h-6  " />
             )}
 
 
@@ -49,7 +49,7 @@ const SingleChat = ({
           </div>
         }
         <div className="flex-1 mx-2">
-          <h2 className="text-sm font-normal">
+          <h2 className="text-sm dark:text-white font-normal">
           
             {userInfo?._id ===currentUserId  ? 'You' :userInfo?.orgname || userInfo?.fullname}
           </h2>
@@ -64,15 +64,15 @@ const SingleChat = ({
               className="hidden peer"
             />
             <div
-              className="w-[50%] h-[3px] bg-black rounded-sm transition-all 
+              className="w-[50%] h-[3px] dark:bg-white bg-black rounded-sm transition-all 
               duration-300 origin-left translate-y-[0.45rem] peer-checked:rotate-[-45deg]"
             ></div>
             <div
-              className="w-[50%] h-[2px] bg-black rounded-md transition-all 
+              className="w-[50%] h-[2px] dark:bg-white bg-black rounded-md transition-all 
               duration-300 origin-center peer-checked:hidden"
             ></div>
             <div
-              className="w-[50%] h-[3px] bg-black rounded-md transition-all 
+              className="w-[50%] h-[3px] dark:bg-white bg-black rounded-md transition-all 
               duration-300 origin-left -translate-y-[0.45rem] peer-checked:rotate-[45deg]"
             ></div>
           </div>
@@ -83,7 +83,7 @@ const SingleChat = ({
 
       {
         userInfo && (
-          <div className="flex flex-col  flex-grow w-full chat-bg   shadow-xl  overflow-hidden">
+          <div className="flex flex-col  flex-grow w-full bg-blue-100 dark:bg-gray-800   shadow-xl  overflow-hidden">
         <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
         
         {
@@ -96,7 +96,7 @@ const SingleChat = ({
              <div   >
              <div>
                <div  className={`flex  my-2 space-x-3 w-2/5 max-md:w-10/12 ${currentUserId=== sender && `ml-auto justify-end`}`}>
-                 <div  className={ `  ${currentUserId=== sender ?`msg-own bg-slate-300/90  rounded-l-xl rounded-br-xl`:`msg-other bg-[#007dfc] rounded-r-xl rounded-bl-xl ` } border w-full relative p-4 max-md:p-3   `}>
+                 <div  className={ `  ${currentUserId=== sender ?`msg-own bg-slate-300/90  rounded-l-xl rounded-br-xl`:`msg-other bg-[#007dfc] rounded-r-xl rounded-bl-xl ` } border dark:border-gray-600 w-full relative p-4 max-md:p-3   `}>
                    <p className={ ` ${currentUserId=== sender ?` text-gray-800/90 `:` text-white ` } text-sm max-md:text-xs`}>{message}</p>
                    <small className={`${currentUserId=== sender ?`bg-slate-300/90 text-gray-800/90 `:`bg-[#007dfc] text-gray-100/70 ` } absolute bottom-0.5 right-3 text-xs  leading-none`}>
                      {createdAt && <TimeAgo timestamp={createdAt} />}

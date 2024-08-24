@@ -231,7 +231,7 @@ if(isError){
       <img  className="h-32 w-32 max-md:h-24 max-md:w-24  drop-shadow-md rounded-full" src={avtar} alt="avatar" />
       </figure>
     ):(  <figure className="w-1/4    max-md:w-full max-md:justify-start flex justify-center items-center">
-      <CiUser  className="h-28 w-28 max-md:h-24 max-md:w-24  drop-shadow-md rounded-full" src={avtar} alt="" />
+      <CiUser  className="h-28 w-28 max-md:h-24 max-md:w-24 dark:text-gray-200 drop-shadow-md rounded-full"  alt="avtar" />
       </figure>)
    }
     <section className="w-3/4   max-md:w-full max-md:my-2">

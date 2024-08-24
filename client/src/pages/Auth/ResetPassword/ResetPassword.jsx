@@ -76,10 +76,10 @@ return (
   <div className="w-full ">
  
   <main role="main" className=" min-h-screen max-h-full max-w-lg mx-auto p-6">
-   <div className="mt-20 max-md:mt-32 bg-blue-100  rounded-md shadow-3xl shadow-current  ">
+   <div className="mt-20 max-md:mt-32 bg-blue-100 dark:bg-gray-900/30 rounded-md shadow-3xl shadow-current  ">
      <div className="p-4  ">
        <div className="text-center ">
-         <h1 className="block text-2xl max-md:text-xl font-medium text-gray-800 "> Create New Password</h1>
+         <h1 className="block text-2xl max-md:text-xl font-medium text-gray-800 dark:text-white "> Create New Password</h1>
        
        </div>
 
@@ -87,7 +87,7 @@ return (
        <div className="mt-4">
            <div className="grid gap-y-2">
              <div>
-               <label htmlFor='password' className="block max-md:font-medium text-sm font-semibold mb-1  dark:text-gray-800">New password</label>
+               <label htmlFor='password' className="block max-md:font-medium text-sm font-semibold mb-1  dark:text-gray-300">New password</label>
                <div className="relative">
                  <input onChange={Hanleresetpassword} value={resetpassword.password} placeholder="new password" type={ShowPassword?"text":"password"} name="password" className="  outline-none py-2 px-4 block w-full border-2 border-gray-100 rounded-md text-sm shadow-sm" required aria-describedby="password-error"/>
                  <span className="top-0 cursor-pointer px-1  right-0  translate-y-2/3 translate-x-2/4 mx-5 absolute">
@@ -97,7 +97,7 @@ return (
              
              </div>
              <div>
-               <label htmlFor='confirmpassword' className="block max-md:font-medium text-sm font-semibold mb-1  dark:text-gray-800">confirm password</label>
+               <label htmlFor='confirmpassword' className="block max-md:font-medium text-sm font-semibold mb-1  dark:text-gray-300">confirm password</label>
                <div className="relative">
                  <input onChange={Hanleresetpassword} value={resetpassword.confirmpassword} placeholder="confirm new password" type={ConfrimShowPassword?"text":"password"} name="confirmpassword" className="  outline-none py-2 px-4 block w-full border-2 border-gray-100 rounded-md text-sm shadow-sm" required aria-describedby="password-error"/>
                  <span className="top-0 cursor-pointer px-1  right-0  translate-y-2/3 translate-x-2/4 mx-5 absolute">

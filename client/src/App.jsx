@@ -83,6 +83,7 @@ function App() {
   <Suspense fallback={<Loader/>}>
   
   <main role="main" className="min-h-screen max-h-full">
+ { ExcludeFooter(location.pathname) &&
   <div >
   <Link to='https://github.com/mahendrameghwal/jobconnect' className="github-corner" title="View source on GitHub">
         <svg
@@ -107,6 +108,7 @@ function App() {
         </svg>
       </Link>
       </div>
+    }
       <Toaster
         position="top-center"
         toastOptions={{

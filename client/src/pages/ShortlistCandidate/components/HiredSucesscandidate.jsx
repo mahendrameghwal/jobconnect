@@ -26,7 +26,7 @@ transition={{ duration: 0.6 }}
 
   {
     applicants && applicants.length < 1  && (
-      <div className="flex justify-center items-center min-h-screen max-h-full border border-green-500 "><pre>candidate not available</pre></div>
+      <div className="flex justify-center items-center min-h-screen max-h-full dark:border-gray-600 border text-red-500"><span>candidate not available</span></div>
     )
 
   }
@@ -38,7 +38,7 @@ transition={{ duration: 0.6 }}
        
       HiredCandidate?.map(({_id,fullname,currentempstatus,avtar, createdAt, appliedJobs})=>(
        
-    <div key={_id} className="relative bg-gray-100   p-4 rounded-md shadow-md hover:shadow-lg border-gray-200 border flex items-center">
+    <div key={_id} className="relative bg-gray-100   p-4 rounded-md shadow-md hover:shadow-lg  border-gray-200 border flex items-center">
     <div className='absolute top-0.5 right-0.5'>
     <div className='bg-gray-300 px-2  text-gray-600 border border-gray-400 rounded-md text-xs flex gap-x-1 items-center'>Joined {format(new Date(createdAt), 'MMMM yyyy')}</div>
     </div>

@@ -35,8 +35,8 @@ const ResumeEditor = ({
   
 
   const renderPersonalInfo = () => (
-    <div className="p-4 bg-gray-100 rounded-lg ">
-      <h3 className="text-xl font-semibold mb-4">Personal Information</h3>
+    <div className="p-4  rounded-lg ">
+      <h3 className="text-xl font-semibold dark:text-white mb-4 ">Personal Information</h3>
       <input
         type="text"
         name="fullname"
@@ -96,8 +96,8 @@ const ResumeEditor = ({
   );
 
   const renderSkills = () => (
-    <div className="p-4 bg-gray-50 rounded-lg shadow-md">
-      <h3 className="text-xl font-semibold mb-4">Skills</h3>
+    <div className="p-4  rounded-lg ">
+      <h3 className="text-xl font-semibold dark:text-white mb-4">Skills</h3>
       {Skillinfo?.map((skill, index) => (
         <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm">
          
@@ -127,8 +127,8 @@ const ResumeEditor = ({
   );
 
   const renderEmployment = () => (
-    <div className="p-4 bg-gray-50 rounded-lg shadow-md">
-      <h3 className="text-xl font-semibold mb-4">Employment History</h3>
+    <div className="p-4  rounded-lg ">
+      <h3 className="text-xl font-semibold dark:text-white mb-4">Employment History</h3>
       {employmentInfo && Array.isArray(employmentInfo) && employmentInfo.map((job, index) => (
         <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm">
           <input
@@ -188,8 +188,8 @@ const ResumeEditor = ({
 
 
   const renderEducation = () => (
-    <div className="p-4 bg-gray-50 rounded-lg shadow-md">
-      <h3 className="text-xl font-semibold mb-4">Education</h3>
+    <div className="p-4  rounded-lg ">
+      <h3 className="text-xl font-semibold dark:text-white mb-4">Education</h3>
       {EduInfo && Array.isArray(EduInfo) &&  EduInfo.map((edu, index) => (
         <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm">
           <input
@@ -262,8 +262,8 @@ const ResumeEditor = ({
   );
 
   const renderProjects = () => (
-    <div className="p-4 bg-gray-50 rounded-lg shadow-md">
-      <h3 className="text-xl font-semibold mb-4">Projects</h3>
+    <div className="p-4  rounded-lg ">
+      <h3 className="text-xl font-semibold dark:text-white mb-4">Projects</h3>
      {ProjectInfo && Array.isArray(ProjectInfo) &&  ProjectInfo.map((proj, index) => (
         <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm">
           <input
@@ -349,8 +349,8 @@ const ResumeEditor = ({
   );
 
   const renderLanguages = () => (
-    <div className="p-4 bg-gray-50 rounded-lg shadow-md">
-    <h3 className="text-xl font-semibold mb-4">Languages</h3>
+    <div className="p-4  rounded-lg ">
+    <h3 className="text-xl font-semibold dark:text-white mb-4">Languages</h3>
     {LangInfo?.map((lang, index) => (
       <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm">
         <input
@@ -395,15 +395,16 @@ const ResumeEditor = ({
   );
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-white rounded-lg ">
+   <div className="p-6 max-w-4xl mx-auto bg-white dark:bg-gray-900/30 rounded-lg max-h-screen overflow-y-auto">
+ 
       <h2 className="text-2xl font-bold mb-6">Edit Your Resume</h2>
      <div className="flex flex-wrap gap-2 border-b border-gray-200">
   <button
     onClick={() => setActiveSection('personal')}
     className={`py-2 px-4 font-medium text-sm focus:outline-none ${
       activeSection === 'personal'
-        ? 'text-blue-600 border-b-2 border-blue-600 '
-        : 'text-gray-500 hover:text-gray-700'
+        ? 'text-blue-600 border-b-2 dark:text-blue-400 border-blue-600 '
+        : 'text-gray-500 dark:text-gray-300 hover:text-gray-700'
     }`}
   >
     Personal
@@ -412,8 +413,8 @@ const ResumeEditor = ({
     onClick={() => setActiveSection('skills')}
     className={`py-2 px-4 font-medium text-sm focus:outline-none ${
       activeSection === 'skills'
-        ? 'text-blue-600 border-b-2 border-blue-600 '
-        : 'text-gray-500 hover:text-gray-700'
+        ? 'text-blue-600 border-b-2  dark:text-blue-400 border-blue-600 '
+        : 'text-gray-500 dark:text-gray-300 hover:text-gray-700'
     }`}
   >
     Skills
@@ -422,8 +423,8 @@ const ResumeEditor = ({
     onClick={() => setActiveSection('employment')}
     className={`py-2 px-4 font-medium text-sm focus:outline-none ${
       activeSection === 'employment'
-        ? 'text-blue-600 border-b-2 border-blue-600 '
-        : 'text-gray-500 hover:text-gray-700'
+        ? 'text-blue-600 border-b-2  dark:text-blue-400 border-blue-600 '
+        : 'text-gray-500 dark:text-gray-300 hover:text-gray-700'
     }`}
   >
     Employment
@@ -432,8 +433,8 @@ const ResumeEditor = ({
     onClick={() => setActiveSection('education')}
     className={`py-2 px-4 font-medium text-sm focus:outline-none ${
       activeSection === 'education'
-        ? 'text-blue-600 border-b-2 border-blue-600 '
-        : 'text-gray-500 hover:text-gray-700'
+        ? 'text-blue-600 border-b-2  dark:text-blue-400 border-blue-600 '
+        : 'text-gray-500 dark:text-gray-300 hover:text-gray-700'
     }`}
   >
     Education
@@ -442,8 +443,8 @@ const ResumeEditor = ({
     onClick={() => setActiveSection('projects')}
     className={`py-2 px-4 font-medium text-sm focus:outline-none ${
       activeSection === 'projects'
-        ? 'text-blue-600 border-b-2 border-blue-600 '
-        : 'text-gray-500 hover:text-gray-700'
+        ? 'text-blue-600 border-b-2  dark:text-blue-400 border-blue-600 '
+        : 'text-gray-500 dark:text-gray-300 hover:text-gray-700'
     }`}
   >
     Projects
@@ -452,14 +453,14 @@ const ResumeEditor = ({
     onClick={() => setActiveSection('languages')}
     className={`py-2 px-4 font-medium text-sm focus:outline-none ${
       activeSection === 'languages'
-        ? 'text-blue-600 border-b-2 border-blue-600 '
-        : 'text-gray-500 hover:text-gray-700'
+        ? 'text-blue-600 border-b-2  dark:text-blue-400 border-blue-600 '
+        : 'text-gray-500 dark:text-gray-300 hover:text-gray-700'
     }`}
   >
     Languages
   </button>
 </div>
-      <div className="active-section">
+      <div className="active-section ">
         {activeSection === 'personal' && renderPersonalInfo()}
         {activeSection === 'skills' && renderSkills()}
         {activeSection === 'employment' && renderEmployment()}

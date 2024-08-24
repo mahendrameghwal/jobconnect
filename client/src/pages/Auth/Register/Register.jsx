@@ -85,7 +85,7 @@ const Register = () =>{
               <h1 className="text-gray-800 dark:text-white font-bold text-2xl mb-1">Hello Dear!</h1>
               <p className="text-sm font-normal dark:text-gray-50 text-gray-600 mb-3">Welcome here</p>
              
-              <div className={`flex items-center dark:border border-2 py-2 px-3 rounded-md mb-3`}>
+              <div className={`flex items-center dark:border-gray-600 border-2 py-2 px-3 rounded-md mb-3`}>
               <FaRegUser className="h-6 dark:text-white"  alt="fullname" />
                   <input value={fullname} onChange={HandleUser} className="pl-2 w-full dark:text-gray-50 dark:bg-gray-800  outline-none border-none" type="text" name="fullname"  placeholder="Full name" />
         </div>
@@ -93,7 +93,7 @@ const Register = () =>{
         {
           error && error.data && error.data.details && error.data.details?.fullname && ( <div className="flex justify-start my-1"><span className="text-xs text-red-600">{error.data.details?.fullname}</span></div>)
          }
-                  <div className={`flex items-center dark:border border-2 py-2 px-3 rounded-md mb-3 `}>
+                  <div className={`flex items-center dark:border-gray-600 border-2 py-2 px-3 rounded-md mb-3 `}>
                   <FaFingerprint className="h-6  dark:text-white"  alt="username" />
                       <input onChange={HandleUser}  value={username} className="pl-2  dark:text-gray-50 dark:bg-gray-800  w-full outline-none border-none" type="text" name="username"  placeholder="Username" />
                       </div>
@@ -101,7 +101,7 @@ const Register = () =>{
           error && error.data && error.data.details && error.data.details?.username && ( <div className="flex justify-start my-1"><span className="text-xs text-red-600">{error.data.details?.username}</span></div>)
          }
              
-                      <div className={`flex items-center  dark:border border-2 py-2 px-3 rounded-md mb-3 `}>
+                      <div className={`flex items-center  dark:border-gray-600 border-2 py-2 px-3 rounded-md mb-3 `}>
                   <MdOutlineAlternateEmail className="h-6  dark:text-white" alt="email" />
                      
                           <input  onChange={HandleUser}  value={email} className="pl-2 dark:text-gray-50 dark:bg-gray-800  w-full outline-none border-none" type="email" name="email"  placeholder="Email Address" />
@@ -111,7 +111,7 @@ const Register = () =>{
          }
     
              
-                          <div className={`flex items-center relative dark:border border-2 py-2 px-3 rounded-md mb-3 `}>
+                          <div className={`flex items-center relative dark:border-gray-600 border-2 py-2 px-3 rounded-md mb-3 `}>
                          <MdOutlineLock className="h-6  dark:text-white"  alt="password" />
                         {
                           Showpassword ?

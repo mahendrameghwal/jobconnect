@@ -107,40 +107,40 @@ const ShortListCandidate = () => {
       transition={{ duration: 0.6 }}
       className="p-2 min-h-screen max-h-full "
     >
-      {title && <p className="text-lg font-medium mb-3 ">{title}</p>}
+      {title && <p className="text-lg font-medium mb-3 dark:text-white ">{title}</p>}
       <section className="grid gap-y-1  grid-cols-6 max-md:grid-cols-3 max-sm:grid-cols-1 overflow-hidden    grid-rows-1 max-md:grid-rows-2 max-sm:grid-rows-3 ">
-        <p className="text-sm   text-gray-600 font-medium">Job ID : {jobId}</p>
-        <p className="text-sm  text-gray-600 font-medium">
+        <p className="text-sm   text-gray-600 dark:text-gray-300 font-medium">Job ID : {jobId}</p>
+        <p className="text-sm  text-gray-600  dark:text-gray-300  font-medium">
           Category : {category}
         </p>
         {Array.isArray(applicants) && (
-          <p className="text-sm  text-gray-600 font-medium">
+          <p className="text-sm dark:text-gray-300   text-gray-600 font-medium">
             Total Candidate : {applicants.length}
           </p>
         )}
         {Array.isArray(skills) && (
-          <p className="text-sm  text-gray-600 font-medium">
+          <p className="text-sm  dark:text-gray-300  text-gray-600 font-medium">
             {' '}
             Skills :{' '}
-            <span className="text-gray-900   ">
+            <span className="text-gray-900 dark:text-gray-300   ">
               {skills.map((skill) => skill).join(',')}
             </span>
           </p>
         )}
         {createdAt && (
-          <p className="text-sm  text-gray-600 font-medium">
+          <p className="text-sm dark:text-gray-300  text-gray-600 font-medium">
             created : {formatDistanceToNowStrict(new Date(createdAt))} ago
           </p>
         )}
         {updatedAt && (
-          <p className="text-sm  text-gray-600 font-medium">
+          <p className="text-sm dark:text-gray-300  text-gray-600 font-medium">
             Updated : {formatDistanceToNowStrict(new Date(updatedAt))} ago
           </p>
         )}
-        <p className="text-sm  text-gray-600 font-medium">
+        <p className="text-sm dark:text-gray-300   text-gray-600 font-medium">
           Job type: {jobtype}
         </p>
-        <p className="text-sm  text-gray-600 font-medium">level : {joblevel}</p>
+        <p className="text-sm dark:text-gray-300  text-gray-600 font-medium">level : {joblevel}</p>
       </section>
 
       <div>
@@ -252,61 +252,48 @@ const ShortListCandidate = () => {
             >
               <input
                 type="search"
-                className="peer  p-2 w-full border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
+                className="dark:text-gray-100  p-2 w-full border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                 placeholder="Search Candidate"
               />
 
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-800 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              <span className="pointer-events-none dark:bg-[#202938] dark:text-white absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-800 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                 Search Candidate Here
               </span>
             </label>
           </section>
         )}
-        <ul className="grid gap-1 grid-cols-3 mt-2  max-md:grid-cols-3 max-sm:grid-cols-1 divide-x divide-gray-100 overflow-hidden rounded-lg  text-sm text-gray-600 grid-rows-1 max-md:grid-rows-2 max-sm:grid-rows-3">
-          <li
-            onClick={() => {
-              SetCurrentStep(1);
-            }}
-            className={`flex cursor-pointer border text-center hover:text-white hover:bg-[#258cf3] bg-gray-100 rounded-md  items-center justify-center max-sm:p-3 max-sm:my-0.5 gap-2 p-4 ${SetStepbg(
-              1,
-              step,
-            )} `}
-          >
-            <VscPreview size={21} />
-            <p className="leading-none ">
-              <strong className="block font-medium">Application Review</strong>
-            </p>
-          </li>
+        <ul className="grid gap-1 grid-cols-3 mt-2 max-md:grid-cols-3 max-sm:grid-cols-1 divide-x divide-gray-100 overflow-hidden rounded-lg text-sm text-gray-600 grid-rows-1 max-md:grid-rows-2 max-sm:grid-rows-3 dark:divide-gray-700 dark:text-gray-300 dark:bg-gray-800">
+  <li
+    onClick={() => SetCurrentStep(1)}
+    className={`flex cursor-pointer border text-center hover:text-white hover:bg-[#258cf3] bg-gray-100 rounded-md items-center justify-center max-sm:p-3 max-sm:my-0.5 gap-2 p-4 dark:bg-gray-700 dark:border-gray-600 ${SetStepbg(1, step)}`}
+  >
+    <VscPreview size={21} />
+    <p className="leading-none">
+      <strong className="block font-medium">Application Review</strong>
+    </p>
+  </li>
 
-          <li
-            onClick={() => {
-              SetCurrentStep(2);
-            }}
-            className={`flex cursor-pointer border text-center hover:text-white hover:bg-[#258cf3]  bg-gray-100 rounded-md  items-center justify-center max-sm:p-3 max-sm:my-0.5 gap-2 p-4 ${SetStepbg(
-              2,
-              step,
-            )} `}
-          >
-            <PiFlagPennant size={21} />
-            <p className="leading-none">
-              <strong className="block font-medium"> Hired candidate</strong>
-            </p>
-          </li>
-          <li
-            onClick={() => {
-              SetCurrentStep(3);
-            }}
-            className={`flex cursor-pointer border text-center  hover:text-white hover:bg-[#258cf3] bg-gray-100 rounded-md  items-center justify-center max-sm:p-3 max-sm:my-0.5 gap-2 p-4 ${SetStepbg(
-              3,
-              step,
-            )} `}
-          >
-            <LiaPollHSolid size={21} />
-            <p className="leading-none">
-              <strong className="block font-medium">Job Report </strong>
-            </p>
-          </li>
-        </ul>
+  <li
+    onClick={() => SetCurrentStep(2)}
+    className={`flex cursor-pointer border text-center hover:text-white hover:bg-[#258cf3] bg-gray-100 rounded-md items-center justify-center max-sm:p-3 max-sm:my-0.5 gap-2 p-4 dark:bg-gray-700 dark:border-gray-600 ${SetStepbg(2, step)}`}
+  >
+    <PiFlagPennant size={21} />
+    <p className="leading-none">
+      <strong className="block font-medium">Hired candidate</strong>
+    </p>
+  </li>
+
+  <li
+    onClick={() => SetCurrentStep(3)}
+    className={`flex cursor-pointer border text-center hover:text-white hover:bg-[#258cf3] bg-gray-100 rounded-md items-center justify-center max-sm:p-3 max-sm:my-0.5 gap-2 p-4 dark:bg-gray-700 dark:border-gray-600 ${SetStepbg(3, step)}`}
+  >
+    <LiaPollHSolid size={21} />
+    <p className="leading-none">
+      <strong className="block font-medium">Job Report</strong>
+    </p>
+  </li>
+</ul>
+
       </div>
       {/*IsVisible && (
         <div className="z-10  transform translate-y-0 filter-component absolute top-10% left-5%  max-md:top-15% w-48 p-3  bg-white rounded-lg shadow ">

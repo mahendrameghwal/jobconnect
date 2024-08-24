@@ -378,7 +378,7 @@ return (
     </label>
     
     <input
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="text" name='institute' onChange={(e)=>handleEducationChange(e, index)} value={edu.institute}
     placeholder="school or institute name "
     />
@@ -391,7 +391,7 @@ return (
     </label>
     
     <input
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="text" name='degree'   
     placeholder="Deegree name" onChange={(e)=>handleEducationChange(e, index)} value={edu.degree}
     />
@@ -403,7 +403,7 @@ return (
     </label>
     
     <input
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="text" name="fieldofstudy"
     placeholder="computer science"  onChange={(e)=>handleEducationChange(e, index)} value={edu.fieldofstudy}
     />
@@ -416,7 +416,7 @@ return (
     </label>
     
     <input placeholder='date' onChange={(e)=>handleEducationChange(e, index)} value={edu.startdate}
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="month"  name="startdate" 
     />
     
@@ -427,7 +427,7 @@ return (
     </label>
     
     <input
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="month"  name="enddate"  onChange={(e)=>handleEducationChange(e, index)} value={edu.enddate}
     />
      
@@ -439,7 +439,7 @@ return (
     </label>
     
     <input
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="text"  name="percentage"    onChange={(e)=>handleEducationChange(e, index)} value={edu.percentage}
     />
     
@@ -450,7 +450,7 @@ return (
 Qualification
 </label>
   <select name='qualification'  onChange={(e)=>handleEducationChange(e, index)} value={edu.qualification}
-  className="max-md:placeholder:text-sm overflow-scroll block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+  className="max-md:placeholder:text-sm overflow-scroll block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800 focus:border-gray-500"
   
   >
   <option  className='!text-sm' value=''>Select a Qualification</option>
@@ -519,7 +519,7 @@ Qualification
      </label>
      
      <input
-     className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white"
+     className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
      type="text" name='orgname'   
      placeholder="Organization name" onChange={(e)=>handleEmploymentChange(e, ind)} value={employment.orgname}
      />
@@ -532,7 +532,7 @@ Qualification
     </label>
     
     <input
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="text" name='position' onChange={(e)=>handleEmploymentChange(e, ind)} value={employment.position}
     placeholder="Position name "
     />
@@ -545,7 +545,7 @@ Qualification
     </label>
     
   <select value={employment.empcategory} onChange={(e)=>handleEmploymentChange(e, ind)}
-  className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+  className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
   name="empcategory" id="">
   <option value="">Select a Job Category</option>
 {
@@ -565,7 +565,7 @@ Qualification
     </label>
     
   <select  value={employment.emplevel} onChange={(e)=>handleEmploymentChange(e, ind)}
-  className="max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+  className="max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
   name="emplevel" id="">
   <option value="">Select a Job Level</option>
 {
@@ -586,7 +586,7 @@ Qualification
     </label>
     
   <select value={employment.emptype} onChange={(e)=>handleEmploymentChange(e, ind)}
-  className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+  className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
   name="emptype" id="">
   <option value="">Select a Job Type</option>
 {
@@ -605,7 +605,7 @@ Qualification
     </label>
     
     <input placeholder='date' onChange={(e)=>handleEmploymentChange(e, ind)} value={employment.startdate}
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="month"  name="startdate" 
     />
     
@@ -615,7 +615,7 @@ Qualification
     End date (or expected)
     </label>
     <input
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="month"  name="enddate"  onChange={(e)=>handleEmploymentChange(e, ind)} value={employment.enddate}
     />
      
@@ -628,7 +628,7 @@ Qualification
      Skill category
      </label>
      <select name="category"   onChange={(e)=>setseletctedSkillType(e.target.value)} value={seletctedSkillType}
-     className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+     className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800 focus:border-gray-500"
      
      >
      <option className='!text-sm' value=''>--select a category--</option>
@@ -653,7 +653,7 @@ Qualification
      name="name"
      value={Skillname}
      onChange={(e) => setSkillname(e.target.value)}
-     className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+     className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800 focus:border-gray-500"/>
      
      
      </div>
@@ -749,7 +749,7 @@ Qualification
     </label>
     
     <input 
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="text" name='title' onChange={(e)=>handleProjectChange(e, index)} value={title}
     placeholder="Project title "
     />
@@ -764,7 +764,7 @@ Qualification
     Project Status
     </label>
     
-  <ul className="items-center w-full bg-gray-100 border  border-gray-300 text-sm rounded-lg sm:flex">
+  <ul className="items-center w-full bg-gray-100 border  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800 border-gray-300 text-sm rounded-lg sm:flex">
     <li className="w-full border-b  sm:border-b-0 ">
         <div className="flex items-center ps-3">
             <input  type="radio"
@@ -796,7 +796,7 @@ Qualification
     </label>
     
     <input placeholder='date' onChange={(e)=>handleProjectChange(e, index)} value={startdate}
-    className="max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="month"  name="startdate" 
     />
     
@@ -807,7 +807,7 @@ Qualification
     </label>
     
     <input onChange={(e)=>handleProjectChange(e, index)} value={enddate}
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="month"  name="enddate" 
     />
      
@@ -821,7 +821,7 @@ Qualification
     </label>
     
     <input placeholder='github link or code link' onChange={(e)=>handleProjectChange(e, index)} value={sourcelink}
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="text"  name="sourcelink" 
     />
     
@@ -835,7 +835,7 @@ Qualification
     </label>
     
     <input
-    className="max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="text"  placeholder='live link Add here' name="livelink"  onChange={(e)=>handleProjectChange(e, index)} value={livelink}
     />
      
@@ -847,20 +847,20 @@ Qualification
     </label>
     
     <textarea placeholder='Type here...' onChange={(e)=>handleProjectChange(e, index)} value={description}
-    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
+    className="  max-md:placeholder:text-sm  block w-full  bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     type="text"  name="description" 
     />
     
     </div>
  
 
-    <div className='w-full max-md:flex-col items-center flex '>
+    <div className='w-full max-md:flex-col items-center flex  gap-x-2'>
 <div  className="w-1/3 max-md:w-full  my-2 max-md:my-1 md:mb-0">
   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 max-md:mb-1" htmlFor='currentempstatus'>
   Skill
   </label>
   <select name="category"   onChange={(e)=>setseletctedSkillType(e.target.value)} value={seletctedSkillType}
-  className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+  className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
   
   >
   <option className='!text-sm' value=''>-- select a category --</option>
@@ -885,7 +885,7 @@ Qualification
   name="name"
   value={Skillname}
   onChange={(e) => setSkillname(e.target.value)}
-  className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+  className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"/>
   
   
   </div>

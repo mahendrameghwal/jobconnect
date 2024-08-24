@@ -41,12 +41,12 @@ const Suggestion = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white  rounded-lg">
-      <h2 className="text-2xl font-semibold text-blue-600 mb-4">Submit a Feature Suggestion</h2>
+    <div className="max-w-4xl mx-auto p-6   rounded-lg">
+      <h2 className="text-2xl font-semibold text-blue-600 dark:text-blue-500 mb-4">Submit a Feature Suggestion</h2>
       {statusMessage && <p className="mb-4 text-green-600">{statusMessage}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="userId" className="block text-gray-700 font-medium">User ID</label>
+          <label htmlFor="userId" className="block text-gray-700 dark:text-gray-300 font-medium">User ID</label>
           <input
             type="text"
             id="userId"
@@ -54,11 +54,11 @@ const Suggestion = () => {
             value={formData.userId}
             onChange={handleChange}
             required
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="mt-1 block w-full max-md:py-1 max-md:px-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
         <div>
-          <label htmlFor="featureTitle" className="block text-gray-700 font-medium">Feature Title</label>
+          <label htmlFor="featureTitle" className="block text-gray-700  dark:text-gray-300 font-medium">Feature Title</label>
           <input
             type="text"
             id="featureTitle"
@@ -66,11 +66,11 @@ const Suggestion = () => {
             value={formData.featureTitle}
             onChange={handleChange}
             required
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="mt-1 block w-full max-md:py-1 max-md:px-2 px-4 py-2 border border-gray-300 rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
         <div>
-          <label htmlFor="featureDescription" className="block text-gray-700 font-medium">Feature Description</label>
+          <label htmlFor="featureDescription" className="block  dark:text-gray-300 text-gray-700 font-medium">Feature Description</label>
           <textarea
             id="featureDescription"
             name="featureDescription"
@@ -78,7 +78,7 @@ const Suggestion = () => {
             onChange={handleChange}
             required
             rows="4"
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="mt-1 block w-full max-md:py-1 max-md:px-2 px-4 py-2 border border-gray-300 rounded-md  focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
         <button
