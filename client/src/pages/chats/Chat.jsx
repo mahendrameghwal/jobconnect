@@ -77,7 +77,7 @@ const Chat = () => {
       fetchMessages();
       GetchatUser()
       
-      socketRef.current = io(import.meta.env.VITE_SERVER_URL);
+      socketRef.current = io(`https://jobconnect-9r0d.onrender.com`);
       socketRef.current.emit('join', currentUserId);
       socketRef.current.on('newMessage', (message) => {
         setMessages((prevMessages) => [...prevMessages, message]);
