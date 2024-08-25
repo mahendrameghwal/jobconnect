@@ -106,8 +106,8 @@ const showLoadMore = remainingCities > 0;
     animate={{ y: 0, opacity: 1 }}
     exit={{ y: -50, opacity: 0 }}
     
-    className="min-h-screen w-95 mx-auto  max-h-full  my-2">
-      <p className="bg-gradient-to-t  from-green-500 via-blue-600 to-purple-600 bg-clip-text text-3xl font-bold text-transparent text-center my-7 max-md:text-xl">Fill some Detail for Your organization</p>
+    className="min-h-screen w-95 mx-auto  max-h-full">
+      <p className="dark:text-gray-100 bg-gradient-to-t  from-green-500 via-blue-600 to-purple-600 bg-clip-text text-3xl font-bold text-transparent text-center my-7 max-md:text-xl">Fill some Detail for Your organization</p>
       <div className="  px-2 ">
       <div className="p-3">
       {
@@ -127,7 +127,7 @@ const showLoadMore = remainingCities > 0;
         <div className="flex flex-wrap mb-6">
         {/*avtar */}
         <div className="w-1/2 max-md:w-full  mb-3 md:mb-0">
-        <label htmlFor="avtar" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+        <label htmlFor="avtar" className="block uppercase tracking-wide  dark:text-gray-50 text-gray-700 text-xs font-bold mb-2">
           Logo
         </label>
         <input  name="avtar" 
@@ -142,7 +142,7 @@ const showLoadMore = remainingCities > 0;
         </div>
      
           <div className="w-1/2 max-md:w-full px-3 max-md:px-0 mb-3 md:mb-0">
-            <label htmlFor="orgname" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            <label htmlFor="orgname" className="block uppercase tracking-wide  dark:text-gray-50 text-gray-700 text-xs font-bold mb-2">
               Name <span className=" text-red-500  text-sm italic ">*</span>
             </label>
             <input name="orgname"  onChange={handleChange} value={Org.orgname}
@@ -161,7 +161,7 @@ const showLoadMore = remainingCities > 0;
 
       
           <div className="w-1/2 max-md:w-full my-2 md:mb-0">
-            <label htmlFor="category" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            <label htmlFor="category" className="block uppercase tracking-wide  dark:text-gray-50 text-gray-700 text-xs font-bold mb-2">
               Category <span className=" text-red-500  text-sm italic ">*</span>
             </label>
             <select required    onChange={handleChange} value={Org.category }      className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2  px-4 py-3 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800" name="category" id="">
@@ -182,7 +182,7 @@ const showLoadMore = remainingCities > 0;
 
          
           <div className="w-1/2 max-md:w-full px-3 max-md:px-0 my-2 md:mb-0">
-          <label htmlFor="linkedin" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          <label htmlFor="linkedin" className="block uppercase  dark:text-gray-50 tracking-wide text-gray-700 text-xs font-bold mb-2">
             Linkdin
           </label>
           <input name="linkedin" onChange={handleChange} value={Org.linkedin}
@@ -197,7 +197,7 @@ const showLoadMore = remainingCities > 0;
 
       
         <div className="w-1/2 max-md:w-full  my-3 md:mb-0">
-        <label htmlFor="website" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+        <label htmlFor="website" className="block uppercase  dark:text-gray-50 tracking-wide text-gray-700 text-xs font-bold mb-2">
           website
         </label>
         <input name="website" onChange={handleChange} value={Org.website}
@@ -210,7 +210,7 @@ const showLoadMore = remainingCities > 0;
 
  
       <div className="w-1/2 max-md:w-full px-3 max-md:px-0 my-2 md:mb-0">
-  <label htmlFor="mobile" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+  <label htmlFor="mobile" className="block uppercase tracking-wide  dark:text-gray-50 text-gray-700 text-xs font-bold mb-2">
   Mobile no. <span className=" text-red-500  text-sm italic ">*</span>
   </label>
   <input name="mobile" onChange={handleChange} value={Org.mobile}
@@ -231,14 +231,14 @@ const showLoadMore = remainingCities > 0;
 
 
 <div className="w-1/3 max-md:w-full my-2 md:mb-0">
-<label htmlFor='country' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+<label htmlFor='country' className="block uppercase tracking-wide  dark:text-gray-50 text-gray-700 text-xs font-bold mb-2">
   Country
 </label>
 <select
   name='country'
   value={Org.country}
   onChange={(e) => HandleCountry(e.target.value)}
-  className="max-md:placeholder:text-sm block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
+  className="max-md:placeholder:text-sm block w-full bg-slate-100  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
   disabled={countryloading}
 >
   <option className='!text-sm' value=''>
@@ -255,7 +255,7 @@ const showLoadMore = remainingCities > 0;
 
 
 <div className="w-1/3 max-md:w-full my-2 md:mb-0">
-<label htmlFor='state' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+<label htmlFor='state' className="block uppercase tracking-wide  dark:text-gray-50 text-gray-700 text-xs font-bold mb-2">
 state
 </label>
   <select name='state'  value={Org.state} onChange={(e) =>dispatch(setState(e.target.value))}
@@ -277,7 +277,7 @@ state
 
 
 <div className="w-1/3 max-md:w-full my-2 md:mb-0">
-  <label htmlFor='city' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+  <label htmlFor='city' className="block uppercase tracking-wide  dark:text-gray-50 text-gray-700 text-xs font-bold mb-2">
     City
   </label>
   <select
@@ -313,7 +313,7 @@ state
 
 <div className="w-full  mb-6 md:mb-0">
           <div className="w-full ">
-            <label htmlFor="about" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            <label htmlFor="about" className="block uppercase tracking-wide  dark:text-gray-50 text-gray-700 text-xs font-bold mb-2">
               About Company <span className=" text-red-500  text-sm italic ">*</span>
             </label>
             <textarea rows={6} name="about" onChange={handleChange} value={Org.about}

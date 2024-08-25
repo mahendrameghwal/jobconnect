@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 
 const Resume4 = ({ PersonalInfo, Skillinfo, employmentInfo, EduInfo, ProjectInfo, LangInfo}) => {
   return (
-    <div className="border-2 border-black w-full mx-auto my-2 font-sans text-base">
+    <div className="border-2 bg-white border-black w-full mx-auto my-2 font-sans text-base">
       {/* Main Info */}
       <div className="my-5 px-2">
         {PersonalInfo.fullname && <h2 className="text-2xl font-bold">{PersonalInfo.fullname}</h2>}

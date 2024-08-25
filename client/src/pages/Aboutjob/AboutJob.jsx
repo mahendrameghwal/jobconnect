@@ -70,7 +70,7 @@ const copyToClipboard = (id) => {
 {
   jobId &&(
     <div className="absolute  p-0.5 top-1 left-2 z-10 flex items-center gap-x-2">
-    <span id="jobid" className="text-[#e85755] max-sm:text-xs max-md:text-sm text-base font-normal tracking-wider">
+    <span id="jobid" className="text-[#e85755] dark:text-red-300 max-sm:text-xs max-md:text-sm text-base font-normal tracking-wider">
       Job ID : {jobId}
     </span>
     <button

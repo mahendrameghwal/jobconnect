@@ -45,7 +45,7 @@ const CreatePersonalInforamtion = ({
    className='  max-md:gap-y-2 gap-y-6 flex flex-wrap '>
    
    <div className="w-1/2   max-md:w-full px-3  md:mb-0">
-   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor='avtar' >
+   <label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2" htmlFor='avtar' >
      Profile image
    </label>
    
@@ -57,7 +57,7 @@ const CreatePersonalInforamtion = ({
  
 
      <div className="w-1/2 max-md:w-full px-3  md:mb-0">
-       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor='fullname'>
+       <label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2" htmlFor='fullname'>
          full Name
        </label>
        <input name='fullname' value={Candidate.fullname} onChange={Handlecandidate}
@@ -70,7 +70,7 @@ const CreatePersonalInforamtion = ({
    <div className="flex justify-between  flex-wrap w-full my-2">
      
    <div className="w-1/4 max-md:w-full px-3 my-2 md:mb-0">
-   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+   <label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     Gender
    </label>
    <select name="gender"  onChange={Handlecandidate} value={Candidate.gender}
@@ -89,7 +89,7 @@ const CreatePersonalInforamtion = ({
 
  
  <div className="w-1/4 max-md:w-full px-3 my-2 md:mb-0">
- <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor='noticeperiod'>
+ <label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2" htmlFor='noticeperiod'>
   Available to Join
  </label>
    <select name="noticeperiod" id="" onChange={Handlecandidate} value={Candidate.noticeperiod}
@@ -111,7 +111,7 @@ const CreatePersonalInforamtion = ({
 </div>
 
 <div className="w-1/4 max-md:w-full px-3 my-2 md:mb-0">
-<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor='empstatus'>
+<label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2" htmlFor='empstatus'>
 employment status
 </label>
  <select name="empstatus" value={Candidate.empstatus} onChange={(e)=>{dispatch(CandidateStatus(e.target.value))}}
@@ -138,7 +138,7 @@ employment status
 
 
 <div className="w-1/4 max-md:w-full px-3 my-2 md:mb-0">
-<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor='currentempstatus'>
+<label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2" htmlFor='currentempstatus'>
 current  status
 </label>
 <select name="currentempstatus" value={Candidate.currentempstatus} onChange={(e)=>dispatch(CurrentCandidateStatus(e.target.value))}
@@ -164,7 +164,7 @@ CurrentEmploymentStatus.map((employment)=>(
 
 <div className=" flex  justify-between flex-wrap w-full px-3 my-2">
 <div className="w-1/4 max-md:w-full my-2 md:mb-0">
-<label htmlFor='country' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+<label htmlFor='country' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
 Country
 </label>
 <select name='country' value={Candidate.country} onChange={(e) => handleCountry(e.target.value)}
@@ -192,7 +192,7 @@ disabled={countryLoading}
 
 
 <div className="w-1/4 max-md:w-full my-2 md:mb-0">
-<label htmlFor='state' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+<label htmlFor='state' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
 State
 </label>
 <select name="state" id="" value={Candidate.state}  onChange={(e) =>dispatch(setState(e.target.value))}
@@ -215,7 +215,7 @@ className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 b
 
 {
 <div className="w-1/4 max-md:w-full my-2 md:mb-0">
-<label htmlFor='city' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+<label htmlFor='city' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
 City
 </label>
  <select name="city" value={Candidate.city} onChange={(e) => dispatch(setCity(e.target.value))}
@@ -248,7 +248,7 @@ City
 <div className=' w-full max-md:gap-y-2 gap-y-6 flex flex-wrap'>
 <div className="w-full px-2  "> <p className="text-base px  font-semibold bg-gradient-to-t text-transparent  from-green-500 via-blue-600 to-purple-600 bg-clip-text">Contact</p> </div>
 <div className="w-1/2 max-md:w-full  px-3 my-2 md:mb-0">
-<label htmlFor='email' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+<label htmlFor='email' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
  email
 </label>
 <input name='email' value={Candidate.email} onChange={Handlecandidate}
@@ -263,7 +263,7 @@ City
 
 
 <div className="w-1/2 max-md:w-full px-3 my-2 md:mb-0">
-<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor='phone'>
+<label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2" htmlFor='phone'>
 Mobile No.
 </label>
 <input name='phone' value={Candidate.phone} onChange={Handlecandidate}
@@ -279,7 +279,7 @@ placeholder="+91 1234567890"
 { /*  summary */}
 <div className="w-full px-3 mb-6 md:mb-0">
 <div className="w-full ">
-<label htmlFor='summary' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+<label htmlFor='summary' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
 Quick summary
 </label>
 <textarea name='summary' value={Candidate.summary} onChange={Handlecandidate}
@@ -294,7 +294,7 @@ Quick summary
 
 <div className='w-full max-md:flex-col items-center flex '>
 <div  className="w-1/3 max-md:w-full px-3 my-2 max-md:my-1 md:mb-0">
-<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 max-md:mb-1" htmlFor='currentempstatus'>
+<label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2 max-md:mb-1" htmlFor='currentempstatus'>
 social
 </label>
 
@@ -323,7 +323,7 @@ SocialLink && SocialLink.map(({name,id})=>(
 </div>
 
 <div className="w-1/3 max-md:w-full px-3 my-2 md:mb-0">
-<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor='link'>
+<label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2" htmlFor='link'>
 Add Link here
 </label>
 <input placeholder='Add link here'
@@ -377,7 +377,7 @@ Candidate.social[0].name!==''&& Candidate.social[0].link!=='' &&  Candidate.soci
 
 <div className='w-full max-md:flex-col items-center flex '>
 <div  className="w-1/3 max-md:w-full px-3 my-2 max-md:my-1 md:mb-0">
-<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 max-md:mb-1" htmlFor='currentempstatus'>
+<label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2 max-md:mb-1" htmlFor='currentempstatus'>
 Skill
 </label>
 <select name="skilltype"   onChange={(e)=>setseletctedSkillType(e.target.value)} value={seletctedSkillType}
@@ -399,7 +399,7 @@ className=" max-md:placeholder:text-sm  block w-full bg-gray-100 text-gray-700 b
 </div>
 
 <div className="w-1/3 max-md:w-full px-3 my-2 md:mb-0">
-<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor='link'>
+<label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2" htmlFor='link'>
 Add Skills
 </label>
 <input placeholder='Add skill here'

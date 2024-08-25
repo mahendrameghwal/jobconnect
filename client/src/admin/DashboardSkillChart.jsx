@@ -68,7 +68,7 @@ const DashboardSkillChart = ({ jobs }) => {
   const series = skillsData.map(item => item.count);
 
   return (
-    <div className='w-45 max-md:w-full shadow-sm rounded-sm border-gray-200 p-1 border border-stroke bg-white'>
+    <div className='w-45 max-md:w-full shadow-sm rounded-sm border-gray-200 p-1 border border-stroke bg-white '>
       <ReactApexChart
         options={chartOptions}
         series={series}

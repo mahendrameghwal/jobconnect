@@ -30,7 +30,7 @@ const DarkLightMode = () => {
       <div>
         <button
           type="button"
-          className="inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white/95 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+          className="inline-flex justify-center items-center w-full rounded-md border dark:bg-gray-700  border-gray-300 shadow-sm px-4 py-1.5 bg-white/95 text-sm font-medium text-gray-700 dark:text-gray-300 dark:border-gray-600 hover:bg-gray-50 focus:outline-none"
           onClick={(e) => {
             e.stopPropagation();
             setIsOpen(!isOpen);
@@ -48,21 +48,22 @@ const DarkLightMode = () => {
       </div>
 
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            {colorModes.map((mode) => (
-              <button
-                key={mode.value}
-                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
-                role="menuitem"
-                onClick={() => handleColorModeChange(mode.value)}
-              >
-                <mode.icon className="mr-3 h-5 w-5" />
-                {mode.name}
-              </button>
-            ))}
-          </div>
-        </div>
+        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-gray-800 dark:ring-gray-700">
+  <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+    {colorModes.map((mode) => (
+      <button
+        key={mode.value}
+        className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 w-full text-left"
+        role="menuitem"
+        onClick={() => handleColorModeChange(mode.value)}
+      >
+        <mode.icon className="mr-3 h-5 w-5 text-gray-500 dark:text-gray-400" />
+        {mode.name}
+      </button>
+    ))}
+  </div>
+</div>
+
       )}
     </div>
   );

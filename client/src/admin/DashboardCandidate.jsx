@@ -79,31 +79,31 @@ if(data.length<1){
     <main className=" min-h-screen relative">
    
   
-    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div className="rounded-sm border dark:border-gray-600  dark:bg-gray-900/30 bg-white ">
     <div className="px-4 flex justify-between py-6 md:px-6 xl:px-7.5">
-    <h4 className="text-xl font-semibold text-black ">
+    <h4 className="text-xl font-semibold dark:text-white text-black ">
         Top Candidates
     </h4>
-    <h4 className="text-sm text-black ">
+    <h4 className="text-sm dark:text-gray-100 text-black ">
         {`Candidates per page: ${jobsPerPage}`}
     </h4>
 </div>
 
 
     <div className="grid grid-cols-3 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-5 md:px-6 2xl:px-7.5">
-      <div className="col-span-1 py-3 flex items-center">
+      <div className="col-span-1 dark:text-gray-200 py-3 flex items-center">
         <p className="font-medium">Profile</p>
       </div>
-      <div className="col-span-1 py-3 hidden items-center sm:flex">
+      <div className="col-span-1 dark:text-gray-200 py-3 hidden items-center sm:flex">
         <p className="font-medium">Full Name</p>
       </div>
-      <div className="col-span-1 py-3 flex items-center">
+      <div className="col-span-1 dark:text-gray-200 py-3 flex items-center">
         <p className="font-medium">Email</p>
       </div>
-      <div className="col-span-1 py-3 hidden items-center sm:flex">
+      <div className="col-span-1 dark:text-gray-200 py-3 hidden items-center sm:flex">
         <p className="font-medium">Gender</p>
       </div>
-      <div className="col-span-1 py-3 hidden items-center sm:flex">
+      <div className="col-span-1 dark:text-gray-200 py-3 hidden items-center sm:flex">
         <p className="font-medium">Resume</p>
       </div>
      
@@ -111,46 +111,51 @@ if(data.length<1){
 
     {currentJobs.length>0 && Array.isArray(currentJobs) &&currentJobs.map(({ avtar, fullname, email, gender, resume, _id }, index) => (
       <div
-        className="grid grid-cols-3 border-t border-stroke py-2 px-4 dark:border-strokedark sm:grid-cols-5 md:px-6 2xl:px-7.5"
-        key={index}
-      >
-        <div className="col-span-1 flex items-center">
-          <Link to={`/user/candidate/${_id}`} className=" flex-shrink-0 h-10 w-10">
-            {avtar ? (
-              <img src={avtar} alt={fullname} className="h-full w-full rounded-full object-cover" />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center rounded-full bg-gray-100 text-gray-500">
-                <FaUserTie size={20} />
-              </div>
-            )}
-          </Link>
-        </div>
-
-        <div className="col-span-1 hidden items-center sm:flex">
-          <p className="text-black ">{fullname}</p>
-        </div>
-
-        <div className="col-span-1 flex items-center">
-          <p className="text-sm text-black ">{email}</p>
-        </div>
-
-        <div className="col-span-1 hidden items-center sm:flex">
-          <p className="text-sm font-medium text-green-500">{gender}</p>
-        </div>
-
-        <div className="col-span-1 hidden visited: cursor-pointer items-center sm:flex">
-          {resume ? resume.url && (
+      className="grid grid-cols-3 border-t dark:border-gray-700 py-2 px-4 sm:grid-cols-5 md:px-6 2xl:px-7.5"
+      key={index}
+    >
+      <div className="col-span-1 flex items-center">
+        <Link to={`/user/candidate/${_id}`} className="flex-shrink-0 h-10 w-10">
+          {avtar ? (
+            <img src={avtar} alt={fullname} className="h-full w-full rounded-full object-cover" />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
+              <FaUserTie size={20} />
+            </div>
+          )}
+        </Link>
+      </div>
+    
+      <div className="col-span-1 hidden items-center sm:flex">
+        <p className="text-black dark:text-gray-300">{fullname}</p>
+      </div>
+    
+      <div className="col-span-1 flex items-center">
+        <p className="text-sm text-black dark:text-gray-300">{email}</p>
+      </div>
+    
+      <div className="col-span-1 hidden items-center sm:flex">
+        <p className="text-sm font-medium text-green-500 dark:text-green-400">{gender}</p>
+      </div>
+    
+      <div className="col-span-1 hidden cursor-pointer items-center sm:flex">
+        {resume ? (
+          resume.url && (
             <Link
               to={resume.url}
-              className="text-sm  text-blue-500 hover:underline"
+              className="text-sm dark:text-blue-400 text-blue-500 hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
               {resume.filename}
             </Link>
-          ):<CgUnavailable color="red" />}
-        </div>
+          )
+        ) : (
+          <CgUnavailable color="red" />
+        )}
       </div>
+    </div>
+    
     ))}
   </div>
 

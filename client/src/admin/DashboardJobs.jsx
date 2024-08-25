@@ -89,19 +89,19 @@ if(jobs.length<1){
     className=" min-h-screen relative">
    
   
-    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div className="rounded-sm border dark:border-gray-600 bg-white dark:bg-gray-900/30 shadow-default  dark:bg-boxdark">
     <div className="px-4 flex justify-between items-center py-6 md:px-6 xl:px-7.5">
-    <h4 className="text-xl font-semibold text-black ">All Jobs</h4>
+    <h4 className="text-xl font-semibold text-black  dark:text-white">All Jobs</h4>
     <div className="flex items-center space-x-4">
       <select 
         value={sortOrder}
         onChange={handleSortChange}
-        className="border border-gray-300 rounded px-2 py-1 text-sm"
+        className="border border-gray-300 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 rounded px-2 py-1 text-sm"
       >
         <option value="latest">Latest</option>
         <option value="oldest">Oldest</option>
       </select>
-      <h4 className="text-sm text-black ">
+      <h4 className="text-sm dark:text-gray-200 text-black ">
         {`Results per page: ${jobsPerPage}`}
       </h4>
     </div>
@@ -110,48 +110,48 @@ if(jobs.length<1){
 
     <div className="grid grid-cols-3 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-5 md:px-6 2xl:px-7.5">
       <div className="col-span-1 py-3 flex items-center">
-        <p className="font-medium">Title</p>
+        <p className="font-medium dark:text-gray-100">Title</p>
       </div>
       <div className="col-span-1 py-3  items-center sm:flex">
-        <p className="font-medium">Job ID</p>
+        <p className="font-medium dark:text-gray-100">Job ID</p>
       </div>
      
       <div className="col-span-1 py-3  items-center sm:flex">
-      <p className="font-medium">Created on </p>
+      <p className="font-medium dark:text-gray-100">Created on </p>
       </div>
       <div className="col-span-1 py-3 hidden items-center sm:flex">
-      <p className="font-medium">Last updated</p>
+      <p className="font-medium dark:text-gray-100">Last updated</p>
       </div>
       <div className="col-span-1 py-3 max-md:hidden items-center sm:flex">
-        <p className="font-medium">Posted By</p>
+        <p className="font-medium dark:text-gray-100">Posted By</p>
       </div>
      
     </div>
 
     {currentJobs.length>0 && Array.isArray(currentJobs) &&currentJobs.map(({title,jobId,category,orgname,createdAt,updatedAt }, index) => (
       <div
-        className="grid grid-cols-3 border-t border-stroke py-2 px-4 dark:border-strokedark sm:grid-cols-5 md:px-6 2xl:px-7.5"
+        className="grid grid-cols-3 border-t dark:border-collapse py-2 px-4 dark:border-gray-600 sm:grid-cols-5 md:px-6 2xl:px-7.5"
         key={index}
       >
 
       <div className="col-span-1  items-center sm:flex">
-          <p className="text-black max-md:text-sm ">{title}</p>
+          <p className="text-black dark:text-gray-300 max-md:text-sm ">{title}</p>
         </div>
         <div className="col-span-1  items-center sm:flex">
-        <p className="text-black max-md:text-sm ">{jobId}</p>
+        <p className="text-black dark:text-gray-300 max-md:text-sm ">{jobId}</p>
       </div>
  
   
 
  
         <div className="col-span-1  items-center sm:flex">
-          <p className="text-sm font-medium text-gray-500">{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_MED)}</p>
+          <p className="text-sm  dark:text-gray-300 font-medium text-gray-500">{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_MED)}</p>
           
         </div>
   
 
       <div className="col-span-1 hidden items-center sm:flex">
-      <p className="text-sm font-medium text-gray-500">{DateTime.fromISO(updatedAt).toLocaleString(DateTime.DATE_MED)}</p>
+      <p className="text-sm font-medium dark:text-gray-300 text-gray-500">{DateTime.fromISO(updatedAt).toLocaleString(DateTime.DATE_MED)}</p>
       
     </div>
     {

@@ -75,9 +75,9 @@ const DashboardOrg = () => {
         transition={{ duration: 0.2 }}
    
     className=" min-h-screen relative">
-      <div className="rounded-sm border border-stroke bg-white shadow-default ">
+      <div className="rounded-sm border dark:border-gray-600 dark:bg-gray-900/30 bg-white shadow-default ">
         <div className="px-4 flex justify-between py-6 md:px-6 xl:px-7.5">
-          <h4 className="text-xl font-semibold text-black ">Top Companies</h4>
+          <h4 className="text-xl font-semibold text-black dark:text-white ">Top Companies</h4>
           <h4 className="text-sm text-black ">
             {`Result per page: ${jobsPerPage}`}
           </h4>
@@ -85,20 +85,20 @@ const DashboardOrg = () => {
 
         <div className="grid grid-cols-3 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-5 md:px-6 2xl:px-7.5">
           <div className="col-span-1 py-3 flex items-center">
-            <p className="font-medium">Profile</p>
+            <p className="dark:text-gray-100 font-medium">Profile</p>
           </div>
           <div className="col-span-1 py-3  items-center sm:flex">
-            <p className="font-medium">Title</p>
+            <p className="dark:text-gray-100 font-medium">Title</p>
           </div>
 
           <div className="col-span-1 py-3  items-center sm:flex">
-            <p className="font-medium">Created on </p>
+            <p className="dark:text-gray-100 font-medium">Created on </p>
           </div>
           <div className="col-span-1 py-3 hidden items-center sm:flex">
-            <p className="font-medium">Job Posted</p>
+            <p className="dark:text-gray-100 font-medium">Job Posted</p>
           </div>
           <div className="col-span-1 py-3 hidden items-center sm:flex">
-            <p className="font-medium">Last updated</p>
+            <p className="dark:text-gray-100 font-medium">Last updated</p>
           </div>
         </div>
 
@@ -106,56 +106,54 @@ const DashboardOrg = () => {
           Array.isArray(currentJobs) &&
           currentJobs.map(
             ({ avtar, orgname, jobs, _id, createdAt, updatedAt }, index) => (
-              <div
-                className="grid grid-cols-3 border-t border-stroke py-2 px-4 dark:border-strokedark sm:grid-cols-5 md:px-6 2xl:px-7.5"
-                key={index}
-              >
-                <div className="col-span-1 flex items-center">
-                  <Link
-                    to={`/browsecompanies/profile/${_id}`}
-                    className=" flex-shrink-0 h-10 w-10 max-md:h-8 max-md:w-8"
-                  >
-                    {avtar ? (
-                      <img
-                        src={avtar}
-                        alt={orgname}
-                        className="h-full w-full rounded-full object-cover"
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center rounded-full bg-gray-100 text-gray-500">
-                        <BsBuilding className="h-6 w-6 p-0.5 " size={20} />
-                      </div>
-                    )}
-                  </Link>
-                </div>
+             <div
+  className="grid grid-cols-3 border-t dark:border-gray-600 py-2 px-4 sm:grid-cols-5 md:px-6 2xl:px-7.5"
+  key={index}
+>
+  <div className="col-span-1 flex items-center">
+    <Link
+      to={`/browsecompanies/profile/${_id}`}
+      className="flex-shrink-0 h-10 w-10 max-md:h-8 max-md:w-8"
+    >
+      {avtar ? (
+        <img
+          src={avtar}
+          alt={orgname}
+          className="h-full w-full rounded-full object-cover"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
+          <BsBuilding className="h-6 w-6 p-0.5" size={20} />
+        </div>
+      )}
+    </Link>
+  </div>
 
-                <div className="col-span-1  items-center sm:flex">
-                  <p className="text-black max-md:text-sm ">{orgname}</p>
-                </div>
+  <div className="col-span-1 items-center sm:flex">
+    <p className="text-black dark:text-gray-300 max-md:text-sm">{orgname}</p>
+  </div>
 
-                <div className="col-span-1  items-center sm:flex">
-                  <p className="text-sm font-medium text-gray-500">
-                    {DateTime.fromISO(createdAt).toLocaleString(
-                      DateTime.DATE_MED,
-                    )}
-                  </p>
-                </div>
-                <div className="col-span-1 hidden items-center sm:flex">
-                  {Array.isArray(jobs) && (
-                    <p className="text-sm font-medium text-gray-500">
-                      {jobs.length}
-                    </p>
-                  )}
-                </div>
+  <div className="col-span-1 items-center sm:flex">
+    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+      {DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_MED)}
+    </p>
+  </div>
 
-                <div className="col-span-1 hidden items-center sm:flex">
-                  <p className="text-sm font-medium text-gray-500">
-                    {DateTime.fromISO(updatedAt).toLocaleString(
-                      DateTime.DATE_MED,
-                    )}
-                  </p>
-                </div>
-              </div>
+  <div className="col-span-1 hidden items-center sm:flex">
+    {Array.isArray(jobs) && (
+      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+        {jobs.length}
+      </p>
+    )}
+  </div>
+
+  <div className="col-span-1 hidden items-center sm:flex">
+    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+      {DateTime.fromISO(updatedAt).toLocaleString(DateTime.DATE_MED)}
+    </p>
+  </div>
+</div>
+
             ),
           )}
       </div>

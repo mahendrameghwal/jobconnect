@@ -72,7 +72,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       <aside
         ref={sidebar}
-        className={`fixed left-0 top-0 z-10 flex h-screen w-72.5 flex-col overflow-y-hidden bg-gray-800 duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+        className={`fixed left-0 border dark:border-gray-600 border-none top-0 z-10 flex h-screen w-72.5 flex-col overflow-y-hidden bg-gray-800 duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

@@ -274,7 +274,7 @@ const Handlecandidate = useCallback((e) => {
   }, [setVisibleCities]);
   
 return (
-  <div ref={Topref} className="min-h-screen w mx-auto  max-h-full w-95 my-2">
+  <div ref={Topref} className="min-h-screen w mx-auto  max-h-full w-95 ">
     <p className="bg-gradient-to-t  from-green-500 via-blue-600 to-purple-600 bg-clip-text text-3xl font-bold text-transparent text-center my-7 max-md:text-xl">Fill Out Your Personal Information</p>
    
   <div className=" px-2 ">
@@ -343,7 +343,7 @@ return (
     <div className='w-full mb-6 md:mb-0 '>
    
     <div className="flex   items-center justify-between  flex-wrap w-full  mt-5  ">
-   <p className="text-base font-semibold bg-gradient-to-t text-transparent   from-green-500 via-blue-600 to-purple-600 bg-clip-text">Education</p>
+   <p className="text-base dark:text-white font-semibold bg-gradient-to-t text-transparent   from-green-500 via-blue-600 to-purple-600 bg-clip-text">Education</p>
    <button type="button" onClick={()=>{dispatch(AddMoreEducation())}} 
    className="group relative inline-flex items-center overflow-hidden tracking-wider rounded bg-indigo-600  px-4 py-1 text-white focus:outline-none focus:ring-2 active:bg-indigo-500">
    <span className="absolute -start-full transition-all group-hover:start-4">
@@ -373,7 +373,7 @@ return (
    exit={{ y: -50, opacity: 0 }}
    className="flex flex-wrap items-center max-md:flex-col justify-between">
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='institute' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='institute' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     institute
     </label>
     
@@ -386,7 +386,7 @@ return (
      
     </div>
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='degree' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='degree' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     Deegree name 
     </label>
     
@@ -398,7 +398,7 @@ return (
     
     </div>
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='fieldofstudy' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='fieldofstudy' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     field of study
     </label>
     
@@ -411,7 +411,7 @@ return (
     </div>
     
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='startdate' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='startdate' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     start date :
     </label>
     
@@ -422,7 +422,7 @@ return (
     
     </div>
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='enddate' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='enddate' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     End date (or expected)
     </label>
     
@@ -434,7 +434,7 @@ return (
     </div>
     
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='percentage' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='percentage' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     Percentage
     </label>
     
@@ -446,7 +446,7 @@ return (
     </div>
     
     <div className="w-1/4 max-md:w-full my-2 md:mb-0">
-   <label htmlFor='qualification' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+   <label htmlFor='qualification' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
 Qualification
 </label>
   <select name='qualification'  onChange={(e)=>handleEducationChange(e, index)} value={edu.qualification}
@@ -514,7 +514,7 @@ Qualification
      className="flex flex-wrap items-center max-md:flex-col justify-between">
 
      <div className="w-30 max-md:w-full my-2 md:mb-0">
-     <label htmlFor='orgname' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+     <label htmlFor='orgname' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
      Organization name
      </label>
      
@@ -527,7 +527,7 @@ Qualification
      </div>
 
      <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='position' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='position' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     position name
     </label>
     
@@ -540,7 +540,7 @@ Qualification
     </div>
 
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='empcategory' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='empcategory' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     Job Category
     </label>
     
@@ -560,7 +560,7 @@ Qualification
 
 
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='emplevel' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='emplevel' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     Level
     </label>
     
@@ -581,7 +581,7 @@ Qualification
 
 
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='emptype' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='emptype' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     Job Type
     </label>
     
@@ -600,7 +600,7 @@ Qualification
     </div>
     
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='startdate' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='startdate' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     start date :
     </label>
     
@@ -611,7 +611,7 @@ Qualification
     
     </div>
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='enddate' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='enddate' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     End date (or expected)
     </label>
     <input
@@ -624,7 +624,7 @@ Qualification
 
    <div className='w-full max-md:flex-col gap-x-2 items-center flex '>
    <div  className="w-1/3 max-md:w-full  my-2 max-md:my-1 md:mb-0">
-     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 max-md:mb-1" htmlFor='category'>
+     <label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2 max-md:mb-1" htmlFor='category'>
      Skill category
      </label>
      <select name="category"   onChange={(e)=>setseletctedSkillType(e.target.value)} value={seletctedSkillType}
@@ -646,7 +646,7 @@ Qualification
      </div>
    
      <div className="w-1/3 max-md:w-full  my-2 md:mb-0">
-     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor='name'>
+     <label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2" htmlFor='name'>
      Add Skills
      </label>
      <input placeholder='Add skill here'
@@ -744,7 +744,7 @@ Qualification
    exit={{ y: -50, opacity: 0 }} 
    className="flex flex-wrap items-center max-md:flex-col justify-between">
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='title' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='title' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     Title
     </label>
     
@@ -760,7 +760,7 @@ Qualification
    
        
     <div className="w-30 max-md:w-full my-1 md:mb-0">
-    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     Project Status
     </label>
     
@@ -791,7 +791,7 @@ Qualification
     
   
     <div className="w-1/3 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='startdate' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='startdate' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     start date :
     </label>
     
@@ -802,7 +802,7 @@ Qualification
     
     </div>
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='enddate' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='enddate' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     End date (or expected)
     </label>
     
@@ -816,7 +816,7 @@ Qualification
 
 
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='sourcelink' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='sourcelink' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     Source link :
     </label>
     
@@ -830,7 +830,7 @@ Qualification
 
 
     <div className="w-30 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='livelink' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='livelink' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
     Live link
     </label>
     
@@ -842,7 +842,7 @@ Qualification
     </div>
 
     <div className="w-full max-md:w-full my-2 md:mb-0">
-    <label htmlFor='description' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='description' className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2">
    Project Description
     </label>
     
@@ -856,7 +856,7 @@ Qualification
 
     <div className='w-full max-md:flex-col items-center flex  gap-x-2'>
 <div  className="w-1/3 max-md:w-full  my-2 max-md:my-1 md:mb-0">
-  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 max-md:mb-1" htmlFor='currentempstatus'>
+  <label className="block dark:text-gray-200 uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 max-md:mb-1" htmlFor='currentempstatus'>
   Skill
   </label>
   <select name="category"   onChange={(e)=>setseletctedSkillType(e.target.value)} value={seletctedSkillType}
@@ -878,7 +878,7 @@ Qualification
   </div>
 
   <div className="w-1/3 max-md:w-full  my-2 md:mb-0">
-  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor='link'>
+  <label className="block uppercase tracking-wide text-gray-700 dark:text-gray-50 text-xs font-bold mb-2" htmlFor='link'>
   Add Skills
   </label>
   <input placeholder='Add skill here'
@@ -963,8 +963,8 @@ Qualification
        <li onClick={()=>{setStep(1), GoToTop()}} className=
        { 
         step ===1 ?
-        "flex py-2 mx-1 border rounded-md   !text-gray-600  border-gray-400 bg-gray-400 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4" :
-        "flex py-2 mx-1 border rounded-md  !text-gray-400  border-gray-300  cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"
+        "flex py-2 mx-1 border rounded-md text-gray-600 dark:text-gray-300 border-gray-400 dark:border-gray-600 bg-gray-400 dark:bg-gray-600 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"
+        : "flex py-2 mx-1 border rounded-md text-gray-400 dark:text-gray-500 border-gray-300 dark:border-gray-500 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4" 
       }  
       >
         
@@ -977,8 +977,8 @@ Qualification
            <li  onClick={()=>{setStep(2), GoToTop()}} className= 
        { 
          step ===2 ?
-        "flex py-2 mx-1 border rounded-md   !text-gray-600  border-gray-400 bg-gray-400 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4" :
-        "flex py-2 mx-1 border rounded-md  !text-gray-400  border-gray-300  cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"
+         "flex py-2 mx-1 border rounded-md text-gray-600 dark:text-gray-300 border-gray-400 dark:border-gray-600 bg-gray-400 dark:bg-gray-600 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"
+         : "flex py-2 mx-1 border rounded-md text-gray-400 dark:text-gray-500 border-gray-300 dark:border-gray-500 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4" 
       }  >
         
       <p className="leading-none flex gap-x-1">
@@ -990,8 +990,8 @@ Qualification
          <li  onClick={()=>{setStep(3), GoToTop()}} className= 
        { 
          step ===3 ?
-         "flex py-2 mx-1 border    rounded-md   !text-gray-600  border-gray-400 bg-gray-400 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4" :
-         "flex py-2 mx-1 border   rounded-md  !text-gray-400  border-gray-300  cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"
+          "flex py-2 mx-1 border rounded-md text-gray-600 dark:text-gray-300 border-gray-400 dark:border-gray-600 bg-gray-400 dark:bg-gray-600 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"
+         : "flex py-2 mx-1 border rounded-md text-gray-400 dark:text-gray-500 border-gray-300 dark:border-gray-500 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"       
         } >
         
          <p className="leading-none flex gap-x-1">
@@ -1004,8 +1004,8 @@ Qualification
          <li  onClick={()=>{setStep(4), GoToTop()}} className= 
        { 
          step ===4 ?
-         "flex py-2 mx-1 border   rounded-md   !text-gray-600  border-gray-400 bg-gray-400 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4" :
-         "flex py-2 mx-1 border   rounded-md  !text-gray-400  border-gray-300  cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"
+         "flex py-2 mx-1 border rounded-md text-gray-600 dark:text-gray-300 border-gray-400 dark:border-gray-600 bg-gray-400 dark:bg-gray-600 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"
+         : "flex py-2 mx-1 border rounded-md text-gray-400 dark:text-gray-500 border-gray-300 dark:border-gray-500 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4" 
         } >
         
          <p className="leading-none flex gap-x-1">
@@ -1041,7 +1041,7 @@ Qualification
       }), GoToTop()
     }}
      type='button'
-    className="flex   py-2.5 mx-1 border   rounded-md  hover:bg-gray-50 !text-gray-600  border-gray-400 bg-gray-400 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"  >
+     className="flex py-2.5 mx-1 border rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border-gray-400 dark:border-gray-600 bg-gray-400 dark:bg-gray-600 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4">
       
        <p  className="leading-none flex gap-x-1">
        <FaAngleLeft/> 
@@ -1065,12 +1065,11 @@ Qualification
        }),  GoToTop()
      }}
      type='button'
-      className="flex py-2.5 mx-1 border rounded-md !text-gray-600 hover:bg-gray-50 border-gray-400 bg-gray-400 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4"  >
-       
-      <p  className="leading-none flex gap-x-1">
-        <strong className="block font-semibold"> Next </strong>
-        <FaAngleRight/>
-      </p>
+     className="flex py-2.5 mx-1 border rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border-gray-400 dark:border-gray-600 bg-gray-400 dark:bg-gray-600 cursor-pointer bg-opacity-20 items-center justify-center gap-2 px-4">
+       <p className="leading-none flex gap-x-1">
+         <strong className="block font-semibold"> Next </strong>
+         <FaAngleRight/>
+       </p>
       </button>
       )
     }

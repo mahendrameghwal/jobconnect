@@ -12,7 +12,7 @@ import {useCreateJobMutation} from "../../../app/api/JobApi";
 import {loadCities,loadCountries,loadStates} from '../../../app/slices/AddressSlice';
 import { useNavigate } from 'react-router-dom';
 import salaryData from '../../data/Salarydata';
-
+import { FaDeleteLeft } from "react-icons/fa6";
 
 const Createjob =React.memo(() => { 
   const NumberOfpost = [1,2,3,4,5,6,7,8,9,10];
@@ -115,20 +115,24 @@ const Createjob =React.memo(() => {
 
   return (
   
-    <div className="min-h-screen  max-h-full">
+    <div className="min-h-screen max-h-full mt-1">
     
     <Fragment>
     <form >
-    <div className="min-h-screen   w-11/12 mx-auto shadow-xl max-h-full border my-2">
-    <p className="text-3xl max-md:text-2xl underline underline-offset-auto font-semibold bg-gradient-to-t text-center text-transparent   from-green-700 via-blue-700 to-purple-700 bg-clip-text">Create Job Here</p>
+    <div className="min-h-screen   w-11/12 mx-auto shadow-xl max-h-full border dark:border-gray-600 ">
+    <p className="text-3xl max-md:text-2xl  font-semibold bg-gradient-to-t text-center text-transparent from-green-700 via-blue-700 to-purple-700 bg-clip-text dark:text-gray-100">
+    Create Job Here
+</p>
+
+
     
     <div className="px-2 ">
     <div className="  mx-2 my-2">
 
     <div className=" flex w-full max-md:my-1.5 max-md:flex-col my-3 justify-between gap-x-4">
     <section className="w-90   max-md:w-full max-md:my-1">
-    <label aria-required htmlFor="title" className="text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">job title <span className="!text-red-500">*</span></label>
-    <input  required  onChange={handleChange} value={Job.title}  placeholder="Job title " className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-2.5 w-full" type="text" name="title"  />
+    <label aria-required htmlFor="title" className="text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase  dark:text-gray-50 my-0.5">job title <span className="!text-red-500">*</span></label>
+    <input  required  onChange={handleChange} value={Job.title}  placeholder="Job title " className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-2.5 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800" type="text" name="title"  />
     <br />
     {isError && error.data?.details?.title && (
       <p className="text-red-500 px-1 py-0 text-sm mt-1">{error.data?.details?.title}</p>
@@ -136,8 +140,8 @@ const Createjob =React.memo(() => {
       
     </section>
     <section className="w-90 max-md:w-full max-md:my-1">
-    <label aria-required htmlFor='jobtype' className="text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">job Type</label>
-    <select required   onChange={handleChange} value={Job.jobtype}    className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-3 w-full" name="jobtype" id="">
+    <label aria-required htmlFor='jobtype' className=" dark:text-gray-50 text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">job Type</label>
+    <select required   onChange={handleChange} value={Job.jobtype}    className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-3 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800" name="jobtype" id="">
     <option value=''>--select Job Type--</option>
      {
       Jobtype.map((types, i)=>(
@@ -152,8 +156,8 @@ const Createjob =React.memo(() => {
     </section>
 
     <section className="w-90 max-md:w-full max-md:my-1">
-    <label aria-required  htmlFor='category' className="text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">job Category</label>
-     <select required  onChange={handleChange} value={Job.category}     className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-3 w-full" name="category" id="">
+    <label aria-required  htmlFor='category' className=" dark:text-gray-50 text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">job Category</label>
+     <select required  onChange={handleChange} value={Job.category}     className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-3 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800" name="category" id="">
      <option   value=''>--select category--</option>
      {
        jobCategories.map((item, i)=>(
@@ -176,7 +180,7 @@ const Createjob =React.memo(() => {
 
 
     <div className="w-1/3 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='country' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='country' className=" dark:text-gray-50 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
       Country
     </label>
     
@@ -184,7 +188,7 @@ const Createjob =React.memo(() => {
     name='country'
     value={Job.country}
     onChange={(e) =>dispatch(setCountry(e.target.value))}
-    className="max-md:placeholder:text-sm focus:ring-1 ring-blue-500 block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+    className="max-md:placeholder:text-sm focus:ring-1 ring-blue-500 block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     
     >
     <option   value=''>select a country</option>
@@ -197,11 +201,11 @@ const Createjob =React.memo(() => {
     
     
     <div className="w-1/3 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='state' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='state' className=" dark:text-gray-50 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
     State
     </label>
       <select name='state'  value={Job.state} onChange={(e) =>dispatch(setState(e.target.value))}
-      className="max-md:placeholder:text-sm focus:ring-1 ring-blue-500  block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      className="max-md:placeholder:text-sm focus:ring-1 ring-blue-500  block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
       
       >
       <option  className='!text-sm' value=''>Select a State</option>
@@ -214,14 +218,14 @@ const Createjob =React.memo(() => {
     
     
     <div className="w-1/3 max-md:w-full my-2 md:mb-0">
-    <label htmlFor='city' className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    <label htmlFor='city' className=" dark:text-gray-50 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
       City
     </label>
     <select
       name="city"
       value={Job.city}
       onChange={(e) => dispatch(setCity(e.target.value))}
-      className="max-md:placeholder:text-sm focus:ring-1 ring-blue-500 block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      className="max-md:placeholder:text-sm focus:ring-1 ring-blue-500 block w-full bg-slate-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
     
       >
       <option   value=''>select a city</option>
@@ -238,8 +242,8 @@ const Createjob =React.memo(() => {
 
     <div className="flex w-full max-md:my-1.5 max-md:flex-col my-3 justify-between gap-x-4">
     <section className="w-90 max-md:w-full max-md:my-1">
-    <label aria-required htmlFor='joblevel' className="text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">job level</label>
-    <select  required  onChange={handleChange} value={Job.joblevel} className=" focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-3 w-full" name="joblevel" id="">
+    <label aria-required htmlFor='joblevel' className=" dark:text-gray-50 text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">job level</label>
+    <select  required  onChange={handleChange} value={Job.joblevel} className=" focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-3 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800" name="joblevel" id="">
     <option   value=''>--select Job level--</option>
      {
       Joblevel.map((types, i)=>(
@@ -257,8 +261,8 @@ const Createjob =React.memo(() => {
        
 
        <section className="w-90 max-md:w-full max-md:my-1">
-       <label aria-required htmlFor='NumberOfPost' className="text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">Number of post</label>
-       <select  required  onChange={handleChange} value={Job.NumberOfPost} className=" focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-3 w-full" name="NumberOfPost" id="">
+       <label aria-required htmlFor='NumberOfPost' className=" dark:text-gray-50 text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">Number of post</label>
+       <select  required  onChange={handleChange} value={Job.NumberOfPost} className=" focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-3 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800" name="NumberOfPost" id="">
        <option  value=''>--number of post--</option>
        <option className='text-xs' disabled value=''>default number of post will be 1 (if not selected)</option>
         {
@@ -276,8 +280,8 @@ const Createjob =React.memo(() => {
           </section>
 
     <section className="w-90 max-md:w-full max-md:my-1">
-  <label aria-required htmlFor="salary" className="text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">salary<span className="!text-sm!lowercase">(per year)</span><span className="!text-red-500">*</span></label>
-  <select required name='salary' onChange={handleChange} value={Job.salary} className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-2.5 w-full">
+  <label aria-required htmlFor="salary" className=" dark:text-gray-50 text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">salary<span className="!text-sm!lowercase">(per year)</span><span className="!text-red-500">*</span></label>
+  <select required name='salary' onChange={handleChange} value={Job.salary} className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-2.5 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800">
     {salaryData.map((option, index) => (
       <option key={index} value={option.range}>{option.range}</option>
     ))}
@@ -293,9 +297,9 @@ const Createjob =React.memo(() => {
 
     <div className="flex w-full max-md:my-1.5 max-md:flex-col  justify-between gap-x-4">
     <section className="w-95 max-md:w-full max-md:my-1">
-    <label aria-required htmlFor="skills" className="text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">Required Skills<span className="!text-red-500">*</span></label>
+    <label aria-required htmlFor="skills" className=" dark:text-gray-50 text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">Required Skills<span className="!text-red-500">*</span></label>
     <div className="flex gap-x-6 justify-around">
-    <input required  onChange={(e)=>{dispatch(setNewSkills(e.target.value))}} value={Job.newSkills}    placeholder="Skills" className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-2 w-full" type="text" name="skills"  />
+    <input required  onChange={(e)=>{dispatch(setNewSkills(e.target.value))}} value={Job.newSkills}    placeholder="Skills" className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-2 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800" type="text" name="skills"  />
    <button  onClick={()=>{dispatch(addSkill(Job.skills))}} type="button"  className="px-10 hover:text-white transition-colors duration-200 tracking-wider bg-slate-300 rounded-md hover:bg-slate-400 font-medium max-md:text-base text-base">Add</button>
    </div> 
    </section>
@@ -321,8 +325,8 @@ const Createjob =React.memo(() => {
 
    <div className="flex w-full max-md:my-1.5 max-md:flex-col  justify-between gap-x-4">
     <section className="w-full max-md:w-full max-md:my-1">
-    <label aria-required htmlFor="shortdesc" className="text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">about the job<span  className="!text-red-500">*</span></label>
-    <textarea  required  onChange={handleChange} value={Job.shortdesc}  rows={5} cols={4}  placeholder="about job " className="focus:ring-1 skills ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-2.5 w-full" type="text" name="shortdesc"  />
+    <label aria-required htmlFor="shortdesc" className=" dark:text-gray-50 text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">about the job<span  className="!text-red-500">*</span></label>
+    <textarea  required  onChange={handleChange} value={Job.shortdesc}  rows={5} cols={4}  placeholder="a short intro about Job" className="focus:ring-1 skills ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-2.5 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800" type="text" name="shortdesc"  />
     </section>
     
     
@@ -335,9 +339,9 @@ const Createjob =React.memo(() => {
       
       <div className="flex w-full max-md:my-1.5 max-md:flex-col my-3 justify-between gap-x-4">
     <section className="w-full max-md:w-full max-md:my-1">
-    <label aria-required htmlFor="responsibility" className="text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5">Roles and Responsiblity <span className="!text-red-500">*</span></label>
+    <label aria-required htmlFor="responsibility" className=" dark:text-gray-50 text-gray-600 max-md:font-medium max-md:text-sm font-semibold uppercase my-0.5 ">Roles and Responsiblity <span className="!text-red-500">*</span></label>
    <div className="flex-col justify-around">
-   <textarea required onChange={(e)=>{dispatch(setNewResponsibility(e.target.value))}} value={Job.newResponsibility}  placeholder="Roles and Responsiblity " className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-2.5 w-full"  name="responsibilities"  />
+   <textarea required onChange={(e)=>{dispatch(setNewResponsibility(e.target.value))}} value={Job.newResponsibility}  placeholder="Roles and Responsiblity " className="focus:ring-1 ring-blue-500 rounded-md outline-none border placeholder:text-gray-400 border-gray-300 bg-slate-100 max-md:px-2 max-md:py-1.5 px-4 py-2.5 w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"  name="responsibilities"  />
    <button  onClick={()=>{dispatch(addResponsibility(Job.responsibilities))}} type="button"  className="px-4 py-1 hover:text-white transition-colors duration-200 tracking-wider bg-slate-300 rounded-md hover:bg-slate-400 font-medium text-lg">Add more description</button>
    </div>
    </section>
@@ -349,7 +353,7 @@ const Createjob =React.memo(() => {
   {
     Job.responsibilities.map((item,i)=>(
    <div className="relative mx-3 my-1" key={i}>
-   <IoCloseCircle  onClick={()=>{dispatch(removeroles(i))}}  className="h-4  absolute  -top-2 -right-1 cursor-pointer  w-4"/>
+   <FaDeleteLeft  onClick={()=>{dispatch(removeroles(i))}}  className="h-4 dark:text-gray-300 dark:bg-black absolute  -top-2 -right-1 cursor-pointer  w-4"/>
    <li className="mb-2 bg-gray-200 rounded-md capitalize text-sm  text-black px-4 py-1 " >{item}</li>
    </div>
    ))
