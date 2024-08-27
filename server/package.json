@@ -11,6 +11,7 @@
   "author": "mahendra",
   "license": "ISC",
   "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.3",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cloudinary": "^1.41.0",
@@ -20,16 +21,18 @@
     "express": "^4.18.3",
     "express-async-handler": "^1.2.0",
     "express-fileupload": "^1.4.3",
+    "gs": "^0.0.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.10",
     "morgan": "^1.10.0",
     "nodemailer": "^6.9.7",
     "password-validator": "^5.3.0",
     "pretty-error": "^4.0.0",
+    "puppeteer": "^23.1.1",
     "socket.io": "^4.7.5",
     "terminal-kit": "^3.0.1",
     "validator": "^13.11.0"
   },
-  "proxy": "https://jobconnect1.netlify.app",
+  "proxy": "http://localhost:5173",
   "description": ""
 }

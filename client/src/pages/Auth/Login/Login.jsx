@@ -91,10 +91,8 @@ const HandleUser = e => {
                 type="text"
                 name="email"
                 placeholder="Email Address"
-              />
-          
-              
-              
+                id="email"
+              /> 
               </div>
           
             <div className={`flex relative dark:border-gray-600  items-center border-2 py-2 px-3 rounded-md mb-4`}>
@@ -123,10 +121,12 @@ const HandleUser = e => {
                 type={Showpassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"
+                id="password"
+                
               />
             </div>
 
-            <button
+            <button id='login-button'
             disabled={isLoading}
               onClick={handleLogin}
               type="submit"

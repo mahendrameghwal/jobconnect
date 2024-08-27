@@ -9,7 +9,7 @@ const {
   UserinfoById,
   MultipleUserinfo,
   AcountDeleteRequest,
-  Me
+  Me,
 } = require('../controllers/UserAuthController');
 const express = require('express');
 const VerifyToken = require('../middlewares/verifytoken');
@@ -26,6 +26,8 @@ router.get('/getinfo/:userid',VerifyToken, UserinfoById);
 router.get('/multiple-user-info',VerifyToken ,MultipleUserinfo);
 router.put('/reset/:token', resetPassword);
 router.delete('/delete', VerifyToken, DeleteAcountPerManently);
+router.delete('/delete', VerifyToken, DeleteAcountPerManently);
+
 
 
 module.exports = router;

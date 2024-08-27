@@ -8,12 +8,10 @@ const ApplyToJob = ({ applyid, applicants }) => {
   const [isAlreadyApplied, setIsAlreadyApplied] = useState(false);
   const [ApplyforJob, { data, error, isLoading }] = useApplyforJobMutation();
   const { data: CurrentUser } = useCurrentUserQuery();
-  console.log(CurrentUser);
-
+  
   const checkIfAlreadyApplied = useCallback(() => {
     if (CurrentUser && CurrentUser.candidate?._id) {
-      console.log( CurrentUser.candidate._id);
-      console.log(applicants);
+    
       const isAlreadyAppliedJob = applicants.some(applicant => applicant === CurrentUser.candidate._id);
       setIsAlreadyApplied(isAlreadyAppliedJob);
     }

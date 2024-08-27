@@ -80,7 +80,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
         {/* SIDEBAR HEADER */}
 
-        <div className="flex flex-col overflow-y-auto duration-300 ease-linear">
+        <div className="flex flex-col overflow-y-auto duration-75 ease-in">
           {/* Sidebar Menu */}
           <nav className="mt-10 py-5 px-4 lg:mt-9 lg:px-6">
             {/* Menu Group */}

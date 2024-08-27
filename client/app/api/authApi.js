@@ -73,7 +73,6 @@ export const authApi = createApi({
         credentials:"include"
       }),
     }),
-
   }),
 });
 
@@ -87,6 +86,7 @@ export const {
   useDelAcountRequestMutation,
   useSignOutMutation,
   useMeQuery,
+  
 } = authApi;
 
 export default authApi;

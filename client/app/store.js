@@ -52,7 +52,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE', 'jobApi/subscriptions/internal_probeSubscription'],
         ignoredPaths: ['jobApi.queries.searchJobs({}).originalArgs'],
-        warnAfter: 100
+        warnAfter: 200
       },
     }).concat(
       jobApi.middleware,

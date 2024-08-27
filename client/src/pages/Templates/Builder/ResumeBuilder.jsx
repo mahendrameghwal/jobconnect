@@ -9,7 +9,7 @@ import html2canvas from 'html2canvas';
 import PDFbutton from './generatePDF';
 import toast from 'react-hot-toast';
 import debounce from 'lodash.debounce';
-
+import axios from "axios"
 
 const ResumeBuilder = () => {
   const [activeSection, setActiveSection] = useState('personal');
@@ -296,53 +296,36 @@ const handleLangInputChange = useCallback((index, e) => {
     }
   };
 
-  const generatePDF = async () => {
-    if(!resumeData){
-      return;
+  const downloadPDF = async () => {
+    try {
+      const resumeContent = document.getElementById('resume-all').innerHTML;
+      const tailwindCSS = '<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">';
+      const fullHTML = `
+        <html>
+          <head>
+            ${tailwindCSS}
+          </head>
+          <body>
+            ${resumeContent}
+          </body>
+        </html>
+      `;
+  
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/candidate/generate-pdf`, { html: fullHTML }, {
+        responseType: 'blob', 
+      });
+  
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `${PersonalInfo?.fullname}.pdf`;
+      link.click();
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
     }
-    const input = document.getElementById('resume-preview');
-    const canvas = await html2canvas(input, { scale: 2 }); 
-    const imgData = canvas.toDataURL('image/png');
-  
-    const pdfDoc = await PDFDocument.create();
-    const imgWidth = canvas.width;
-    const imgHeight = canvas.height;
-  
-    // Set the desired padding
-    const padding = 40; 
-  
-    // Create a page with padding
-    const page = pdfDoc.addPage([imgWidth + padding, imgHeight + padding]);
-  
-    // Embed the image
-    const pngImage = await pdfDoc.embedPng(imgData);
-    const pngDims = pngImage.scale(1); // Scale to original size
-  
-    // Draw the image with padding
-    page.drawImage(pngImage, {
-      x: padding / 2, // Left padding
-      y: padding / 2, // Top padding
-      width: pngDims.width,
-      height: pngDims.height,
-    });
-  
-    // Save the PDF
-    const pdfBytes = await pdfDoc.save();
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-    const url = URL.createObjectURL(blob);
-  
-    // Create a link to download the PDF
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', `${resumeData?.fullname}.pdf`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
   };
   
   
-
-
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -392,7 +375,7 @@ const handleLangInputChange = useCallback((index, e) => {
         
             <div className='flex justify-between'>
             <h2 className="text-2xl font-bold dark:text-white ">Resume Preview</h2>
-            <PDFbutton generatePDF={generatePDF} />
+            <PDFbutton downloadPDF={downloadPDF} />
             </div>
         
           <ResumePreview

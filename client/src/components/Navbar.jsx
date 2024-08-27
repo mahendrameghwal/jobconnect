@@ -88,6 +88,7 @@ function Navbar() {
      >
        Browse Companies
      </NavLink>
+    
 
      {userInfo?.Isorg && (
        <NavLink
@@ -99,6 +100,14 @@ function Navbar() {
          Search Talent
        </NavLink>
      )}
+     <NavLink
+     to="/pricing"
+     className={({ isActive }) =>
+       `text-base mr-3 block mt-4 lg:inline-block lg:mt-0 ${isActive ? "text-blue-500 font-semibold" : "text-gray-600 dark:text-gray-300 font-semibold"} transition-colors duration-300`
+     }
+   >
+  Pricing
+   </NavLink>
    </div>
        <div className='flex items-center gap-x-2 justify-end '>
       <DarkLightmode/>

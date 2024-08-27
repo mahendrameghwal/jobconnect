@@ -1,5 +1,5 @@
 const express = require("express");
-const {CreateCandidate, getAllCandidate,EditCandidateInformation,UpdateResume, ApplyToJob, GetCandidateById, UpdateCandidateProfile} = require("../controllers/CandidateController");
+const {CreateCandidate, getAllCandidate,EditCandidateInformation,UpdateResume, ApplyToJob, GetCandidateById, UpdateCandidateProfile, generatePDF} = require("../controllers/CandidateController");
 const router = express.Router();
 const VerifyToken = require('../middlewares/verifytoken');
 const VerifyCandidate = require("../middlewares/VerifyCandidate");
@@ -14,6 +14,9 @@ router.put('/edit',VerifyToken,VerifyCandidate,EditCandidateInformation);
 router.patch('/apply/:jobid',VerifyToken,VerifyCandidate,ApplyToJob);
 router.put('/update/profile',VerifyToken,VerifyCandidate,UpdateCandidateProfile);
 router.put('/upload/resume',VerifyToken,VerifyCandidate,UpdateResume);
+router.post('/generate-pdf', generatePDF)
+
+
 
 
 

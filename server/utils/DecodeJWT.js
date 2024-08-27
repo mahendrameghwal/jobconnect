@@ -13,6 +13,8 @@ const DecodeJWT = (res)=>{
               httpOnly: true,
               expires: expirationDate,
 
+            secure: true,
+            sameSite: 'none',
             })
             .status(200)
             .send({ message: 'login success', token:decodedToken }); 

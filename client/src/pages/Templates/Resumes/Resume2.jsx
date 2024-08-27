@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 
 const Resume2 = ({ PersonalInfo, Skillinfo, employmentInfo, EduInfo, ProjectInfo, LangInfo }) => {
   return (
-    <div className="border  border-gray-300 font-black mx-auto my-2 bg-white">
+    <div className="border-2  border-gray-300 font-medium mx-auto my-2 bg-white">
       {/* Information */}
       <div className="text-center mb-3 w-full">
         <h2 className="text-2xl font-bold">
@@ -142,9 +142,6 @@ const Resume2 = ({ PersonalInfo, Skillinfo, employmentInfo, EduInfo, ProjectInfo
                     {DateTime.fromISO(exp.startdate, { setZone: true }).toFormat('MMMM dd, yyyy')} - {DateTime.fromISO(exp.enddate, { setZone: true }).toFormat('MMMM dd, yyyy')}
                   </span>
                 </div>
-                <p className="text-gray-700">
-                  {exp.description || "Job Description"}
-                </p>
               </div>
             ))}
           </div>

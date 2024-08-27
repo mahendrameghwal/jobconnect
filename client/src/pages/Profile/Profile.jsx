@@ -7,7 +7,7 @@ import AppliedJobs from "../../components/AppliedJobs";
 import { MdFolderDelete } from "react-icons/md";
 import { useDelAcountRequestMutation, useMeQuery } from "../../../app/api/authApi";
 import toast from "react-hot-toast";
-import { useRef } from 'react';
+import { useRef, lazy } from 'react';
 import { IoCreateOutline } from "react-icons/io5";
 import { MdOutlineRememberMe } from "react-icons/md";
 import { CiChat1, CiSearch } from "react-icons/ci";
@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { FaChartPie } from "react-icons/fa";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+const PremiumButton = lazy(() => import("../../components/PremiumButton"));
 
 const Profile = () => {
   
@@ -77,10 +78,12 @@ const navigate = useNavigate()
    <main className=" bg-gray-400 bg-opacity-10 pt-8 ">
    <section role="main" className="w-full max-h-full min-h-screen">
    <div className="flex justify-evenly max-md:flex-col  px-2">
-   <section className="max-h-screen  
+   <section className="relative max-h-screen  
 dark:bg-gray-900/30 dark:shadow-gray-800/30  bg-white w-1/4 max-md:w-full rounded-md shadow-md">
+<section className="absolute right-1">
+<PremiumButton/>
+</section>
 <div className="w-90  max-md:my-2 my-5 mx-auto ">
-
 <div className="flex  flex-col justify-center">
 {
 
@@ -172,6 +175,7 @@ to={
   )
 }
 </Link>
+
 
 
 

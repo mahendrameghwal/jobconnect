@@ -60,13 +60,20 @@ const Userschema = new mongoose.Schema({
     default:null
   },
   jobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job',}],
-
-  
    resetPasswordToken: String,
    resetPasswordExpires: Date,
    deleteAcountToken: String,
-   deleteAcountExpires: Date
+   deleteAcountExpires: Date,
 
+   
+   currentSubscription: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Subscription'
+  },
+  subscriptionHistory: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Subscription'
+  }]
 
 },{
   timestamps:true

@@ -9,8 +9,8 @@ const asyncHandler = require('express-async-handler');
 const crypto = require('crypto');
 const { sendResetPasswordEmail, DeleteAcountSendEmail } = require('../utils/emailServices');
 const validator = require('validator');
-
 const { default: mongoose } = require('mongoose');
+
 
 
 const expirationDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
@@ -526,5 +526,5 @@ module.exports = {
   GetCurrentUserInfo,
   UserinfoById,
   MultipleUserinfo,
-Me
+  Me,
 };

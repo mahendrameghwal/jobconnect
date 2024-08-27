@@ -31,7 +31,7 @@ const ResumePreview = ({ templateId, PersonalInfo,Skillinfo, employmentInfo, Edu
   };
 
   return (
-    <div id='resume-preview'>
+    <div id='resume-all'>
       {getTemplate()}
     </div>
   );

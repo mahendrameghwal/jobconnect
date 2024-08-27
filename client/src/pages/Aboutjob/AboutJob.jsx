@@ -53,9 +53,9 @@ const copyToClipboard = (id) => {
 
   return (
       <div>
-      {isError && ( error && error.data  && error.data.message &&<div ref={Topref} class="flex justify-center items-center h-screen bg-transparent">
-      <div class="text-center">
-        <h1 class="text-gray-600 text-lg capitalize font-bold py-1 px-2 rounded">{error.data.message}</h1>
+      {isError && ( error && error.data  && error.data.message &&<div ref={Topref} className="flex justify-center items-center h-screen bg-transparent">
+      <div className="text-center">
+        <h1 className="text-gray-600 text-lg capitalize font-bold py-1 px-2 rounded">{error.data.message}</h1>
         <button className="w-1/2 shrink-0 rounded-md bg-blue-500 px-2 py-1.5 text-sm tracking-wide text-white transition-colors duration-200 hover:bg-blue-600 sm:w-auto">
         <Link to="/">Take me home</Link>
         </button>

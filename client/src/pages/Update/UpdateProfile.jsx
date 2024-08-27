@@ -211,7 +211,7 @@ if(isError){
   Permisson &&   <div className="flex justify-end items-center gap-x-3  p-4">
   <EditMode isChecked={isEditMode} onToggle={handleToggle} />
   <p className="ml-4 dark:text-white text-sm font-semibold">{isEditMode ? 'Edit Mode On' : 'Edit Mode Off'}</p>
-  <Link to='/template' type="button" class="py-1 px-5 max-md:py-0.5 max-md:px-2 me-2 text-base font-normal text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 ">Build Your CV</Link>
+  <Link to='/template' type="button" className="py-1 px-5 max-md:py-0.5 max-md:px-2 me-2 text-base font-normal text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 ">Build Your CV</Link>
 </div>
 }
     {/* basic information */}

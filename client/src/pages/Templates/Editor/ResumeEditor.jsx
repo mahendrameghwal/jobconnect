@@ -43,7 +43,7 @@ const ResumeEditor = ({
         value={PersonalInfo?.fullname}
         onChange={handlePersonalInfochange}
         placeholder="Full Name"
-        className="block w-full p-1 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+        className="block w-full p-1 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
       />
       <input
         type="text"
@@ -51,7 +51,7 @@ const ResumeEditor = ({
         value={PersonalInfo?.email}
         onChange={handlePersonalInfochange}
         placeholder="Email"
-        className="block w-full p-1 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+        className="block w-full p-1 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
       />
       <input
         type="text"
@@ -59,7 +59,7 @@ const ResumeEditor = ({
         value={PersonalInfo?.phone}
         onChange={handlePersonalInfochange}
         placeholder="Phone"
-        className="block w-full p-1 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+        className="block w-full p-1 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
       />
       <input
         type="text"
@@ -67,7 +67,7 @@ const ResumeEditor = ({
         value={PersonalInfo?.city}
         onChange={handlePersonalInfochange}
         placeholder="City"
-        className="block w-full p-1.5 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+        className="block w-full p-1.5 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
       />
       <input
         type="text"
@@ -75,7 +75,7 @@ const ResumeEditor = ({
         value={PersonalInfo?.state}
         onChange={handlePersonalInfochange}
         placeholder="State"
-        className="block w-full p-1.5 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+        className="block w-full p-1.5 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
       />
       <input
         type="text"
@@ -83,14 +83,14 @@ const ResumeEditor = ({
         value={PersonalInfo?.country}
         onChange={handlePersonalInfochange}
         placeholder="Country"
-        className="block w-full p-1.5 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+        className="block w-full p-1.5 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
       />
       <textarea
         name="summary"
         value={PersonalInfo?.summary}
         onChange={handlePersonalInfochange}
         placeholder="Professional Summary"
-        className="block w-full p-1.5 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded h-32"
+        className="block w-full p-1.5 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded h-32  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
       />
     </div>
   );
@@ -99,7 +99,7 @@ const ResumeEditor = ({
     <div className="p-4  rounded-lg ">
       <h3 className="text-xl font-semibold dark:text-white mb-4">Skills</h3>
       {Skillinfo?.map((skill, index) => (
-        <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm">
+        <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm dark:bg-gray-900/40 dark:border-gray-600">
          
           <input
             type="text"
@@ -107,7 +107,7 @@ const ResumeEditor = ({
             value={skill?.name}
             onChange={(e)=>handleSkillInputChange(index,e)}
             placeholder="Skill Name"
-            className="block w-full p-1 focus:ring-1 ring-blue-400 outline-none mb-1 border rounded"
+            className="block w-full p-1 focus:ring-1 ring-blue-400 outline-none mb-1 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <button
           onClick={()=>HandleDeleteSkill(index)}
@@ -130,14 +130,14 @@ const ResumeEditor = ({
     <div className="p-4  rounded-lg ">
       <h3 className="text-xl font-semibold dark:text-white mb-4">Employment History</h3>
       {employmentInfo && Array.isArray(employmentInfo) && employmentInfo.map((job, index) => (
-        <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm">
+        <div key={index} className="mb-4 p-4 bg-white dark:bg-gray-900/30 dark:border-gray-600 border rounded shadow-sm">
           <input
             type="text"
             name="position"
             value={job.position}
             onChange={(e)=>handleEmploymentInputChange(index,e)}
             placeholder="Position"
-            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none"
+            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <input
             type="text"
@@ -145,7 +145,7 @@ const ResumeEditor = ({
             value={job.orgname}
             onChange={(e)=>handleEmploymentInputChange(index,e)}
             placeholder="Organization Name"
-            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none "
+            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800 "
           />
           <input
             type="text"
@@ -153,25 +153,25 @@ const ResumeEditor = ({
             value={job.emptype}
             onChange={(e)=>handleEmploymentInputChange(index,e)}
             placeholder="Employment Type"
-            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none"
+            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <input
             type="date"
             name="startdate"
             value={job.startdate.split('T')[0]}
             onChange={(e)=>handleEmploymentInputChange(index,e)}
-            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none"
+            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <input
             type="date"
             name="enddate"
             value={job.enddate.split('T')[0]}
             onChange={(e)=>handleEmploymentInputChange(index,e)}
-            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none"
+            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <button
             onClick={()=>HandleDeleteEmployment(index)}
-            className="mt-2 text-red-500 hover:text-red-700 focus:ring-1 ring-blue-400 outline-none"
+            className="mt-2 text-red-500 hover:text-red-700 focus:ring-1 ring-blue-400 outline-none  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           >
             Remove
           </button>
@@ -179,7 +179,7 @@ const ResumeEditor = ({
       ))}
       <button
        onClick={handleAddEmployment}
-        className="py-1 px-4 bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="py-1 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 "
       >
         Add Job
       </button>
@@ -191,7 +191,7 @@ const ResumeEditor = ({
     <div className="p-4  rounded-lg ">
       <h3 className="text-xl font-semibold dark:text-white mb-4">Education</h3>
       {EduInfo && Array.isArray(EduInfo) &&  EduInfo.map((edu, index) => (
-        <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm">
+        <div key={index} className="mb-4 p-4 bg-white dark:bg-gray-900/30 border rounded shadow-sm">
           <input
             type="text"
             name="institute"
@@ -199,7 +199,7 @@ const ResumeEditor = ({
                       onChange={(e)=>handleEduInputChange(index,e)}
 
             placeholder="Institute"
-            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <input
             type="text"
@@ -208,7 +208,7 @@ const ResumeEditor = ({
                       onChange={(e)=>handleEduInputChange(index,e)}
 
             placeholder="Degree"
-            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <input
             type="text"
@@ -217,7 +217,7 @@ const ResumeEditor = ({
                       onChange={(e)=>handleEduInputChange(index,e)}
 
             placeholder="Field of Study"
-            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <input
             type="date"
@@ -225,7 +225,7 @@ const ResumeEditor = ({
             value={edu.startdate.split('T')[0]}
               onChange={(e)=>handleEduInputChange(index,e)}
 
-            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <input
             type="date"
@@ -233,7 +233,7 @@ const ResumeEditor = ({
             value={edu.enddate.split('T')[0]}
                       onChange={(e)=>handleEduInputChange(index,e)}
 
-            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <input
             type="text"
@@ -242,7 +242,7 @@ const ResumeEditor = ({
                       onChange={(e)=>handleEduInputChange(index,e)}
 
             placeholder="Percentage/GPA"
-            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <button
            onClick={()=>HandleDeleteEdu(index)}
@@ -265,18 +265,18 @@ const ResumeEditor = ({
     <div className="p-4  rounded-lg ">
       <h3 className="text-xl font-semibold dark:text-white mb-4">Projects</h3>
      {ProjectInfo && Array.isArray(ProjectInfo) &&  ProjectInfo.map((proj, index) => (
-        <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm">
+        <div key={index} className="mb-4 p-4 bg-white dark:bg-gray-900/30 dark:border-gray-600 border rounded shadow-sm">
           <input
             type="text"
             name="title"
             value={proj.title}
             onChange={(e)=>handleProjectChange(index,e)}
             placeholder="Project Title"
-            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded"
+            className="block w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
          
 
-          <select        onChange={(e)=>handleProjectChange(index,e)} name="status" value={proj.status} className="block  w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded">
+          <select    onChange={(e)=>handleProjectChange(index,e)} name="status" value={proj.status} className="block  w-full p-2 focus:ring-1 ring-blue-400 outline-none mb-2 border rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800">
 <option  value="in progress">in progress</option>
 <option value="finished">finished</option>
 
@@ -286,21 +286,21 @@ const ResumeEditor = ({
             value={proj.description}
             onChange={(e)=>handleProjectChange(index,e)}
             placeholder="Description"
-            className="block w-full p-2 mb-2 focus:ring-1 ring-blue-400 outline-none border rounded h-32"
+            className="block w-full p-2 mb-2 focus:ring-1 ring-blue-400 outline-none border rounded h-32  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <input
             type="date"
             name="startdate"
             value={proj.startdate.split('T')[0]}
             onChange={(e)=>handleProjectChange(index,e)}
-            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none"
+            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
           <input
             type="date"
             name="enddate"
             value={proj.enddate.split('T')[0]}
             onChange={(e)=>handleProjectChange(index,e)}
-            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none"
+            className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
           />
        
            
@@ -313,7 +313,7 @@ const ResumeEditor = ({
     value={skill?.name || ''} 
     onChange={(e) => handleProjectSkill(index, ind, e)} 
     placeholder="Skill"
-    className="block w-full p-2 mb-2 border focus:ring-1 ring-blue-400 outline-none rounded"
+    className="block w-full p-2 mb-2 border focus:ring-1 ring-blue-400 outline-none rounded  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
   />
 
 
@@ -352,7 +352,7 @@ const ResumeEditor = ({
     <div className="p-4  rounded-lg ">
     <h3 className="text-xl font-semibold dark:text-white mb-4">Languages</h3>
     {LangInfo?.map((lang, index) => (
-      <div key={index} className="mb-4 p-4 bg-white border rounded shadow-sm">
+      <div key={index} className="mb-4 p-4 bg-white dark:bg-gray-900/30 border dark:border-gray-600 rounded shadow-sm">
         <input
           type="text"
           name="lan"
@@ -361,13 +361,13 @@ const ResumeEditor = ({
             onChange={(e)=>handleLangInputChange(index,e)}
 
           placeholder="Language"
-          className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none"
+          className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
         />
         <select
           name="proficiency"
           value={lang.proficiency}
            onChange={(e)=>handleLangInputChange(index,e)}
-          className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none"
+          className="block w-full p-2 mb-2 border rounded focus:ring-1 ring-blue-400 outline-none  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:focus:bg-gray-800"
         >
           <option value="" disabled>Select Proficiency</option>
           {proficiency?.map((level) => (
