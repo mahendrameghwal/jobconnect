@@ -14,7 +14,7 @@ router.put('/edit',VerifyToken,VerifyCandidate,EditCandidateInformation);
 router.patch('/apply/:jobid',VerifyToken,VerifyCandidate,ApplyToJob);
 router.put('/update/profile',VerifyToken,VerifyCandidate,UpdateCandidateProfile);
 router.put('/upload/resume',VerifyToken,VerifyCandidate,UpdateResume);
-router.post('/generate-pdf', generatePDF)
+router.post('/generate-pdf',VerifyToken,VerifyCandidate,generatePDF)
 
 
 

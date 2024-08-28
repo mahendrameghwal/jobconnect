@@ -3,13 +3,11 @@ import { useParams } from 'react-router-dom';
 import ResumeEditor from '../Editor/ResumeEditor';
 import ResumePreview from '../Preview/ResumePreview';
 import { useMeQuery } from '../../../../app/api/authApi';
-// import { jsPDF } from 'jspdf';
-import { PDFDocument } from 'pdf-lib';
-import html2canvas from 'html2canvas';
 import PDFbutton from './generatePDF';
 import toast from 'react-hot-toast';
-import debounce from 'lodash.debounce';
 import axios from "axios"
+import 'jspdf-autotable';
+import html2pdf from 'html2pdf.js';
 
 const ResumeBuilder = () => {
   const [activeSection, setActiveSection] = useState('personal');
@@ -299,7 +297,9 @@ const handleLangInputChange = useCallback((index, e) => {
   const downloadPDF = async () => {
     try {
       const resumeContent = document.getElementById('resume-all').innerHTML;
-      const tailwindCSS = '<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">';
+  
+      // Add the Tailwind CSS CDN link in the frontend
+      const tailwindCSS = `<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">`;
       const fullHTML = `
         <html>
           <head>
@@ -311,20 +311,38 @@ const handleLangInputChange = useCallback((index, e) => {
         </html>
       `;
   
+      // Send the HTML content to the backend
       const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/candidate/generate-pdf`, { html: fullHTML }, {
-        responseType: 'blob', 
+        withCredentials: true
       });
   
-      const blob = new Blob([response.data], { type: 'application/pdf' });
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = `${PersonalInfo?.fullname}.pdf`;
-      link.click();
-    } catch (error) {
-      console.error('Error downloading PDF:', error);
-    }
-  };
+      // Get the HTML from the response
+      const { html } = response.data;
   
+      // Generate the PDF using html2pdf.js with selectable text
+      const element = document.createElement('div');
+      element.innerHTML = html;
+  
+      const opt = {
+        margin: 1,
+        filename: `${PersonalInfo?.fullname}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+          scale: 2, // Adjust scale for better quality
+          useCORS: true, // Enable CORS to load external stylesheets and images
+          logging: true,
+          letterRendering: true ,
+  
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+  
+      html2pdf().from(element).set(opt).save();
+      toast.success("resume download successfully")
+    } catch (error) {
+     toast.error(error?.message?error.message:"something went wrong")
+    }
+  }
   
 
   if (isLoading) {

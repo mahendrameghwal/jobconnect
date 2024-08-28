@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const { default: mongoose } = require('mongoose');
 const Job = require('../models/jobschema');
 const puppeteer = require("puppeteer")
-
+const sanitizeHtml = require('sanitize-html');
 
 
 const CreateCandidate = asyncHandler(async (req, res, next) => {
@@ -402,32 +402,11 @@ const ApplyToJob = asyncHandler(async (req, res, next) => {
 });
 
 const generatePDF = asyncHandler(async (req, res, next) => {
+  console.log(req.user);
   try {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    // Set the HTML content of the page
-    await page.setContent(req.body.html, { waitUntil: 'networkidle0' });
-
-    // Generate the PDF in memory without saving it to disk
-    const pdfBuffer = await page.pdf({
-      format: 'A4',
-      printBackground: true,
-    });
-
-    await browser.close();
-
-    // Set the correct headers for the PDF response
-    res.set({
-      'Content-Type': 'application/pdf',
-      'Content-Disposition': 'attachment; filename="resume.pdf"',
-      'Content-Length': pdfBuffer.length,
-    });
-
-    // Send the PDF buffer directly to the client
-    res.end(pdfBuffer);
+    const { html } = req.body;
+    res.status(200).json({ html });
   } catch (error) {
-    console.error('Error generating PDF:', error);
     next(error);
   }
 });
