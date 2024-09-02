@@ -364,6 +364,24 @@ input[type="number"]::-webkit-outer-spin-button {
   max-height: 100%;
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #ffff 0%, #e0e0e0 50%, #fff 100%);
+  background-size: 200px 100%;
+  animation: shimmer 4s infinite;
+}
+
+.dark .skeleton-shimmer {
+  background: linear-gradient(90deg, #4b5563 0%, #6a717c 50%, #4b5563 100%);
+}
 
 
 

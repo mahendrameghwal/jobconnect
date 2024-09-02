@@ -2,7 +2,7 @@
 import Bannner1 from "../components/Bannner1"
 import Explores from "../components/Explores"
 import FeaturedJobs from "../components/FeaturedJobs"
-import LatestJob from "../components/LatestJob"
+import LatestJob from "./Job/LatestJob/LatestJob"
 
 
 

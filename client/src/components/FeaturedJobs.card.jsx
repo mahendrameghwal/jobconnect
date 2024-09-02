@@ -5,11 +5,11 @@ const FeaturedJobsCard = () => {
 
   return (
     <div className="my-16 max-md:my-12">
-      <div className="flex flex-wrap gap-4 justify-between max-sm:justify-center">
+      <div className="flex flex-wrap gap-2 justify-between max-sm:justify-center">
         {arr.map((item, i) => (
           <div
             key={i}
-            className="w-1/5 p-5 hover:shadow-md border striped-border dark:bg-gray-900/30 bg-gray-50 rounded max-sm:w-full max-lg:w-2/5 max-md:p-3"
+            className="w-1/5 p-4 hover:shadow-md border striped-border dark:bg-gray-900/30 bg-gray-50 rounded max-sm:w-full max-lg:w-2/5 max-md:p-3"
           >
             <div className="flex justify-between items-center">
               <img

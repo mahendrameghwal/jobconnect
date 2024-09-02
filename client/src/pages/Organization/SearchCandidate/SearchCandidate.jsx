@@ -8,6 +8,7 @@ import { loadCountries } from "../../../../app/slices/AddressSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { CiHome } from "react-icons/ci";
+import SearchCandidateSkeleton from "./SearchCandidateSkeleton";
 const SearchCandidate = () => {
   const [SearchParams, setSearchParams] = useState({
     searchTerm:'',
@@ -35,10 +36,19 @@ const SearchCandidate = () => {
   
   const [searchQuery, setSearchQuery] = useState({});
   const {data, isLoading, isError, error,}= useSearchCandidateQuery(SearchParams);
+  const [Load,setLoad]=useState(true)
   
-if(isLoading){
-  return <Loader/>
-}
+  if (Load) {
+    return (
+      <div className='container-lg mx-auto'>
+        <div className="grid grid-cols-1 grid-flow-dense sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-16 max-md:my-12 px-4">
+          {Array(4).fill().map((_, index) => (
+            <SearchCandidateSkeleton key={index} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
 
 
@@ -73,10 +83,10 @@ HandleSubmit={HandleSubmit}/>
 
 {Array.isArray(data) && data.length > 0 ? <SearchCandidateCard data={data} />:
 <div className="company-job-div flex justify-center items-center">
-            <div className="flex items-center mx-4">
-            <span className="ml-2  text-gray-500 text-xl">result not found</span>
-          </div>
-            </div>
+<div className="flex items-center mx-4">
+ <span className="ml-2  text-gray-500 text-xl">result not found</span>
+ </div>
+ </div>
 }
 
 

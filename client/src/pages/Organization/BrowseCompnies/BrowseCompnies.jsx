@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import BrowseCompniesCard from "../../../components/BrowseCompniesCard"
+import BrowseCompniesCard from "./BrowseCompniesCard"
 import Orgcategory from "../../../data/OrgCategory"
 import { loadCountries } from "../../../../app/slices/AddressSlice";
 import { useEffect, useState } from "react";
 import { useGetOrgQuery } from "../../../../app/api/OrgApi";
 import { Link } from "react-router-dom";
+import SkeletonCompanies from "./SkeletonCompanies";
 
 
 const BrowseCompnies = () => {
-
-
   const address = useSelector((state) => state.address);
   const [SearchParams, setSearchParams] = useState({
     orgname: '',
@@ -24,7 +23,6 @@ const BrowseCompnies = () => {
   const query = {};
   
   const [searchQuery, setSearchQuery] = useState({});
-
   const { data, isLoading, error, isError, isSuccess } = useGetOrgQuery(SearchParams);
 
   const HandleSubmit = (e) => {
@@ -33,6 +31,19 @@ const BrowseCompnies = () => {
 
     setSearchParams(searchQuery , { replace: true });
   };
+
+
+  if (isLoading) {
+    return (
+      <div className='min-h-screen'>
+      <div className="container-lg w-5/6 mx-auto grid grid-cols-1 grid-flow-dense sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-16 max-md:my-12 px-4">
+        {Array(4).fill().map((_, index) => (
+          <SkeletonCompanies key={index} />
+        ))}
+      </div>
+      </div>
+    );
+  }
 
   return (
     <section>
@@ -97,7 +108,7 @@ const BrowseCompnies = () => {
   {
      
     
-    isError&& error.data && error.data.message &&
+    isError && error.data && error.data.message &&
         <div className="min-h-screen flex items-center justify-center ">
         <div className="text-center flex flex-col">
         <h1 className="bg-transparent uppercase text-gray-700 ">{error.data.message}</h1>
@@ -129,20 +140,10 @@ const BrowseCompnies = () => {
            </div>
              </div>
      }
-   
-
-
-
-
-
-
-
-
-
   {
     isSuccess   &&
     (
-      <BrowseCompniesCard isLoading={isLoading} data={data} error={error} isError={isError} isSuccess={isSuccess}/>
+      <BrowseCompniesCard  data={data} isSuccess={isSuccess}/>
     )
     
   }

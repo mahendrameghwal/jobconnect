@@ -21,7 +21,7 @@ Welcome to the JobConnect Job Portal Platform! This project is designed to conne
 - **Database:** MongoDB
 - **Authentication:** JWT, OAuth 
 - **Messaging:** socket.io
-  **CV Builder:** puppeteer (Created By Google)
+  **CV Builder:** html2pdf.js
   **Deployment:** Render(for server),Netlify(client-side) 
 
 

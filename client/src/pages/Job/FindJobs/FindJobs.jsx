@@ -1,19 +1,20 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { useSearchJobsQuery } from "../../../../app/api/JobApi";
-import FindJobCard from "../../../components/FIndJob.card";
+import FindJobCard from "./FIndJob.card";
 import jobtypes from "../../../data/Jobtypes";
 import { useEffect, useState } from "react";
 import jobCategories from "../../../data/JobCategory";
-import { loadCountries } from '../../../../app/slices/AddressSlice';
+// import { loadCountries } from '../../../../app/slices/AddressSlice';
 import { useDispatch, useSelector } from "react-redux";
 import sort from "../../../data/Sort";
 import Salarydata from "../../../data/Salarydata";
-import { debounce } from "lodash";
-
+import SkeletonCard from "./SkeletonCard";
 
 
 const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
+
+
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -35,7 +36,7 @@ const FindJobs = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [userSelect, setUserSelect] = useState({});
   const debouncedUserSelect = useDebounce(userSelect, 2000);
-
+  
  
   
   useEffect(() => {
@@ -127,7 +128,25 @@ const FindJobs = () => {
         </section>
       </div>
 
-      {isLoading && <LoadingSpinner />}
+      {
+        isLoading && (
+          <div className="container-lg mx-auto max-md:w-11/12">
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 my-8 max-md:my-12 auto-rows-fr grid-flow-dense"
+          >
+          
+         
+            {Array(4)
+              .fill()
+              .map((_, index) => (
+                <SkeletonCard key={index} />
+              ))}
+         
+          </div>
+          </div>
+          
+        )
+      }
       {isError && error.data && error.data.message && <ErrorMessage error={error} />}
       {error && error.status === 'FETCH_ERROR' && <FetchErrorMessage />}
       {isSuccess && <FindJobCard data={data} error={error} isError={isError} isSuccess={isSuccess} />}

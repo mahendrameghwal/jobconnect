@@ -24,6 +24,7 @@ import ExcludeFooter from "./utils/ExcludeFooter";
 import ExcludeNavbar from "./utils/ExcludeNavbar";
 import ResumeTemplateSelector from "./pages/Templates/Selector/ResumeTemplateSelector";
 import ResumeBuilder from "./pages/Templates/Builder/ResumeBuilder";
+import 'react-loading-skeleton/dist/skeleton.css';
 
 
 const PrivateRouteForAllUser = lazy(() => import("./routes/PrivateRouteForAllUser"));
