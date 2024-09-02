@@ -29,4 +29,4 @@ Welcome to the JobConnect Job Portal Platform! This project is designed to conne
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/job-portal-platform.git
+   git clone https://github.com/mahendrameghwal/jobconnect.git
