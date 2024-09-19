@@ -5,6 +5,7 @@ Welcome to the JobConnect Job Portal Platform! This project is designed to conne
 ## 🚀 Features
 
 - **User Accounts:** Create accounts as either candidates or organizations.
+- **State management:** Redux toolkit.
 - **Detailed Profiles:** Both candidates and organizations can create and update detailed profiles.
 - **Job Postings:** Organizations can post job openings.
 - **Job Search:** Candidates can search for jobs based on preferences and qualifications.
@@ -12,7 +13,8 @@ Welcome to the JobConnect Job Portal Platform! This project is designed to conne
 - **Application Review:** Organizations can review applications and select the best candidates.
 - **Messaging:** Direct messaging between candidates and organizations for seamless communication.
 - **Profile Updates:** Regularly update profiles to keep information current.
-- **CV Builder:** Candidates can build and customize their CVs using the data within the platform.
+- **CV Builder:** Candidates can build and customize their CVs using the data within the platform if taken 
+- **Subscription Plan** A User can create choose subscription monthly or Yearly subscription as per their requirement by paypal 
 
 ## 💻 Technologies Used
 
@@ -22,11 +24,16 @@ Welcome to the JobConnect Job Portal Platform! This project is designed to conne
 - **Authentication:** JWT, OAuth 
 - **Messaging:** socket.io
 - **CV Builder:** html2pdf.js
-- **Deployment:** Render(for server),Netlify(client-side) 
+- **Deployment:** Render(for server) , Netlify(client-side) 
+- **Payment intrigration:** Paypal,webhook-Paypal etc .
 
 
-## 🎯 How to Get Started
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/mahendrameghwal/jobconnect.git
+# Clone the repository
+git clone https://github.com/mahendrameghwal/jobconnect.git
+
+
+# Test Account Credentials (for testing purposes only)
+echo "Test Account Credentials:"
+echo "Email: candidate1@gmail.com"
+echo "Password: candidate1"

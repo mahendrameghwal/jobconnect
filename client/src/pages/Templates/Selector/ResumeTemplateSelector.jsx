@@ -9,8 +9,6 @@ const templates = [
   { id: 2, name: 'Classic', image: t1 },
   { id: 3, name: 'Elegant', image: t5 },
   { id: 4, name: 'Minimalist', image: t6 },
-
- 
 ];
 
 const ResumeTemplateSelector = () => {
@@ -48,7 +46,7 @@ const ResumeTemplateSelector = () => {
       {selectedTemplate && (
         <motion.div className="mt-8 text-center">
           <button
-            className="bg-blue-500 text-white px-6 py-2 max-md:py-1 rounded-md hover:bg-blue-600 transition-colors"
+            className="bg-blue-500 text-white px-6 py-1 max-md:py-1 rounded-md hover:bg-blue-600 transition-colors"
             onClick={handleCreateResume} // Attach handler to button click
           >
             Create Resume

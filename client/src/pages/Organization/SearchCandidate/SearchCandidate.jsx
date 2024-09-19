@@ -36,9 +36,9 @@ const SearchCandidate = () => {
   
   const [searchQuery, setSearchQuery] = useState({});
   const {data, isLoading, isError, error,}= useSearchCandidateQuery(SearchParams);
-  const [Load,setLoad]=useState(true)
+  // const [Load,setLoad]=useState(true)
   
-  if (Load) {
+  if (isLoading) {
     return (
       <div className='container-lg mx-auto'>
         <div className="grid grid-cols-1 grid-flow-dense sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-16 max-md:my-12 px-4">

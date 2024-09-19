@@ -4,7 +4,7 @@ export const orgApi = createApi({
   reducerPath: 'orgApi',
   baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_SERVER_URL}/org`,  credentials: 'include' }),
   refetchOnReconnect: true, refetchOnMountOrArgChange:true,
-  providesTags: ['org','job'],
+  tagTypes: ['org','job'],
   endpoints: (builder) => ({
     createorg: builder.mutation({
       query: (FormData) => ({

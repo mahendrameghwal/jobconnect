@@ -53,6 +53,10 @@ const DashboardJobs = lazy(() => import("./admin/DashboardJobs"));
 const DashboardOrg = lazy(() => import("./admin/DashboardOrg"));
 const DashboardChart = lazy(() => import("./admin/DashboardChart"));
 const Pricing = lazy(() => import("./pages/pricing/Pricing"));
+const PaymentSuccessPage = lazy(() => import("./pages/payment/Success/Successpage"));
+const PaymentFailedpage = lazy(() => import("./pages/payment/failed/Failedpage"));
+
+
 
 
 
@@ -150,6 +154,10 @@ function App() {
           <Route path="/chat/:recipient" element={<Chat/>} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/payment/success" element={<PaymentSuccessPage />} />
+          <Route path="/payment/failed" element={<PaymentFailedpage/>} />
+
+
        
           </Route>
           

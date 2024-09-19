@@ -1,49 +1,54 @@
-const SubscriptionSchema = new mongoose.Schema({
+const mongoose = require('mongoose');
+
+const SubscriptionSchema = new mongoose.Schema(
+  {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true
+      required: true,
     },
-    planId: {
+    plan: {
       type: String,
-      required: true
+      enum: ['candidate', 'organization'],
+      required: true,
     },
-    planName: {
+
+    billingCycle: {
       type: String,
-      required: true
+      enum: ['monthly', 'yearly'],
+      required: true,
+    },
+    subCreatedate: {
+      type: Date,
+    },
+    subEnddate: {
+      type: Date,
     },
     status: {
       type: String,
-      enum: ['ACTIVE', 'CANCELLED', 'SUSPENDED', 'EXPIRED'],
-      default: 'ACTIVE'
     },
-    startDate: {
+    price: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    isrefund:{
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    lastPaymentDate:{
       type: Date,
-      required: true
     },
-    endDate: {
-      type: Date
+    cancelDate:{
+      type: Date,
     },
     paypalSubscriptionId: {
       type: String,
-      required: true
+      required: true,
     },
-    amount: {
-      type: Number,
-      required: true
-    },
-    currency: {
-      type: String,
-      default: 'USD'
-    },
-    frequency: {
-      type: String,
-      enum: ['MONTH', 'YEAR'],
-      required: true
-    }
-  }, {
-    timestamps: true
-  });
-  
-  const Subscription = mongoose.model('Subscription', SubscriptionSchema);
-  module.exports = Subscription;
+  },
+  { timestamps: true },
+);
+
+module.exports = mongoose.model('Subscription', SubscriptionSchema);

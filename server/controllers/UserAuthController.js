@@ -390,12 +390,12 @@ const GetCurrentUserInfo = asyncHandler(async (req, res, next) => {
       return res.status(400).json({ message: 'User not found' });
     }
     if (!user.Isorg) {
-      const populatedUser = await user.populate('candidate');
+      const populatedUser = await user.populate(['candidate','currentSubscription']);
       const { Org, password, jobs,deleteAcountExpires,deleteAcountToken, ...Candidatedetail } =
         populatedUser.toObject();
       return res.status(200).json(Candidatedetail);
     } else {
-      const populatedUser = await user.populate('Org');
+      const populatedUser = await user.populate('Org').populate(['candidate','currentSubscription']);;
       const { password, candidate,deleteAcountExpires,deleteAcountToken, ...Orgdetails  } = populatedUser.toObject();
       return res.status(200).json(Orgdetails);
     }

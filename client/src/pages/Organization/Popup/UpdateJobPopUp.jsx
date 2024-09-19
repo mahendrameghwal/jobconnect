@@ -11,10 +11,12 @@ import { BiX } from "react-icons/bi";
 import {Country,State,City} from "country-state-city";
 import { loadCities, loadCountries, loadStates } from '../../../../app/slices/AddressSlice';
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import salaryData from '../../../data/Salarydata';
 
 import { v4 as uuidv4 } from 'uuid';
 const UpdateJobPopUp = ({togglePopup, job}) => {
+    // console.log(job);
     const navigate = useNavigate()
     const [currentSkill, setCurrentSkill] = useState("");
     const [currentResponsibility, setCurrentResponsibility] = useState("");
@@ -226,8 +228,16 @@ const UpdateJobPopUp = ({togglePopup, job}) => {
 
                 <div className="flex justify-between">
                     <div className="my-1 w-45">
-                        <label htmlFor="salary" className="block font-medium text-sm mb-1">Salary</label>
-                        <input value={JobData.salary} onChange={handleChange} name="salary" placeholder="Enter salary" className="w-full py-2 px-3 rounded-md border border-gray-400 text-sm" type="number" />
+                       <label htmlFor="salary" className="block font-medium text-sm mb-1">Country</label>
+                  <select
+                    value={JobData.salary}
+                    onChange={handleChange}
+                    name="salary"
+                    className="w-full py-2 px-3 rounded-md border border-gray-400 text-sm"
+                  >
+                    
+                    {salaryData.map(salary=>( <option key={salary.id} value={salary.range}>{salary.range}</option>))}
+                  </select>
                     </div>
 
                     <div className="my-1 w-45">

@@ -6,13 +6,17 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 const morgan = require('morgan');
+// const ngrok = require("@ngrok/ngrok");
 const port = process.env.PORT;
 const errorHandler = require('./handler/errorhandler');
 const fileUpload = require('express-fileupload');
 const ConnectDB = require('./config/DbConfig');
 const ChatSocket = require('./utils/Chatsocket');
+const checkExpiredSubscriptions = require('./utils/checkExpiredSubscriptions');
+const cron = require('node-cron');
 
 
+ConnectDB();
 const io = require('socket.io')(server, {
  cors: {
     origin: process.env.FRONTEND_APP_URL,
@@ -20,7 +24,12 @@ const io = require('socket.io')(server, {
 });
 module.exports.io = io;
 ChatSocket(io);
-ConnectDB();
+
+
+// Run every day at midnight
+cron.schedule('0 0 * * *', () => {
+  checkExpiredSubscriptions();
+});
 
 // process?.env?.JWT_SECRET
 //middlewares
@@ -63,6 +72,12 @@ const Orgroutes = require('./routes/OrgRoute');
 const CandidateRoutes = require('./routes/CandidateRoute');
 const MessageRoutes = require('./routes/MessageRoute');
 const Userroute = require('./routes/UserauthRoute');
+const SubscriptionRoutes = require('./routes/SubcriptionRoute');
+
+app.get('/hello', (req, res) => {
+  res.send('<h1 style="color: #333; font-size: 24px;">Hello World!</h1>')
+})
+
 
 
 app.use('/api/user', Userroute);
@@ -71,9 +86,22 @@ app.use('/api/job', jobroutes);
 app.use('/api', GetAPIRoute);
 app.use('/api/candidate', CandidateRoutes);
 app.use('/api/message', MessageRoutes);
+app.use('/api/subscription', SubscriptionRoutes);
+
 
 app.use(errorHandler);
 
 server.listen(port, () => {
   console.log(`server Listing on Port ${port}`);
 });
+
+{/** ngrok config for public address and webhook verification */}
+// ngrok.connect({
+//   addr: port,
+//   authtoken: process.env.NGROK_AUTHTOKEN,
+//   hostname: 'calm-penguin-informed.ngrok-free.app' 
+// }).then(listener => {
+//     console.log(listener.url());
+// }).catch(error => {
+//     console.error("Ngrok connection failed:", error);
+// });

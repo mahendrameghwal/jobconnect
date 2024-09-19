@@ -73,6 +73,7 @@ const CompanyProfile = memo(() => {
   const paginate = useCallback((pageNumber) => {
     setCurrentPage(pageNumber);
   }, []);
+  
 
   if (isLoading) {
     return <div className="spinner min-h-screen absolute top-1/2 left-1/2 transform -translate-x-1/2"></div>;
@@ -127,9 +128,9 @@ const CompanyProfile = memo(() => {
 
 
     
-    const ChangeExistJob = (i)=>{
-      togglePopup('updatejob')
-      setChangeJob(i)
+    const ChangeExistJob = (jobId) => {
+      togglePopup('updatejob');
+      setChangeJob(jobId);
     }
 
 
@@ -152,9 +153,12 @@ const CompanyProfile = memo(() => {
         )
       }
 
-      {
-        activePopup === 'updatejob' && (<UpdateJobPopUp    job={jobs[ChangeJob]}  togglePopup={togglePopup}      />)
-      }
+      {activePopup === 'updatejob' && (
+        <UpdateJobPopUp
+          job={jobs.find(job => job._id === ChangeJob)}
+          togglePopup={togglePopup}
+        />
+      )}
       
 
         <div className=" mx-auto pt-6">
@@ -329,7 +333,7 @@ const CompanyProfile = memo(() => {
                                   <FaUser color="#3b82f6" />
                                 </button>
                                 <button
-                                onClick={()=>ChangeExistJob(index)}
+                                onClick={() => ChangeExistJob(_id)}
                                 type="button"
                                 disabled={isLoading}
                                 className="inline-flex items-center px-7 py-2 bg-blue-900/60 hover:bg-blue-800 text-slate-100 text-sm font-medium rounded-sm"

@@ -8,6 +8,8 @@ import { CiMail } from "react-icons/ci";
 import { loadCities, loadCountries, loadStates } from '../../../../app/slices/AddressSlice';
 import { toast } from 'react-hot-toast';
 import { useUpdateOrgInformationMutation } from '../../../../app/api/OrgApi';
+import OrgCategories from '../../../data/OrgCategory';
+
 
 const UpdateOrg = ({ category, city, state, country, website, about, mobile, orgname, linkedin, togglePopup }) => {
   const dispatch = useDispatch();
@@ -132,8 +134,6 @@ const UpdateOrg = ({ category, city, state, country, website, about, mobile, org
     }
   };
 
-  // Sample categories, replace with your actual categories
-  const categories = ['Technology', 'Finance', 'Healthcare', 'Education', 'Other'];
 
 
 
@@ -225,8 +225,8 @@ const UpdateOrg = ({ category, city, state, country, website, about, mobile, org
              
               >
                 <option value="">Select a category</option>
-                {categories.map((cat) => (
-                  <option key={cat} value={cat}>{cat}</option>
+                {OrgCategories.map((cat) => (
+                  <option key={cat.id} value={cat.name}>{cat.name}</option>
                 ))}
               </select>
             </div>

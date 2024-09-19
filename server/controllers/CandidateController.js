@@ -6,8 +6,6 @@ const { CastError } = require('mongoose').Error;
 const jwt = require('jsonwebtoken');
 const { default: mongoose } = require('mongoose');
 const Job = require('../models/jobschema');
-const puppeteer = require("puppeteer")
-const sanitizeHtml = require('sanitize-html');
 
 
 const CreateCandidate = asyncHandler(async (req, res, next) => {

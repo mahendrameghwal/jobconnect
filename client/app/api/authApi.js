@@ -33,6 +33,7 @@ export const authApi = createApi({
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       }),
+      invalidatesTags:["auth"]
     }),
 
     CurrentUser: builder.query({

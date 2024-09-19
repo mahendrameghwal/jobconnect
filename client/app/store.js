@@ -15,6 +15,7 @@ import jobApi from './api/JobApi';
 import OrgApi from './api/OrgApi';
 import AddressSlice from './slices/AddressSlice';
 import CandidateApi from './api/CandidateApi';
+import PaymentApi from './api/PaymentApi';
 import authApi from './api/authApi';
 import Sendcategory from './slices/Sendcategory';
 
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   [OrgApi.reducerPath]: OrgApi.reducer,
   [CandidateApi.reducerPath]: CandidateApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
+  [PaymentApi.reducerPath]: PaymentApi.reducer,
   auth: Authslice,
   createnewpassword: ResetpasswordSlice,
   CreateJob: CreateJobSlice,
@@ -59,6 +61,7 @@ const store = configureStore({
       OrgApi.middleware,
       CandidateApi.middleware,
       authApi.middleware,
+      PaymentApi.middleware
     ),
 });
 

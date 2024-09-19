@@ -1,13 +1,14 @@
-import React, {useState,useCallback, useEffect} from 'react';
+import React, {useState,useCallback, useEffect,lazy} from 'react';
 import { useParams } from 'react-router-dom';
 import ResumeEditor from '../Editor/ResumeEditor';
 import ResumePreview from '../Preview/ResumePreview';
-import { useMeQuery } from '../../../../app/api/authApi';
+import { useCurrentUserQuery, useMeQuery } from '../../../../app/api/authApi';
 import PDFbutton from './generatePDF';
 import toast from 'react-hot-toast';
 import axios from "axios"
 import 'jspdf-autotable';
 import html2pdf from 'html2pdf.js';
+const BuySubscriptionButton = lazy(() => import("./BuySubscriptionButton"));
 
 const ResumeBuilder = () => {
   const [activeSection, setActiveSection] = useState('personal');
@@ -28,8 +29,8 @@ const ResumeBuilder = () => {
   const [ProjectInfo,setProjectInfo] = useState(resumeData?.project || []);
   const [LangInfo,setLangInfo] = useState(resumeData?.language || []);
 
-
-
+  const {data:currentuser}  = useCurrentUserQuery()
+  // console.log(currentuser);
 
 
   // intial set input for personal information
@@ -262,20 +263,10 @@ const handleLangInputChange = useCallback((index, e) => {
 
 
 
-
-
-
-
-
-
-
-
   const handleAddLang = useCallback(() => {
     setLangInfo([...LangInfo, { lan: '', proficiency: ''}]);
   },[LangInfo])
 
-
-  
 
   const handleInputChange = (e, section, index = null) => {
     const { name, value } = e.target;
@@ -293,6 +284,7 @@ const handleLangInputChange = useCallback((index, e) => {
       updatedData[section] = { ...updatedData[section], [name]: value };
     }
   };
+
 
   const downloadPDF = async () => {
     try {
@@ -332,7 +324,6 @@ const handleLangInputChange = useCallback((index, e) => {
           useCORS: true, // Enable CORS to load external stylesheets and images
           logging: true,
           letterRendering: true ,
-  
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
@@ -393,7 +384,13 @@ const handleLangInputChange = useCallback((index, e) => {
         
             <div className='flex justify-between'>
             <h2 className="text-2xl font-bold dark:text-white ">Resume Preview</h2>
-            <PDFbutton downloadPDF={downloadPDF} />
+            {
+            currentuser && currentuser.currentSubscription && currentuser.currentSubscription.status==='ACTIVE'?<PDFbutton  downloadPDF={downloadPDF} />
+            : <div className="flex justify-end">
+    <BuySubscriptionButton/>
+    </div>
+            }
+            
             </div>
         
           <ResumePreview

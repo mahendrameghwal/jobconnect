@@ -27,15 +27,15 @@ const PremiumButton = () => {
   return (
     <button
       style={buttonStyle}
-      className=" flex items-center justify-center w-full h-7 border-none rounded-lg text-[#e4b34f] cursor-pointer transition-transform duration-1000 overflow-hidden hover:bg-gradient-to-r hover:from-[#77530a] hover:via-[#ffd277] hover:to-[#77530a] active:scale-95"
+      className=" flex items-center justify-center w-full h-6 border-none rounded-lg text-[#e4b34f] cursor-pointer transition-transform duration-1000 overflow-hidden hover:bg-gradient-to-r hover:from-[#77530a] hover:via-[#ffd277] hover:to-[#77530a] active:scale-95"
       onMouseEnter={(e) => e.currentTarget.style.backgroundPosition = 'right'}
       onMouseLeave={(e) => e.currentTarget.style.backgroundPosition = 'left'}
     >
       <span
         style={beforeStyle}
-        className=" rounded-lg  px-4"
+        className=" rounded-sm  px-4"
       >
-      Premium
+      Pro
       </span>
     </button>
   );

@@ -5,7 +5,7 @@ import TopCompnies from "../../components/TopCompnies";
 import { Link, useNavigate } from "react-router-dom";
 import AppliedJobs from "../../components/AppliedJobs";
 import { MdFolderDelete } from "react-icons/md";
-import { useDelAcountRequestMutation, useMeQuery } from "../../../app/api/authApi";
+import { useCurrentUserQuery, useDelAcountRequestMutation, useMeQuery } from "../../../app/api/authApi";
 import toast from "react-hot-toast";
 import { useRef, lazy } from 'react';
 import { IoCreateOutline } from "react-icons/io5";
@@ -16,6 +16,8 @@ import { FaChartPie } from "react-icons/fa";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 const PremiumButton = lazy(() => import("../../components/PremiumButton"));
+const Subscription = lazy(() => import("../Subscription/Subscription"));
+
 
 const Profile = () => {
   
@@ -25,12 +27,13 @@ const navigate = useNavigate()
   const recommendedJobsRef = useRef(null);
   const userInfo = useSelector((state) => state?.auth?.userInfo);
   useEffect(()=>{},[userInfo])
+  const {data:currentuser}=useCurrentUserQuery()
 
-  const scrollToRef = (ref) => {
-    if (ref && ref.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  // const scrollToRef = (ref) => {
+  //   if (ref && ref.current) {
+  //     ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  //   }
+  // };
   const [
     delAccountRequest,
     { error: deleteError, isLoading:isDeleteLoading,isError: isDeleteError, isSuccess: isDeleteSuccess, data: deleteData }
@@ -46,7 +49,7 @@ const navigate = useNavigate()
 
   const {isError,data,error,isLoading}= useMeQuery()
   const {avtar,fullname,orgname, jobs, PermissonForUpdate,Isorg, city,appliedJobs, _id}= data || {}; 
-
+// console.log(data);
   
  if (isLoading) {
    return  <div className="spinner min-h-screen absolute top-1/2 left-1/2  transform -translate-x-1/2 "></div>
@@ -80,20 +83,33 @@ const navigate = useNavigate()
    <div className="flex justify-evenly max-md:flex-col  px-2">
    <section className="relative max-h-screen  
 dark:bg-gray-900/30 dark:shadow-gray-800/30  bg-white w-1/4 max-md:w-full rounded-md shadow-md">
-<section className="absolute right-1">
+{/*<section className="absolute right-1">
 <PremiumButton/>
-</section>
+</section>*/}
 <div className="w-90  max-md:my-2 my-5 mx-auto ">
 <div className="flex  flex-col justify-center">
-{
+<div className="flex justify-center">
+  <div className="relative">
+    <img
+      className="h-28 dark:border dark:border-gray-600 p-4  max-md:h-24 max-md:drop-shadow-md drop-shadow-lg rounded-full"
+      src={
+        avtar
+          ? avtar
+          : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+      }
+      alt="user"
+    />
+    {/*  bottom right of the avatar */}
 
-      <div className="flex  justify-center">
-<img className="  h-28 max-md:h-24 max-md:drop-shadow-md drop-shadow-lg rounded-full" src={
-  avtar ? avtar : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-} alt="user" />
+    {
+ currentuser && currentuser.currentSubscription && currentuser.currentSubscription.status==='ACTIVE' &&    <div className="absolute bottom-0 -right-4">
+ <PremiumButton />
+</div>
+    }
+
+  </div>
 </div>
 
-}
 
 
 {
@@ -215,11 +231,25 @@ to={
       <AppliedJobs currentuserid={_id} Isorg={Isorg} isLoading={isLoading} applicationdata={Isorg ? jobs :appliedJobs}/>
      </motion.div>
     }
+
+    <motion.div 
+    initial={{ opacity: 0, scale: 1 }}
+   animate={{ opacity: 1, scale: 1 }}
+   transition={{ duration: 0.6 }}
+     className="dark:bg-gray-900/30 dark:shadow-gray-800/30 rounded-lg shadow-sm p-2 mb-5 bg-white ">
+    <Subscription/>
+   </motion.div>
+
    <motion.div  initial={{ opacity: 0, scale: 1 }}
    animate={{ opacity: 1, scale: 1 }}
    transition={{ duration: 0.6 }} ref={topCompaniesRef} className="dark:bg-gray-900/30 dark:shadow-gray-800/30 rounded-lg shadow-sm p-2 mb-5 bg-white ">
    <TopCompnies/>
     </motion.div>
+
+
+  
+
+
     <motion.div 
     initial={{ opacity: 0, scale: 1 }}
    animate={{ opacity: 1, scale: 1 }}
@@ -228,6 +258,8 @@ to={
     <RecommendedJobs/>
    </motion.div>
       {/*<div className="rounded-lg w-full shadow-sm p-2 mb-5 bg-white "><img src={Banner} alt="" /></div>*/}
+
+     
    </section>
    </div>
    </section>
