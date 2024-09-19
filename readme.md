@@ -30,10 +30,13 @@ Welcome to the JobConnect Job Portal Platform! This project is designed to conne
 
 
 # Clone the repository
+```bash
 git clone https://github.com/mahendrameghwal/jobconnect.git
-
+```
 
 # Test Account Credentials (for testing purposes only)
+```bash
 echo "Test Account Credentials:"
 echo "Email: candidate1@gmail.com"
 echo "Password: candidate1"
+```
