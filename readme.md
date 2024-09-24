@@ -14,7 +14,7 @@ Welcome to the JobConnect Job Portal Platform! This project is designed to conne
 - **Messaging:** Direct messaging between candidates and organizations for seamless communication.
 - **Profile Updates:** Regularly update profiles to keep information current.
 - **CV Builder:** Candidates can build and customize their CVs using the data within the platform if taken 
-- **Subscription Plan** A User can create choose subscription monthly or Yearly subscription as per their requirement by paypal 
+- **Subscription Plan** A user can choose a monthly or yearly subscription based on their requirements through PayPal. Additionally, users can pay using their account balance, cancel their subscription, and request a refund for their account.
 
 ## 💻 Technologies Used
 
@@ -39,4 +39,10 @@ git clone https://github.com/mahendrameghwal/jobconnect.git
 echo "Test Account Credentials:"
 echo "Email: candidate1@gmail.com"
 echo "Password: candidate1"
+```
+
+# Test Account Credentials (for payment only)
+```bash
+echo "Email: sb-g443ej32524960@personal.example.com"
+echo "Password: ,)PHF6Ph"
 ```
