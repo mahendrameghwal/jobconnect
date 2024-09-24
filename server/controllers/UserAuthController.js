@@ -398,7 +398,7 @@ const GetCurrentUserInfo = asyncHandler(async (req, res, next) => {
         populatedUser.toObject();
       return res.status(200).json(Candidatedetail);
     } else {
-      const populatedUser = await user.populate('Org').populate(['candidate','currentSubscription']);;
+      const populatedUser = await user.populate(['Org','currentSubscription']);;
       const { password, candidate,deleteAcountExpires,deleteAcountToken, ...Orgdetails  } = populatedUser.toObject();
       return res.status(200).json(Orgdetails);
     }
