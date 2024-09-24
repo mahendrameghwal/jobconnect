@@ -3,7 +3,7 @@ import t2 from "./T2.jpg"
 import t3 from "./T3.jpg"
 import t4 from "./T4.jpg"
 import t5 from "./T5.jpg"
-import t6 from "./T6.png"
+import t6 from "./T6.jpg"
 import t7 from "./T7.jpg"
 
 
