@@ -1,15 +1,18 @@
 import React, { Fragment,useState } from 'react';
-import { useCancelSubscriptionMutation, useGetUserCurrentSubscriptionQuery } from '../../../../app/api/PaymentApi';
+import { useCancelSubscriptionMutation, useGetUserCurrentSubscriptionQuery, useRefundMoneyMutation } from '../../../../app/api/PaymentApi';
 import Skeletion from './Skeletion';
 import { FiCalendar, FiClock, FiDollarSign, FiRefreshCcw } from "react-icons/fi";
 import { DateTime } from 'luxon';
 import { toast } from "react-hot-toast";
+import { RiRefundFill } from "react-icons/ri";
 
 
 
 const CurrentSubscription = () => {
   const { data: currentSubscription, isLoading:CurrentSubLoading, isSuccess } = useGetUserCurrentSubscriptionQuery();
   const [cancelSubscription, { isLoading: cancelLoading }] = useCancelSubscriptionMutation();
+  const [RefundMoney, { isLoading: RefundMoneyLoading }] = useRefundMoneyMutation();
+  
   
   const HandleCancelSubscription = async (subscriptionId) => {
     console.log(subscriptionId);
@@ -31,6 +34,25 @@ const CurrentSubscription = () => {
   };
 
 
+  const HandleRefundMoney = async (subscriptionId) => {
+    try {
+      if (!subscriptionId) return;
+      const response = await RefundMoney(subscriptionId).unwrap();
+      
+      if (response.message) {
+        toast.success(response.message);
+      }
+    } catch (error) {
+      console.error('Cancellation error:', error);
+      if (error.data && error.data.message) {
+        toast.error(error.data.message);
+      } else {
+        toast.error('An error occurred while cancelling the subscription');
+      }
+    }
+  };
+
+console.log(currentSubscription);
   const formatDateTime = (dateString) => {
     if (!dateString) return "";
     return DateTime.fromISO(dateString).toFormat("dd LLL yyyy, hh:mm a");
@@ -81,10 +103,21 @@ const CurrentSubscription = () => {
             Your active subscription details
           </p>
         </section>
-        <section className='w-full sm:w-1/2 flex justify-start sm:justify-end'>
-          <button disabled={cancelLoading} onClick={()=>{HandleCancelSubscription(currentSubscription?._id)}} className="py-2 max-md:py-1 px-4 rounded-md text-white shadow-sm flex items-center tracking-wider bg-[#f93a3a] hover:bg-[#e71f1f] active:bg-[#c21313] disabled:bg-[#ffc7c7] transition-colors duration-200">
-          {cancelLoading ? 'cancelling Subscription..':'Cancel Subscription'}
+        <section className='w-full sm:w-1/2 flex gap-x-3 justify-start sm:justify-end'>
+          <button disabled={cancelLoading} onClick={()=>{HandleCancelSubscription(currentSubscription?._id)}} className="py-0.5 max-md:py-1 px-2 rounded-md text-white shadow-sm flex items-center tracking-wider bg-[#f93a3a] hover:bg-[#e71f1f] active:bg-[#c21313] disabled:bg-[#ffc7c7] transition-colors duration-200">
+          {cancelLoading ? 'cancelling Subscription..':'Cancel Plan'}
           </button>
+     {  !currentSubscription.isrefund &&    <button disabled={RefundMoneyLoading} onClick={()=>{HandleRefundMoney(currentSubscription?._id)}} className="relative inline-flex items-center justify-center gap-2 text-sm font-medium bg-green-500 hover:bg-green-600 rounded-md px-3 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+     {RefundMoneyLoading ? (
+        'Wait...'
+      ) : (
+        <>
+          <RiRefundFill />
+          Refund
+        </>
+      )}
+      
+    </button>}
         </section>
       </div>
           
@@ -95,8 +128,10 @@ const CurrentSubscription = () => {
                 <InfoRow icon={<FiCalendar />} label="Period" value={`${formatDateTime(currentSubscription?.lastPaymentDate)} - ${formatDateTime(currentSubscription?.subEnddate)}`} />
                 <InfoRow icon={<FiClock />} label="Created" value={formatDateTime(currentSubscription?.subCreatedate)} />
                 <InfoRow icon={<FiRefreshCcw />} label="Last Payment" value={formatDateTime(currentSubscription?.lastPaymentDate)} />
+                <InfoRow icon={<FiRefreshCcw />} label="end date" value={formatDateTime(currentSubscription?.subEnddate)} />
+
                 {currentSubscription?.isrefund !== undefined && (
-                  <InfoRow icon={<FiRefreshCcw />} label="Refunded" value={currentSubscription.refunded ? "Yes" : "No"} />
+                  <InfoRow icon={<FiRefreshCcw />} label="Refunded" value={currentSubscription.isrefund ? "Yes" : "No"} />
                 )}
               </div>
             </div>

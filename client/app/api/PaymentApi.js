@@ -36,6 +36,14 @@ export const paymentApi = createApi({
       }),
       invalidatesTags: ['payment'],
     }),
+
+    RefundMoney: builder.mutation({
+      query: (subscriptionId) => ({
+        url: `/refund/${subscriptionId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['payment'],
+    }),
   }),
 });
 
@@ -43,7 +51,8 @@ export const {
   useGetUserSubscriptionsHistoryQuery, 
   useCreateSubscriptionMutation,
   useCancelSubscriptionMutation,
-  useGetUserCurrentSubscriptionQuery
+  useGetUserCurrentSubscriptionQuery,
+  useRefundMoneyMutation
 } = paymentApi;
 
 export default paymentApi;

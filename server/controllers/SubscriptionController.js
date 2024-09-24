@@ -77,110 +77,6 @@ const createSubscription = async (req, res, next) => {
   }
 };
 
-const handlePayPalWebhook = async (req, res) => {
-  try {
-    const webhookId = process.env.WEBHOOKID;
-    const isVerified = await verifyWebhookSignature(
-      req.headers,
-      req.body,
-      webhookId,
-    );
-
-    if (!isVerified) {
-      console.error('Invalid webhook signature');
-      return res.status(400).json({ message: 'something went wrong' });
-    }
-    // console.log('from request', req);
-    const event = req.body;
-    // console.log('Received PayPal webhook:', event.event_type);
-    // console.log('event body:', event);
-
-    let subscriptionId;
-    let subscription;
-
-    switch (event.event_type) {
-      case 'BILLING.SUBSCRIPTION.CREATED':
-        subscriptionId = event.resource.id;
-        subscription = await Subscription.findOne({
-          paypalSubscriptionId: subscriptionId,
-        });
-        if (subscription) {
-          subscription.status = 'CREATED';
-          subscription.subCreatedate = event.create_time;
-          await subscription.save();
-          // console.log('Subscription created:', subscriptionId);
-        }
-        break;
-      case 'PAYMENT.SALE.COMPLETED':
-        subscriptionId = event.resource.billing_agreement_id;
-        subscription = await Subscription.findOne({
-          paypalSubscriptionId: subscriptionId,
-        });
-        if (subscription) {
-          const lastPaymentDate = new Date(event.resource.create_time);
-          subscription.status = 'ACTIVE';
-          subscription.lastPaymentDate = lastPaymentDate;
-          subscription.subEnddate = calculateEndDate(
-            subscription.billingCycle,
-            lastPaymentDate,
-          );
-          await subscription.save();
-          // console.log('Payment completed for subscription:', subscriptionId);
-        }
-        break;
-
-      case 'BILLING.SUBSCRIPTION.CANCELLED':
-        subscriptionId = event.resource.id;
-        subscription = await Subscription.findOne({
-          paypalSubscriptionId: subscriptionId,
-        });
-        if (subscription) {
-          subscription.status =event.status;
-          subscription.cancelDate = event.status_update_time;
-          await subscription.save();
-          // console.log('Subscription cancelled:', subscriptionId);
-          const user = await User.findById(Subscription.user);
-          if (user) {
-            user.currentSubscription = undefined;
-            if (!user.subscriptionHistory.includes(subscriptionId)) {
-              user.subscriptionHistory.push(subscriptionId);
-            }
-            await user.save();
-          }
-      
-        }
-        break;
-      case 'BILLING.SUBSCRIPTION.EXPIRED':
-        subscriptionId = event.resource.id;
-        subscription = await Subscription.findOne({
-          paypalSubscriptionId: subscriptionId,
-        });
-        if (subscription) {
-          subscription.status = 'EXPIRED';
-          await subscription.save();
-          // console.log('Subscription expired:', subscriptionId);
-        }
-        break;
-
-      default:
-        // console.log('Unhandled event type:', event.event_type);
-    }
-
-    if (!subscription && subscriptionId) {
-      console.error('Subscription not found:', subscriptionId);
-      return res.status(404).json({ message: 'Subscription not found' });
-    }
-
-    res.status(200).json({ message: 'Webhook successfully' });
-  } catch (error) {
-    console.error('Error handling PayPal webhook:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-};
-
-
-
-
 const getUserCurrentSubscriptions = async (req, res) => {
   try {
     const user = await User.findById(req.user._id)
@@ -191,8 +87,6 @@ const getUserCurrentSubscriptions = async (req, res) => {
     return res.status(500).json({ message: 'Error fetching subscriptions' });
   }
 };
-
-
 
 const getUserSubscriptionsHistory = async (req, res) => {
   try {
@@ -215,8 +109,6 @@ const getUserSubscriptionsHistory = async (req, res) => {
       .json({ message: 'Error fetching subscription history' });
   }
 };
-
-
 
 const cancelSubscription = async (req, res, next) => {
   try {
@@ -252,11 +144,6 @@ const cancelSubscription = async (req, res, next) => {
         },
       },
     );
-
-   
-
-   
-    res.status(200).json({ message: 'Subscription cancelled successfully' });
   } catch (error) {
     console.error(
       'Error cancelling subscription:',
@@ -270,6 +157,196 @@ const cancelSubscription = async (req, res, next) => {
   }
 };
 
+const handleRefundRequest = async (req, res) => {
+  try {
+    console.log(req.params);
+    const { subscriptionId } = req.params;
+    const userId = req.user._id;
+    const subscription = await Subscription.findOne({
+      _id: subscriptionId,
+      user: userId,
+    });
+
+    if (!subscription) {
+      return res.status(404).json({ message: 'Subscription not found' });
+    }
+
+    const daysSincePayment =
+      (new Date() - subscription.lastPaymentDate) / (1000 * 60 * 60 * 24);
+
+    if (daysSincePayment > 15) {
+      return res
+        .status(400)
+        .json({ message: 'Refund not possible after 15 days' });
+    }
+
+    if (subscription.price <= 0 || !subscription.price) {
+      return res.status(400).json({ message: 'Invalid refund amount' });
+    }
+    if (subscription.isrefund) {
+      return res.status(400).json({ message: 'Refund was already issued for transaction' });
+    }
+console.log(subscription);
+    //  refund
+    if (subscription.TransactionId) {
+      const accessToken = await getAccessToken();
+      const refundResponse = await axios.post(
+        `${process.env.PAYPAL_API_URL}/v1/payments/sale/${subscription.TransactionId}/refund`,
+        {
+          amount: {
+            total: subscription.price.toFixed(2),
+            currency: 'USD',
+          }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      console.log('response from refund',refundResponse);
+      if (refundResponse.data.state === 'completed') {
+        subscription.status = 'CANCELLED';
+        subscription.refundDate = new Date(refundResponse.data.create_time);
+        subscription.cancelDate = new Date(refundResponse.data.create_time);
+
+        subscription.isrefund = true;
+
+        const user = await User.findById(subscription.user);
+        if (user) {
+          user.currentSubscription = undefined;
+          if (!user.subscriptionHistory.includes(subscriptionId)) {
+            user.subscriptionHistory.push(subscriptionId);
+            await subscription.save();
+          }
+          await user.save();
+          return res.status(201).json({ message: 'Refund successfully' });
+        }
+        
+      } else {
+        return res
+          .status(400)
+          .json({ message: 'Refund could not be processed' });
+      }
+    }
+  } catch (error) {
+    console.error('Error processing refund:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+const handlePayPalWebhook = async (req, res) => {
+  try {
+    const webhookId = process.env.WEBHOOKID;
+    const isVerified = await verifyWebhookSignature(
+      req.headers,
+      req.body,
+      webhookId,
+    );
+
+    if (!isVerified) {
+      console.error('Invalid webhook signature');
+      return res.status(400).json({ message: 'something went wrong' });
+    }
+    // console.log('from request', req);
+    const event = req.body;
+    // console.log('Received PayPal webhook:', event.event_type);
+    console.log('event body:', event);
+
+    let subscriptionId;
+    let subscription;
+
+    switch (event.event_type) {
+      case 'BILLING.SUBSCRIPTION.CREATED':
+        subscriptionId = event.resource.id;
+        subscription = await Subscription.findOne({
+          paypalSubscriptionId: subscriptionId,
+        });
+        if (subscription) {
+          subscription.status = 'CREATED';
+          subscription.subCreatedate = event.create_time;
+          await subscription.save();
+          // console.log('Subscription created:', subscriptionId);
+        }
+        break;
+      case 'PAYMENT.SALE.COMPLETED':
+        subscriptionId = event.resource.billing_agreement_id;
+        subscription = await Subscription.findOne({
+          paypalSubscriptionId: subscriptionId,
+        });
+        if (subscription) {
+          const lastPaymentDate = new Date(event.resource.create_time);
+          subscription.status = 'ACTIVE';
+          subscription.TransactionId=event.resource.id;
+          subscription.lastPaymentDate = lastPaymentDate;
+          subscription.subEnddate = calculateEndDate(
+            subscription.billingCycle,
+            lastPaymentDate,
+          );
+          await subscription.save();
+          // console.log('Payment completed for subscription:', subscriptionId);
+        }
+        break;
+
+      case 'BILLING.SUBSCRIPTION.CANCELLED':
+        subscriptionId = event.resource.id;
+        subscription = await Subscription.findOne({
+          paypalSubscriptionId: subscriptionId,
+        });
+        if (subscription) {
+          subscription.status = event.status;
+          subscription.cancelDate = event.status_update_time;
+          await subscription.save();
+          // console.log('Subscription cancelled:', subscriptionId);
+          const user = await User.findById(subscription.user);
+          if (user) {
+            user.currentSubscription = undefined;
+            if (!user.subscriptionHistory.includes(subscriptionId)) {
+              user.subscriptionHistory.push(subscriptionId);
+            }
+            await user.save();
+            res
+              .status(200)
+              .json({ message: 'subscription cancelled successfully' });
+          }
+        }
+        break;
+      case 'BILLING.SUBSCRIPTION.EXPIRED':
+        subscriptionId = event.resource.id;
+        subscription = await Subscription.findOne({
+          paypalSubscriptionId: subscriptionId,
+        });
+        if (subscription) {
+          subscription.status = 'EXPIRED';
+          await subscription.save();
+          // console.log('Subscription expired:', subscriptionId);
+          const user = await User.findById(subscription.user);
+          if (user) {
+            user.currentSubscription = undefined;
+            if (!user.subscriptionHistory.includes(subscriptionId)) {
+              user.subscriptionHistory.push(subscriptionId);
+            }
+            await user.save();
+          }
+        }
+        break;
+
+      default:
+      // console.log('Unhandled event type:', event.event_type);
+    }
+
+    if (!subscription && subscriptionId) {
+      console.error('Subscription not found:', subscriptionId);
+      return res.status(404).json({ message: 'Subscription not found' });
+    }
+
+    res.status(200).json({ message: 'Webhook successfully' });
+  } catch (error) {
+    console.error('Error handling PayPal webhook:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 
 module.exports = {
   cancelSubscription,
@@ -277,4 +354,5 @@ module.exports = {
   handlePayPalWebhook,
   getUserCurrentSubscriptions,
   getUserSubscriptionsHistory,
+  handleRefundRequest,
 };

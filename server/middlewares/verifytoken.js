@@ -5,7 +5,7 @@ const VerifyToken = async (req, res, next) => {
   
   try {
     const {accesstoken} = req?.cookies;
-    console.log('from accesstoken',accesstoken);
+    // console.log('from accesstoken',accesstoken);
 
     if (!accesstoken) {
       return res.status(401).send({ message: 'Unauthorized user access' });

@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 const morgan = require('morgan');
-// const ngrok = require("@ngrok/ngrok");
+const ngrok = require("@ngrok/ngrok");
 const port = process.env.PORT;
 const errorHandler = require('./handler/errorhandler');
 const fileUpload = require('express-fileupload');
@@ -75,7 +75,7 @@ const Userroute = require('./routes/UserauthRoute');
 const SubscriptionRoutes = require('./routes/SubcriptionRoute');
 
 app.get('/hello', (req, res) => {
-  res.send('<h1 style="color: #333; font-size: 24px;">Hello World!</h1>')
+  res.send('<h1 style="color: green; font-size: 24px;">Hello World!</h1>')
 })
 
 
@@ -96,12 +96,12 @@ server.listen(port, () => {
 });
 
 {/** ngrok config for public address and webhook verification */}
-// ngrok.connect({
-//   addr: port,
-//   authtoken: process.env.NGROK_AUTHTOKEN,
-//   hostname: 'calm-penguin-informed.ngrok-free.app' 
-// }).then(listener => {
-//     console.log(listener.url());
-// }).catch(error => {
-//     console.error("Ngrok connection failed:", error);
-// });
+ngrok.connect({
+  addr: port,
+  authtoken: process.env.NGROK_AUTHTOKEN,
+  hostname: 'calm-penguin-informed.ngrok-free.app' 
+}).then(listener => {
+    console.log(listener.url());
+}).catch(error => {
+    console.error("Ngrok connection failed:", error);
+});

@@ -43,6 +43,12 @@ const SubscriptionSchema = new mongoose.Schema(
     cancelDate:{
       type: Date,
     },
+    refundDate:{
+      type: Date,
+    },
+TransactionId:{
+  type: String,
+},
     paypalSubscriptionId: {
       type: String,
       required: true,

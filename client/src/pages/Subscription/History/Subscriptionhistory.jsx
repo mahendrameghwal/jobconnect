@@ -24,7 +24,7 @@ const Subscriptionhistory = () => {
         icon = <FaTimesCircle className="inline mr-1" />;
         break;
       case SubscriptionStatus.CANCELLED:
-        color = 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100';
+        color = 'bg-gray-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100';
         icon = <FaTimesCircle className="inline mr-1" />;
         break;
       default:
@@ -32,7 +32,7 @@ const Subscriptionhistory = () => {
         icon = null;
     }
     return (
-      <span className={`px-2 py-1 border flex items-center rounded-full text-xs font-semibold ${color}`}>
+      <span className={`px-1 py-1 my-1 border border-slate-500 flex items-center rounded-full text-xs font-semibold ${color}`}>
         {icon}{status}
       </span>
     );
@@ -71,7 +71,7 @@ const Subscriptionhistory = () => {
                       </p>
                     </div>
                     <div className="text-right ">
-                      <p className="font-semibold">${sub.price.toFixed(2)}</p>
+                      <p className={`font-semibold ${sub.isrefund ?`text-green-400`:`text-red-400`}`}> {sub.isrefund ? "+":"-"} ${sub.price.toFixed(2)}</p>
                       <StatusBadge status={sub.status} />
                     </div>
                   </div>
@@ -79,7 +79,8 @@ const Subscriptionhistory = () => {
                     PayPal Subscription ID: {sub.paypalSubscriptionId} <br />
                     Last Payment Date: {new Date(sub.lastPaymentDate).toLocaleString()} <br />
                     Cancel Date: {sub.cancelDate ? new Date(sub.cancelDate).toLocaleString() : 'N/A'} <br />
-                    Billing Cycle: {sub.billingCycle.charAt(0).toUpperCase() + sub.billingCycle.slice(1)}
+                    Billing Cycle: {sub.billingCycle.charAt(0).toUpperCase() + sub.billingCycle.slice(1)}<br />
+                    Refund: {sub.isrefund ? "Yes":"No"}
                   </p>
                 </div>
               ))}

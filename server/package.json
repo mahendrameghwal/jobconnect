@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "mahendra",
-  "license": "ISC",
+"license": "ISC",
   "dependencies": {
     "@ngrok/ngrok": "^1.4.1",
     "axios": "^1.7.7",

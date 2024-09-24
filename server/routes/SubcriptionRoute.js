@@ -5,7 +5,8 @@ const {
   createSubscription,
   handlePayPalWebhook,
   getUserCurrentSubscriptions,
-  getUserSubscriptionsHistory
+  getUserSubscriptionsHistory,
+  handleRefundRequest
 } = require('../controllers/SubscriptionController');
 const VerifyToken = require('../middlewares/verifytoken');
 // const verifyWebhookSignature = require('../utils/verifyWebhookSignature');
@@ -15,6 +16,7 @@ router.post('/create', VerifyToken, createSubscription);
 router.get('/current', VerifyToken,getUserCurrentSubscriptions);
 router.get('/history', VerifyToken,getUserSubscriptionsHistory);
 router.post('/cancel/:subscriptionId', VerifyToken, cancelSubscription);
+router.post('/refund/:subscriptionId',VerifyToken, handleRefundRequest);
 router.post('/paypal/webhook', handlePayPalWebhook);
 
 module.exports = router;

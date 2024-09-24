@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheckCircle } from 'react-icons/fa'; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {useCurrentUserQuery} from "../../../app/api/authApi";
 import {useCreateSubscriptionMutation} from "../../../app/api/PaymentApi"
 import useAuth from '../../../hooks/useAuth';
@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 import toast from 'react-hot-toast';
 const Pricing = () => {
   const { data: currentUser } = useCurrentUserQuery();
+  const navigate = useNavigate()
   const isAuth = useAuth();
   const [createSubscription, { isLoading, isError, error, isSuccess,reset,data }] = useCreateSubscriptionMutation();
   const [activeBilling, setActiveBilling] = useState('monthly');
@@ -33,7 +34,7 @@ const Pricing = () => {
   useEffect(() => {
     if (isSuccess) {
       toast.success('Subscription created successfully!');
-      window.location.href = data.approvalUrl;
+      navigate(data.approvalUrl)
       reset(); 
     }
     if (isError) {
