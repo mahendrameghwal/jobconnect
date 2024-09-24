@@ -36,7 +36,8 @@ cron.schedule('0 0 * * *', () => {
 app.use(cookieParser(process?.env?.JWT_SECRET, {
   httpOnly: true,
   secure: true,
-  sameSite: 'none',
+  sameSite: 'lax',
+  path: '/'
 }));
 
 

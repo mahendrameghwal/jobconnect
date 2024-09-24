@@ -82,7 +82,8 @@ const CreateOrg = async (req, res, next) => {
           httpOnly: true,
           expires: expirationDate,
           secure: true,
-          sameSite: 'none',
+         sameSite: 'lax',
+           path: '/',
         });
 
 
