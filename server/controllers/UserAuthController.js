@@ -64,7 +64,7 @@ const register = asyncHandler(async (req, res, next) => {
         httpOnly: true,
         expires: expirationDate,
         secure: true,
-        sameSite: 'lax',
+        sameSite: 'none',
         path: '/',
       });
 
@@ -146,7 +146,7 @@ const login = async (req, res, next) => {
                 httpOnly: true,
                 expires: expirationDate,
                 secure: true,
-                sameSite: 'lax',
+                sameSite: 'none',
                 path: '/',
               })
               .status(200)
@@ -182,7 +182,7 @@ const login = async (req, res, next) => {
               httpOnly: true,
               expires: expirationDate,
               secure: true,
-              sameSite: 'lax',
+              sameSite: 'none',
            path: '/',
               })
               .status(200)
@@ -499,7 +499,7 @@ const DeleteAcountPerManently = asyncHandler(async (req, res, next) => {
       await Org.findOneAndDelete({ owner: user?._id });
       await Job.deleteMany({ author: user?._id });
       await User.findByIdAndDelete(user?._id);
-      res.clearCookie('accesstoken', { httpOnly: true, secure: true, sameSite: 'lax', });
+      res.clearCookie('accesstoken', { httpOnly: true, secure: true, sameSite: 'none', });
       return res.status(200).json({ message: 'Successfully deleted account' });
     } else {
       await Job.updateMany(
@@ -508,7 +508,7 @@ const DeleteAcountPerManently = asyncHandler(async (req, res, next) => {
       )
       await Candidate.findOneAndDelete({ owner:user?._id});
       await User.findByIdAndDelete(user?._id);
-      res.clearCookie('accesstoken', { httpOnly: true ,secure: true, sameSite: 'lax', });
+      res.clearCookie('accesstoken', { httpOnly: true ,secure: true, sameSite: 'none', });
       return res
         .status(200)
         .json({ message: 'Successfully deleted account' });

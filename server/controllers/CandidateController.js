@@ -76,7 +76,7 @@ const CreateCandidate = asyncHandler(async (req, res, next) => {
             httpOnly: true,
             expires: expirationDate,
             secure: true,
-           sameSite: 'lax',
+           sameSite: 'none',
            path: '/',
           });
           return res.status(201).json(CandidateData);
