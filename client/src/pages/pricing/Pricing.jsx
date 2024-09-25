@@ -34,7 +34,7 @@ const Pricing = () => {
   useEffect(() => {
     if (isSuccess) {
       toast.success('Subscription created successfully!');
-      navigate(data.approvalUrl)
+      window.location.href = data.approvalUrl;
       reset(); 
     }
     if (isError) {
