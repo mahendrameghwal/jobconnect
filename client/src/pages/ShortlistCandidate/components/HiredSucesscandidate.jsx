@@ -14,7 +14,7 @@ const HiredSucesscandidate = ({orgid,applicants}) => {
   const [HiredCandidate, setHiredcandidate]= useState(FilterWithAppliedJobsCandidated)
 
 
-  
+  console.log(FilterWithAppliedJobsCandidated);
 
  
   return (
@@ -35,22 +35,25 @@ transition={{ duration: 0.6 }}
     <div className='grid grid-cols-1 grid-flow-dense sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-3'>
   {
     applicants && applicants.length > 0  && (
-       
+      
+      
       HiredCandidate?.map(({_id,fullname,currentempstatus,avtar, createdAt, appliedJobs})=>(
        
-    <div key={_id} className="relative bg-gray-100   p-4 rounded-md shadow-md hover:shadow-lg  border-gray-200 border flex items-center">
+    <div key={_id} className="relative bg-gray-100 dark:bg-gray-900 dark:border-gray-600  p-4 rounded-md shadow-md hover:shadow-lg  border-gray-200 border flex items-center">
     <div className='absolute top-0.5 right-0.5'>
-    <div className='bg-gray-300 px-2  text-gray-600 border border-gray-400 rounded-md text-xs flex gap-x-1 items-center'>Joined {format(new Date(createdAt), 'MMMM yyyy')}</div>
+    <div className='bg-gray-300 px-2 dark:bg-gray-700 dark:text-gray-400
+     text-gray-600 border border-gray-400 rounded-md text-xs flex gap-x-1 items-center'>Joined {format(new Date(createdAt), 'MMMM yyyy')}</div>
     </div>
 {
-avtar &&  <img src={avtar} alt="Profile Image" className="w-20 h-20 max-md:w-16 max-md:h-16 rounded-full mr-4"/>
+avtar ?  <img src={avtar} alt="Profile Image" className="w-20 h-20 max-md:w-16 max-md:h-16 rounded-full mr-4"/>:
+<CiUser  className="w-20 h-20 max-md:w-16 max-md:h-16 rounded-full mr-4" alt="avtar" />
 
 } 
  <div className="flex-1">
-  <h2 className="text-lg font-medium">{fullname}</h2>
+  <h2 className="text-lg dark:text-white font-medium">{fullname}</h2>
 
 {
-  currentempstatus && <h2 className="text-base tracking-wide">{currentempstatus}</h2>
+  currentempstatus && <h2 className="text-base dark:text-gray-200 tracking-wide">{currentempstatus}</h2>
 }
 
 
@@ -66,21 +69,21 @@ avtar &&  <img src={avtar} alt="Profile Image" className="w-20 h-20 max-md:w-16 
 </div>
 {
   
-  appliedJobs.map(({success}, _id)=>(
+  appliedJobs.map(({dateApplied})=>(
    <div key={_id} className="flex flex-row gap-x-1 my-1 flex-wrap">
-   <span className=" text-sm font-medium">Date of Hire :</span>
+   <span className=" text-sm dark:text-gray-300 font-medium">Applied On :</span>
    <span  className="inline-flex items-center px-1 text-sm rounded-sm   text-emerald-600">
     
    {
      
 
- DateTime.fromISO(success.dateHired).toLocaleString({ 
+ DateTime.fromISO(dateApplied).toLocaleString({ 
    weekday: 'short', 
    day: 'numeric', 
    month: 'short' 
    
  }) + 
- ' at ' + DateTime.fromISO(success.dateHired).toLocaleString({ 
+ ' at ' + DateTime.fromISO(dateApplied).toLocaleString({ 
    hour: 'numeric', 
    minute: '2-digit', 
    meridiem: 'short' 
