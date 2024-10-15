@@ -16,14 +16,14 @@ const SearchCandidateInput = ({HandleSubmit, searchQuery, setSearchQuery ,addres
         <h1 className="capitalize text-2xl md:text-3xl tracking-wider text-center font-medium text-white mb-6">Find Talent Here</h1>
         <form onSubmit={HandleSubmit} className="flex flex-wrap items-end -mx-3">
           <div className="w-full md:w-1/2 px-1 mb-2 md:mb-0">
-            <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="searchTerm">Search Term</label>
+            <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="searchTerm">Keyword</label>
             <input
               onChange={(e) => setSearchQuery({ ...searchQuery, searchTerm: e.target.value })}
               name="searchTerm"
               className="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-sm py-2 max-md:py-1.5 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
               id="searchTerm"
               type="search"
-              placeholder="Search Term"
+              placeholder="Search by Keyword"
             />
           </div>
           <div className="w-full md:w-1/4 px-1 mb-2 md:mb-0">
