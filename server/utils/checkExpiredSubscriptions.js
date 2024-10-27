@@ -1,4 +1,4 @@
-const Subscription = require("../models/SubscriptionSchema");
+import Subscription from "../models/SubscriptionSchema.js";
 
 const checkExpiredSubscriptions = async () => {
     const now = new Date();
@@ -17,4 +17,4 @@ const checkExpiredSubscriptions = async () => {
       console.log(`Subscription ${subscription._id} expired for user ${subscription.user}`);
     }
   };
-  module.exports=checkExpiredSubscriptions
+export default checkExpiredSubscriptions

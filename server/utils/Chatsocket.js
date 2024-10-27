@@ -1,4 +1,4 @@
-const Message = require("../models/MessageSchema");
+import Message from "../models/MessageSchema.js";
 
 const ChatSocket = (io) => {
   let activeUsers = new Map();
@@ -56,4 +56,4 @@ const ChatSocket = (io) => {
   });
 };
 
-module.exports = ChatSocket;
+export default ChatSocket;

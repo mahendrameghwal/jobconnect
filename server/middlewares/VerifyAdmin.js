@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 const SECERET_KEY = process.env.JWT_SECRET;
 
 const Verifyorg = async (req, res, next) => {
@@ -25,4 +25,4 @@ const Verifyorg = async (req, res, next) => {
   }
 };
 
-module.exports = Verifyorg;
+export default Verifyorg;

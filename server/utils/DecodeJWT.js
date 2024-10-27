@@ -1,4 +1,4 @@
-const jwt =  require("jsonwebtoken")
+import jwt from "jsonwebtoken";
 const SECERET_KEY = process?.env?.JWT_SECRET;
 const DecodeJWT = (res)=>{
 
@@ -23,4 +23,4 @@ const DecodeJWT = (res)=>{
 
 
 }
-module.exports = DecodeJWT
+export default DecodeJWT

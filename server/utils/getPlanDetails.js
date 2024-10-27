@@ -13,4 +13,4 @@ const getPlanDetails = (plan, billingCycle) => {
     return plans[plan] && plans[plan][billingCycle];
   };
 
-  module.exports=getPlanDetails;
+export default getPlanDetails;

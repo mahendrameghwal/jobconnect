@@ -1,4 +1,4 @@
-const isJobIdUnique = require("./IsJobIdUnique");
+import isJobIdUnique from "./IsJobIdUnique.js";
 
 
 const GenrateJobId = async () => {
@@ -23,4 +23,4 @@ const GenrateJobId = async () => {
     return id;
   };
   
-  module.exports= GenrateJobId
+ export default GenrateJobId

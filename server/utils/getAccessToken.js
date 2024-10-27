@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "axios";
 
 const getAccessToken = async () => {
     const auth = Buffer.from(`${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`).toString('base64');
@@ -14,4 +14,4 @@ const getAccessToken = async () => {
     );
     return response.data.access_token;
   };
-  module.exports = getAccessToken;
+export default getAccessToken;

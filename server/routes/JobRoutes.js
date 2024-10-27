@@ -1,7 +1,19 @@
-const express = require("express");
-const {Createjob,RejectedSingleCandidate, ShortListSingleCandidate,getAllJobs, GetJobById, DeleteAlljob,UpdateJobInformation, getPernoalizePost, SearchJobPost, AppliedCandidate, GenrateCategory} = require("../controllers/JobController");
-const Verifyorg = require("../middlewares/Verifyorg");
-const VerifyToken= require('../middlewares/verifytoken');
+import express from "express";
+import { 
+  Createjob, 
+  RejectedSingleCandidate, 
+  ShortListSingleCandidate, 
+  getAllJobs, 
+  GetJobById, 
+  DeleteAlljob, 
+  UpdateJobInformation, 
+  getPernoalizePost, 
+  SearchJobPost, 
+  AppliedCandidate, 
+  GenrateCategory 
+} from "../controllers/JobController.js"; 
+import Verifyorg from "../middlewares/Verifyorg.js"; 
+import VerifyToken from '../middlewares/verifytoken.js'; 
 
 const router = express.Router()
 router.post('/create',VerifyToken,Verifyorg,Createjob);
@@ -16,4 +28,4 @@ router.patch('/updatejob',VerifyToken,Verifyorg, UpdateJobInformation);
 router.patch('/reject/:applicationId/:candidateId',VerifyToken,Verifyorg, RejectedSingleCandidate);
 router.patch('/shortlist/:applicationId/:candidateId',Verifyorg , VerifyToken , ShortListSingleCandidate);
 
-module.exports = router;
+export default router;

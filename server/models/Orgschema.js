@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+import mongoose from "mongoose";
 
 const Orgschema = new mongoose.Schema(
   {
@@ -56,4 +56,4 @@ const Orgschema = new mongoose.Schema(
 );
 
 const Org = mongoose.model("Org", Orgschema);
-module.exports = Org;
+export default Org;

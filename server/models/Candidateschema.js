@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const CandidateSchema = new mongoose.Schema(
   {
@@ -250,4 +250,4 @@ const CandidateSchema = new mongoose.Schema(
 );
 
 const Candidate = mongoose.model('candidate', CandidateSchema);
-module.exports = Candidate;
+export default Candidate;

@@ -1,14 +1,14 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const {
+import {
   cancelSubscription,
   createSubscription,
   handlePayPalWebhook,
   getUserCurrentSubscriptions,
   getUserSubscriptionsHistory,
   handleRefundRequest
-} = require('../controllers/SubscriptionController');
-const VerifyToken = require('../middlewares/verifytoken');
+} from '../controllers/SubscriptionController.js';
+import VerifyToken from '../middlewares/verifytoken.js';
 // const verifyWebhookSignature = require('../utils/verifyWebhookSignature');
 
 router.post('/create', VerifyToken, createSubscription);
@@ -19,4 +19,4 @@ router.post('/cancel/:subscriptionId', VerifyToken, cancelSubscription);
 router.post('/refund/:subscriptionId',VerifyToken, handleRefundRequest);
 router.post('/paypal/webhook', handlePayPalWebhook);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
   service: process.env.SMTP_SERVICE,
@@ -215,4 +215,4 @@ const sendResetPasswordEmail = async (email, resetToken) => {
   }
 };
 
-module.exports = { sendResetPasswordEmail, DeleteAcountSendEmail };
+export { sendResetPasswordEmail, DeleteAcountSendEmail };

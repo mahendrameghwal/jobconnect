@@ -1,5 +1,5 @@
-const Candidate = require('../models/Candidateschema');
-const Job = require('../models/jobschema');
+import Candidate  from '../models/Candidateschema.js';
+import Job  from '../models/jobschema.js';
 
 async function checkJobValid(applicationId) {
   try {
@@ -18,4 +18,4 @@ async function checkCandidateValid(candidateId) {
   }
 }
 
-module.exports = { checkJobValid, checkCandidateValid };
+export { checkJobValid, checkCandidateValid };

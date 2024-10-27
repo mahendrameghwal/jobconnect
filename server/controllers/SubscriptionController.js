@@ -1,12 +1,12 @@
-const Subscription = require('../models/SubscriptionSchema');
-const User = require('../models/Userschema');
-const getPlanDetails = require('../utils/getPlanDetails');
-const calculateEndDate = require('../utils/CalculateEndDate');
-const getAccessToken = require('../utils/getAccessToken');
-const axios = require('axios');
-const updateUserSubscription = require('../utils/updateUserSubscription');
-const verifyWebhookSignature = require('../utils/verifyWebhookSignature');
-const syncSubscriptionStatus = require('../utils/syncSubscriptionStatus');
+import Subscription from '../models/SubscriptionSchema.js';
+import User from '../models/Userschema.js';
+import getPlanDetails from '../utils/getPlanDetails.js';
+import calculateEndDate from '../utils/CalculateEndDate.js';
+import getAccessToken from '../utils/getAccessToken.js';
+import axios from 'axios';
+import updateUserSubscription from '../utils/updateUserSubscription.js';
+import verifyWebhookSignature from '../utils/verifyWebhookSignature.js';
+import syncSubscriptionStatus from '../utils/syncSubscriptionStatus.js';
 
 const createSubscription = async (req, res, next) => {
   try {
@@ -348,7 +348,7 @@ const handlePayPalWebhook = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   cancelSubscription,
   createSubscription,
   handlePayPalWebhook,

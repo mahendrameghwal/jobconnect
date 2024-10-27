@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const SubscriptionSchema = new mongoose.Schema(
   {
@@ -57,4 +57,4 @@ TransactionId:{
   { timestamps: true },
 );
 
-module.exports = mongoose.model('Subscription', SubscriptionSchema);
+export default mongoose.model('Subscription', SubscriptionSchema);

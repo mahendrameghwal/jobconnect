@@ -2,6 +2,7 @@
   "name": "jobconnect",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module" ,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
@@ -32,5 +33,5 @@
     "validator": "^13.11.0"
   },
   "proxy": "https://jobconnect1.netlify.app",
-  "description": ""
+  "description": "JobConnect Job Portal Platform! This project is designed to connect candidates with organizations, making job searching and hiring easier than ever."
 }

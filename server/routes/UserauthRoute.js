@@ -1,4 +1,4 @@
-const {
+import {
   login,
   register,
   logout,
@@ -10,9 +10,9 @@ const {
   MultipleUserinfo,
   AcountDeleteRequest,
   Me,
-} = require('../controllers/UserAuthController');
-const express = require('express');
-const VerifyToken = require('../middlewares/verifytoken');
+} from '../controllers/UserAuthController.js';
+import express from 'express';
+import VerifyToken from '../middlewares/verifytoken.js'
 const router = express.Router();
 
 router.post('/register', register);
@@ -30,4 +30,4 @@ router.delete('/delete', VerifyToken, DeleteAcountPerManently);
 
 
 
-module.exports = router;
+export default router;

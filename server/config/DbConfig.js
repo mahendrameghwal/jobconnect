@@ -1,9 +1,14 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose"
+import dotenv from 'dotenv';
+
+dotenv.config(); // Ensure this line is present
+
+
 const DB_URI = process.env.DB_URI;
 
 // Mongoose connection options
 const dbOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-
+console.log(process.env.DB_URI)
 // connect db
 const ConnectDB = () => {
   mongoose
@@ -15,4 +20,4 @@ const ConnectDB = () => {
     });
 };
 
-module.exports = ConnectDB;
+export default ConnectDB;

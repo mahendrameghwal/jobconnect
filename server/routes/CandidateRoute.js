@@ -1,10 +1,18 @@
-const express = require("express");
-const {CreateCandidate, getAllCandidate,EditCandidateInformation,UpdateResume, ApplyToJob, GetCandidateById, UpdateCandidateProfile, generatePDF} = require("../controllers/CandidateController");
+import express from "express";
+import { 
+  CreateCandidate, 
+  getAllCandidate, 
+  EditCandidateInformation, 
+  UpdateResume, 
+  ApplyToJob, 
+  GetCandidateById, 
+  UpdateCandidateProfile, 
+  generatePDF 
+} from "../controllers/CandidateController.js"; 
 const router = express.Router();
-const VerifyToken = require('../middlewares/verifytoken');
-const VerifyCandidate = require("../middlewares/VerifyCandidate");
-const VerifyAdmin = require("../middlewares/VerifyAdmin");
-
+import VerifyToken from '../middlewares/verifytoken.js';
+import VerifyCandidate from "../middlewares/VerifyCandidate.js";
+import VerifyAdmin from "../middlewares/VerifyAdmin.js";
 
 
 router.get('/getall/candidate',VerifyAdmin,getAllCandidate)
@@ -23,4 +31,4 @@ router.post('/generate-pdf',VerifyToken,VerifyCandidate,generatePDF)
 
 
 
-module.exports = router
+export default router

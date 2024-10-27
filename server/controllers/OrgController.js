@@ -1,11 +1,11 @@
-const expressAsyncHandler = require('express-async-handler');
-const Org = require('../models/Orgschema');
-const { cloudinary } = require('../utils/cloudinary');
-const User = require('../models/Userschema');
-const jwt = require('jsonwebtoken');
-const { CastError } = require('mongoose').Error;
-const Candidate = require('../models/Candidateschema');
-const Job = require('../models/jobschema');
+import expressAsyncHandler from 'express-async-handler';
+import Org from '../models/Orgschema.js'; // Add .js extension
+import { cloudinary } from '../utils/cloudinary.js'; // Add .js extension
+import User from '../models/Userschema.js'; // Add .js extension
+import jwt from 'jsonwebtoken';
+import Candidate from '../models/Candidateschema.js'; // Add .js extension
+import Job from '../models/jobschema.js'; // Add .js extension
+import mongoose from 'mongoose';
 
 const CreateOrg = async (req, res, next) => {
   try {
@@ -207,7 +207,7 @@ const GetOrgById = expressAsyncHandler(async (req, res, next) => {
     return res.status(200).json(orgWithPermission);
   } catch (err) {
     // Handle specific errors
-    if (err instanceof CastError) {
+    if (err instanceof mongoose.Error.CastError) {
       return res.status(400).json({ message: 'Invalid organization ID. Please check and try again' });
     }
     // Handle other potential errors
@@ -366,4 +366,4 @@ const searchCandidates = async (req, res, next) => {
 
 
 
-module.exports = {  CreateOrg, SearchOrg, GetOrgById, DeleteJob , UpdateOrgInformation, searchCandidates};
+export {  CreateOrg, SearchOrg, GetOrgById, DeleteJob , UpdateOrgInformation, searchCandidates};

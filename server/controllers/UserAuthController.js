@@ -1,15 +1,15 @@
-const User = require('../models/Userschema');
-const Org = require('../models/Orgschema');
-const Job = require('../models/jobschema');
-const Candidate = require('../models/Candidateschema');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import User from '../models/Userschema.js';
+import Org from '../models/Orgschema.js';
+import Job from '../models/jobschema.js';
+import Candidate from '../models/Candidateschema.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import asyncHandler from 'express-async-handler';
+import crypto from 'crypto';
+import { sendResetPasswordEmail, DeleteAcountSendEmail } from '../utils/emailServices.js';
+import validator from 'validator';
+import mongoose from 'mongoose'; 
 const SECERET_KEY = process?.env?.JWT_SECRET;
-const asyncHandler = require('express-async-handler');
-const crypto = require('crypto');
-const { sendResetPasswordEmail, DeleteAcountSendEmail } = require('../utils/emailServices');
-const validator = require('validator');
-const { default: mongoose } = require('mongoose');
 
 
 
@@ -518,7 +518,7 @@ const DeleteAcountPerManently = asyncHandler(async (req, res, next) => {
   }
 });
 
-module.exports = {
+export {
   login,
   logout,
   register,

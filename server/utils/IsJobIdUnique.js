@@ -1,4 +1,4 @@
-const Job = require("../models/jobschema");
+import Job from "../models/jobschema.js";
 
 const isJobIdUnique = async jobId => {
   try {
@@ -11,4 +11,4 @@ const isJobIdUnique = async jobId => {
     return false;
   }
 };
-module.exports = isJobIdUnique;
+export default isJobIdUnique;

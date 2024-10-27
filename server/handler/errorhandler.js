@@ -5,4 +5,4 @@ const errorHandler = (err, req, res, next) => {
   return res.status(statusCode).send({ message: { message } });
 };
 
-module.exports = errorHandler;
+export default errorHandler;

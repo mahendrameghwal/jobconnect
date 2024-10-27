@@ -1,12 +1,11 @@
-const Job = require('../models/jobschema');
-const asyncHandler = require('express-async-handler');
-const GenrateJobId = require('../utils/GenrateJobId');
-const { default: mongoose } = require('mongoose');
-const { CastError } = require('mongoose').Error;
-const Org = require('../models/Orgschema');
-const User = require('../models/Userschema');
-const Candidate = require('../models/Candidateschema');
-const { checkCandidateValid, checkJobValid } = require('../utils/checkValidId');
+import Job from '../models/jobschema.js';
+import asyncHandler from 'express-async-handler';
+import GenrateJobId from '../utils/GenrateJobId.js';
+import Org from '../models/Orgschema.js';
+import User from '../models/Userschema.js';
+import Candidate from '../models/Candidateschema.js';
+import { checkCandidateValid, checkJobValid } from '../utils/checkValidId.js';
+import mongoose from 'mongoose';
 
 const Createjob = async (req, res, next) => {
   try {
@@ -101,7 +100,7 @@ const GetJobById = asyncHandler(async (req, res, next) => {
     }
     return res.status(200).json({ job });
   } catch (err) {
-    if (err instanceof CastError) {
+    if (err instanceof mongoose.Error.CastError) {
       return res.status(400).json({ message: 'we could not find any Job 🧐' });
     }
     next(err);
@@ -132,7 +131,7 @@ const AppliedCandidate = asyncHandler(async (req, res, next) => {
       return res.status(200).json({job,Permission});
     }
   } catch (err) {
-    if (err instanceof CastError) {
+    if (err instanceof mongoose.Error.CastError) {
       return res
         .status(404)
         .json({ message: 'Please verify the ID and try again.' });
@@ -427,7 +426,7 @@ const UpdateJobInformation = asyncHandler(async (req, res, next) => {
 
 
 
-module.exports = {
+export {
   AppliedCandidate,
   Createjob,
   DeleteAlljob,

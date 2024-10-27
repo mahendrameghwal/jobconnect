@@ -1,4 +1,4 @@
-const User = require('../models/Userschema');
+import User from '../models/Userschema.js';
 const updateUserSubscription = async (userId, subscriptionId) => {
   try {
     const user = await User.findById(userId);
@@ -15,4 +15,4 @@ const updateUserSubscription = async (userId, subscriptionId) => {
     throw new Error(error.message);
   }
 };
-module.exports = updateUserSubscription;
+export default updateUserSubscription;

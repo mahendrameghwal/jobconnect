@@ -1,5 +1,5 @@
-const { default: axios } = require("axios");
-const getAccessToken = require("./getAccessToken");
+import axios from "axios"
+import  getAccessToken from "./getAccessToken.js";
 
 
 const verifyWebhookSignature = async (headers, body, webhookId) => {
@@ -34,4 +34,4 @@ const verifyWebhookSignature = async (headers, body, webhookId) => {
     }
   };
 
-  module.exports=verifyWebhookSignature
+export default verifyWebhookSignature

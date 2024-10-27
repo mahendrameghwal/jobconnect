@@ -1,5 +1,5 @@
-const { default: axios } = require("axios");
-const getAccessToken = require("./getAccessToken");
+import axios from "axios";
+import getAccessToken from "./getAccessToken.js";
 
 const syncSubscriptionStatus = async (subscription) => {
     const accessToken = await getAccessToken();
@@ -21,4 +21,4 @@ const syncSubscriptionStatus = async (subscription) => {
     return response.data.status;
   };
 
-  module.exports=syncSubscriptionStatus
+export default syncSubscriptionStatus

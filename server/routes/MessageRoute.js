@@ -1,17 +1,17 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
   sendMessage,
   getMessages,
   DeleteMessage,
   GetChatuser
 
-} = require('../controllers/MessageController');
+}from '../controllers/MessageController.js';
 const router = express.Router();
-const VerifyToken = require('../middlewares/verifytoken');
+import VerifyToken from '../middlewares/verifytoken.js';
 
 router.get('/getmessage',VerifyToken, getMessages);
 router.post('/messages', VerifyToken,sendMessage);
 router.get('/chatuser', VerifyToken,GetChatuser);
 router.delete('/delete', VerifyToken,DeleteMessage);
 
-module.exports = router;
+export default router;

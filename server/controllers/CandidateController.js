@@ -1,11 +1,11 @@
-const Candidate = require('../models/Candidateschema');
-const asyncHandler = require('express-async-handler');
-const { cloudinary } = require('../utils/cloudinary');
-const User = require('../models/Userschema');
-const { CastError } = require('mongoose').Error;
-const jwt = require('jsonwebtoken');
-const { default: mongoose } = require('mongoose');
-const Job = require('../models/jobschema');
+import Candidate from '../models/Candidateschema.js'; 
+import asyncHandler from 'express-async-handler';
+import { cloudinary } from '../utils/cloudinary.js'; 
+import User from '../models/Userschema.js'; 
+import  CastError  from 'mongoose'; 
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose'; 
+import Job from '../models/jobschema.js'; 
 
 
 const CreateCandidate = asyncHandler(async (req, res, next) => {
@@ -392,7 +392,7 @@ const ApplyToJob = asyncHandler(async (req, res, next) => {
       }
     }
   } catch (err) {
-    if (err instanceof CastError) {
+    if (err instanceof mongoose.Error.CastError) {
       return res.status(400).json({ message: 'Invalid ID format' });
     } else {
       next(err);
@@ -447,7 +447,7 @@ const GetCandidateById = asyncHandler(async (req, res, next) => {
 
 
 
-module.exports = {
+export {
   CreateCandidate,
   getAllCandidate,
   EditCandidateInformation,

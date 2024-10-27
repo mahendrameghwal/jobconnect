@@ -76,7 +76,7 @@ const Chat = () => {
     if (currentUserId) {
       fetchMessages();
       GetchatUser()
-      
+      //using for production
       socketRef.current = io(`https://jobconnect-9r0d.onrender.com`);
       socketRef.current.emit('join', currentUserId);
       socketRef.current.on('newMessage', (message) => {

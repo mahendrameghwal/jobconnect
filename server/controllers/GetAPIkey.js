@@ -10,4 +10,4 @@ const GetAPIKEY = async (req, res) => {
   }
 };
 
-module.exports = GetAPIKEY;
+export default GetAPIKEY;

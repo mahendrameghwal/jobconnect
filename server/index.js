@@ -1,30 +1,39 @@
-const express = require('express');
-const app = express();
-const server = require('http').Server(app);
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-require('dotenv').config();
-const morgan = require('morgan');
-// const ngrok = require("@ngrok/ngrok");
-const port = process.env.PORT;
-const errorHandler = require('./handler/errorhandler');
-const fileUpload = require('express-fileupload');
-const ConnectDB = require('./config/DbConfig');
-const ChatSocket = require('./utils/Chatsocket');
-const checkExpiredSubscriptions = require('./utils/checkExpiredSubscriptions');
-const cron = require('node-cron');
+import express from 'express';
+import { Server } from 'http';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import morgan from 'morgan';
+// import ngrok from '@ngrok/ngrok'; // Uncomment if needed
+import errorHandler from './handler/errorhandler.js';
+import fileUpload from 'express-fileupload';
+import ConnectDB from './config/DbConfig.js';
+import ChatSocket from './utils/Chatsocket.js';
+import checkExpiredSubscriptions from './utils/checkExpiredSubscriptions.js';
+import cron from 'node-cron';
+import { Server as socketIo } from 'socket.io';
 
+dotenv.config();
+
+const app = express();
+const server = new Server(app);
+const port = process.env.PORT;
 
 ConnectDB();
-const io = require('socket.io')(server, {
- cors: {
+
+
+const io = new socketIo(server, {
+  cors: {
     origin: process.env.FRONTEND_APP_URL,
   },
 });
-module.exports.io = io;
-ChatSocket(io);
 
+// Export the 'io' instance
+export { io };
+
+// Call the ChatSocket function with 'io'
+ChatSocket(io);
 
 // Run every day at midnight
 cron.schedule('0 0 * * *', () => {
@@ -67,13 +76,13 @@ app.use(
 );
 
 //Routes
-const GetAPIRoute = require('./routes/GetAPIRoute');
-const jobroutes = require('./routes/JobRoutes');
-const Orgroutes = require('./routes/OrgRoute');
-const CandidateRoutes = require('./routes/CandidateRoute');
-const MessageRoutes = require('./routes/MessageRoute');
-const Userroute = require('./routes/UserauthRoute');
-const SubscriptionRoutes = require('./routes/SubcriptionRoute');
+import GetAPIRoute from './routes/GetAPIRoute.js';
+import jobroutes from './routes/JobRoutes.js';
+import Orgroutes from './routes/OrgRoute.js';
+import CandidateRoutes from './routes/CandidateRoute.js';
+import MessageRoutes from './routes/MessageRoute.js';
+import Userroute from './routes/UserauthRoute.js';
+import SubscriptionRoutes from './routes/SubcriptionRoute.js';
 
 app.get('/hello', (req, res) => {
   res.send('<h1 style="color: green; font-size: 24px;">Hello World!</h1>')

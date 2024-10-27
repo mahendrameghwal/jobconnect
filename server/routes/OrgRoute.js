@@ -1,7 +1,7 @@
-const express = require("express");
-const {CreateOrg, DeleteJob, GetOrgById,SearchOrg, UpdateOrgInformation, searchCandidates}  = require("../controllers/OrgController");
-const VerifyToken = require("../middlewares/verifytoken");
-const VerifyOrg = require("../middlewares/Verifyorg")
+import express from "express";
+import {CreateOrg, DeleteJob, GetOrgById,SearchOrg, UpdateOrgInformation, searchCandidates}  from "../controllers/OrgController.js";
+import VerifyToken from "../middlewares/verifytoken.js";
+import VerifyOrg from "../middlewares/Verifyorg.js"
 const router = express.Router();
 
 router.post('/create',VerifyToken,VerifyOrg,CreateOrg);
@@ -14,5 +14,4 @@ router.patch('/update',VerifyToken,VerifyOrg,UpdateOrgInformation);
 
 
 // router.patch('/short-list/:jobid',VerifyToken,VerifyOrg,Shortlistappliciants);
-
-module.exports = router;
+export default router;

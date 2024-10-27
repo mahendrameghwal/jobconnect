@@ -8,4 +8,4 @@ const constants = {
 
   };
   
-  module.exports = constants
+export default constants

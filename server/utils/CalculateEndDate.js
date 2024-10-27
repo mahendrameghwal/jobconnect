@@ -5,4 +5,4 @@ function calculateEndDate(billingCycle) {
   }
 }
 
-module.exports = calculateEndDate;
+export default calculateEndDate;

@@ -28,4 +28,4 @@ const CreateBanner = async () => {
     next(error);
   }
 };
-module.exports = CreateBanner;
+export default CreateBanner;

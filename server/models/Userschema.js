@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const passwordValidator= require("password-validator")
+import mongoose from "mongoose";
+import passwordValidator from "password-validator";
 
 const schema = new passwordValidator();
 
@@ -87,5 +87,5 @@ Userschema.pre('save', function(next) {
 
 const User = mongoose.model("User", Userschema);
 
-module.exports = User;
+export default User;
 

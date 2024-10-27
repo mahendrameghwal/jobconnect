@@ -1,4 +1,4 @@
-const Message = require('../models/MessageSchema');
+import Message from '../models/MessageSchema.js';
 
 // Get all messages sender and  receiver
 const getMessages = async (req, res, next) => {
@@ -69,7 +69,7 @@ const DeleteMessage = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   getMessages,
   sendMessage,
   DeleteMessage,

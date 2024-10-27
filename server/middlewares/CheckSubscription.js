@@ -1,4 +1,4 @@
-const User = require("../models/Userschema");
+import User from "../models/Userschema";
 
 const CheckSubscription = async (req, res, next) => {
   try {
@@ -22,4 +22,4 @@ const CheckSubscription = async (req, res, next) => {
   }
 };
 
-module.exports = CheckSubscription;
+export default  CheckSubscription;
