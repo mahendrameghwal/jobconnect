@@ -17,7 +17,7 @@ const Userschema = new mongoose.Schema({
   },
   username:{
     type:String,
-    required:[true, ' enter username']
+    required:[true, 'enter username']
   },
   email:{
     
@@ -30,7 +30,7 @@ const Userschema = new mongoose.Schema({
    },
    password: {
     type: String,
-    required: [true, ' enter your password '],
+    required: [true, 'enter your password'],
     validate: {
       validator: function (value) {
         return schema.validate(value) ? true : false;
