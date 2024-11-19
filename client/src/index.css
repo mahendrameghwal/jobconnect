@@ -401,3 +401,15 @@ input[type="number"]::-webkit-outer-spin-button {
     animation: octocat-wave 560ms ease-in-out;
   }
 }
+
+
+.skill-match{
+ 
+    width: fit-content;
+
+    background-clip: text;
+    background: linear-gradient(to right, #7d8eaa, #e34050);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+}
