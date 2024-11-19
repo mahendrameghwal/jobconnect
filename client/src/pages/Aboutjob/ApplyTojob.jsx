@@ -2,13 +2,10 @@ import { Fragment, useEffect, useState, useCallback } from "react";
 import { toast } from "react-hot-toast";
 import { BsSendCheck } from "react-icons/bs";
 import { useApplyforJobMutation } from "../../../app/api/CandidateApi";
-import { useCurrentUserQuery } from "../../../app/api/authApi";
 
-const ApplyToJob = ({ applyid, applicants }) => {
+const ApplyToJob = ({CurrentUser, applyid, applicants }) => {
   const [isAlreadyApplied, setIsAlreadyApplied] = useState(false);
   const [ApplyforJob, { data, error, isLoading }] = useApplyforJobMutation();
-  const { data: CurrentUser } = useCurrentUserQuery();
-  
   const checkIfAlreadyApplied = useCallback(() => {
     if (CurrentUser && CurrentUser.candidate?._id) {
     
