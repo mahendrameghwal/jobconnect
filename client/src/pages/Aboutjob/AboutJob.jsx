@@ -13,10 +13,14 @@ import ApplyTojob from "./ApplyTojob";
 import { FaClipboardCheck, FaCopy } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { useCurrentUserQuery } from "../../../app/api/authApi";
+import SkillMatcher from "./SkillMatcher";
+
 
 
 
 const AboutJob = memo(() => {
+  const { data: CurrentUser } = useCurrentUserQuery();
   const userInfo = useSelector((state) => state?.auth?.userInfo);
   const navigate = useNavigate();
   const { jobid } = useParams();
@@ -28,7 +32,7 @@ const AboutJob = memo(() => {
   const {data,error,isError,isLoading, isSuccess }= GetjobById();
   const Jobdata = data && data.job;
   const {title,_id,orgname,jobId,skills,country,state,city,responsibilities,applicants,salary,joblevel,shortdesc, category, jobtype, createdAt}= Jobdata || {};
-
+console.log(CurrentUser)
   useEffect(()=>{
   setRandomColor(RandomColor)
   if (createdAt) {
@@ -84,6 +88,15 @@ const copyToClipboard = (id) => {
 )
 
 }
+
+
+ {
+   userInfo && CurrentUser && <SkillMatcher userskills={CurrentUser?.candidate?.skills} jobskills={skills} />
+ }
+
+
+
+
 {
   applicants && (
     <span className="flex absolute text-[#0C356A] dark:text-blue-200 top-1 right-2 max-md:text-sm max-sm:text-xs z-10 items-center gap-x-1 tracking-wider text-base font-normal">
@@ -101,7 +114,7 @@ Total applicants : {applicants.length}
   )
 }
 {
-  orgname && (<button onClick={()=>{navigate(`/browsecompanies/profile/${orgname._id}`)}} className="official ">Our Official page</button>)
+  orgname && (<button onClick={()=>{navigate(`/browsecompanies/profile/${orgname._id}`)}} className="official ">Official page</button>)
 }
 
   </div>
@@ -137,20 +150,34 @@ Total applicants : {applicants.length}
   
   </div>
 </div>
-{
-  jobtype && 
-  (<span className="flex gap-x-1 max-md:text-base text-lg"> <span className="capitalize dark:text-white font-semibold">Job Type :</span>  <span className="capitalize dark:text-gray-50">{jobtype}</span></span>)
-}
-{
-  joblevel && (
-    <span className="flex gap-x-1 max-md:text-base text-lg">  <span className="capitalize dark:text-white font-semibold">Exprience Level :</span> <span className="capitalize dark:text-gray-50">{joblevel}</span></span>
-  )
-}
-{
-  category && (
-    <span className="flex gap-x-1 max-md:text-base text-lg">  <span className="capitalize dark:text-white font-semibold">Category :</span>  <span className="capitalize dark:text-gray-50">{category}</span></span>
-  )
-}
+
+
+<div className="flex w-full flex-row gap-y-2">
+  <div className="flex  gap-x-2">
+    <div className="flex flex-col gap-y-2">
+      {jobtype && (
+        <span className="flex gap-x-1 max-md:text-base text-lg">
+          <span className="capitalize dark:text-white font-semibold">Job Type:</span>
+          <span className="capitalize dark:text-gray-50">{jobtype}</span>
+        </span>
+      )}
+      {joblevel && (
+        <span className="flex gap-x-1 max-md:text-base text-lg">
+          <span className="capitalize dark:text-white font-semibold">Experience Level:</span>
+          <span className="capitalize dark:text-gray-50">{joblevel}</span>
+        </span>
+      )}
+      {category && (
+        <span className="flex gap-x-1 max-md:text-base text-lg">
+          <span className="capitalize dark:text-white font-semibold">Category:</span>
+          <span className="capitalize dark:text-gray-50">{category}</span>
+        </span>
+      )}
+    </div>
+  </div>
+
+</div>
+
 
 <div className=" my-8">
 {
@@ -208,7 +235,7 @@ Total applicants : {applicants.length}
 }
 
 {
-  !userInfo?.Isorg && (<ApplyTojob applicants={applicants}  applyid={_id} />)
+  !userInfo?.Isorg && (<ApplyTojob CurrentUser={CurrentUser} applicants={applicants}  applyid={_id} />)
 }
 
 </motion.div>
