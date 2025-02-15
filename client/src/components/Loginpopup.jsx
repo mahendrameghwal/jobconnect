@@ -5,10 +5,9 @@ import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { SetLoginUser, resetuser } from '../../app/slices/Loginslice';
-import { useCallback } from 'react';
+
 import { toast } from 'react-hot-toast';
-import { useLoginMutation } from '../../app/api/authApi';
-import { setCredentials } from '../../app/slices/Authslice';
+import  authApi, { useLoginMutation } from '../../app/api/authApi';
 
 const Loginpopup = ({ show }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -33,8 +32,7 @@ const Loginpopup = ({ show }) => {
         setTimeout(() => {
           dispatch(resetuser());
         }, 2000);
-        const { Isorg, isAdmin } = response?.token; 
-         dispatch(setCredentials({Isorg,isAdmin}))
+        dispatch(authApi.util.invalidateTags(['CurrentUser']));
         response.message && toast.success(response.message);
         navigate('/');
       }

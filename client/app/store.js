@@ -26,7 +26,6 @@ const rootReducer = combineReducers({
   [CandidateApi.reducerPath]: CandidateApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [PaymentApi.reducerPath]: PaymentApi.reducer,
-  auth: Authslice,
   createnewpassword: ResetpasswordSlice,
   CreateJob: CreateJobSlice,
   CreateOrg: CreateOrgSlice,

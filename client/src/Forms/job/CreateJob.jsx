@@ -121,7 +121,7 @@ const Createjob =React.memo(() => {
     <form >
     <div className="min-h-screen   w-11/12 mx-auto shadow-xl max-h-full border dark:border-gray-600 ">
     <p className="text-3xl max-md:text-2xl  font-semibold bg-gradient-to-t text-center text-transparent from-green-700 via-blue-700 to-purple-700 bg-clip-text dark:text-gray-100">
-    Create Job Here
+    Post Job
 </p>
 
 

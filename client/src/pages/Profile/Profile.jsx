@@ -1,4 +1,3 @@
-import {HiOutlineChevronRight} from "react-icons/hi"
 import {BiHome} from "react-icons/bi"
 import RecommendedJobs from "../../components/RecommendedJobs";
 import TopCompnies from "../../components/TopCompnies";
@@ -11,10 +10,10 @@ import { useRef, lazy } from 'react';
 import { IoCreateOutline } from "react-icons/io5";
 import { MdOutlineRememberMe } from "react-icons/md";
 import { CiChat1, CiSearch } from "react-icons/ci";
-import { useSelector } from "react-redux";
 import { FaChartPie } from "react-icons/fa";
-import { useEffect } from "react";
 import { motion } from "framer-motion";
+import Loader from "../../components/Loader";
+
 const PremiumButton = lazy(() => import("../../components/PremiumButton"));
 const Subscription = lazy(() => import("../Subscription/Subscription"));
 
@@ -25,9 +24,10 @@ const navigate = useNavigate()
   const appliedJobsRef = useRef(null);
   const topCompaniesRef = useRef(null);
   const recommendedJobsRef = useRef(null);
-  const userInfo = useSelector((state) => state?.auth?.userInfo);
-  useEffect(()=>{},[userInfo])
   const {data:currentuser}=useCurrentUserQuery()
+
+  // console.log(currentuser);
+  
 
   // const scrollToRef = (ref) => {
   //   if (ref && ref.current) {
@@ -51,9 +51,12 @@ const navigate = useNavigate()
   const {avtar,fullname,orgname, jobs, PermissonForUpdate,Isorg, city,appliedJobs, _id}= data || {}; 
 // console.log(data);
   
- if (isLoading) {
-   return  <div className="spinner min-h-screen absolute top-1/2 left-1/2  transform -translate-x-1/2 "></div>
- }
+if (isLoading) {
+  return  <Loader/>
+}
+if(!currentuser){
+  navigate("/")
+}
 
  if (isError) {
    return error.data && error.data.message && <div className="flex items-center justify-center min-h-screen max-h-full ">
@@ -196,7 +199,7 @@ to={
 
 
 {
-  userInfo?.isAdmin && (
+  currentuser?.isAdmin && (
     <Link  to='/dashboard'
  className="dark:border-none dark:text-gray-100 dark:bg-gray-900/95 hover:bg-blue-50 max-md:my-0.5  flex flex-row items-center justify-center gap-x-2 border py-2 my-1 rounded-md">
  <span className="flex dark:text-gray-100 items-center gap-x-2">DashBoard<FaChartPie  size={16} /></span>

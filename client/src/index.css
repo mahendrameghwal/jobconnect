@@ -261,7 +261,7 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-.spinner {
+/* .spinner {
   --size: 30px;
   --first-block-clr: #1f4fdee4;
   --second-block-clr: #4071d4e6;
@@ -288,7 +288,7 @@ input[type="number"]::-webkit-outer-spin-button {
   top: calc(50% - var(--size));
   left: calc(50% - var(--size));
   animation: down 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
- }
+ } */
  
  @keyframes down {
   0%, 100% {
@@ -413,3 +413,4 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-text-fill-color: transparent;
   
 }
+

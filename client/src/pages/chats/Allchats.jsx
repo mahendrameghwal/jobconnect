@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 const Allchats = ({AllchattingUserError, AllchattingUserInformation ,  recipient}) => {
 const Navigate = useNavigate()
 
-
+console.log(AllchattingUserInformation);
 
 
 

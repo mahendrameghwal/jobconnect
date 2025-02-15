@@ -6,8 +6,13 @@ export const authApi = createApi({
     baseUrl: `${import.meta.env.VITE_SERVER_URL}/user`,
     credentials: 'include',
   }),
-  tagTypes: ['auth'],
+  tagTypes: ['auth', 'CurrentUser'],
   endpoints: (builder) => ({
+    CurrentUser: builder.query({
+      query: () => `/currentuser`,
+      credentials: 'include',
+      providesTags: ['CurrentUser']
+    }),
     Login: builder.mutation({
       query: (User) => ({
         url: '/login',
@@ -16,6 +21,7 @@ export const authApi = createApi({
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       }),
+      invalidatesTags: ['CurrentUser'],
     }),
     Register: builder.mutation({
       query: (Registerdata) => ({
@@ -33,14 +39,9 @@ export const authApi = createApi({
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       }),
-      invalidatesTags:["auth"]
+     invalidatesTags: ['CurrentUser'],
     }),
 
-    CurrentUser: builder.query({
-      query: () => `/currentuser`,
-      credentials: 'include',
-      providesTags: ['auth'],
-    }),
     Me: builder.query({
       query: () => `/me`,
       credentials: 'include',

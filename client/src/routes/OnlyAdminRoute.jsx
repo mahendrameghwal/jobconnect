@@ -1,24 +1,24 @@
-
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+import { useCurrentUserQuery } from '../../app/api/authApi';
 import LoginPopup from '../components/Loginpopup';
-import { useSelector } from 'react-redux';
+import Loader from '../components/Loader';
+Loader
 
 const OnlyAdminRoute = () => {
-  const  isAuth  = useAuth();
-  const userInfo = useSelector((state) => state?.auth?.userInfo);
+  const { data: CurrentUser, isLoading } = useCurrentUserQuery();
 
-  if (!isAuth) {
-    return <LoginPopup show={true} />;
+  // if (!CurrentUser || typeof CurrentUser?.isAdmin !== 'boolean') {
+  //   return <LoginPopup show={true} />;
+  // }
+  if (isLoading) {
+    return <Loader />;
+  }
+  if (CurrentUser && CurrentUser.isAdmin === true && typeof CurrentUser.isAdmin === 'boolean') {
+    return <Outlet />;
   }
 
-  if (!userInfo?.isAdmin) {
-    return <Navigate to="/unauthorized" replace />;
-  }
-
-  return <Outlet />;
+  return <Navigate to="/unauthorized" replace />;
 };
 
 export default OnlyAdminRoute;
-

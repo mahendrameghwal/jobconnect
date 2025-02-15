@@ -5,6 +5,8 @@ import { Fragment, useState } from 'react';
 import { useGetOrgQuery } from '../../app/api/OrgApi';
 import { Link } from 'react-router-dom';
 import { GoOrganization } from "react-icons/go";
+import Loader from './Loader';
+Loader
 
 const Top = () => {
 
