@@ -20,6 +20,7 @@ const RoleSelection = ({ onRoleSelect }) => {
     }
   ];
 
+
   const handleRoleSelection = (role) => {
     setSelectedRole(role);
     onRoleSelect(role);

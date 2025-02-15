@@ -15,7 +15,7 @@ import cron from 'node-cron';
 import { Server as socketIo } from 'socket.io';
 import passport from 'passport';
 import session from 'express-session';
-import PassportConfig from './utils/Passport.js';
+// import PassportConfig from './utils/Passport.js';
 
 dotenv.config();
 
@@ -43,9 +43,9 @@ app.use(session({
 
 
 // Configure passport
-app.use(passport.initialize());
-app.use(passport.session());
-PassportConfig();
+// app.use(passport.initialize());
+// app.use(passport.session());
+// PassportConfig();
 
 
 // Create a Socket.IO instance
