@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import sort from "../../../data/Sort";
 import Salarydata from "../../../data/Salarydata";
 import SkeletonCard from "./SkeletonCard";
-import Loader from "../../../components/Loader";
 
 
 const useDebounce = (value, delay) => {
@@ -198,7 +197,15 @@ const SelectField = ({ label, name, value, onChange, options, optionKey }) => (
   </section>
 );
 
-
+const LoadingSpinner = () => (
+  <div className="min-h-screen flex justify-center items-center max-h-full">
+    <div className="flex flex-row gap-2 items-center justify-center">
+      <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+      <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+      <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+    </div>
+  </div>
+);
 
 const ErrorMessage = ({ error }) => (
   <div className="min-h-screen flex items-center justify-center">

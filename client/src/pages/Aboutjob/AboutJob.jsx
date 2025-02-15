@@ -15,13 +15,13 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useCurrentUserQuery } from "../../../app/api/authApi";
 import SkillMatcher from "./SkillMatcher";
-import Loader from "../../components/Loader";
 
 
 
 
 const AboutJob = memo(() => {
   const { data: CurrentUser } = useCurrentUserQuery();
+  const userInfo = useSelector((state) => state?.auth?.userInfo);
   const navigate = useNavigate();
   const { jobid } = useParams();
   const GetjobById = useCallback(()=>useGetJobByIdQuery(jobid),[]);
@@ -67,9 +67,7 @@ const copyToClipboard = (id) => {
         </div>
     </div>)}
       {isLoading && (
-        
-      <Loader/>
-        
+        <div ref={Topref} className="spinner min-h-screen absolute top-1/2 left-1/2  transform -translate-x-1/2 "></div>
       )}
       {Jobdata && ( isSuccess &&
         <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} ref={Topref} className="min-h-screen relative border-2 max-md:border striped-border my-2 w-4/5 max-md:w-11/12  max-sm:p-3 p-6 mx-auto " >
@@ -93,7 +91,7 @@ const copyToClipboard = (id) => {
 
 
  {
-  CurrentUser && !CurrentUser.Isorg && CurrentUser && <SkillMatcher userskills={CurrentUser?.candidate?.skills} jobskills={skills} />
+   userInfo && CurrentUser && <SkillMatcher userskills={CurrentUser?.candidate?.skills} jobskills={skills} />
  }
 
 
@@ -237,7 +235,7 @@ Total applicants : {applicants.length}
 }
 
 {
-  !CurrentUser?.Isorg && (<ApplyTojob CurrentUser={CurrentUser} applicants={applicants}  applyid={_id} />)
+  !userInfo?.Isorg && (<ApplyTojob CurrentUser={CurrentUser} applicants={applicants}  applyid={_id} />)
 }
 
 </motion.div>

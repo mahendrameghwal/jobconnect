@@ -3,10 +3,13 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import {useCurrentUserQuery} from "../../../app/api/authApi";
 import {useCreateSubscriptionMutation} from "../../../app/api/PaymentApi"
+import useAuth from '../../../hooks/useAuth';
 import { motion } from 'framer-motion'
 import toast from 'react-hot-toast';
 const Pricing = () => {
   const { data: currentUser } = useCurrentUserQuery();
+  const navigate = useNavigate()
+  const isAuth = useAuth();
   const [createSubscription, { isLoading, isError, error, isSuccess,reset,data }] = useCreateSubscriptionMutation();
   const [activeBilling, setActiveBilling] = useState('monthly');
   const [prices, setPrices] = useState({
@@ -54,30 +57,30 @@ const Pricing = () => {
 // console.log(data);
   return (
     <div className="flex flex-col items-center p-10 bg-white dark:bg-gray-900">
-    <div className="relative bg-slate-200 dark:bg-black rounded-lg p-0.5 flex mb-8 max-w-xs sm:max-w-md mx-auto">
-    <button
-      type="button"
-      onClick={() => setActiveBilling('monthly')}
-      className={`relative w-1/2 rounded-md py-2 px-2 sm:px-6 md:px-8 text-xs sm:text-sm font-medium whitespace-nowrap focus:outline-none transition-all duration-200 ${
-        activeBilling === 'monthly'
-          ? 'bg-blue-100 border border-blue-500 text-slate-900 dark:bg-blue-900 dark:border-blue-700 dark:text-slate-100'
-          : 'bg-slate-50 border-slate-50 text-slate-900 dark:bg-gray-800 dark:border-gray-700 dark:text-slate-200'
-      } shadow-sm`}
-    >
-      Monthly billing
-    </button>
-    <button
-      type="button"
-      onClick={() => setActiveBilling('yearly')}
-      className={`ml-0.5 relative w-1/2 rounded-md py-2 px-2 sm:px-6 md:px-8 text-xs sm:text-sm font-medium whitespace-nowrap focus:outline-none transition-all duration-200 ${
-        activeBilling === 'yearly'
-          ? 'bg-blue-100 border border-blue-500 text-slate-900 dark:bg-blue-900 dark:border-blue-700 dark:text-slate-100'
-          : 'border border-transparent text-slate-900 dark:bg-gray-800 dark:border-gray-700 dark:text-slate-200'
-      } shadow-sm`}
-    >
-      Yearly billing
-    </button>
-  </div>
+      <div className="relative bg-slate-200 dark:bg-black rounded-lg p-0.5 flex mb-8">
+        <button
+          type="button"
+          onClick={() => setActiveBilling('monthly')}
+          className={`relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 ${
+            activeBilling === 'monthly'
+              ? 'bg-blue-100 border border-blue-500 text-slate-900 dark:bg-blue-900 dark:border-blue-700 dark:text-slate-100'
+              : 'bg-slate-50 border-slate-50 text-slate-900 dark:bg-gray-800 dark:border-gray-700 dark:text-slate-200'
+          } shadow-sm`}
+        >
+          Monthly billing
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveBilling('yearly')}
+          className={`ml-0.5 relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 ${
+            activeBilling === 'yearly'
+              ? 'bg-blue-100 border border-blue-500 text-slate-900 dark:bg-blue-900 dark:border-blue-700 dark:text-slate-100'
+              : 'border border-transparent text-slate-900 dark:bg-gray-800 dark:border-gray-700 dark:text-slate-200'
+          } shadow-sm`}
+        >
+          Yearly billing
+        </button>
+      </div>
 
       <div className="flex justify-center mt-12 sm:mt-16">
         <div className="max-w-md w-full">
@@ -102,7 +105,7 @@ const Pricing = () => {
                     /{activeBilling === 'yearly' ? 'mo' : 'mo'}
                   </span>
                 </p>
-                {currentUser ? (
+                {isAuth ? (
                   <motion.button 
                   whileHover={{
                     scale: 1.03,
@@ -168,7 +171,7 @@ const Pricing = () => {
                     /{activeBilling === 'yearly' ? 'mo' : 'mo'}
                   </span>
                 </p>
-                {currentUser ? (
+                {isAuth ? (
                   <motion.button 
                   whileHover={{
                     scale: 1.03,

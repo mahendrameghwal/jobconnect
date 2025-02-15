@@ -10,6 +10,8 @@ import { DiGithubBadge } from "react-icons/di";
 // import LoginPopup from "./components/Loginpopup";
 // import Errorboundrypage from "./pages/error/ErrorboundryPage";
 import Welcome from "../src/pages/Welcome/Welcome";
+
+import AuthChecker from "./components/AuthChecker";
 import PasswordResetRequest from "./pages/Auth/ForgotPassword/PasswordResetRequest";
 import SentSuccess from "./pages/SentSuccess";
 import Home from"./pages/Home"; //public
@@ -23,7 +25,7 @@ import ExcludeNavbar from "./utils/ExcludeNavbar";
 import ResumeTemplateSelector from "./pages/Templates/Selector/ResumeTemplateSelector";
 import ResumeBuilder from "./pages/Templates/Builder/ResumeBuilder";
 import 'react-loading-skeleton/dist/skeleton.css';
-import { FaGithub } from "react-icons/fa";
+
 
 const PrivateRouteForAllUser = lazy(() => import("./routes/PrivateRouteForAllUser"));
 const OnlyAdminRoute = lazy(() => import("./routes/OnlyAdminRoute"));
@@ -78,9 +80,11 @@ function App() {
     });
   }, []);
   
+  // const isauth = useAuth()
   return (
  
   <main className='dark:bg-gray-800'>
+  <AuthChecker/>
   <Suspense fallback={<Loader/>}>
   
   <main role="main" className="min-h-screen max-h-full">
@@ -185,8 +189,13 @@ function App() {
    
            </Route>
           </Route>
-          
-          
+
+
+
+
+
+
+
           </Routes>
           <Gotop />
           

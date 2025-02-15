@@ -2,7 +2,7 @@
   "name": "jobconnect",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+  "type": "module" ,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
@@ -10,7 +10,7 @@
   },
   "keywords": [],
   "author": "mahendra",
-  "license": "ISC",
+"license": "ISC",
   "dependencies": {
     "@ngrok/ngrok": "^1.4.1",
     "axios": "^1.7.7",
@@ -23,14 +23,11 @@
     "express": "^4.18.3",
     "express-async-handler": "^1.2.0",
     "express-fileupload": "^1.4.3",
-    "express-session": "^1.18.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.10",
     "morgan": "^1.10.0",
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.7",
-    "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0",
     "password-validator": "^5.3.0",
     "socket.io": "^4.7.5",
     "validator": "^13.11.0"

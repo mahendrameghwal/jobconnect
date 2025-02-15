@@ -13,48 +13,21 @@ import ChatSocket from './utils/Chatsocket.js';
 import checkExpiredSubscriptions from './utils/checkExpiredSubscriptions.js';
 import cron from 'node-cron';
 import { Server as socketIo } from 'socket.io';
-import passport from 'passport';
-import session from 'express-session';
-import PassportConfig from './utils/Passport.js';
 
 dotenv.config();
 
-
-// create express app
 const app = express();
 const server = new Server(app);
 const port = process.env.PORT;
 
-
-
-// Connect to MongoDB
 ConnectDB();
 
-// middlewares
-app.use(session({
-  secret: process.env.JWT_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { 
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  }
-}));
 
-
-// Configure passport
-app.use(passport.initialize());
-app.use(passport.session());
-PassportConfig();
-
-
-// Create a Socket.IO instance
 const io = new socketIo(server, {
   cors: {
     origin: process.env.FRONTEND_APP_URL,
   },
 });
-
 
 // Export the 'io' instance
 export { io };
@@ -67,7 +40,7 @@ cron.schedule('0 0 * * *', () => {
   checkExpiredSubscriptions();
 });
 
-
+// process?.env?.JWT_SECRET
 //middlewares
 app.use(cookieParser(process?.env?.JWT_SECRET, {
   httpOnly: true,
@@ -76,12 +49,13 @@ app.use(cookieParser(process?.env?.JWT_SECRET, {
   path: '/'
 }));
 
+
+
 const corsOptions = {
   origin:  process.env.FRONTEND_APP_URL,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
 };
-
 app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
@@ -89,6 +63,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
   next();
 });
+
 
 app.use(morgan('dev'));
 morgan(':method :url :status :res[content-length] - :response-time ms');
@@ -100,7 +75,7 @@ app.use(
   fileUpload({ limits: { fileSize: 5 * 1024 * 1024 }, useTempFiles: false }),
 );
 
-//import all Routes
+//Routes
 import GetAPIRoute from './routes/GetAPIRoute.js';
 import jobroutes from './routes/JobRoutes.js';
 import Orgroutes from './routes/OrgRoute.js';
@@ -109,14 +84,12 @@ import MessageRoutes from './routes/MessageRoute.js';
 import Userroute from './routes/UserauthRoute.js';
 import SubscriptionRoutes from './routes/SubcriptionRoute.js';
 
-
-//test server
 app.get('/hello', (req, res) => {
   res.send('<h1 style="color: green; font-size: 24px;">Hello World!</h1>')
 })
 
 
-//routes 
+
 app.use('/api/user', Userroute);
 app.use('/api/org', Orgroutes);
 app.use('/api/job', jobroutes);
@@ -125,14 +98,12 @@ app.use('/api/candidate', CandidateRoutes);
 app.use('/api/message', MessageRoutes);
 app.use('/api/subscription', SubscriptionRoutes);
 
-//error handler
+
 app.use(errorHandler);
 
-//start server
 server.listen(port, () => {
   console.log(`server Listing on Port ${port}`);
 });
-
 
 {/** ngrok config for public address and webhook verification */}
 // ngrok.connect({

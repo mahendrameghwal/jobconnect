@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { persistor } from '../store';
 
 const initialState = {
   userInfo: localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
-  : null,
+    ? JSON.parse(localStorage.getItem('userInfo'))
+    : null,
   loginTimestamp: localStorage.getItem('loginTimestamp')
     ? parseInt(localStorage.getItem('loginTimestamp'))
     : null,
 };
-
 
 const authSlice = createSlice({
   name: 'auth',
@@ -30,5 +30,3 @@ const authSlice = createSlice({
 
 export const { setCredentials, logout } = authSlice.actions;
 export default authSlice.reducer;
-
-

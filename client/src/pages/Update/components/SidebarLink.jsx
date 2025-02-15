@@ -1,7 +1,8 @@
 import React from 'react'
 import useSticky from '../../../../hooks/Usesticky'
-import authApi, { useSignOutMutation } from '../../../../app/api/authApi'
+import { useSignOutMutation } from '../../../../app/api/authApi'
 import toast from 'react-hot-toast'
+import { logout } from '../../../../app/slices/Authslice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 const SidebarLink = ({focusSection, Permisson}) => {
@@ -15,7 +16,6 @@ const SidebarLink = ({focusSection, Permisson}) => {
 
 
    const HandleLogout = async ()=>{
-
       await SignOut().unwrap()
     }
     
@@ -23,8 +23,8 @@ const SidebarLink = ({focusSection, Permisson}) => {
       toast(error?.data?.message)
     }
     if(isSuccess){
-      dispatch(authApi.util.invalidateTags(['CurrentUser']));
       toast(data?.message)
+      dispatch(logout())
       navigate('/')
 
    }

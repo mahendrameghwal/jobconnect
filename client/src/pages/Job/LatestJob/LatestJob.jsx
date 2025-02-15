@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useGetJobsQuery } from "../../../../app/api/JobApi";
 import LatestJobCard from "./LatestJob.card"
+import { useState } from "react";
 import LatestJobSkeleton from "../JobSkeleton";
 
 
@@ -30,7 +31,7 @@ const LatestJob = () => {
     return (
       <div className="flex justify-center items-center h-28">
 
-     <div className="flex justify-center text-red-500 items-center"><pre>{error?.data?.message? error?.data?.message :'something went wrong..'}</pre></div>
+     <div className="flex justify-center text-red-500 items-center"><pre>{error.data.message? error.data.message :'something went wrong..'}</pre></div>
      </div>
     )
   }

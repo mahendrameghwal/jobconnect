@@ -7,7 +7,7 @@ const DarkLightMode = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleColorModeChange = (mode) => {
-  if (typeof setColorMode === 'function') {
+    if (typeof setColorMode === 'function') {
       setColorMode(mode);
     }
     setIsOpen(false);

@@ -2,16 +2,14 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useCurrentUserQuery } from '../../../app/api/authApi';
 
 
 const Welcome = () => {
-const {data:CurrentUser} = useCurrentUserQuery();
   const navigate =useNavigate();
-
+  const info = useSelector((state)=>state?.auth?.userInfo);
 
   const NextPage = ()=>{
-    CurrentUser?.Isorg ? navigate('/create-company') : navigate('/create-candidate');
+    info?.Isorg ? navigate('/create-company') : navigate('/create-candidate');
   }
   return (
     <motion.div 

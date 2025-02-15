@@ -17,7 +17,7 @@ const Userschema = new mongoose.Schema({
   },
   username:{
     type:String,
-    // required:[true, 'enter username']
+    required:[true, 'enter username']
   },
   email:{
     
@@ -28,25 +28,14 @@ const Userschema = new mongoose.Schema({
     ,   'Please provide a valid email address',],
     lowercase: true 
    },
-
-   googleId: {
-    type: String,
-    unique: true,
-    sparse: true
-  },
-
    password: {
     type: String,
-    required: function() {
-      // Only require password for non-Google auth users
-      return !this.googleId;
-    },
+    required: [true, 'enter your password'],
     validate: {
-      validator: function(v) {
-        // Skip password validation for Google auth users
-        return !this.googleId || v !== undefined;
+      validator: function (value) {
+        return schema.validate(value) ? true : false;
       },
-      message: 'Password is required for non-Google authentication'
+      message: 'Password does not meet the criteria'
     }
   },
    Isorg:{
@@ -70,8 +59,6 @@ const Userschema = new mongoose.Schema({
     ref: 'Org',
     default:null
   },
- 
-
   jobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job',}],
    resetPasswordToken: String,
    resetPasswordExpires: Date,
@@ -102,10 +89,3 @@ const User = mongoose.model("User", Userschema);
 
 export default User;
 
-
-// validate: {
-//   validator: function (value) {
-//     return schema.validate(value) ? true : false;
-//   },
-//   message: 'Password does not meet the criteria'
-// },

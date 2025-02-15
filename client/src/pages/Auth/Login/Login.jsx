@@ -1,17 +1,20 @@
 import { useNavigate } from "react-router-dom";
+import emailicon from "../../../assets/email.svg";
+import lock from "../../../assets/lock.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { SetLoginUser, resetuser } from "../../../../app/slices/Loginslice";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { BiShow, BiHide } from "react-icons/bi";
 import {toast} from "react-hot-toast";
-import authApi, {useLoginMutation } from "../../../../app/api/authApi";
+import { useLoginMutation } from "../../../../app/api/authApi";
+import {logout,setCredentials} from "../../../../app/slices/Authslice"
 import { MdOutlineAlternateEmail ,MdOutlineLock } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
 
 
-const Login = () => { 
-  const [login, { isLoading }] = useLoginMutation();
+const Login = () => {
+  const [login, { isLoading, error }] = useLoginMutation();
   const [Showpassword, setShowpassword] = useState(false);
+  const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const User = useSelector(state => state.login.User);
   const dispatch = useDispatch();
@@ -26,7 +29,8 @@ const handleLogin = async (e) => {
       setTimeout(() => {
         dispatch(resetuser());
       }, 2000);
-      dispatch(authApi.util.invalidateTags(['CurrentUser']));
+      const { Isorg, isAdmin } = response?.token; 
+       dispatch(setCredentials({Isorg,isAdmin}))
       response.message && toast.success(response.message);
       navigate('/');
     }
@@ -53,11 +57,11 @@ const HandleUser = e => {
     <div className="min-h-screen max-h-full">
 
       <div className="h-screen md:flex">
-        <div className="relative  overflow-hidden md:flex w-1/2 dark:from-gray-900  dark:to-gray-900/30  bg-gradient-to-r from-gray-900 to-blue-700  justify-around items-center hidden">
+        <div className="relative  overflow-hidden md:flex w-1/2   dark:from-gray-900/30  dark:to-gray-900/30  bg-gradient-to-r from-gray-900 to-blue-700  justify-around items-center hidden">
           <div>
             <h1 className="text-white font-bold text-4xl font-sans">JobConnect</h1>
             <p className="text-white mt-1">Looking for a New Job?</p>
-            <button className="block w-40 bg-white text-indigo-800 mt-4 py-1 rounded-md font-bold mb-2">
+            <button className="block w-28 bg-white text-indigo-800 mt-4 py-2 rounded-2xl font-bold mb-2">
               Read More
             </button>
           </div>
@@ -68,11 +72,11 @@ const HandleUser = e => {
         </div>
         <form
           onSubmit={handleLogin}
-          className="flex dark:bg-gray-900  max-md:flex max-md:items-center max-md:h-screen md:w-1/2 justify-center py-10 items-center bg-white"
+          className="flex dark:bg-gray-900/30  max-md:flex max-md:items-center max-md:h-screen md:w-1/2 justify-center py-10 items-center bg-white"
         >
           <div className=" max-md:w-4/5 w-1/2">
             <h1 className="text-gray-800 dark:text-white font-bold text-2xl mb-1">
-              Hello Welcome
+              Hello Again!
             </h1>
             <p className="text-sm font-normal dark:text-gray-50 text-gray-600 mb-7">
               Welcome Back
@@ -83,7 +87,7 @@ const HandleUser = e => {
               <input
                 value={email}
                 onChange={HandleUser}
-                className="pl-2 dark:text-gray-50 dark:bg-gray-900  outline-none border-none w-full"
+                className="pl-2 dark:text-gray-50 dark:bg-gray-800  outline-none border-none w-full"
                 type="text"
                 name="email"
                 placeholder="Email Address"
@@ -113,7 +117,7 @@ const HandleUser = e => {
               <input
                 value={password}
                 onChange={HandleUser}
-                className="pl-2 dark:text-gray-50 outline-none dark:bg-gray-900 border-none w-full"
+                className="pl-2 dark:text-gray-50 outline-none dark:bg-gray-800 border-none w-full"
                 type={Showpassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"
@@ -130,13 +134,7 @@ const HandleUser = e => {
             >
               {isLoading ?'logging in..':'Login'}
             </button>
-            {/**<button type="button" className="flex w-full hover:bg-gray-100 hover:dark:bg-gray-700 items-center dark:text-gray-50 justify-center gap-3.5 rounded-md tracking-wide border border-gray-500 bg-gray py-1.5 my-2  ">
-            <span>
-         <FcGoogle/>
-            </span>
-            Login with Google
-          </button>**/}
-
+           
 
             <button type="button" role="button"
               onClick={() => {

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 const useSkillMatchPercentage = (userSkills,jobSkills) => {
     const [matchPercentage, setMatchPercentage] = useState(0);
 
-    // console.log(userSkills,jobSkills);
+    console.log(userSkills,jobSkills);
     useEffect(() => {
       const matchedSkills = userSkills?.filter((userSkill) => {
         return jobSkills.some((jobSkill) => jobSkill.trim().toLowerCase() === userSkill.name.trim().toLowerCase());

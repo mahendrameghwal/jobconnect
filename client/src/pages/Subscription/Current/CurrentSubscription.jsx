@@ -15,7 +15,7 @@ const CurrentSubscription = () => {
   
   
   const HandleCancelSubscription = async (subscriptionId) => {
-    
+    console.log(subscriptionId);
     try {
       if (!subscriptionId) return;
       const response = await cancelSubscription(subscriptionId).unwrap();
@@ -52,7 +52,7 @@ const CurrentSubscription = () => {
     }
   };
 
-
+console.log(currentSubscription);
   const formatDateTime = (dateString) => {
     if (!dateString) return "";
     return DateTime.fromISO(dateString).toFormat("dd LLL yyyy, hh:mm a");

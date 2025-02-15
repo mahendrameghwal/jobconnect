@@ -1,14 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../app/slices/Authslice';
-import { useCurrentUserQuery } from '../app/api/authApi';
 
 const useAuth = () => {
- const {data: CurrentUserinfo}= useCurrentUserQuery();
- const dispatch = useDispatch();
- const userInfo = useSelector((state) => state?.auth?.userInfo);
- const loginTimestamp = useSelector((state) => state.auth.loginTimestamp);
- console.log(`this is userInfo`,userInfo)
- console.log(`this is Currentuser`,CurrentUserinfo);
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state?.auth?.userInfo);
+  const loginTimestamp = useSelector((state) => state.auth.loginTimestamp);
+ 
 
   if (userInfo && loginTimestamp) {
     const currentTime = Date.now();

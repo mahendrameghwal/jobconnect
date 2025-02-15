@@ -30,7 +30,7 @@ const CreateCompany = () => {
     setFileInputState(e.target.value);
   },[]);
 
-
+console.log(Org) 
   
 
 const previewFile = useCallback((file) => {

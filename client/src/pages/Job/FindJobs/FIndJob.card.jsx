@@ -43,18 +43,18 @@ const FIndJobCard = ({ data, error, isError, isSuccess }) => {
                 </div>
 
                 <div className="p-2">
-                <div className="flex flex-wrap mt-1 items-center justify-start gap-x-3">
-                  {skills.length > 0 &&
-                    skills.slice(0, 3).map((skill, index) => (
-                      <span
-                        key={index}
-                        className="border-gray-400 dark:border-gray-600 dark:text-gray-50 capitalize border mt-1 text-xs font-medium px-3 py-1 rounded-sm"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                  <div className="flex flex-wrap mt-1 items-center justify-start gap-x-3">
+                    {skills.length > 0 &&
+                      skills.map((skill, index) => (
+                        <span
+                          key={index}
+                          className="border-gray-400 dark:border-gray-200 dark:text-gray-50 capitalize border mt-1 text-xs font-medium px-3 py-1 rounded-sm"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                  </div>
                 </div>
-              </div>
 
                 <div className="p-2 mt-auto">
                   <button
