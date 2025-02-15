@@ -23,13 +23,13 @@ const Banner1 = () => {
                 to="/post/search"
                 className="block w-full sm:w-auto px-8 py-2 text-sm md:text-base font-semibold tracking-wider rounded-lg max-md:rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition duration-300 ease-in-out transform focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
               >
-                Find Jobs
+                Find Opportunities
               </Link>
               <Link
                 to="/browsecompanies"
                 className="block w-full sm:w-auto px-8 py-2 text-sm md:text-base font-semibold tracking-wider rounded-lg max-md:rounded-md bg-transparent border-2 border-cyan-400 hover:bg-cyan-400 hover:text-gray-900 transition duration-300 ease-in-out transform focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400"
               >
-                Find More
+                Find organizations
               </Link>
             </div>
           </div>

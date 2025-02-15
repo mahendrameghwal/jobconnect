@@ -1,21 +1,25 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
-import LoginPopup from '../components/Loginpopup';
 import { useSelector } from 'react-redux';
+import { useCurrentUserQuery } from '../../app/api/authApi';
+import Loginpopup from '../components/Loginpopup';
+import Loader from '../components/Loader';
+
 const PrivateCandidateRoute = () => {
-  const userInfo = useSelector((state) => state?.auth?.userInfo);
-  const  isAuth  = useAuth();
+  const { data: CurrentUser, isLoading } = useCurrentUserQuery();
 
-  if (!isAuth) {
-    return <LoginPopup show={true} />;
+  // if (!CurrentUser || typeof CurrentUser?.Isorg !== 'boolean') {
+  //   return <Loginpopup show={true} />;
+  // }
+  if (isLoading) {
+    return <Loader />;
   }
 
-  if (userInfo.Isorg) {
-    return <Navigate to="/unauthorized" replace />;
+  if (CurrentUser.Isorg === false && typeof CurrentUser.Isorg === 'boolean') {
+    return <Outlet/>; // or any other component you want to show
   }
 
-  return <Outlet />;
+  return <Navigate to="/unauthorized" replace />;
 };
 
 export default PrivateCandidateRoute;

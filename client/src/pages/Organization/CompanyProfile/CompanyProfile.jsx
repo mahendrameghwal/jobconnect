@@ -9,12 +9,13 @@ import {
 } from '../../../../app/api/OrgApi';
 import { motion } from 'framer-motion';
 import { useState, memo, useMemo,  Fragment, useEffect, useCallback , lazy} from 'react';
-
+import { HiBuildingOffice2 } from "react-icons/hi2";
 import { toast } from 'react-hot-toast';
 import { MdRemoveRedEye } from 'react-icons/md';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { LuPenSquare } from 'react-icons/lu';
 import { FiEdit } from 'react-icons/fi';
+import Loader from '../../../components/Loader';
 
 const UpdateOrg = lazy(() => import("../Popup/UpdateOrg"));
 const UpdateJobPopUp = lazy(() => import("../Popup/UpdateJobPopUp")); 
@@ -76,7 +77,7 @@ const CompanyProfile = memo(() => {
   
 
   if (isLoading) {
-    return <div className="spinner min-h-screen absolute top-1/2 left-1/2 transform -translate-x-1/2"></div>;
+    return <Loader/>
   }
 
   if (isError) {
@@ -175,22 +176,25 @@ const CompanyProfile = memo(() => {
       } 
 
 
-                {avtar && (
-                  <div className="flex flex-col items-center">
-                    <img
-                      src={avtar}
-                      className="w-32 h-32 p-2 border dark:border-gray-600 rounded-full mb-4 shrink-0"
-                    ></img>
-                    {orgname && (
-                      <h1 className="text-xl max-md:text-base text-blue-600 font-bold">
-                        {orgname}
-                      </h1>
-                    )}
-                    {category && (
-                      <p className="text-gray-900 max-md:text-sm dark:text-white">{category}</p>
-                    )}
-                  </div>
-                )}
+      <div className="flex flex-col items-center">
+      {avtar ? (
+        <img
+          src={avtar}
+          alt={orgname || "Organization Avatar"}
+          className="w-32 h-32 p-2 border dark:border-gray-600 rounded-full mb-4 shrink-0"
+        />
+      ) : (
+        <HiBuildingOffice2 className="w-32 h-32 p-2 border dark:border-gray-600 rounded-full mb-4 shrink-0 text-gray-500" />
+      )}
+      {orgname && (
+        <h1 className="text-xl max-md:text-base text-blue-600 font-bold">
+          {orgname}
+        </h1>
+      )}
+      {category && (
+        <p className="text-gray-900 max-md:text-sm dark:text-white">{category}</p>
+      )}
+    </div>
                 <hr className="my-3 border-t border-gray-300" />
                 <div className="flex flex-col mb-2">
                   <h2 className="text-blue-600 capitalize font-bold max-md:font-medium tracking-wider mb-2">

@@ -30,8 +30,7 @@ const Chat = () => {
   const [ChatUser,SetChatUser] = useState([]);
   const [OnlineUser, setOnlineUser] = useState([]);
 
-  const { data: userInfo, isLoading: loadingUserInfo } =
-    useUserDetailQuery(recipient);
+  const { data: userInfo, isLoading: loadingUserInfo } =useUserDetailQuery(recipient);
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
@@ -54,7 +53,8 @@ const Chat = () => {
       alert(error.message);
     }
   }, [currentUserId, recipient]);
-    const {data:AllchattingUserInformation, error:AllchattingUserError} = useMultipleUserDetailQuery(ChatUser);
+
+  const {data:AllchattingUserInformation, error:AllchattingUserError} = useMultipleUserDetailQuery(ChatUser);
   
   const GetchatUser = useCallback(async () => {
     try {
@@ -77,7 +77,7 @@ const Chat = () => {
       fetchMessages();
       GetchatUser()
       //using for production
-      socketRef.current = io(`https://jobconnect-9r0d.onrender.com`);
+      socketRef.current = io(`http://localhost:8800`);
       socketRef.current.emit('join', currentUserId);
       socketRef.current.on('newMessage', (message) => {
         setMessages((prevMessages) => [...prevMessages, message]);

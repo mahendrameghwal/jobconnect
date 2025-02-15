@@ -1,25 +1,24 @@
-
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
 import LoginPopup from '../components/Loginpopup';
 import { useSelector } from 'react-redux';
-
+import { useCurrentUserQuery } from '../../app/api/authApi';
 const PrivateOrgRoute = () => {
-  const isAuth  = useAuth();
-  const userInfo = useSelector((state) => state?.auth?.userInfo);
 
+  const { data: CurrentUser, isLoading } = useCurrentUserQuery();
 
-  if (!isAuth) {
-    return <LoginPopup show={true} />;
+  // if (!CurrentUser || typeof CurrentUser?.Isorg !== 'boolean') {
+  //   return <LoginPopup show={true} />;
+  // }
+  if (isLoading) {
+    return <Loader />;
   }
 
-  if (!userInfo.Isorg) {
-    return <Navigate to="/unauthorized" replace />;
+  if (CurrentUser?.Isorg && typeof CurrentUser?.Isorg == 'boolean') {
+    return <Outlet/>; 
   }
 
-  return <Outlet />;
+  return <Navigate to="/unauthorized" replace />;
 };
 
 export default PrivateOrgRoute;
-

@@ -97,7 +97,7 @@ const SingleChat = ({
              <div>
                <div  className={`flex  my-2 space-x-3 w-2/5 max-md:w-10/12 ${currentUserId=== sender && `ml-auto justify-end`}`}>
                  <div  className={ `  ${currentUserId=== sender ?`msg-own bg-slate-300/90  rounded-l-xl rounded-br-xl`:`msg-other bg-[#007dfc] rounded-r-xl rounded-bl-xl ` } border dark:border-gray-600 w-full relative p-4 max-md:p-3   `}>
-                   <p className={ ` ${currentUserId=== sender ?` text-gray-800/90 `:` text-white ` } text-sm max-md:text-xs`}>{message}</p>
+                   <p className={ ` ${currentUserId=== sender ?` text-gray-800/90 `:` text-white ` } text-sm max-md:text-xs font-medium`}>{message}</p>
                    <small className={`${currentUserId=== sender ?`bg-slate-300/90 text-gray-800/90 `:`bg-[#007dfc] text-gray-100/70 ` } absolute bottom-0.5 right-3 text-xs  leading-none`}>
                      {createdAt && <TimeAgo timestamp={createdAt} />}
                    </small>

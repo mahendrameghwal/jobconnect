@@ -41,22 +41,26 @@ const register = asyncHandler(async (req, res, next) => {
         .status(403)
         .json({ message: 'user already exist with this email' });
     } else {
-      const NewUser = new User({ ...req.body, password: Hashpassword });
+
+      
+      const googleId = req.body.googleId;
+      const NewUser = new User({ ...req.body, googleId: googleId, password: Hashpassword });
 
       await NewUser.save();
       const {
-        jobs,
-        __v,
-        createdAt,
-        updatedAt,
-        fullname,
-        username,
-        password,
-        resetPasswordToken,resetPasswordExpires,
-        deleteAcountExpires,
-        deleteAcountToken,
-        ...info
+        _id,
+        email,
+        Isorg,
+        isAdmin
       } = NewUser._doc;
+
+     
+      const info = {
+        _id,
+        email,
+        Isorg,
+        isAdmin
+      };
 
       const token = jwt.sign(info, SECERET_KEY, { expiresIn: '24h' });
 
@@ -67,10 +71,7 @@ const register = asyncHandler(async (req, res, next) => {
         sameSite: 'none',
         path: '/',
       });
-
-
       
-
       return res
         .status(201)
         .json({ message: 'user created successfully', data: NewUser });
@@ -388,6 +389,7 @@ const logout = asyncHandler(async (req, res, next) => {
 const GetCurrentUserInfo = asyncHandler(async (req, res, next) => {
   try {
     const userid = req.user?._id;
+    console.log(userid);
     const user = await User.findById(userid);
     if (!user) {
       return res.status(400).json({ message: 'User not found' });
