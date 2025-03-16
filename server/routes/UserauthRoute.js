@@ -13,54 +13,54 @@ import {
 } from '../controllers/UserAuthController.js';
 import express from 'express';
 import VerifyToken from '../middlewares/verifytoken.js';
-import passport from 'passport';
+// import passport from 'passport';
 import jwt from "jsonwebtoken"
 const router = express.Router();
 
 
-router.get('/auth/google', (req, res, next) => {
-   const { role } = req.query;
-   // Store role in session or pass as state
-   req.session.selectedRole = role;
-   passport.authenticate('google', {
-      scope: ['profile', 'email'],
-      state: role, // Pass role as state
-   })(req, res, next);
-});
+// router.get('/auth/google', (req, res, next) => {
+//    const { role } = req.query;
+//    // Store role in session or pass as state
+//    req.session.selectedRole = role;
+//    passport.authenticate('google', {
+//       scope: ['profile', 'email'],
+//       state: role, // Pass role as state
+//    })(req, res, next);
+// });
 
-router.get(
-   '/auth/google/callback',
-   passport.authenticate('google', { failureRedirect: '/' , session: false}),
-   async (req, res) => {
-      const user = req.user;
-      const info = {
-         _id: user._id,
-         email: user.email,
-         Isorg: user.Isorg,
-         isAdmin: user.isAdmin,
-         googleId: user.googleId,
-      };
+// router.get(
+//    '/auth/google/callback',
+//    passport.authenticate('google', { failureRedirect: '/' , session: false}),
+//    async (req, res) => {
+//       const user = req.user;
+//       const info = {
+//          _id: user._id,
+//          email: user.email,
+//          Isorg: user.Isorg,
+//          isAdmin: user.isAdmin,
+//          googleId: user.googleId,
+//       };
 
-      const token = jwt.sign(info, process.env.JWT_SECRET, {
-         expiresIn: '24h',
-      });
-     const updatedUser = await user.save();
-     if(updatedUser){
-      const expirationDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
-      res.cookie('accesstoken', token, {
-         httpOnly: true,
-         expires: expirationDate, 
-         secure: true,
-         sameSite: 'none',
-         path: '/',
-      });
-      res.redirect(301,`${process.env.FRONTEND_APP_URL}/profile`);
+//       const token = jwt.sign(info, process.env.JWT_SECRET, {
+//          expiresIn: '24h',
+//       });
+//      const updatedUser = await user.save();
+//      if(updatedUser){
+//       const expirationDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+//       res.cookie('accesstoken', token, {
+//          httpOnly: true,
+//          expires: expirationDate, 
+//          secure: true,
+//          sameSite: 'none',
+//          path: '/',
+//       });
+//       res.redirect(301,`${process.env.FRONTEND_APP_URL}/profile`);
       
-      res.status(201).json({ message: 'user created successfully', data: info });
-    }
+//       res.status(201).json({ message: 'user created successfully', data: info });
+//     }
 
-   },
-);
+//    },
+// );
 
 // router.get('/auth/google/callback',
 //   passport.authenticate('google', {
