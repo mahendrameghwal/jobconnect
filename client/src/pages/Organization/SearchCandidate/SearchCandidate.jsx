@@ -16,7 +16,6 @@ const SearchCandidate = () => {
     country: '',
     gender:'',
     noticeperiod:'',
-    country:'',
     state:'',
     empstatus:'',
   });
