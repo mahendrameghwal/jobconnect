@@ -8,7 +8,7 @@ import { useCurrentUserQuery, useRegisterMutation } from "../../../../app/api/au
 import { FcGoogle } from "react-icons/fc";
 import { FaRegUser , FaFingerprint } from "react-icons/fa"
 import { MdOutlineAlternateEmail , MdOutlineLock} from "react-icons/md"
-import RoleSelection from './component/Roleselection';
+import RoleSelection from '../../../components/Roleselection';
 import { FaArrowLeft } from "react-icons/fa6";
 
 
