@@ -13,8 +13,8 @@ import ChatSocket from './utils/Chatsocket.js';
 import checkExpiredSubscriptions from './utils/checkExpiredSubscriptions.js';
 import cron from 'node-cron';
 import { Server as socketIo } from 'socket.io';
-import passport from 'passport';
-import session from 'express-session';
+// import passport from 'passport';
+// import session from 'express-session';
 // import PassportConfig from './utils/Passport.js';
 
 dotenv.config();
@@ -31,15 +31,15 @@ const port = process.env.PORT;
 ConnectDB();
 
 // middlewares
-app.use(session({
-  secret: process.env.JWT_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { 
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  }
-}));
+// app.use(session({
+//   secret: process.env.JWT_SECRET,
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { 
+//     secure: process.env.NODE_ENV === 'production',
+//     maxAge: 24 * 60 * 60 * 1000 // 24 hours
+//   }
+// }));
 
 
 // Configure passport
