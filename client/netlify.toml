@@ -1,4 +1,5 @@
 [build]
+  base = "client"    # Add this line to specify the base directory
   command = "npm run build"
   publish = "dist"
 
@@ -6,3 +7,6 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[build.environment]
+  NODE_VERSION = "18"
