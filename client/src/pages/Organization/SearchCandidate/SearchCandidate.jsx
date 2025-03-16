@@ -15,10 +15,10 @@ const SearchCandidate = () => {
     sort: 'desc',
     country: '',
     gender:'',
-    noticeperiod:"",
-    country:"",
-    state:"",
-    empstatus:"",
+    noticeperiod:'',
+    country:'',
+    state:'',
+    empstatus:'',
   });
   const address = useSelector((state) => state.address);
   

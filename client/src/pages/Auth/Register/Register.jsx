@@ -8,7 +8,7 @@ import { useCurrentUserQuery, useRegisterMutation } from "../../../../app/api/au
 import { FcGoogle } from "react-icons/fc";
 import { FaRegUser , FaFingerprint } from "react-icons/fa"
 import { MdOutlineAlternateEmail , MdOutlineLock} from "react-icons/md"
-import RoleSelection from './components/Roleselection'
+import RoleSelection from './component/Roleselection';
 import { FaArrowLeft } from "react-icons/fa6";
 
 
@@ -182,7 +182,7 @@ const Register = () =>{
    
       </form>  ) : (
         <div className="md:w-1/2 min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-        <Roleselection onRoleSelect={handleRoleSelection} />
+        <RoleSelection onRoleSelect={handleRoleSelection} />
       </div>
       )
     }
