@@ -15,7 +15,7 @@ A modern job search platform built with React and Vite, featuring job listings, 
 
 ## 🛠️ Tech Stack
 
-- React 18
+- React Js
 - Redux Toolkit (State Management)
 - TailwindCSS (Styling)
 - Vite (Build Tool)
@@ -24,6 +24,39 @@ A modern job search platform built with React and Vite, featuring job listings, 
 - React Hot Toast (Notifications)
 - HTML2PDF (PDF Generation)
 - Socket.io (Real-time Features)
+
+## 📦 Installation
+
+## 📁 Project Structure
+
+```
+client/
+├── app/
+│   ├── api/               # API service files
+│   ├── slices/            # Redux slices
+│   └── store.js          # Redux store configuration
+├── hooks/                 # Custom React hooks
+├── public/                # Static assets
+├── src/
+│   ├── admin/             # Admin dashboard components
+│   ├── api/               # API configuration
+│   ├── assets/            # Images and icons
+│   ├── components/        # Reusable components
+│   ├── data/              # Data configuration files
+│   ├── Forms/             # Form components
+│   ├── pages/             # Page components
+│   ├── routes/            # Protected routes
+│   └── utils/             # Utility functions
+├── .eslintrc.cjs          # ESLint configuration
+├── .gitignore             # Git ignore rules
+├── .prettierrc            # Prettier configuration
+├── index.html             # Main HTML file
+├── netlify.toml           # Netlify configuration
+├── package.json           # Project dependencies
+├── postcss.config.js      # PostCSS configuration
+├── tailwind.config.js     # Tailwind configuration
+└── vite.config.js         # Vite configuration
+```
 
 ## 📦 Installation
 

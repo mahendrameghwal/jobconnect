@@ -29,6 +29,23 @@ Welcome to the JobConnect Job Portal Platform! This project is designed to conne
 
 
 
+## 📂 Project Structure
+
+```
+jobBoard/
+├── client/                # Frontend application
+│   ├── public/            # Static assets
+│   ├── src/               # React components and logic
+│   └── README.md          # Client-specific documentation
+├── server/               # Backend application
+│   ├── controllers/       # Business logic handlers
+│   ├── models/            # Database models
+│   ├── routes/            # API endpoints
+│   └── utils/             # Utility functions
+├── readme.md              # Main project documentation
+└── ...
+```
+
 # Clone the repository
 ```bash
 git clone https://github.com/mahendrameghwal/jobconnect.git
