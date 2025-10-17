@@ -65,7 +65,7 @@ jobBoard/
 │   ├── public/            # Static assets
 │   ├── src/               # React components and logic
 │   └── README.md          # Client-specific documentation
-├── server/               # Backend application
+├── server/                # Backend application
 │   ├── controllers/       # Business logic handlers
 │   ├── models/            # Database models
 │   ├── routes/            # API endpoints
