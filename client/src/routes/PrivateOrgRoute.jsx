@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import LoginPopup from '../components/Loginpopup';
+import Loader from '../components/Loader';
 import { useSelector } from 'react-redux';
 import { useCurrentUserQuery } from '../../app/api/authApi';
 const PrivateOrgRoute = () => {

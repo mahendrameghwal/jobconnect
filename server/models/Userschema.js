@@ -34,6 +34,10 @@ const Userschema = new mongoose.Schema({
     unique: true,
     sparse: true
   },
+  googleRefreshToken: {
+    type: String,
+    default: null
+  },
 
    password: {
     type: String,

@@ -8,12 +8,15 @@ const colorPalette = [
   '#33B2DF', '#546E7A', '#D4526E', '#13D8AA', '#A5978B'
 ];
 
-const DashboardSkillChart = ({ jobs }) => {
+const DashboardSkillChart = ({ jobs, skillsData: preAggSkills }) => {
   const skillsData = useMemo(() => {
+    if (preAggSkills && Array.isArray(preAggSkills) && preAggSkills.length > 0) {
+      return preAggSkills.map(item => ({ skill: item.skill || item._id, count: item.count || 0 }));
+    }
     const skillCounts = {};
     jobs?.forEach(job => {
       job?.skills?.forEach(skill => {
-        const normalizedSkill = skill.toLowerCase(); // Normalize to lowercase
+        const normalizedSkill = skill.toLowerCase();
         skillCounts[normalizedSkill] = (skillCounts[normalizedSkill] || 0) + 1;
       });
     });
@@ -21,7 +24,7 @@ const DashboardSkillChart = ({ jobs }) => {
       .map(([skill, count]) => ({ skill, count }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 10);
-  }, [jobs]);
+  }, [jobs, preAggSkills]);
 
   // Create a map of skills to colors
   const skillColors = useMemo(() => {
@@ -36,6 +39,7 @@ const DashboardSkillChart = ({ jobs }) => {
   const chartOptions = {
     chart: {
       type: 'pie',
+      background: 'transparent',
     },
     labels: skillsData.map(item => item.skill),
     colors: skillsData.map(item => skillColors[item.skill]), // Use 'colors' instead of 'background'
@@ -68,12 +72,13 @@ const DashboardSkillChart = ({ jobs }) => {
   const series = skillsData.map(item => item.count);
 
   return (
-    <div className='w-45 max-md:w-full shadow-sm rounded-sm border-gray-200 p-1 border border-stroke bg-white '>
+    <div className='w-full h-full shadow-sm rounded-sm border-gray-200 p-3 border border-stroke flex items-center justify-center'>
       <ReactApexChart
         options={chartOptions}
         series={series}
         type="pie"
-        height={400}
+        height={350}
+        width={'100%'}
       />
     </div>
   );

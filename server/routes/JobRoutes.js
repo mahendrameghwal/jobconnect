@@ -10,7 +10,8 @@ import {
   getPernoalizePost, 
   SearchJobPost, 
   AppliedCandidate, 
-  GenrateCategory 
+  GenrateCategory,
+  getJobReport
 } from "../controllers/JobController.js"; 
 import Verifyorg from "../middlewares/Verifyorg.js"; 
 import VerifyToken from '../middlewares/verifytoken.js'; 
@@ -27,5 +28,6 @@ router.delete('/deletejob/all', DeleteAlljob);
 router.patch('/updatejob',VerifyToken,Verifyorg, UpdateJobInformation);
 router.patch('/reject/:applicationId/:candidateId',VerifyToken,Verifyorg, RejectedSingleCandidate);
 router.patch('/shortlist/:applicationId/:candidateId',Verifyorg , VerifyToken , ShortListSingleCandidate);
+router.get('/report/:jobId', VerifyToken, Verifyorg, getJobReport);
 
 export default router;

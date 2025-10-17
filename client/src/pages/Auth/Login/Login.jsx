@@ -4,7 +4,7 @@ import { SetLoginUser, resetuser } from "../../../../app/slices/Loginslice";
 import { useState } from "react";
 import { BiShow, BiHide } from "react-icons/bi";
 import {toast} from "react-hot-toast";
-import authApi, {useLoginMutation } from "../../../../app/api/authApi";
+import authApi, {useLoginMutation, useGetGoogleAuthUrlQuery } from "../../../../app/api/authApi";
 import { MdOutlineAlternateEmail ,MdOutlineLock } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 
@@ -16,6 +16,7 @@ const Login = () => {
   const User = useSelector(state => state.login.User);
   const dispatch = useDispatch();
   const { email, password } = User;
+  const { data: googleUrlData } = useGetGoogleAuthUrlQuery();
 
 
 const handleLogin = async (e) => {
@@ -130,12 +131,14 @@ const HandleUser = e => {
             >
               {isLoading ?'logging in..':'Login'}
             </button>
-            {/**<button type="button" className="flex w-full hover:bg-gray-100 hover:dark:bg-gray-700 items-center dark:text-gray-50 justify-center gap-3.5 rounded-md tracking-wide border border-gray-500 bg-gray py-1.5 my-2  ">
+            <button type="button" className="flex w-full hover:bg-gray-100 hover:dark:bg-gray-700 items-center dark:text-gray-50 justify-center gap-3.5 rounded-md tracking-wide border border-gray-500 bg-gray py-1.5 my-2  "
+              onClick={() => { if (googleUrlData?.url) window.location.href = googleUrlData.url; }}
+            >
             <span>
-         <FcGoogle/>
+              <FcGoogle/>
             </span>
             Login with Google
-          </button>**/}
+          </button>
 
 
             <button type="button" role="button"

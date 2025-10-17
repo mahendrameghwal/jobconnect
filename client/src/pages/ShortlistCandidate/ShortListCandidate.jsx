@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useCallback, useMemo, useState } from 'react';
+import React, { Suspense, lazy, useCallback, useMemo, useState, useEffect } from 'react';
 import { VscPreview } from 'react-icons/vsc';
 import { PiFlagPennant } from 'react-icons/pi';
 import { LiaPollHSolid } from 'react-icons/lia';
@@ -7,7 +7,7 @@ import Loader from '../../components/Loader';
 
 const ApplicationReview = lazy(() => import('./components/ApplicationReview'));
 // const PhoneCall = lazy(() => import('./components/PhoneCall'));
-// const Interview = lazy(() => import('./components/Interview'));
+const InterviewTab = lazy(() => import('./components/InterviewTab'));
 // const VerifcationProcess = lazy(() =>
 //   import('./components/VerifcationProcess'),
 // );
@@ -17,17 +17,34 @@ const HiredSucesscandidate = lazy(() =>
 );
 const JobReport = lazy(() => import('./components/JobReport'));
 import { motion } from 'framer-motion';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useJobdetailWithCandidateQuery } from '../../../app/api/JobApi';
 import { formatDistanceToNowStrict } from 'date-fns';
 import filterCandidate from '../../utils/FilterByStatus';
 
 const ShortListCandidate = () => {
   const { jobid } = useParams();
+  const [searchParams] = useSearchParams();
   const [step, setStep] = useState(1);
   
 
   const { data, error, isLoading } = useJobdetailWithCandidateQuery(jobid);
+
+  // Handle URL parameters for tab navigation
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    const filter = searchParams.get('filter');
+    
+    if (tab === 'applications') {
+      setStep(1);
+    } else if (tab === 'interviews') {
+      setStep(3);
+    } else if (tab === 'hired') {
+      setStep(2);
+    } else if (tab === 'report') {
+      setStep(4);
+    }
+  }, [searchParams]);
   const { jobId, applicants, title, category, createdAt, updatedAt, orgname, skills, jobtype, joblevel,} = data?.job || {};
 
 
@@ -262,7 +279,7 @@ const ShortListCandidate = () => {
             </label>
           </section>
         )}
-        <ul className="grid gap-1 grid-cols-3 mt-2 max-md:grid-cols-3 max-sm:grid-cols-1 divide-x divide-gray-100 overflow-hidden rounded-lg text-sm text-gray-600 grid-rows-1 max-md:grid-rows-2 max-sm:grid-rows-3 dark:divide-gray-700 dark:text-gray-300 dark:bg-gray-800">
+        <ul className="grid gap-1 grid-cols-4 mt-2 max-md:grid-cols-2 max-sm:grid-cols-1 divide-x divide-gray-100 overflow-hidden rounded-lg text-sm text-gray-600 grid-rows-1 max-md:grid-rows-2 max-sm:grid-rows-4 dark:divide-gray-700 dark:text-gray-300 dark:bg-gray-800">
   <li
     onClick={() => SetCurrentStep(1)}
     className={`flex cursor-pointer border text-center hover:text-white hover:bg-[#258cf3] bg-gray-100 rounded-md items-center justify-center max-sm:p-3 max-sm:my-0.5 gap-2 p-4 dark:bg-gray-700 dark:border-gray-600 ${SetStepbg(1, step)}`}
@@ -286,6 +303,15 @@ const ShortListCandidate = () => {
   <li
     onClick={() => SetCurrentStep(3)}
     className={`flex cursor-pointer border text-center hover:text-white hover:bg-[#258cf3] bg-gray-100 rounded-md items-center justify-center max-sm:p-3 max-sm:my-0.5 gap-2 p-4 dark:bg-gray-700 dark:border-gray-600 ${SetStepbg(3, step)}`}
+  >
+    <LiaPollHSolid size={21} />
+    <p className="leading-none">
+      <strong className="block font-medium">Interviews</strong>
+    </p>
+  </li>
+  <li
+    onClick={() => SetCurrentStep(4)}
+    className={`flex cursor-pointer border text-center hover:text-white hover:bg-[#258cf3] bg-gray-100 rounded-md items-center justify-center max-sm:p-3 max-sm:my-0.5 gap-2 p-4 dark:bg-gray-700 dark:border-gray-600 ${SetStepbg(4, step)}`}
   >
     <LiaPollHSolid size={21} />
     <p className="leading-none">
@@ -364,7 +390,8 @@ const ShortListCandidate = () => {
         {parseInt(step) === 2 && (
           <HiredSucesscandidate orgid={orgname} applicants={shortlistedCandidates} />
         )}
-        {parseInt(step) === 3 && <JobReport />}
+        {parseInt(step) === 3 && <InterviewTab />}
+        {parseInt(step) === 4 && <JobReport />}
       </Suspense>
     </motion.div>
   );

@@ -4,7 +4,7 @@ import {useSelector, useDispatch } from "react-redux"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 import {BiShow, BiHide} from "react-icons/bi"
-import { useCurrentUserQuery, useRegisterMutation } from "../../../../app/api/authApi"
+import { useCurrentUserQuery, useRegisterMutation, useLazyGetGoogleAuthUrlQuery } from "../../../../app/api/authApi"
 import { FcGoogle } from "react-icons/fc";
 import { FaRegUser , FaFingerprint } from "react-icons/fa"
 import { MdOutlineAlternateEmail , MdOutlineLock} from "react-icons/md"
@@ -21,6 +21,7 @@ const Register = () =>{
     const dispatch =useDispatch();
     const {fullname, username, email, password}= Registerdata;
    const [Showpassword, setShowpassword] = useState(false)
+   const [triggerGoogleAuth] = useLazyGetGoogleAuthUrlQuery();
 
   
    const HandleUser = (e) => {
@@ -70,10 +71,21 @@ const Register = () =>{
         
       };
 
-      const handleGoogleLogin = () => {
-        // Redirect to backend Google auth
-        // window.location.href = 'http://localhost:8800/api/user/auth/google';
-        window.open('http://localhost:8800/api/user/auth/google', '_self');
+      const handleGoogleLogin = async () => {
+        if (!selectedRole) {
+          toast.error('Please select a role first');
+          return;
+        }
+        try {
+          const { data } = await triggerGoogleAuth(selectedRole === 'candidate' ? 'candidate' : 'org');
+          if (data?.url) {
+            window.location.href = data.url;
+          } else {
+            toast.error('Unable to start Google authentication');
+          }
+        } catch (e) {
+          toast.error('Unable to start Google authentication');
+        }
       };
 
 
@@ -164,12 +176,12 @@ const Register = () =>{
       </div>*/}         
        <button onClick={HandleRegister} type="submit" disabled={isLoading} className="block w-full bg-gradient-to-r from-gray-900 to-blue-700  mt-1 py-2 rounded-md text-white font-medium mb-1">{isLoading ?'creating acount..':'Register'}</button>
       
-     { /**  <button onClick={handleGoogleLogin} type="button" className="flex w-full hover:bg-gray-100 hover:dark:bg-gray-700 items-center dark:text-gray-50 justify-center gap-3.5 rounded-md tracking-wide border border-gray-500 bg-gray py-1.5 my-2  ">
+      <button onClick={handleGoogleLogin} type="button" className="flex w-full hover:bg-gray-100 hover:dark:bg-gray-700 items-center dark:text-gray-50 justify-center gap-3.5 rounded-md tracking-wide border border-gray-500 bg-gray py-1.5 my-2  ">
                   <span>
                <FcGoogle/>
                   </span>
                   continue with Google
-                </button>**/}
+                </button>
 
                       
       <div className="flex justify-between mt-2">

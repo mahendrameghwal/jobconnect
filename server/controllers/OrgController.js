@@ -97,6 +97,7 @@ const CreateOrg = async (req, res, next) => {
         .json({ message: 'You cannot create multiple profile' });
     }
   } catch (err) {
+    console.log(err);
     if (err.name === 'ValidationError') {
       const validationErrors = {};
       for (const field in err.errors) {

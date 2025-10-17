@@ -1,11 +1,13 @@
 import React, { useMemo } from 'react'
-
 import ReactApexChart from 'react-apexcharts';
-const JobCategoryChart = ({jobs}) => {
+const JobCategoryChart = ({jobs, categoryData: preAggCategory}) => {
 
 
 
  const categoryData = useMemo(() => {
+    if (preAggCategory && Array.isArray(preAggCategory) && preAggCategory.length > 0) {
+      return preAggCategory.map(item => ({ category: item.category || item._id || 'unknown', count: item.count || 0 }));
+    }
     const categories = {};
     jobs?.forEach(job => {
       if (job.category) {
@@ -13,15 +15,16 @@ const JobCategoryChart = ({jobs}) => {
       }
     });
     return Object.entries(categories).map(([category, count]) => ({ category, count }));
-  }, [jobs]);
+  }, [jobs, preAggCategory]);
 
   const chartOptions = {
     chart: {
       type: 'donut',
+      background: 'transparent',
     },
     labels: categoryData.map(item => item.category),
     legend: {
-        position: 'left',
+        position: 'bottom',
         fontSize: '14px',
       },
     
@@ -50,13 +53,15 @@ const JobCategoryChart = ({jobs}) => {
 
 
 
-   <div className=' w-45  max-md:w-full  shadow-sm  rounded-sm border-gray-200  p-1 border border-stroke bg-white'>
+   <div className='w-full h-full shadow-sm rounded-sm border-gray-200 p-3 border border-stroke flex items-center justify-center'>
    <ReactApexChart
    
    options={chartOptions}
    series={series}
    type="donut"
-   height={350}/>
+   height={350}
+   width={'100%'}
+   />
    </div>
   )
 }

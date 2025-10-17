@@ -13,6 +13,7 @@ import { CiChat1, CiSearch } from "react-icons/ci";
 import { FaChartPie } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Loader from "../../components/Loader";
+import CandidateInterviews from "./components/CandidateInterviews";
 
 const PremiumButton = lazy(() => import("../../components/PremiumButton"));
 const Subscription = lazy(() => import("../Subscription/Subscription"));
@@ -232,6 +233,11 @@ to={
    transition={{ duration: 0.6 }}
       ref={appliedJobsRef} className="dark:bg-gray-900/30 dark:shadow-gray-950 rounded-lg  shadow-sm p-2 mb-5 bg-white ">
       <AppliedJobs currentuserid={_id} Isorg={Isorg} isLoading={isLoading} applicationdata={Isorg ? jobs :appliedJobs}/>
+      {!Isorg && (
+        <div className="mt-4">
+          <CandidateInterviews />
+        </div>
+      )}
      </motion.div>
     }
 

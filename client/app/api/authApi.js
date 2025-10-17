@@ -8,10 +8,20 @@ export const authApi = createApi({
   }),
   tagTypes: ['auth', 'CurrentUser'],
   endpoints: (builder) => ({
+    AdminReport: builder.query({
+      query: () => `/admin/report`,
+      credentials: 'include',
+    }),
     CurrentUser: builder.query({
       query: () => `/currentuser`,
       credentials: 'include',
       providesTags: ['CurrentUser']
+    }),
+    GetGoogleAuthUrl: builder.query({
+      query: (role) => ({
+        url: '/auth/google/url',
+        params: role ? { role } : undefined,
+      }),
     }),
     Login: builder.mutation({
       query: (User) => ({
@@ -79,6 +89,7 @@ export const authApi = createApi({
 });
 
 export const {
+  useAdminReportQuery,
   useLoginMutation,
   useRegisterMutation,
   useCurrentUserQuery,
@@ -88,6 +99,8 @@ export const {
   useDelAcountRequestMutation,
   useSignOutMutation,
   useMeQuery,
+  useGetGoogleAuthUrlQuery,
+  useLazyGetGoogleAuthUrlQuery,
   
 } = authApi;
 

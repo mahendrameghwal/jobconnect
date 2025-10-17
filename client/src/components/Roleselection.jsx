@@ -29,7 +29,7 @@ const RoleSelection = ({ onRoleSelect }) => {
   return (
     <div className="w-full h-full flex flex-col justify-center items-center space-y-6 p-8">
       <h2 className="text-3xl font-bold text-center dark:text-white mb-6">
-        Choose Your Account Type
+        I am a
       </h2>
 
       <RadioGroup value={selectedRole} onChange={handleRoleSelection} className="w-full max-w-md">

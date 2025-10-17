@@ -84,6 +84,10 @@ getJobs: builder.query({
       }),
       invalidatesTags: (result, error, { applicationId }) => [{ type: 'jobetail', id: applicationId }],
     }),
+    getJobReport: builder.query({
+      query: (jobId) => `/report/${jobId}`,
+      providesTags: (result, error, jobId) => [{ type: 'jobReport', id: jobId }],
+    }),
   }),
 });
 
@@ -96,7 +100,8 @@ export const {
   useRejectedSingleCandidateMutation,
   useShortlistSingleCandidateMutation,
   useUpdateJobInformationMutation,
-  useGetJobsQuery
+  useGetJobsQuery,
+  useGetJobReportQuery
 } = jobApi;
 
 export default jobApi;

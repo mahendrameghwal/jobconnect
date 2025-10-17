@@ -22,6 +22,8 @@ import ExcludeFooter from "./utils/ExcludeFooter";
 import ExcludeNavbar from "./utils/ExcludeNavbar";
 import ResumeTemplateSelector from "./pages/Templates/Selector/ResumeTemplateSelector";
 import ResumeBuilder from "./pages/Templates/Builder/ResumeBuilder";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService/TermsOfService";
 import 'react-loading-skeleton/dist/skeleton.css';
 import { FaGithub } from "react-icons/fa";
 
@@ -140,6 +142,8 @@ function App() {
           <Route path="/sendsuccess" element={<SentSuccess />} />
           <Route path="/suggestion" element={<Suggestion />} />
           <Route path="/pricing" element={<Pricing/>} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
        
           
           {/* candidate & org private routes */}

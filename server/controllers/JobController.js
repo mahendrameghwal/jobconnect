@@ -192,11 +192,12 @@ const SearchJobPost = asyncHandler(async (req, res, next) => {
       query.joblevel = { $regex: new RegExp(joblevel, 'i') };
     }
   
-    let sortBy = {};
-    if (sort === 'newest') {
-      sortBy = { createdAt: -1 };
-    } else if (sort === 'oldest') {
+    // Default to newest first if not specified
+    let sortBy = { createdAt: -1 };
+    if (sort === 'oldest') {
       sortBy = { createdAt: 1 };
+    } else if (sort === 'newest') {
+      sortBy = { createdAt: -1 };
     }
     const jobPosts = await Job.find(query).populate('orgname').sort(sortBy);
 
@@ -375,6 +376,178 @@ const RejectedSingleCandidate = asyncHandler(async (req, res, next) => {
   }
 });
 
+// Get job report with statistics and comprehensive activity tracking
+const getJobReport = asyncHandler(async (req, res, next) => {
+  try {
+    const { jobId } = req.params;
+    const userId = req.user._id;
+    const orgId = req.user.Org;
+
+    // Validate job ID
+    if (!mongoose.Types.ObjectId.isValid(jobId)) {
+      return res.status(400).json({ message: 'Invalid job ID' });
+    }
+
+    // Find the job and verify ownership
+    const job = await Job.findById(jobId).populate('orgname');
+    if (!job) {
+      return res.status(404).json({ message: 'Job not found' });
+    }
+
+    if (job.orgname._id.toString() !== orgId.toString()) {
+      return res.status(403).json({ message: 'No permission to view this job report' });
+    }
+
+    // Get all candidates who applied to this job
+    const candidates = await Candidate.find({
+      'appliedJobs.jobId': jobId
+    }).select('fullname avtar appliedJobs');
+
+    // Get all interviews for this job
+    const Interview = (await import('../models/InterviewSchema.js')).default;
+    const interviews = await Interview.find({ job: jobId })
+      .populate('candidate', 'fullname avtar')
+      .sort({ createdAt: -1 });
+
+    // Calculate statistics
+    const totalApplications = candidates.length;
+    let shortlisted = 0;
+    let rejected = 0;
+    let pending = 0;
+
+    const recentActivity = [];
+
+    // Process application activities
+    candidates.forEach(candidate => {
+      const application = candidate.appliedJobs.find(app => app.jobId.toString() === jobId);
+      if (application) {
+        switch (application.status.toLowerCase()) {
+          case 'shortlisted':
+            shortlisted++;
+            break;
+          case 'rejected':
+            rejected++;
+            break;
+          default:
+            pending++;
+        }
+
+        // Add application activity
+        recentActivity.push({
+          type: 'application',
+          action: 'applied',
+          candidateName: candidate.fullname,
+          candidateId: candidate._id,
+          status: application.status,
+          timestamp: application.dateApplied,
+          avatar: candidate.avtar || `https://ui-avatars.com/api/?name=${encodeURIComponent(candidate.fullname)}&background=random`,
+          details: `Applied for ${job.title}`
+        });
+
+        // Add status change activities if status is not 'pending'
+        if (application.status.toLowerCase() !== 'pending') {
+          recentActivity.push({
+            type: 'status_change',
+            action: application.status.toLowerCase(),
+            candidateName: candidate.fullname,
+            candidateId: candidate._id,
+            status: application.status,
+            timestamp: application.dateApplied, // You might want to track when status was changed
+            avatar: candidate.avtar || `https://ui-avatars.com/api/?name=${encodeURIComponent(candidate.fullname)}&background=random`,
+            details: `Status changed to ${application.status}`
+          });
+        }
+      }
+    });
+
+    // Process interview activities
+    interviews.forEach(interview => {
+      const candidate = interview.candidate;
+      if (candidate) {
+        // Interview scheduled
+        recentActivity.push({
+          type: 'interview',
+          action: 'scheduled',
+          candidateName: candidate.fullname,
+          candidateId: candidate._id,
+          status: interview.status,
+          timestamp: interview.createdAt,
+          avatar: candidate.avtar || `https://ui-avatars.com/api/?name=${encodeURIComponent(candidate.fullname)}&background=random`,
+          details: `Interview scheduled: ${interview.title}${interview.roundTitle ? ` - ${interview.roundTitle}` : ''}`,
+          interviewData: {
+            round: interview.round,
+            scheduledStart: interview.scheduledStart,
+            scheduledEnd: interview.scheduledEnd,
+            meetingPlatform: interview.meetingPlatform,
+            meetingLink: interview.meetingLink
+          }
+        });
+
+        // Interview completed with feedback
+        if (interview.status === 'completed') {
+          recentActivity.push({
+            type: 'interview',
+            action: 'completed',
+            candidateName: candidate.fullname,
+            candidateId: candidate._id,
+            status: interview.status,
+            timestamp: interview.updatedAt,
+            avatar: candidate.avtar || `https://ui-avatars.com/api/?name=${encodeURIComponent(candidate.fullname)}&background=random`,
+            details: `Interview completed: ${interview.title}${interview.roundTitle ? ` - ${interview.roundTitle}` : ''}`,
+            interviewData: {
+              round: interview.round,
+              feedback: interview.feedback,
+              notes: interview.notes,
+              evaluations: interview.evaluations
+            }
+          });
+        }
+
+        // Interview cancelled
+        if (interview.status === 'cancelled') {
+          recentActivity.push({
+            type: 'interview',
+            action: 'cancelled',
+            candidateName: candidate.fullname,
+            candidateId: candidate._id,
+            status: interview.status,
+            timestamp: interview.updatedAt,
+            avatar: candidate.avtar || `https://ui-avatars.com/api/?name=${encodeURIComponent(candidate.fullname)}&background=random`,
+            details: `Interview cancelled: ${interview.title}${interview.roundTitle ? ` - ${interview.roundTitle}` : ''}`,
+            interviewData: {
+              round: interview.round,
+              notes: interview.notes
+            }
+          });
+        }
+      }
+    });
+
+    // Sort all activities by timestamp (newest first) and limit to 20
+    recentActivity.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    const limitedActivity = recentActivity.slice(0, 20);
+
+    const stats = {
+      totalApplications,
+      shortlisted,
+      rejected,
+      pending,
+      jobId: job.jobId,
+      jobTitle: job.title,
+      recentActivity: limitedActivity,
+      totalInterviews: interviews.length,
+      completedInterviews: interviews.filter(i => i.status === 'completed').length,
+      scheduledInterviews: interviews.filter(i => i.status === 'scheduled').length,
+      cancelledInterviews: interviews.filter(i => i.status === 'cancelled').length
+    };
+
+    return res.status(200).json(stats);
+
+  } catch (err) {
+    next(err);
+  }
+});
+
 
 
 const UpdateJobInformation = asyncHandler(async (req, res, next) => {
@@ -438,4 +611,5 @@ export {
   GenrateCategory,
   ShortListSingleCandidate,
   RejectedSingleCandidate,
+  getJobReport,
 };

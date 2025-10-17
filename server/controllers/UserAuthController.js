@@ -2,6 +2,7 @@ import User from '../models/Userschema.js';
 import Org from '../models/Orgschema.js';
 import Job from '../models/jobschema.js';
 import Candidate from '../models/Candidateschema.js';
+import Interview from '../models/InterviewSchema.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
@@ -443,6 +444,176 @@ const UserinfoById = asyncHandler(async (req, res, next) => {
   }
 });
 
+// Admin unified report: aggregates for dashboard charts
+const adminReport = asyncHandler(async (req, res, next) => {
+  try {
+    const now = new Date();
+    const days30Ago = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+    const [
+      totalUsers,
+      totalOrgs,
+      totalCandidates,
+      totalJobs,
+      newUsersLast30Days,
+      newJobsLast30Days,
+      orgsByCategory,
+      jobsByCategory,
+      jobsByType,
+      jobsByLevel,
+      applicationsAgg,
+      candidatesByExperience,
+      topSkills,
+      jobsPerDayLast30,
+      interviewsThisMonth,
+      interviewsPrevMonth,
+      interviewsByStatusThisMonth,
+      interviewsByStatusAllTime,
+      jobsMonthOverMonthCounts
+    ] = await Promise.all([
+      User.countDocuments(),
+      Org.countDocuments(),
+      Candidate.countDocuments(),
+      Job.countDocuments(),
+      User.countDocuments({ createdAt: { $gte: days30Ago } }),
+      Job.countDocuments({ createdAt: { $gte: days30Ago } }),
+      Org.aggregate([
+        { $group: { _id: '$category', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+      ]),
+      Job.aggregate([
+        { $group: { _id: '$category', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+      ]),
+      Job.aggregate([
+        { $group: { _id: '$jobtype', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+      ]),
+      Job.aggregate([
+        { $group: { _id: '$joblevel', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+      ]),
+      Job.aggregate([
+        { $project: { applicantsCount: { $size: { $ifNull: ['$applicants', []] } } } },
+        { $group: { _id: null, totalApplications: { $sum: '$applicantsCount' } } }
+      ]),
+      Candidate.aggregate([
+        { $group: { _id: '$YearsOfExperience', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+      ]),
+      Candidate.aggregate([
+        { $unwind: '$skills' },
+        { $match: { 'skills.name': { $ne: null } } },
+        { $group: { _id: '$skills.name', count: { $sum: 1 } } },
+        { $sort: { count: -1 } },
+        { $limit: 20 }
+      ]),
+      Job.aggregate([
+        { $match: { createdAt: { $gte: days30Ago } } },
+        { $group: { _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } }, count: { $sum: 1 } } },
+        { $sort: { _id: 1 } }
+      ]),
+      // Interviews: this month vs previous month
+      (async () => {
+        const startOfThisMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+        const startOfNextMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1));
+        const startOfPrevMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1));
+        const startOfThisMonthLocal = new Date(startOfThisMonth);
+        const startOfNextMonthLocal = new Date(startOfNextMonth);
+        const startOfPrevMonthLocal = new Date(startOfPrevMonth);
+        const thisMonth = await Interview.countDocuments({ scheduledStart: { $gte: startOfThisMonthLocal, $lt: startOfNextMonthLocal } });
+        const prevMonth = await Interview.countDocuments({ scheduledStart: { $gte: startOfPrevMonthLocal, $lt: startOfThisMonthLocal } });
+        return { thisMonth, prevMonth };
+      })(),
+      (async () => {
+        const startOfThisMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+        const startOfNextMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1));
+        const startOfThisMonthLocal = new Date(startOfThisMonth);
+        const startOfNextMonthLocal = new Date(startOfNextMonth);
+        return await Interview.aggregate([
+          { $match: { scheduledStart: { $gte: startOfThisMonthLocal, $lt: startOfNextMonthLocal } } },
+          { $group: { _id: '$status', count: { $sum: 1 } } }
+        ]);
+      })(),
+      // All-time interview status distribution
+      Interview.aggregate([
+        { $group: { _id: '$status', count: { $sum: 1 } } }
+      ]),
+      // Jobs month over month
+      (async () => {
+        const startOfThisMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+        const startOfNextMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1));
+        const startOfPrevMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1));
+        const startOfThisMonthLocal = new Date(startOfThisMonth);
+        const startOfNextMonthLocal = new Date(startOfNextMonth);
+        const startOfPrevMonthLocal = new Date(startOfPrevMonth);
+        const thisMonth = await Job.countDocuments({ createdAt: { $gte: startOfThisMonthLocal, $lt: startOfNextMonthLocal } });
+        const prevMonth = await Job.countDocuments({ createdAt: { $gte: startOfPrevMonthLocal, $lt: startOfThisMonthLocal } });
+        return { thisMonth, prevMonth };
+      })()
+    ]);
+
+    const totalApplications = applicationsAgg?.[0]?.totalApplications || 0;
+
+    return res.status(200).json({
+      totals: {
+        users: totalUsers,
+        orgs: totalOrgs,
+        candidates: totalCandidates,
+        jobs: totalJobs,
+        applications: totalApplications
+      },
+      recent30Days: {
+        newUsers: newUsersLast30Days,
+        newJobs: newJobsLast30Days,
+        jobsPerDay: jobsPerDayLast30.map(d => ({ date: d._id, count: d.count }))
+      },
+      breakdowns: {
+        orgsByCategory: orgsByCategory.map(d => ({ category: d._id || 'unknown', count: d.count })),
+        jobsByCategory: jobsByCategory.map(d => ({ category: d._id || 'unknown', count: d.count })),
+        jobsByType: jobsByType.map(d => ({ type: d._id || 'unknown', count: d.count })),
+        jobsByLevel: jobsByLevel.map(d => ({ level: d._id || 'unknown', count: d.count })),
+        candidatesByExperience: candidatesByExperience.map(d => ({ experience: d._id || 'unknown', count: d.count })),
+        topSkills: topSkills.map(d => ({ skill: d._id, count: d.count }))
+      },
+      interviews: {
+        monthOverMonth: {
+          thisMonth: interviewsThisMonth.thisMonth,
+          prevMonth: interviewsThisMonth.prevMonth
+        },
+        thisMonthByStatus: (() => {
+          const arr = Array.isArray(interviewsByStatusThisMonth) ? interviewsByStatusThisMonth : [];
+          const base = { scheduled: 0, completed: 0, cancelled: 0 };
+          for (const item of arr) {
+            if (!item || !item._id) continue;
+            const key = String(item._id);
+            if (base[key] === undefined) base[key] = 0;
+            base[key] += item.count || 0;
+          }
+          return Object.entries(base).map(([status, count]) => ({ status, count }));
+        })(),
+        allTimeByStatus: (() => {
+          const arr = Array.isArray(interviewsByStatusAllTime) ? interviewsByStatusAllTime : [];
+          const base = { scheduled: 0, completed: 0, cancelled: 0 };
+          for (const item of arr) {
+            if (!item || !item._id) continue;
+            const key = String(item._id);
+            if (base[key] === undefined) base[key] = 0;
+            base[key] += item.count || 0;
+          }
+          return Object.entries(base).map(([status, count]) => ({ status, count }));
+        })()
+      },
+      jobsMonthOverMonth: {
+        thisMonth: jobsMonthOverMonthCounts?.thisMonth ?? 0,
+        prevMonth: jobsMonthOverMonthCounts?.prevMonth ?? 0
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 const MultipleUserinfo = asyncHandler(async (req, res, next) => {
   const Userids = req.query.ids ? req.query.ids.split(',') : [];
   try {
@@ -532,4 +703,5 @@ export {
   UserinfoById,
   MultipleUserinfo,
   Me,
+  adminReport,
 };

@@ -38,12 +38,12 @@ const Footer = () => {
               <h3 className="mb-2 text-sm font-semibold  uppercase text-white">Legal</h3>
               <ul>
                 <li className="mb-2">
-                  <div className=" hover:underline dark:text-gray-200 text-gray-400">Privacy
-                    Policy</div>
+                  <Link to="/privacy-policy" className=" hover:underline dark:text-gray-200 text-gray-400">Privacy
+                    Policy</Link>
                 </li>
-                <li>
-                  <div className=" hover:underline dark:text-gray-200 text-gray-400">Terms
-                    &amp; Conditions</div>
+                <li className="mb-2">
+                  <Link to="/terms-of-service" className=" hover:underline dark:text-gray-200 text-gray-400">Terms
+                    &amp; Conditions</Link>
                 </li>
                 <li className="mb-4">
                 <Link to="/suggestion" className=" hover:underline dark:text-gray-200 text-gray-400">Suggestion</Link>

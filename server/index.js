@@ -108,6 +108,7 @@ import CandidateRoutes from './routes/CandidateRoute.js';
 import MessageRoutes from './routes/MessageRoute.js';
 import Userroute from './routes/UserauthRoute.js';
 import SubscriptionRoutes from './routes/SubcriptionRoute.js';
+import InterviewRoutes from './routes/InterviewRoute.js';
 
 
 //test server
@@ -124,6 +125,7 @@ app.use('/api', GetAPIRoute);
 app.use('/api/candidate', CandidateRoutes);
 app.use('/api/message', MessageRoutes);
 app.use('/api/subscription', SubscriptionRoutes);
+app.use('/api/interview', InterviewRoutes);
 
 //error handler
 app.use(errorHandler);
